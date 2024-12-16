@@ -6,6 +6,7 @@
                  name="use"
                  start-page="starter-topic.md">
 
-    <toc-element topic="如何使用.md"/>
-    <toc-element topic="starter-topic.md"/>
+    <toc-element topic="starter-topic.md">
+        <toc-element topic="如何使用.md"/>
+    </toc-element>
 </instance-profile>
