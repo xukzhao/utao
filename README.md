@@ -52,4 +52,6 @@
 优酷+桃厂 企鹅加不进去了(>-<)
 
 
+### Star History
 
+[![Star History Chart](https://api.star-history.com/svg?repos=VonChange/utao&type=Date)](https://star-history.com/#VonChange/utao&Date)
