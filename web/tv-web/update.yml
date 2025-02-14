@@ -1,13 +1,13 @@
 res:
   url: http://qn.vonchange.com/utao/res/tv-web.zip
   skipFirst: true
-  version: 18
+  version: 19
   update: true
 apk:
   version: 20
   url: http://qn.vonchange.com/utao/release/utao-20250118.apk
   force: false
-  desc: 修复小米等部分电视启动不了问题 部分崩溃问题
+  desc: 修复小米等部分电视启动不了问题
 x5Url:
   64:
     - https://tbsall.imtt.qq.com/mtt/release/component/tbs_core_046285_20240613152541_nolog_fs_obfs_arm64-v8a_release.tbs

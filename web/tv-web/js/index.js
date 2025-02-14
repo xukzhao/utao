@@ -87,8 +87,7 @@ const _html={
             setFocus(item){
                 let _this=this;
               //获取系统信息和 版本信息
-                _apiX.queryByService("" +
-                    "",null,function (data){
+                _apiX.queryByService("querySysInfo",null,function (data){
                     console.log("querySysInfo"+data);
                     let sysInfo=JSON.parse(data);
                     let  version="当前版本:"+sysInfo.versionName;

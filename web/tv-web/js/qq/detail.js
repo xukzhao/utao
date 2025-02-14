@@ -147,6 +147,7 @@ let _data={
         if(barrageTitle==="关闭弹幕"){
             $$(".barrage-switch").click();
         }
+        $$(".player-play-title").hide();
         //$$("#GameDiv").remove();
         //写当前数据
        });
