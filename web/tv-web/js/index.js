@@ -72,11 +72,17 @@ const _html={
                 this.tab=item.tag;
                 if(item.tag==="history"){
                     this.historyFocus(item);
-                    return
                 }
                 if(item.tag==="set"){
                     this.setFocus(item)
                 }
+                let menuId="#tv-"+item.tag;
+                let hasFocus= $$(menuId).hasClass("tv-focus");
+                this.$nextTick(function (){
+                    if(hasFocus){
+                        $$(menuId).addClass("tv-focus");
+                    }
+                })
             },
             updateApk(){
                _apiX.msg("updateApk",null);

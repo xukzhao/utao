@@ -19,14 +19,19 @@
         <div class="tv-body" style="height: 100%" id="tv-body" @vue:mounted="initData()">
             <div class="tv-header" style="justify-content: space-around;">
                 <div tabindex="0"  @focus="switchChannel(channels[0])"  @click="switchChannel(channels[0])" class="tv-btn"
+                     :class="{'tv-active':tab=='see'}"
                      id="tv-see">&#xe64d; 须知</div>
                 <div tabindex="0"  @focus="switchChannel(channels[1])"  @click="switchChannel(channels[1])" class="tv-btn"
+                     :class="{'tv-active':tab=='index'}"
                      id="tv-index" move-down="#tv-index-content:.tv-item">&#xe6ce; 首页</div>
                 <div tabindex="0"  @focus="switchChannel(channels[2])"  @click="switchChannel(channels[2])" class="tv-btn"
+                     :class="{'tv-active':tab=='history'}"
                      id="tv-history" move-down="#tv-history-content:.tv-btn"> &#xe63c; 历史</div>
                 <div tabindex="0"  @focus="switchChannel(channels[3])"  @click="switchChannel(channels[3])" class="tv-btn"
+                     :class="{'tv-active':tab=='search'}"
                      id="tv-search">&#xe610; 搜索</div>
                 <div tabindex="0"  @focus="switchChannel(channels[4])"  @click="switchChannel(channels[4])" class="tv-btn"
+                     :class="{'tv-active':tab=='set'}"
                      id="tv-set" move-down="#tv-set-content:.tv-btn">&#xe68f; 设置</div>
             </div>
             <div id="tv-content">
