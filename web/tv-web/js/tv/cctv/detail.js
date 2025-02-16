@@ -1,8 +1,4 @@
-const _ctrlx={
-    play(){
-        _menuCtrl.menu();
-    }
-};
+
 (function(){
     _tvFunc.check(function (){return null!=document.getElementById("player");},function (){
         //$$("#control_bar_player").hide();

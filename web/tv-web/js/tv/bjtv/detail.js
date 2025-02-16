@@ -1,8 +1,4 @@
-const _ctrlx={
-    play(){
-        _menuCtrl.menu();
-    }
-};
+
 (function(){
     _tvFunc.check(function (){return $$(".right_list li").length>0},function (){
         let url = window.location.href;

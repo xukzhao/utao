@@ -11,8 +11,8 @@ html,body{
    /* background-color: #FAF9DE; */
   display: flex;
   flex-direction: column;
-  visibility: visible;
-  height: 100vh;
+  /*visibility: visible;*/
+  /*height: 100vh;*/
 }
 .tv-font-2{
     font-size: 2vw;
@@ -161,10 +161,14 @@ html,body{
     max-width: 15vw;
     /*background-color: #5ca9e8;*/
     background-color:#FAF9DE;
+    /*background-color:#FAF9DE;*/
     flex-shrink: 0;
     font-family: "tv-icon" !important;
-    box-shadow: none;
+    /*box-shadow: none;*/
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
+    background: rgba(255, 255, 240, 0.3); /* 半透明背景 */
+    backdrop-filter: blur(10px);
 }
 .tv-btn-vw{
   padding: 0.5vw 1vw;
@@ -194,7 +198,9 @@ html,body{
 
 .tv-active{
     /*background-color: #71b371;*/
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    background:#FAF9DE;
+    /*box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);*/
+    box-shadow: none;
 }
 .tv-focus {
     border: 2px solid blue;

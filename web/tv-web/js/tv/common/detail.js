@@ -1,8 +1,4 @@
-const _ctrlx={
-    play(){
-        _menuCtrl.menu();
-    }
-};
+
 (function(){
     _tvFunc.check(function (){return document.getElementsByTagName("video").length>0;},function (){
         console.log("video found")

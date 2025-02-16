@@ -174,7 +174,7 @@ let _data={
         if(!isGecko){
             bili="https://www.bilibili.com/tv-web/bili.html";
         }
-        apps.push({id:0,url:"tv.html",name:"电视直播大全",pic:"img/utao.jpg"});
+        apps.push({id:0,url:"https://tv.cctv.com/live/cctv13/",name:"电视直播大全",pic:"img/utao.jpg"});
         apps.push({id:0,url:"https://www.yangshipin.cn/tv/home?pid=600002475",name:"CCTV直播",pic:"img/cctv.jpg"});
         apps.push({id:0,url:"cctv.html",name:"央视片库",pic:"img/cctv-video.jpg"});
         apps.push({id:0,url:"bestv.html",name:"百视通",pic:"img/bestv.png"});

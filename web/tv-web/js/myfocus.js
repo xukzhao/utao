@@ -232,6 +232,7 @@ const TvFocus={
     },
     isElementInViewport(el) {
         var rect = el.getBoundingClientRect();
+        console.log("isElementInViewport",rect.top,rect.left)
         return (
           rect.top >= 0 &&
           rect.left >= 0 &&
@@ -242,7 +243,7 @@ const TvFocus={
       scrollTo() {
               var el = document.querySelector(this.focusId);
               var flag= this.isElementInViewport(el);
-              console.log(flag);
+              console.log("scrollTo",flag);
               if(!flag){
                 el.scrollIntoView();
               }

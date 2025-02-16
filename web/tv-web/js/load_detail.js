@@ -70,9 +70,13 @@ if(typeof _tvload == "undefined"){
     _tvLoadRes.js(_browser.getURL("js/common.js?v=x"));
     _tvLoadRes.js(_browser.getURL("js/myfocus.js?v=x"));
     _tvLoadRes.js(_browser.getURL("js/vuex.min.js?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/detailBase.js?v=x"));
     let detailPath=loadDetailByUrl(window.location.href);
     console.log("detailPath:: "+detailPath);
+    if(detailPath.startsWith("tv/")){
+        _tvLoadRes.js(_browser.getURL(`js/tv/common.js?v=x`));
+    }else{
+        _tvLoadRes.js(_browser.getURL("js/detailBase.js?v=x"));
+    }
     _tvLoadRes.js(_browser.getURL(`js/${detailPath}/detail.js?v=x`));//"js/youku/detail.js?v=x"
 
 })();
