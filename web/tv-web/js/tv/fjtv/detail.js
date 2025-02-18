@@ -1,9 +1,7 @@
-const _ctrlx={
-    play(){
-        _menuCtrl.menu();
-    }
-};
+
 (function(){
+    _tvFunc.fixedW("body");
+    _detailInit(null,999990,true);
     _tvFunc.check(function (){return null!=document.getElementById("m2o_player");},function (){
         document.getElementById("m2o_player").classList.add("utv-video-full");
     });
@@ -11,8 +9,8 @@ const _ctrlx={
         init(){
             _tvFunc.check(function(){return  null!=document.getElementById("m2o_player");},function(index){
                 //全屏
-                let menuId = _detailInit(null,999990,true);
-
+               // let menuId = _detailInit(null,999990,true);
+                _detailHz();
             },1000);
         }
     };

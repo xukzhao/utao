@@ -90,7 +90,10 @@ const Filter = {
                     _layer.wait("正在跳转到 "+item.name+" 请耐心等待。。。");
                     item.url=_tvFunc.url(item.url);
                     console.log(item.url);
-                    if(!isApp){
+                    if(!isApp||_tvFunc.isGecko()){
+                        if(item.url.startsWith("https://tv.utao.tv/tv-web/")){
+                            item.url=item.url.substring(26);
+                        }
                         window.location.href = item.url;
                         return;
                     }

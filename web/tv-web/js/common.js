@@ -43,6 +43,14 @@ var _tvFunc={
  `;
         this.loadCssCode(css);
     },
+    fixedW(id){
+        var css=`
+   ${id}{
+        position: fixed !important;
+       }
+ `;
+        this.loadCssCode(css);
+    },
     fullscreenW(id){
         var css=`
    ${id}{
@@ -261,6 +269,7 @@ var _apiX={
         _api.message(service,dataStr);
     },
     msgStr(service,dataStr){
+        console.log("msgStr",service,dataStr)
         _api.message(service,dataStr);
     },
     queryByService:async function (service,param,callback){
@@ -349,6 +358,7 @@ var _layer={
         myDiv.id = idName;
         myDiv.style.zIndex=index;
         myDiv.style.visibility="hidden";//hidden  visible
+        myDiv.style.maxWidth="100vw";
         myDiv.style.overflowY="auto";
         if(classNames.length==0){
             myDiv.className="tv-index";

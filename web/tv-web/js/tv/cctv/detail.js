@@ -1,5 +1,7 @@
 
 (function(){
+    _tvFunc.fixedW("body");
+    _detailInit(null,999990,true);
     _tvFunc.check(function (){return null!=document.getElementById("player");},function (){
         //$$("#control_bar_player").hide();
         setInterval(function(){
@@ -22,7 +24,8 @@
      init(){
            _tvFunc.check(function(){return  $$("#player_pagefullscreen_msg_player").length>0},function(index){
                  //全屏
-               let menuId = _detailInit(null,999990,true);
+               //let menuId = _detailInit(null,999990,true);
+               _detailHz();
 
            },1000);
         }

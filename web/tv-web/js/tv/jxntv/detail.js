@@ -1,9 +1,7 @@
-const _ctrlx={
-    play(){
-        _menuCtrl.menu();
-    }
-};
+
 (function(){
+    _tvFunc.fixedW("body");
+    _detailInit(null,999990,true);
     _tvFunc.check(function (){return $$(".channel-list .item").length>0},function (){
         let url = window.location.href;
          let index= url.indexOf("tag=");
@@ -38,7 +36,8 @@ const _ctrlx={
         init(){
             _tvFunc.check(function(){return  document.getElementsByTagName("video").length>0;},function(index){
                 //全屏
-                let menuId = _detailInit(null,999990,true);
+               // let menuId = _detailInit(null,999990,true);
+                _detailHz();
             },1000);
         }
     };

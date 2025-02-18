@@ -1,5 +1,7 @@
 
 (function(){
+    _tvFunc.fixedW("body");
+    _detailInit(null,999990,true);
     _tvFunc.check(function (){return $$(".right_list li").length>0},function (){
         let url = window.location.href;
         let index= url.indexOf("tag=");
@@ -26,7 +28,8 @@
         init(){
             _tvFunc.check(function(){return  document.getElementsByTagName("video").length>0;},function(index){
                 //全屏
-                let menuId = _detailInit(null,999990,true);
+               // let menuId = _detailInit(null,999990,true);
+                _detailHz();
             },1000);
         }
     };

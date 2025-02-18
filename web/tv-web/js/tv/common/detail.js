@@ -1,5 +1,7 @@
 
 (function(){
+    _tvFunc.fixedW("body");
+    _detailInit(null,999990,true);
     _tvFunc.check(function (){return document.getElementsByTagName("video").length>0;},function (){
         console.log("video found")
        // document.getElementsByTagName("video")[0].classList.add("utv-video-full");
@@ -10,7 +12,8 @@
         init(){
             _tvFunc.check(function(){return  document.getElementsByTagName("video").length>0;},function(index){
                 //全屏
-                let menuId = _detailInit(null,999990,true);
+               // let menuId = _detailInit(null,999990,true);
+                _detailHz();
             },1000);
         }
     };

@@ -63,6 +63,9 @@ if(typeof _tvload == "undefined"){
             _tvLoadRes.js("https://cdn.bootcdn.net/ajax/libs/hls.js/1.5.13/hls.js");
             return "tv/lctv"
         }
+        if(url.startsWith("https://www.fengshows.com/")){
+            return "tv/fengshows"
+        }
         return "tv/common"
     }
     _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));

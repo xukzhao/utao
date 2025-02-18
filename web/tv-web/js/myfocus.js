@@ -1,4 +1,4 @@
-const TvFocus={
+let TvFocus={
     focusId:".tv-focus",
     focusClass:"tv-focus",
     menuId: null,
@@ -232,7 +232,6 @@ const TvFocus={
     },
     isElementInViewport(el) {
         var rect = el.getBoundingClientRect();
-        console.log("isElementInViewport",rect.top,rect.left)
         return (
           rect.top >= 0 &&
           rect.left >= 0 &&
@@ -243,10 +242,11 @@ const TvFocus={
       scrollTo() {
               var el = document.querySelector(this.focusId);
               var flag= this.isElementInViewport(el);
-              console.log("scrollTo",flag);
-              if(!flag){
-                el.scrollIntoView();
-              }
+              console.log("scrollTo",scrollTo);
+               if(!flag){
+                 el.scrollIntoView();
+               }
+               // el.scrollIntoView();
               //console.log(offset);
               //element.scrollIntoView({behavior: "instant", block: "end", inline: "nearest"});
               //el.scrollIntoView();

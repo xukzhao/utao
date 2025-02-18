@@ -1,73 +1,42 @@
-const MyFocus = new Proxy(TvFocus, {
-    ok:function (){
-        _ctrlx.ok();
-        return true;
-    },
-    menu:function(){
-        if(_ctrlx.menu){
-            _ctrlx.menu();
-        }
-        return true;
-    },
-    left:function(){
-        if(_isVideo){
-            _tvFunc.getVideo().currentTime-=20;_layer.notifyLess("进度减20秒");
-        }
-        return true;
-    },
-    right:function(){
-        if(_isVideo){
-            _tvFunc.getVideo().currentTime+=20;_layer.notifyLess("进度加20秒");
-        }
-        return true;
-    },
-    up:function(){
-        let video= _tvFunc.getVideo();
-        let currentVolume=_tvFunc.getVideo().volume;
-        if(currentVolume<1){if((currentVolume+0.2)>1){video.volume=1}else{video.volume+=0.2}}
-        let name= Math.floor(video.volume*100);
-        _layer.notifyLess("音量"+name);
-        return true;
-    },
-    down:function(){
-        let video= _tvFunc.getVideo();
-        let currentVolume=_tvFunc.getVideo().volume;
-        if(currentVolume>0){if((currentVolume-0.2)<0){video.volume=0}else{video.volume-=0.2;}}
-        let name= Math.floor(video.volume*100);
-        _layer.notifyLess("音量"+name);
-        return true;
-    }
-});
-/*class MyFocus extends  TvFocus{
-
+TvFocus.left=function (){
+    _apiX.msgStr("live","left");
+    return true;
+}
+TvFocus.right=function (){
+    _apiX.msgStr("live","right");
+    return true;
+}
+/*TvFocus.up=function (){
+    _apiX.msgStr("live","up");
+    return true;
+}
+TvFocus.down=function (){
+    _apiX.msgStr("live","down");
+    return true;
 }*/
+
 const _ctrlx={
-    play(){
+    ok(){
+        //$$(".vjs-play-control").click();
         _menuCtrl.menu();
     },
     menu(){
         console.log("menuxxx");
-        //let url=window.location.href;
-      /*  let currentChannel=null;
-        _data.vue.channels.forEach((channel,index)=>{
-            channel.vods.forEach((item,index)=>{
-                if(url.startsWith(item.url)){
-                    currentChannel=channel;
-                }
-            })
-        });
-        if(null!=currentChannel){
-            console.log("#tv-"+currentChannel.tag);
-          //  $$("#tv-"+currentChannel.tag).click();
-           // _data.vue.currentChannel=currentChannel;
-
-        }*/
-
     },
 };
 (function(){
     const _html={
         _ctrl:{
+            hzChoose(item){
+                setTimeout(function(){
+                    //$$("#"+item.id).click();
+                    if(item.type&&item.type==="id"){
+                        $$("#"+item.id).click();
+                        return;
+                    }
+                    $$("#xhz-"+item.id).click();
+                },1000);
+            },
             xjChoose(item){
                 let waitId= _layer.wait("请耐心等待跳转。。。");
                 if(""!==item.url){
@@ -85,15 +54,19 @@ const _ctrlx={
                 this.xjChoose(item);
             }
         },
-        xjList(){
-            let requestUrl=_browser.getURL("js/cctv/tv.json");
-            _data.vue.focusId="cctv";
+        xjList(_this){
+            let requestUrl="js/cctv/tv.json";
+            if(_tvFunc.isGecko()||!_tvFunc.isApp()){
+                requestUrl= _browser.getURL("js/cctv/tv.json");
+            }
+            _this.focusId="cctv";
+            console.log("requestUrl",requestUrl);
             _apiX.getJson(requestUrl, {}, function(text) {
                 console.log("text::: "+text)
                 let data = JSON.parse(text);
                 data.data.forEach((item,index)=>{
                     item.id=index;
-                    _data.vue.channels.push(item);
+                    _this.channels.push(item);
                 })
             });
         },
@@ -103,14 +76,6 @@ const _ctrlx={
             if(notReload){
                 return menuId;
             }
-            let orgUrl=window.location.href;
-            setInterval(function(){
-                let nowUrl=window.location.href;
-                if(nowUrl!==orgUrl){
-                    console.log("UUUUUUUPP 已经发生变化！");
-                    window.location.reload();
-                }
-            },2000);
             return menuId;
         },
         initCtrl(){
@@ -164,45 +129,27 @@ const _ctrlx={
                 isVip:true,
                 initData(){
                     let _this=this;
+                    window.tv_vue=this;
                     _html.vue=this;
-                    _data.initData(this,function(){
-                        //vip自动选择画质1080p
-                        //非vip 选择不是vip的最高
-                        let isVip=_this.isVip;
-                        console.log("hzLevel",_this.now.hz.level);
-                        if(_this.now.hz.level<1080){
-                            console.log("need qie")
-                            $$.each(_this.hzs,function(index,item){
-                                if(isVip&&item.level===1080){
-                                    setTimeout(function(){
-                                        _layer.notify("正在切换到"+item.name);
-                                        _this.hzChoose(item);
-                                    },2000);
-                                    return false;
-                                }
-                                if(!isVip&&!item.isVip){
-                                    setTimeout(function(){
-                                        _layer.notify("正在切换到"+item.name);
-                                        _this.hzChoose(item);
-                                    },2000);
-                                    return false;
-                                }
-                            });
-                        }
-                    });
-                    _html.xjList();
-
+                    _html.xjList(_this);
                   if(this.channels.length>0){
-                      let url=window.location.href;
+                      let url=decodeURI(window.location.href);
                       let currentChannel=null;
                       this.channels.forEach((channel,index)=>{
                           channel.vods.forEach((item,index)=>{
                               if(url.startsWith(item.url)){
                                   currentChannel=channel;
+                                  return;
                               }
                           })
+                          if(null!=currentChannel){
+                              return;
+                          }
                       });
-                         this.currentChannel=currentChannel;
+                         if(null==currentChannel){
+                             currentChannel=this.channels[0];
+                         }
+                      this.currentChannel=currentChannel;
                          this.$nextTick(()=>{
                              let idFirst = "#"+this.tvId(this.currentChannel.tag);
                              $$(idFirst).addClass("tv-focus");
@@ -219,7 +166,6 @@ const _ctrlx={
                         _data.channelPage(item);
                     }
                     this.$nextTick(function (){
-
                         console.log("hasFocus",hasFocus);
                         if(hasFocus){
                             $$(channelId).addClass("tv-focus");
@@ -236,6 +182,12 @@ const _ctrlx={
                 },
                 reload(){
                     window.location.reload();
+                },
+                hzChoose(item){
+                    _ctrl.hzChoose(item);
+                    this.now.hz=item;
+                    _layer.hide(menuId);
+                    _layer.notifyLess(`画质切换到${item.name}`)
                 },
                 goto(item){
                     item.url=_tvFunc.url(item.url);
@@ -261,6 +213,27 @@ const _ctrlx={
             return menuId;
         }
     };
+ /* */
+    window._detailHz=function (){
+        _data.initData(tv_vue,function(){
+            //vip自动选择画质1080p
+            //非vip 选择不是vip的最高
+            let _this=tv_vue;
+            console.log("hzLevel",_this.now.hz.level);
+            if(_this.now.hz.level<1080){
+                console.log("need qie")
+                $$.each(_this.hzs,function(index,item){
+                    if(item.level===1080){
+                        setTimeout(function(){
+                            _layer.notify("正在切换到"+item.name);
+                            _this.hzChoose(item);
+                        },2000);
+                        return false;
+                    }
+                });
+            }
+        });
+    }
     window._detailInitOnly=function(id,index,notReload){
         return  _html.init(id,index,notReload);
     }
@@ -268,6 +241,9 @@ const _ctrlx={
         let menuId = _html.init(id,index,notReload);
         // new MyFocus(menuId).init();
         TvFocus.init(menuId);
+        _menuCtrl.menu=function (){
+            TvFocus.keyMenuEvent();
+        };
         return menuId;
     }
     window._detailData=function(){

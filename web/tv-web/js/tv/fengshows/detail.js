@@ -2,30 +2,25 @@
 (function(){
     _tvFunc.fixedW("body");
     _detailInit(null,999990,true);
-    _tvFunc.check(function (){return $$(".channel-list li").length>0},function (){
+    _tvFunc.check(function (){return $$(".right_list li").length>0},function (){
         let url = window.location.href;
-         let index= url.indexOf("tag=");
-         let tag = decodeURI(url.substring(index+4,url.length));
-         console.log(tag);
-         let currentTag=0;
-        let tagIndex=0;
-        $$(".channel-list li").each(function (i,item){
-             let active=  $$(item).hasClass("active");
-            let text = $$(item).find("span").text().trim();
-             if(active){
-                 currentTag=text;
-             }
-            if(tag===text){
-                tagIndex=i;
+        let index= url.indexOf("tag=");
+        let tag = url.substring(index+4,url.length);
+        console.log(tag);
+        let currentTag=0;
+        $$(".right_list li").each(function (i,item){
+            let active=  $$(item).hasClass("active");
+            if(active){
+                currentTag=i;
             }
         });
         console.log(currentTag);
-        if(tag!==currentTag){
-            $$(".channel-list li")[tagIndex].click();
+        if(Number(tag)!==currentTag){
+            $$(".right_list li")[Number(tag)].click();
         }
         _tvFunc.check(function (){return document.getElementsByTagName("video").length>0;},function (){
-           // document.getElementsByTagName("video")[0].classList.add("utv-video-full");
-            _tvFunc.fullscreenW("video");
+            //document.getElementsByTagName("video")[0].classList.add("utv-video-full");
+            _tvFunc.fullscreen("video");
         });
         // $("#programMain .title")[1].click()
     });
@@ -33,7 +28,7 @@
         init(){
             _tvFunc.check(function(){return  document.getElementsByTagName("video").length>0;},function(index){
                 //全屏
-                //let menuId = _detailInit(null,999990,true);
+                // let menuId = _detailInit(null,999990,true);
                 _detailHz();
             },1000);
         }

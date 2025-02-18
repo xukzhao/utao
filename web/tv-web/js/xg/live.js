@@ -11,22 +11,9 @@ const config = {
     "width": "100%",
     "height": "100%"
 }
-config.plugins.push(HlsPlayer)
+config.plugins.push(HlsPlayer);
+//config.plugins.push(FlvPlayer)
 let player = new Player(config);
-const _ctrlx={
-    play(){
-        _menuCtrl.menu();
-    }
-};
-(function(){
-    let _app={
-        init(){
-            let menuId = _detailInit(null,999990,true);
-        }
-    };
-    _app.init();
-
-})();
 let _data={
     vue:null,
     initData(vue){
@@ -40,3 +27,16 @@ let _data={
         _tvFunc.volume100();
     }
 };
+(function(){
+    _detailInit(null,999990,true);
+    let _app={
+        init(){
+            //let menuId = _detailInit(null,999990,true);
+            _tvFunc.videoReady(function (){
+                _detailHz();
+            })
+        }
+    };
+    _app.init();
+
+})();
