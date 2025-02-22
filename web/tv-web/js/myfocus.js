@@ -242,7 +242,6 @@ let TvFocus={
       scrollTo() {
               var el = document.querySelector(this.focusId);
               var flag= this.isElementInViewport(el);
-              console.log("scrollTo",scrollTo);
                if(!flag){
                  el.scrollIntoView();
                }
