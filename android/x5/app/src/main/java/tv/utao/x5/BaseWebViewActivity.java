@@ -3,8 +3,10 @@ package tv.utao.x5;
 import static tv.utao.x5.util.PermissionUtil.REQUEST_EXTERNAL_STORAGE;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Instrumentation;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -63,10 +65,12 @@ import tv.utao.x5.impl.WebViewClientImpl;
 import tv.utao.x5.impl.X5WebChromeClientExtension;
 import tv.utao.x5.service.UpdateService;
 import tv.utao.x5.util.AppVersionUtils;
+import tv.utao.x5.util.DataCleanManager;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.JsonUtil;
 import tv.utao.x5.util.Util;
+import tv.utao.x5.util.ValueUtil;
 
 
 /**
@@ -88,8 +92,14 @@ public class BaseWebViewActivity extends Activity {
     protected  ActivityMainBinding binding;
 
     private Context thisContext;
-
-
+    private boolean x5Ok(){
+        return "ok".equals(ValueUtil.getString(this,"x5","0"));
+    }
+    private void toStart(){
+        Intent intent = new Intent(this, StartActivity.class);
+        startActivity(intent);
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -169,6 +179,8 @@ public class BaseWebViewActivity extends Activity {
         }
         initWebViewClient();
         initWebChromeClient();
+        //禁止上下左右滚动(不显示滚动条)
+        mWebView.setScrollContainer(false);
         mWebView.setVerticalScrollBarEnabled(false);
         mWebView.setHorizontalScrollBarEnabled(false);
 
@@ -515,7 +527,26 @@ public class BaseWebViewActivity extends Activity {
         }
     }
 
-
+    private void toLive(){
+        Intent intent = new Intent(this, LiveActivity.class);
+        startActivity(intent);
+        //finish();
+    }
+    protected void killAppProcess()
+    {
+        //注意：不能先杀掉主进程，否则逻辑代码无法继续执行，需先杀掉相关进程最后杀掉主进程
+        ActivityManager mActivityManager = (ActivityManager)this.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> mList = mActivityManager.getRunningAppProcesses();
+        for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : mList)
+        {
+            if (runningAppProcessInfo.pid != android.os.Process.myPid())
+            {
+                android.os.Process.killProcess(runningAppProcessInfo.pid);
+            }
+        }
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
+    }
     //js
     public class JsInterface{
 
@@ -529,6 +560,10 @@ public class BaseWebViewActivity extends Activity {
         @JavascriptInterface
         public void message(String service,String data){
             Log.i(TAG,"service "+service+" data "+data);
+            if("activity".equals(service)){
+                toLive();
+                return;
+            }
             if("history.save".equals(service)){
                 //final AppDatabase db = AppDatabase.getInstance(this);
                 HistoryDaoX.save(thisContext, data, new StringCallback() {
@@ -556,6 +591,17 @@ public class BaseWebViewActivity extends Activity {
                 });
                 return;
             }
+            if("openX5".equals(service)){
+                ValueUtil.putString(getApplicationContext(),"openX5","1");
+                //Toast.makeText(thisContext, "开启内核成功 重启应用后生效",Toast.LENGTH_SHORT).show();
+                //showToastOrg("开启内核成功 重启应用后生效",thisContext);
+                toStart();
+                return;
+            }
+            if("closeApp".equals(service)){
+                killAppProcess();
+                return;
+            }
             if("js".equals(service)){
                 Util.evalOnUi(mWebView,data);
                 return;
@@ -566,6 +612,12 @@ public class BaseWebViewActivity extends Activity {
             }
             if("keyNum".equals(service)){
                 keyEventAll(Integer.parseInt(data));
+                return;
+            }
+            if("clearCache".equals(service)){
+                DataCleanManager.cleanInternalCache(thisContext);
+                DataCleanManager.cleanExternalCache(thisContext);
+                Toast.makeText(thisContext, "清理缓存成功 网站可能会要求重新扫码登录",Toast.LENGTH_SHORT).show();
                 return;
             }
             if("updateApk".equals(service)){
@@ -605,6 +657,8 @@ public class BaseWebViewActivity extends Activity {
                 boolean is64= Util.is64();
                 sysInfo.setIs64(is64);
                 sysInfo.setVersionCode(Build.VERSION.SDK_INT);
+                sysInfo.setX5Ok(x5Ok());
+                sysInfo.setCacheSize(DataCleanManager.getCacheSize(thisContext));
                 //Build.VERSION.SDK_INT
                 sysInfo.setVersionName(AppVersionUtils.getVersionName());
                 return JsonUtil.toJson(sysInfo);
@@ -641,6 +695,8 @@ public class BaseWebViewActivity extends Activity {
         }
 
     }
+
+
 
 
     //key event

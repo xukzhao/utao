@@ -276,9 +276,11 @@ let TvFocus={
         this.isShow= _layer.toggle(_tv_menuId);
         if(!this.isShow){
             this.focus=null;
+            _apiX.msgStr("menu","0");
         }else{
             this.menu();
             this.focus=this.found(this.focusId);
+            _apiX.msgStr("menu","1");
         }
     },
     focusEvent(){

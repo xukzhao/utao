@@ -144,9 +144,9 @@ data:
       - name: 枣庄公共
         url: http://www.lncm.cn/zhibo/show-4.html
       - name: 聊城综合
-        url: https://www.lcxw.cn/kands?tag=0
+        url: https://www.lcxw.cn/kands/?tag=0
       - name: 聊城民生
-        url: https://www.lcxw.cn/kands?tag=1
+        url: https://www.lcxw.cn/kands/?tag=1
   - tag: jstv
     name: 江苏
     vods:
@@ -217,20 +217,8 @@ data:
       - name: 纪录片
         url: https://www.gdtv.cn/tvChannelDetail/94
   - tag: sh
-    name: 北京&上海
+    name: 北上
     vods:
-      - name: 东方卫视
-        url: https://live.kankanews.com/huikan?tag=东方卫视
-      - name: 上海新闻综合
-        url: https://live.kankanews.com/huikan?tag=新闻综合
-      - name: 魔都眼
-        url: https://live.kankanews.com/huikan?tag=魔都眼
-      - name: 上海第一财经
-        url: https://live.kankanews.com/huikan?tag=第一财经
-      - name: 上海新纪实
-        url: https://live.kankanews.com/huikan?tag=新纪实
-      - name: 上海都市频道
-        url: https://live.kankanews.com/huikan?tag=都市频道
       - name: 北京卫视
         url: https://www.btime.com/btv/btvsy_index?tag=0
       - name: 北京文艺
@@ -247,6 +235,19 @@ data:
         url: https://www.btime.com/btv/btvsy_index?tag=6
       - name: 北京新闻
         url: https://www.btime.com/btv/btvsy_index?tag=7
+      - name: 东方卫视
+        url: https://live.kankanews.com/huikan?tag=东方卫视
+      - name: 上海新闻综合
+        url: https://live.kankanews.com/huikan?tag=新闻综合
+      - name: 魔都眼
+        url: https://live.kankanews.com/huikan?tag=魔都眼
+      - name: 上海第一财经
+        url: https://live.kankanews.com/huikan?tag=第一财经
+      - name: 上海新纪实
+        url: https://live.kankanews.com/huikan?tag=新纪实
+      - name: 上海都市频道
+        url: https://live.kankanews.com/huikan?tag=都市频道
+
   - tag: gxtv
     name: 广西
     vods:

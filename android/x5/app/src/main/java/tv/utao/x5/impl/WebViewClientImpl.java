@@ -13,6 +13,7 @@ import com.tencent.smtt.sdk.WebViewClient;
 import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
 
+import tv.utao.x5.LiveActivity;
 import tv.utao.x5.util.ConstantMy;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.Util;
@@ -56,16 +57,16 @@ public class WebViewClientImpl extends WebViewClient {
             }
             lastUrl=url;
         }
-        String fileContent = FileUtil.readExt(baseFolder +"js/begin.js");
-        Log.i(TAG,"begin:: "+fileContent);
+  /*      String fileContent = FileUtil.readExt(baseFolder +"js/begin.js");
+        Log.i(TAG,"begin:: "+fileContent);*/
         //begin.js cctv测试直接全屏
        // String fileContent= FileUtil.readAssert(context,"web/js/begin.js");
-        view.evaluateJavascript(fileContent, new ValueCallback<String>() {
+     /*   view.evaluateJavascript(fileContent, new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String s) {
                 Log.i(TAG, "onReceiveValue:"+s);
             }
-        });
+        });*/
     }
 
 

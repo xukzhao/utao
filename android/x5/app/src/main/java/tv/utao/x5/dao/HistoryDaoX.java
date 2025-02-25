@@ -7,10 +7,12 @@ import java.util.Date;
 import java.util.List;
 
 import tv.utao.x5.call.StringCallback;
+import tv.utao.x5.domain.live.Vod;
+import tv.utao.x5.service.UpdateService;
 import tv.utao.x5.util.JsonUtil;
 
 public class HistoryDaoX {
-    private static String TAG="MainActivity";
+    private static String TAG="HistoryDaoX";
 
     public  static  void save(Context context, String data,StringCallback stringCallback){
         HistoryDao historyDao = AppDatabase.getInstance(context).historyDao();
@@ -36,7 +38,37 @@ public class HistoryDaoX {
     }
     public  static  List<History> queryHistory(Context context){
         HistoryDao historyDao = AppDatabase.getInstance(context).historyDao();
+        //@todo 大于150 才
+        historyDao.clearData();
         return    historyDao.queryHistory();
+    }
+
+    public static Vod currentChannel(Context context){
+        HistoryDao historyDao = AppDatabase.getInstance(context).historyDao();
+        History history =   historyDao.queryOneBySite("tv");
+        if(null==history){
+            return UpdateService.getByKey("0_0");
+        }
+        return UpdateService.getByUrl(history.url);
+    }
+    public static void updateChannel(Context context, String url){
+        HistoryDao historyDao = AppDatabase.getInstance(context).historyDao();
+        History history =   historyDao.queryOneBySite("tv");
+        Vod vod = UpdateService.getByUrl(url);
+        if(null==history){
+            History historyNew = new History();
+            historyNew.url=vod.getUrl();
+            historyNew.name=vod.getName();
+            historyNew.site="tv";
+            historyNew.vodId="0";
+            historyNew.createTime=new Date().getTime();
+            historyNew.updateTime=new Date().getTime();
+            historyDao.insertAll(historyNew);
+            return ;
+        }
+        Log.i(TAG,vod.getName()+vod.getUrl());
+        historyDao.updateChannel(history.id,vod.getName(),vod.getUrl(),new Date().getTime());
+
     }
    /* public  static  void all(Context context,String data){
         HistoryDao historyDao = AppDatabase.getInstance(context).historyDao();

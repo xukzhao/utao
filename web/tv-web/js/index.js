@@ -87,6 +87,15 @@ const _html={
             updateApk(){
                _apiX.msg("updateApk",null);
             },
+            clearCache(){
+                _apiX.msg("clearCache",null);
+            },
+            openX5(){
+                _apiX.msg("openX5",null);
+            },
+            closeApp(){
+                _apiX.msg("closeApp",null);
+            },
             historyChoose(item){
                 window.location.href=item.url;
             },
@@ -96,6 +105,8 @@ const _html={
                 _apiX.queryByService("querySysInfo",null,function (data){
                     console.log("querySysInfo"+data);
                     let sysInfo=JSON.parse(data);
+                    _this.info.x5Ok=sysInfo.x5Ok;
+                    _this.info.cacheSize=sysInfo.cacheSize;
                     let  version="当前版本:"+sysInfo.versionName;
                     if(sysInfo.haveNew){
                         version=version+" 发现新版 点击更新";
@@ -124,8 +135,12 @@ const _html={
                 console.log(`appChoose item ${item.name} ${item.url}`)
                 let dataUrl = item.url;
                 if (""!==dataUrl) {
-                    _layer.wait("请耐心等待跳转。。。");
-                    window.location.href = dataUrl;
+                    if(dataUrl==="tv.html"&& _tvFunc.isApp()){
+                        _apiX.msg("activity","live");
+                    }else{
+                        _layer.wait("请耐心等待跳转。。。");
+                        window.location.href = dataUrl;
+                    }
                 } else {
                     _layer.notify("抱歉 还未适配 正在加急开发中。。。 敬请期待");
                 }

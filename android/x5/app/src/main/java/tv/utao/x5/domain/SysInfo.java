@@ -6,6 +6,8 @@ public class SysInfo {
 
     private Integer versionCode;
     private Boolean haveNew;
+    private Boolean x5Ok;
+    private String cacheSize;
 
     public String getVersionName() {
         return versionName;
@@ -37,5 +39,21 @@ public class SysInfo {
 
     public void setHaveNew(Boolean haveNew) {
         this.haveNew = haveNew;
+    }
+
+    public Boolean getX5Ok() {
+        return x5Ok;
+    }
+
+    public void setX5Ok(Boolean x5Ok) {
+        this.x5Ok = x5Ok;
+    }
+
+    public String getCacheSize() {
+        return cacheSize;
+    }
+
+    public void setCacheSize(String cacheSize) {
+        this.cacheSize = cacheSize;
     }
 }

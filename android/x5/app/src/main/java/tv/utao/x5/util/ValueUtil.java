@@ -9,7 +9,8 @@ public class ValueUtil {
 
     /**存储字符串*/
     public static boolean putString(Context context, String key, String value) {
-        SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_NAME, 0);
+        //PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key, value);
         return editor.commit();

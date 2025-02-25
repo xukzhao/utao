@@ -58,8 +58,7 @@ public class StartActivity extends Activity {
             public void getConfig(ConfigDTO configDTO) {
                 if(null==configDTO){
                     runOnUiThread(()->{
-                        String x5Ok=ValueUtil.getString(thisContext,"x5");
-                        if(x5Ok.equals("ok")||Util.isNotNeedX5()){
+                        if(x5Ok()|(Util.isNotNeedX5()&&!openX5())){
                             to();
                         }else{
                             Toast.makeText(thisContext,"请求接口失败 请检查网络 2次返回键退出重进", Toast.LENGTH_SHORT).show();
@@ -103,22 +102,30 @@ public class StartActivity extends Activity {
         }
         return false;
     }
+    private boolean openX5(){
+        return "1".equals(ValueUtil.getString(getApplicationContext(),"openX5","0"));
+    }
+    private boolean x5Ok(){
+        return "ok".equals(ValueUtil.getString(getApplicationContext(),"x5","0"));
+    }
     private  void installX5(Context content,ConfigDTO configDTO){
-        String x5Ok=ValueUtil.getString(content,"x5");
+        boolean isX5Ok=x5Ok();
         boolean is64=Util.is64();
         Log.i(TAG,"is64::: "+is64+" id "+MyApplication.androidId);
         //new File(toFilePath).exists()
         //x5Ok.equals("ok")
         //boolean is64=Util.is64();
         boolean isX86 = Util.isX86();
-        if(x5Ok.equals("ok")){
-            Log.i(TAG, "x5  install  "+x5Ok);
+        if(isX5Ok){
+            Log.i(TAG, "x5  install  "+isX5Ok);
             to();
             return;
         }
         //Build.VERSION_CODES.R 安卓11
         //Build.VERSION_CODES.P 安卓9
-        if(Util.isNotNeedX5()){
+        boolean isOpenX5=openX5();
+        Log.i(TAG,"isOpenX5::::"+isOpenX5);
+        if(Util.isNotNeedX5()&&!isOpenX5){
             to();
             return;
         }

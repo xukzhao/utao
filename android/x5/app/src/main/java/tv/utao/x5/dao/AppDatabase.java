@@ -19,7 +19,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             .addMigrations()
                             .fallbackToDestructiveMigration()
                             // 默认不允许在主线程中连接数据库
-                            // .allowMainThreadQueries()
+                             .allowMainThreadQueries()
                             .build();
                 }
             }

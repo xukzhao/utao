@@ -1,5 +1,6 @@
 package tv.utao.x5;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -44,7 +45,36 @@ public class MyApplication extends Application {
         CrashHandler.getInstance().init(this);
         CrashHandler.uploadExceptionToServer(this);
         //startX5WebProcessPreinitService();
+        initPieWebView();
     }
+    private static final String PROCESS = "tv.utao.x5";
+    private void initPieWebView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            String processName = getProcessName(this);
+            if (!PROCESS.equals(processName)) {
+                WebView.setDataDirectorySuffix(getString(processName, "utao"));
+            }
+        }
+    }
+    public String getProcessName(Context context) {
+        if (context == null) return null;
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo processInfo : manager.getRunningAppProcesses()) {
+            if (processInfo.pid == android.os.Process.myPid()) {
+                return processInfo.processName;
+            }
+        }
+        return null;
+    }
+
+    public String getString(String s, String defValue) {
+        return isEmpty(s) ? defValue : s;
+    }
+
+    public boolean isEmpty(String s) {
+        return s == null || s.trim().length() == 0;
+    }
+
     public static Context getContext() {
         return context;
     }
