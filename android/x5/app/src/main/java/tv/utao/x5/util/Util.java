@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.net.Uri;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
@@ -126,4 +128,22 @@ public class Util {
         }
         return false;
     }
+    // wifi下获取本地网络IP地址（局域网地址）
+    public static String getLocalIPAddress(Context context) {
+        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        if (wifiManager != null) {
+           // @SuppressLint("MissingPermission")
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());
+            return ipAddress;
+        }
+        return "";
+    }
+    public static String intIP2StringIP(int ip) {
+        return (ip & 0xFF) + "." +
+                ((ip >> 8) & 0xFF) + "." +
+                ((ip >> 16) & 0xFF) + "." +
+                (ip >> 24 & 0xFF);
+    }
+
 }
