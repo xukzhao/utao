@@ -71,6 +71,7 @@ import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.JsonUtil;
 import tv.utao.x5.util.Util;
 import tv.utao.x5.util.ValueUtil;
+import tv.utao.x5.util.WebService;
 
 
 /**
@@ -79,7 +80,7 @@ import tv.utao.x5.util.ValueUtil;
 public class BaseWebViewActivity extends Activity {
     protected String TAG = "BaseWebViewActivity";
 
-    protected  com.tencent.smtt.sdk.WebView mWebView;
+    public static   com.tencent.smtt.sdk.WebView mWebView;
 
 
 
@@ -113,6 +114,7 @@ public class BaseWebViewActivity extends Activity {
         initWebView();
         //file:///android_asset/tv-web/index.html http://www.utao.tv/tv-web/index.html
         mWebView.loadUrl(mHomeUrl);
+        new WebService(10240);
         ConfigApi.syncIsX5Ok(this);
        /* new Thread(()-> {
             //https://raw.githubusercontent.com/hxh19950701/WebViewTvLive/main/app/channels/2.0/%E5%AE%8C%E6%95%B4.json
@@ -644,6 +646,9 @@ public class BaseWebViewActivity extends Activity {
             Log.i(TAG,"queryByService "+service+" extPraram "+extPraram);
             if("queryHistory".equals(service)){
                 return JsonUtil.toJson(HistoryDaoX.queryHistory(thisContext));
+            }
+            if("queryIp".equals(service)){
+                return Util.getLocalIPAddress(thisContext);
             }
             if("querySysInfo".equals(service)){
                ConfigDTO configDTO= ConfigApi.getConfig();
