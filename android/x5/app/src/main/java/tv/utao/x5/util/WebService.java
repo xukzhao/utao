@@ -1,0 +1,141 @@
+package tv.utao.x5.util;
+
+import android.util.Log;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import fi.iki.elonen.NanoHTTPD;
+import tv.utao.x5.BaseWebViewActivity;
+
+public class WebService extends NanoHTTPD {
+    protected String TAG = "WebService";
+    public WebService(int port) {
+        super(port);
+        try {
+            start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+        }catch (Exception e){
+            Log.i(TAG,e.getMessage());
+        }
+
+        System.out.println("\nRunning! Point your browsers to http://localhost:" + port + "/ \n");
+    }
+
+ 
+    @Override
+    public Response serve(IHTTPSession session) {
+        Method method = session.getMethod();
+        String uri = session.getUri();
+        if(uri.endsWith(".ico")){
+            return newFixedLengthResponse("404!!");
+        }
+        String mimetype = minetype(uri);
+        Map<String, List<String>> stringListMap =  session.getParameters();
+        if(uri.endsWith("image")){
+            String url= stringListMap.get("url").get(0);
+            String ref=stringListMap.get("tv-ref").get(0);
+            InputStream data= HttpRequest.get(url).header("Referer",ref).stream();
+            return newChunkedResponse(Response.Status.OK, mimetype, data);
+        }
+        String baseFolder = "tv-web/";
+        if (uri.endsWith(".woff2")) {
+            return newChunkedResponse(Response.Status.OK, "font/woff2", FileUtil.readExtIn(baseFolder+uri));
+        }
+        if(uri.endsWith("ctrl")){
+            String url= stringListMap.get("url").get(0);
+            BaseWebViewActivity.mWebView.loadUrl(url);
+            return newFixedLengthResponse(Response.Status.OK, mimetype, "ok");
+        }
+
+        //System.out.println(ip + " [" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + "] >>>　" + uri + "  ===> " + method);
+        String data =readData(uri,session);
+        return newFixedLengthResponse(Response.Status.OK, mimetype, data);
+ 
+    }
+    private String getRequestBody(IHTTPSession session){
+        Map<String, String> files = new HashMap<>();
+        try {
+            session.parseBody(files);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (ResponseException e) {
+            throw new RuntimeException(e);
+        }
+        return  files.get("postData");
+    }
+    private String minetype(String uri){
+        String mimetype = "text/html";
+        if (uri.endsWith(".html") || uri.endsWith(".htm")) {
+            return  "text/html";
+        }
+        if (uri.endsWith(".js")) {
+            return  "text/javascript";
+        }
+        if (uri.endsWith(".css")) {
+            return "text/css";
+        }
+        if (uri.endsWith("json")) {
+            return "application/json";
+        }
+        if(uri.endsWith("image")){
+            return  "image/jpeg";
+
+        }
+
+
+        return mimetype;
+    }
+ 
+ 
+    private Response handler(IHTTPSession session) {
+ 
+        return newFixedLengthResponse("404!!");
+    }
+
+ 
+    private String readData(String pathname,IHTTPSession session) {
+        if(pathname.endsWith("json")){
+            String requestUrl = session.getHeaders().get("rel-url");
+            Method method = session.getMethod();
+            try {
+                requestUrl= URLDecoder.decode(requestUrl, "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                Log.e(TAG,e.getMessage());
+            }
+            Map<String, String> headerMap=new HashMap<>();
+            //headerMap.remove("rel-url");
+            if(method.equals(Method.GET)){
+                String data= HttpRequest.get(requestUrl).body();
+                Log.i(TAG,data);
+                return data;
+            }
+            if(method.equals(Method.POST)){
+                String requestBody= getRequestBody(session);
+                Log.i("requestBody",requestBody);
+                Map<String,String> headerMapInSession = session.getHeaders();
+                if(headerMapInSession.containsKey("tv-ref")){
+                    headerMap.put("Referer",headerMapInSession.get("tv-ref"));
+                }
+                if(headerMapInSession.containsKey("tv-org")){
+                    headerMap.put("Origin",headerMapInSession.get("tv-org"));
+                }
+                String data= HttpUtil.postJson(requestUrl,headerMap,requestBody);
+                return data;
+            }
+        }
+
+
+
+        String baseFolder = "tv-web/";
+        return FileUtil.readExt(baseFolder+pathname);
+    }
+ 
+}
+ 
+ 
+ 
