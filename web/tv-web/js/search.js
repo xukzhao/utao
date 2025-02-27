@@ -62,6 +62,7 @@ let _data = {
             },
             error: function (xhr, type) {
                 console.log('Ajax error!'+url);
+                _layer.notify("网络错误");
             }
         });
         this.searchQ(query);
@@ -95,6 +96,7 @@ let _data = {
             },
             error: function (xhr, type) {
                 console.log('Ajax error!'+url);
+                _layer.notify("网络错误");
             }
         });
     }
@@ -123,6 +125,7 @@ $$(function() {
         openResult(result) {
            // window.location.href = result.url;
             $$.get("/ctrl?url="+result.url);
+            _layer.notify("即将在电视端打开对应视频链接");
         },
 
         doSearch() {
