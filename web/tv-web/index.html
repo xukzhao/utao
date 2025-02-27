@@ -12,6 +12,7 @@
     <script src="js/common.js?v=x"></script>
     <script src="js/vuex.min.js"></script>
     <script src="js/focus-home.js?v=x"></script>
+    <script src="js/qrcode.min.js"></script>
     <script src="js/index.js?v=x"></script>
 </head>
 
@@ -76,13 +77,13 @@
                 </div>
                 <div id="tv-search-content" class="tv-tab" :style="{display:(tab == 'search' ? 'grid' : 'none')}">
                     <div class="tv-text">
-                        在电视端用遥控器搜索实在是太麻烦了 后续版本会有对应手机控制端app上线！尽情期待
+                         请用手机在同一个局域网wifi下 微信或浏览器扫一扫二维码搜索
                     </div>
                     <div class="tv-content" style="grid-template-columns: repeat(3, 33%);">
                         <div class="tv-item">
                         </div>
                         <div class="tv-item">
-                            <img src="img/mydy.jpg?tvImg=1"/><span>抖音私信或任一视频下反馈问题</span>
+                            <img :src="qrCode" style="width: 60vh;height: 60vh"/><span>{{qrUrl}}</span>
                         </div>
                         <div class="tv-item">
                         </div>

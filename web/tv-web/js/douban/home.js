@@ -6,9 +6,9 @@ var _data={
         this.channelPage();
     },
     channels(){
-        _data.vue.channels.push({id:1,tag:"tv",name:"电视剧",loading:false,filter:Filter.hot,pageNum:0,vods:[]});
-        _data.vue.channels.push({id:1,tag:"zy",name:"综艺",loading:false,filter:Filter.hot,pageNum:0,vods:[]});
-        _data.vue.channels.push({id:5,tag:"movie",name:"电影",loading:false,filter:Filter.hot,pageNum:0,vods:[]});
+        _data.vue.channels.push({id:1,tag:"tv",name:"电视剧",loading:false,filter:Filter.new,pageNum:0,vods:[]});
+        _data.vue.channels.push({id:1,tag:"zy",name:"综艺",loading:false,filter:Filter.new,pageNum:0,vods:[]});
+        _data.vue.channels.push({id:5,tag:"movie",name:"电影",loading:false,filter:Filter.default,pageNum:0,vods:[]});
         //_data.vue.channels.push({id:7,tag:"zy",name:"综艺",loading:false,pageNum:0,vods:[]});
         _data.vue.filters=[Filter.default,Filter.hot,Filter.new,Filter.best];
     },

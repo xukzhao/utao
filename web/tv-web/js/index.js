@@ -54,6 +54,8 @@ const _html={
             channels:[],
             apps:[],
             focusId:"",
+            qrCode:null,
+            qrUrl:null,
             historys:[],
             tab: "index",
             info:{
@@ -75,6 +77,9 @@ const _html={
                 }
                 if(item.tag==="set"){
                     this.setFocus(item)
+                }
+                if(item.tag==="search"){
+                    this.searchFocus(item)
                 }
                 let menuId="#tv-"+item.tag;
                 let hasFocus= $$(menuId).hasClass("tv-focus");
@@ -98,6 +103,23 @@ const _html={
             },
             historyChoose(item){
                 window.location.href=item.url;
+            },
+            searchFocus(item){
+                let _this=this;
+                _apiX.queryByService("queryIp",null,function (data){
+                    console.log("queryIp"+data);
+                    const text = "http://"+data+":10240/search.html";  // 要编码的内容
+                   // const imageElement = document.getElementById('qrcodeImage');  // 获取 img 元素
+                    _this.qrUrl=text;
+                    QRCode.toDataURL(text, function(error, url) {
+                        if (error) {
+                            console.error(error);
+                        } else {
+                            _this.qrCode=url;
+                            console.log("QR Code image successfully generated!");
+                        }
+                    });
+                });
             },
             setFocus(item){
                 let _this=this;

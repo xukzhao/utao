@@ -22,6 +22,10 @@ data:
         url: https://tv.cctv.com/live/cctv6/
       - name: CCTV-7 国防军事
         url: https://tv.cctv.com/live/cctv7/
+      - name: CCTV-8 电视剧
+        url: https://tv.cctv.com/live/cctv8/
+      - name: CCTV-9 记录
+        url: https://tv.cctv.com/live/cctvjilu/
       - name: CCTV-10 科教
         url: https://tv.cctv.com/live/cctv10/
       - name: CCTV-11 戏曲
