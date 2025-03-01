@@ -121,12 +121,14 @@ const _data={
        let requestUrl=`https://api.bilibili.com/pgc/view/web/ep/list?ep_id=${nowId}`;
        _apiX.getJson(requestUrl,   { "User-Agent": _apiX.userAgent(false), "tv-ref": "https://www.bilibili.com/" },function(text){
             let data = JSON.parse(text);
+             //console.log("data",data);
             let orderMap = new Map();
             $$.each(data.result.episodes,function(index,item){
                 orderMap.set(item.title,item);
             });
             let index=0;
             orderMap.forEach((item,k)=>{
+                //console.log("orderMap",item);
                 let title= _tvFunc.title(item.title);
                     //`第${item.title}集`;
                 let isVip=false;
@@ -136,7 +138,7 @@ const _data={
                 if(item.badge==="会员"){
                     isVip=true;
                 }
-                let itemData={vodId:vodId,id:id,url:url,isVip:isVip,remark:remark,title:title,index:index,site:"bili"};
+                let itemData={vodId:vodId,id:id,url:url,name:item.show_title,isVip:isVip,remark:remark,title:title,index:index,site:"bili"};
                 index++;
                 if(nowId===id){
                     _tvFunc.currentXj(itemData);

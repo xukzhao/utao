@@ -163,8 +163,9 @@ var _tvFunc={
         console.log("currentXj "+item.vodId+"  "+item.site);
         //记录当前
         if(null!=item.vodId&&""!==item.site){
+            let remark= item.title;
             _apiX.msg("history.update",
-                {site:item.site,vodId:item.vodId,url:item.url,remark:"看至"+item.title});
+                {site:item.site,vodId:item.vodId,url:item.url,name:item.name,remark:remark});
         }
     },
     hzLevel(name,type){

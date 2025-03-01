@@ -95,11 +95,12 @@ const _data={
                     nowId=data.Data.Episodes[0].ID;
                 }
                 data.Data.Episodes.forEach((item,k)=>{
+                    //console.log("item",item);
                     let id= item.ID;
                     let vid= item.Vid;
                     let title= _tvFunc.title(item.Num);
                     let url=`https://www.bestv.com.cn/web/play/${vid}/${id}`;
-                    let itemData={vodId:vid,id:id,url:url,isVip:true,remark:"",title:title,index:index,site:"bestv"};
+                    let itemData={vodId:vid,id:id,url:url,name:item.Title,isVip:true,remark:"",title:title,index:index,site:"bestv"};
                     index++;
                     if(nowId==id){//  必须的
                         _tvFunc.currentXj(itemData);

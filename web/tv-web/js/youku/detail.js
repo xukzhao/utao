@@ -138,6 +138,7 @@ const _data={
               //  console.log("html::"+dataListStr);
                 let list=  xjItem.dataNode;
                 $$.each(list,function(index,item){
+                    //console.log("item",item);
                     let title= _tvFunc.titleQ(item.data.stage,item.data.title);
                         //`第${item.data.stage}集`;
                     let id= item.data.action.value;
@@ -146,7 +147,7 @@ const _data={
                     if(item.data.videoType==="预告片"){
                         remark="预告";
                     }
-                    let itemData={vodId:vodId,id:index,url:url,isVip:false,remark:remark,title:title,index:index,"site":"youku"};
+                    let itemData={vodId:vodId,id:index,url:url,isVip:false,name:item.data.title,remark:remark,title:title,index:index,"site":"youku"};
                     if(nowId===id){
                         _data.vue.now.xj=itemData;
                         _tvFunc.currentXj(itemData)

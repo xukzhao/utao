@@ -107,23 +107,24 @@ public class WebService extends NanoHTTPD {
             } catch (UnsupportedEncodingException e) {
                 Log.e(TAG,e.getMessage());
             }
+            Log.i(TAG,requestUrl);
             Map<String, String> headerMap=new HashMap<>();
             //headerMap.remove("rel-url");
+            Map<String,String> headerMapInSession = session.getHeaders();
+            if(headerMapInSession.containsKey("tv-ref")){
+                headerMap.put("Referer",headerMapInSession.get("tv-ref"));
+            }
+            if(headerMapInSession.containsKey("tv-org")){
+                headerMap.put("Origin",headerMapInSession.get("tv-org"));
+            }
             if(method.equals(Method.GET)){
-                String data= HttpRequest.get(requestUrl).body();
+                String data= HttpUtil.getJson(requestUrl,headerMap);
                 Log.i(TAG,data);
                 return data;
             }
             if(method.equals(Method.POST)){
                 String requestBody= getRequestBody(session);
                 Log.i("requestBody",requestBody);
-                Map<String,String> headerMapInSession = session.getHeaders();
-                if(headerMapInSession.containsKey("tv-ref")){
-                    headerMap.put("Referer",headerMapInSession.get("tv-ref"));
-                }
-                if(headerMapInSession.containsKey("tv-org")){
-                    headerMap.put("Origin",headerMapInSession.get("tv-org"));
-                }
                 String data= HttpUtil.postJson(requestUrl,headerMap,requestBody);
                 return data;
             }

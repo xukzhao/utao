@@ -115,7 +115,7 @@ let _data={
            data.data.list.forEach((item,index)=>{
             let title=`第${index+1}集`;
             //item.sc
-            let itemData={vodId:next_id,id:item.id,url:item.url,isVip:false,remark:"",title:title,index:index,site:"cctv"};
+            let itemData={vodId:next_id,id:item.id,url:item.url,isVip:false,name:item.title,remark:"",title:title,index:index,site:"cctv"};
             if(itemData.id===itemid1){
                 _data.vue.now.xj=itemData;
                 _tvFunc.currentXj(itemData);

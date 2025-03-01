@@ -138,9 +138,11 @@ const _data={
                 if(item.isvip==="1"){
                     isvip=true;
                 }
-                let itemData={vodId:vodId,id:id,url:url,isVip:isVip,remark:remark,title:title,index:itemNum,site:"mgtv"};
+                let itemData={vodId:vodId,id:id,url:url,isVip:isVip,name:item.t3,remark:remark,title:title,index:itemNum,site:"mgtv"};
                 itemNum++;
+
                 if(nowId===id){
+                    console.log("nowId",nowId,id);
                     _data.vue.now.xj=itemData;
                     _tvFunc.currentXj(itemData);
                 }

@@ -90,7 +90,14 @@ public class HistoryDaoX {
         new Thread(()-> {
                 History history =  JsonUtil.fromJson(data, History.class);
                 //vodId
-                historyDao.updateUrl(history.vodId,history.site,history.remark,history.url,new Date().getTime());
+               List<History> histories = historyDao.queryByVodId(history.vodId,history.site);
+               if(histories.isEmpty()){
+                   history.createTime=new Date().getTime();
+                   history.updateTime=new Date().getTime();
+                   historyDao.insertAll(history);
+                   return;
+               }
+               historyDao.updateUrl(history.vodId,history.site,history.remark,history.url,new Date().getTime());
         }).start();
     }
 }

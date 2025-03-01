@@ -93,12 +93,13 @@ const _data={
             });
             let index=0;
             orderMap.forEach((item,k)=>{
+                //console.log("item",item);
                 let title= item.bottomLabel;
                 let isVip=false;
                 let id= item.episodeId;
                 let url=`https://www.ixigua.com/${item.albumId}?id=${id}`;
                 let remark="";
-                let itemData={vodId:item.albumId,id:id,url:url,isVip:isVip,remark:remark,title:title,index:index,site:"xigua"};
+                let itemData={vodId:item.albumId,id:id,name:item.title,url:url,isVip:isVip,remark:remark,title:title,index:index,site:"xigua"};
                 index++;
                 if(nowId===id){
                     _data.vue.now.xj=itemData;

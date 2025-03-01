@@ -70,6 +70,7 @@ public class LiveActivity extends Activity {
         //数据库获取最新数据
         //String liveUrl= "https://tv.cctv.com/live/cctv13/";
         lWebView.loadUrl(currentLive.getUrl());
+        showToastOrg("已支持遥控器上下左右可快速切台",this);
     }
     private long lastTime = 0;
 
