@@ -19,6 +19,15 @@ var _tvFunc={
      let index= window.location.href.lastIndexOf("/")
         return window.location.href.substring(0,index+1)+url;
     },
+    link(url){
+        if(url.startsWith("http")){
+            return url;
+        }
+        if(url.startsWith("//")){
+            return "https:"+url;
+        }
+        return url;
+    },
    loadCssCode(code) {
       var style = document.createElement('style')
     // style.type = 'text/css'
@@ -126,6 +135,28 @@ var _tvFunc={
             this.video=videos[0];
         }
         return this.video;
+    },
+    videoTrueReady(ready,time){
+        let video = this.getVideo();
+        if(null==video){
+            this.check(function (){return document.getElementsByTagName("video").length>0;},function (){
+                video=_tvFunc.getVideo();
+                _tvFunc.check(function (){return video.readyState>2&& video.duration>time;},function (){
+                    console.log("video found ",video.readyState);
+                    if(ready){
+                        ready(video);
+                    }
+                })
+            })
+        }
+        if(null!=video){
+            this.check(function (){return video.readyState>2 && video.duration>time;},function (){
+                console.log("video found ",video.readyState);
+                if(ready){
+                    ready(video);
+                }
+            })
+        }
     },
     videoPlay(){
         let video = this.getVideo();

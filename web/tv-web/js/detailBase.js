@@ -1,46 +1,3 @@
-const MyFocus = new Proxy(TvFocus, {
-    ok:function (){
-        _ctrlx.ok();
-        return true;
-    },
-    menu:function(){
-        if(_ctrlx.menu){
-            _ctrlx.menu();
-        }
-        return true;
-    },
-    left:function(){
-        if(_isVideo){
-            _tvFunc.getVideo().currentTime-=20;_layer.notifyLess("进度减20秒");
-        }
-        return true;
-    },
-    right:function(){
-        if(_isVideo){
-            _tvFunc.getVideo().currentTime+=20;_layer.notifyLess("进度加20秒");
-        }
-        return true;
-    },
-    up:function(){
-        let video= _tvFunc.getVideo();
-        let currentVolume=_tvFunc.getVideo().volume;
-        if(currentVolume<1){if((currentVolume+0.2)>1){video.volume=1}else{video.volume+=0.2}}
-        let name= Math.floor(video.volume*100);
-        _layer.notifyLess("音量"+name);
-        return true;
-    },
-    down:function(){
-        let video= _tvFunc.getVideo();
-        let currentVolume=_tvFunc.getVideo().volume;
-        if(currentVolume>0){if((currentVolume-0.2)<0){video.volume=0}else{video.volume-=0.2;}}
-        let name= Math.floor(video.volume*100);
-        _layer.notifyLess("音量"+name);
-        return true;
-    }
-});
-/*class MyFocus extends  TvFocus{
-
-}*/
 (function(){
     const _html={
         _ctrl:{
@@ -172,6 +129,7 @@ const MyFocus = new Proxy(TvFocus, {
                         if(_this.now.hz.level<1080){
                             console.log("need qie")
                             $$.each(_this.hzs,function(index,item){
+                                console.log("isVip",isVip,item.isVip);
                                 if(isVip&&item.level===1080){
                                     setTimeout(function(){
                                         _layer.notify("正在切换到"+item.name);
@@ -180,6 +138,9 @@ const MyFocus = new Proxy(TvFocus, {
                                     return false;
                                 }
                                 if(!isVip&&!item.isVip){
+                                    if(item.level===_this.now.hz.level){
+                                        return false;
+                                    }
                                     setTimeout(function(){
                                         _layer.notify("正在切换到"+item.name);
                                         _this.hzChoose(item);
@@ -194,10 +155,19 @@ const MyFocus = new Proxy(TvFocus, {
                     this.getJds( (splits)=>{
                         this.jds=splits;
                     });
+                    setInterval(function (){
+                        _this.getJds( (splits)=>{
+                            _this.jds=splits;
+                        });
+                    },10*1000);
                 },
                 getJds(callback){
                     _tvFunc.videoReady(function (video){
                         console.log("videoReady getJds",video.duration)
+                        if(video.duration=="Infinity"){
+                            callback([])
+                            return;
+                        }
                         let timeAll = video.duration;
                         if(timeAll<120){
                             return;

@@ -63,6 +63,8 @@ data:
         url: https://www.jxntv.cn/live/?tag=5#/jxtv6
       - name: 内蒙少儿
         url: https://tv.utao.tv/tv-web/live.html?url=https://livestream-bt.nmtv.cn/nmtv/2318general.m3u8?txSecret=a2c948908728a0733cecbe1fadea23dc&txTime=771E8800
+      - name: 深圳少儿
+        url: https://www.sztv.com.cn/dianshi.shtml?id=7881
   - tag: cztv
     name: 浙江
     vods:
@@ -84,6 +86,28 @@ data:
         url: https://www.cztv.com/liveTV/111
       - name: 之江记录
         url: https://www.cztv.com/liveTV/112
+      - name: 杭州综合
+        url: https://tv.hoolo.tv/hzzh/
+      - name: 杭州西湖明珠
+        url: https://tv.hoolo.tv/xhmz/
+      - name: 杭州生活
+        url: https://tv.hoolo.tv/hzsh/
+      - name: 杭州影视
+        url: https://tv.hoolo.tv/utv/
+      - name: 杭州青少体育
+        url: https://tv.hoolo.tv/hzse/
+      - name: 杭州文化
+        url: https://tv.hoolo.tv/whpd/
+      - name: 宁波1
+        url: https://www.ncmc.nbtv.cn/gbds/folder8458/NBTV1/index.shtml
+      - name: 宁波2
+        url: https://www.ncmc.nbtv.cn/gbds/folder8458/NBTV2/index.shtml
+      - name: 宁波3
+        url: https://www.ncmc.nbtv.cn/gbds/folder8458/NBTV3/index.shtml
+      - name: 宁波4
+        url: https://www.ncmc.nbtv.cn/gbds/folder8458/NBTV4/index.shtml
+      - name: 宁波1
+        url: https://www.ncmc.nbtv.cn/gbds/folder8458/NBTV1/index.shtml
   - tag: sdtv
     name: 山东
     vods:
@@ -220,8 +244,22 @@ data:
         url: https://www.gdtv.cn/tvChannelDetail/15
       - name: 纪录片
         url: https://www.gdtv.cn/tvChannelDetail/94
+      - name: 广州综合
+        url: https://app.gztv.com/plusshare/#/tvDetail?code=3001
+      - name: 广州新闻
+        url: https://app.gztv.com/plusshare/#/tvDetail?code=3002
+      - name: 广州南国都市
+        url: https://app.gztv.com/plusshare/#/tvDetail?code=3003
+      - name: 广州法制
+        url: https://app.gztv.com/plusshare/#/tvDetail?code=3004
+      - name: 广州影视
+        url: https://app.gztv.com/plusshare/#/tvDetail?code=3006
+      - name: 东莞新闻综合
+        url: https://dgrtv.sun0769.com/index.php/online2/4
+      - name: 东莞生活
+        url: https://dgrtv.sun0769.com/index.php/online2/5
   - tag: sh
-    name: 北上
+    name: 北上深
     vods:
       - name: 北京卫视
         url: https://www.btime.com/btv/btvsy_index?tag=0
@@ -251,6 +289,18 @@ data:
         url: https://live.kankanews.com/huikan?tag=新纪实
       - name: 上海都市频道
         url: https://live.kankanews.com/huikan?tag=都市频道
+      - name: 深圳卫视
+        url: https://www.sztv.com.cn/dianshi.shtml?id=7867
+      - name: 深圳都市
+        url: https://www.sztv.com.cn/dianshi.shtml?id=7868
+      - name: 深圳电视
+        url: https://www.sztv.com.cn/dianshi.shtml?id=7880
+      - name: 深圳财经
+        url: https://www.sztv.com.cn/dianshi.shtml?id=7871
+      - name: 深圳移动
+        url: https://www.sztv.com.cn/dianshi.shtml?id=7869
+      - name: 深圳国际
+        url: https://www.sztv.com.cn/dianshi.shtml?id=7944
 
   - tag: gxtv
     name: 广西

@@ -4,16 +4,17 @@
     _detailInit(null,999990,true);
     _tvFunc.check(function (){return document.getElementsByTagName("video").length>0;},function (){
         console.log("video found")
-       // document.getElementsByTagName("video")[0].classList.add("utv-video-full");
+        // document.getElementsByTagName("video")[0].classList.add("utv-video-full");
         _tvFunc.fullscreen("video");
         $$("video").css("position","fixed !important");
-        $$(".head-nav").hide();
+        $$("video").css("left","50% !important");
+        $$("video").css("top","50% !important");
     });
     let _app={
         init(){
             _tvFunc.check(function(){return  document.getElementsByTagName("video").length>0;},function(index){
                 //全屏
-               // let menuId = _detailInit(null,999990,true);
+                // let menuId = _detailInit(null,999990,true);
                 _detailHz();
             },1000);
         }

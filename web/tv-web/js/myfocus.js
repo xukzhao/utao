@@ -62,12 +62,20 @@ let TvFocus={
     },
     left(){
         if(_isVideo){
+            let duration=_tvFunc.getVideo().duration;
+            if(duration=="Infinity"){
+                return true;
+            }
             _tvFunc.getVideo().currentTime-=20;_layer.notifyLess("进度减20秒");
         }
         return true;
     },
     right(){
         if(_isVideo){
+            let duration=_tvFunc.getVideo().duration;
+            if(duration=="Infinity"){
+                return true;
+            }
             _tvFunc.getVideo().currentTime+=20;_layer.notifyLess("进度加20秒");
         }
         return true;

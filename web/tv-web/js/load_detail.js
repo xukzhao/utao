@@ -34,8 +34,17 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.iqiyi.com/")){
             return "iqiyi";
         }
+        if(url.startsWith("https://www.miguvideo.com/p/live")){
+            return "ty/mg";
+        }
+        if(url.startsWith("https://passport.migu.cn/login")){
+            return "ty/mg/login";
+        }
         if(url.startsWith("https://www.mgtv.com/b/")){
             return "mgtv";
+        }
+        if(url.startsWith("https://www.le.com/")){
+            return "letv";
         }
         if(url.startsWith("https://www.bilibili.com/bangumi/play/")){
             return "bili";
@@ -58,6 +67,9 @@ if(typeof _tvload == "undefined"){
         }
         if(url.startsWith("https://www.jxntv.cn/")){
             return "tv/jxntv"
+        }
+        if(url.startsWith("https://tv.hoolo.tv")){
+            return "tv/hztv"
         }
         if(url.startsWith("https://www.lcxw.cn/")){
             _tvLoadRes.js("https://cdn.bootcdn.net/ajax/libs/hls.js/1.5.13/hls.js");

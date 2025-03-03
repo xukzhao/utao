@@ -237,7 +237,9 @@ let _data={
         if(!isGecko){
             apps.push({id:0,url:bili,name:"哔哩哔哩",pic:"img/bilibili.png"});
         }
-        //apps.push({id:0,url:"ty.html",name:"体育",pic:"img/utao.jpg"});
+        //apps.push({id:0,url:"https://www.douyin.com/?recommend=1",name:"抖音推荐",pic:"img/dy2.jpg"});
+        apps.push({id:0,url:"ty.html",name:"体育",pic:"img/utao.jpg"});
+        apps.push({id:0,url:"letv.html",name:"乐视",pic:"img/letv.jpg"});
         //apps.push({id:0,url:"douyin.html",name:"抖音推荐",pic:"img/douyin.jpeg"});
         apps.forEach((item,index)=>{
             item.id=index;
