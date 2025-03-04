@@ -82,9 +82,9 @@ data:
         url: https://www.cztv.com/liveTV/107
       - name: 浙江国际
         url: https://www.cztv.com/liveTV/110
-      - name: 好易购
+      - name: 浙江好易购
         url: https://www.cztv.com/liveTV/111
-      - name: 之江记录
+      - name: 浙江之江记录
         url: https://www.cztv.com/liveTV/112
       - name: 杭州综合
         url: https://tv.hoolo.tv/hzzh/
@@ -233,15 +233,15 @@ data:
         url: https://www.gdtv.cn/tvChannelDetail/46
       - name: 广东影视
         url: https://www.gdtv.cn/tvChannelDetail/53
-      - name: 4K超高清
+      - name: 广东4K超高清
         url: https://www.gdtv.cn/tvChannelDetail/53
-      - name: 南方购物
+      - name: 广东南方购物
         url: https://www.gdtv.cn/tvChannelDetail/42
-      - name: 现代教育
+      - name: 广东现代教育
         url: https://www.gdtv.cn/tvChannelDetail/13
-      - name: 岭南戏曲
+      - name: 广东岭南戏曲
         url: https://www.gdtv.cn/tvChannelDetail/15
-      - name: 纪录片
+      - name: 广东纪录片
         url: https://www.gdtv.cn/tvChannelDetail/94
       - name: 广州综合
         url: https://tv.utao.tv/tv-web/live.html?url=https://tencentplaywebsite.gztv.com/live/zonghes.m3u8?txSecret=4528666d03404f24e44c1cc45d6d98f5&txTime=1955a3c2631
@@ -317,34 +317,39 @@ data:
     vods:
       - name: 广西卫视
         url: https://tv.gxtv.cn/channel/channelivePlay_e7a7ab7df9fe11e88bcfe41f13b60c62.html
-      - name: 旅游
+      - name: 广西旅游
         url: https://tv.gxtv.cn/channel/channelivePlay_f3335975f9fe11e88bcfe41f13b60c62.html
-      - name: 都市
+      - name: 广西都市
         url: https://tv.gxtv.cn/channel/channelivePlay_fdbaf085f9fe11e88bcfe41f13b60c62.html
-      - name: 影视
+      - name: 广西影视
         url: https://tv.gxtv.cn/channel/channelivePlay_5e923d82058e11e9ba67e41f13b60c62.html
-      - name: 新闻
+      - name: 广西新闻
         url: https://tv.gxtv.cn/channel/channelivePlay_9dfd8600075811e9ba67e41f13b60c62.html
-      - name: 国际
+      - name: 广西国际
         url: https://tv.gxtv.cn/channel/channelivePlay_bfa17b64157f11e999f0e41f13b60c62.html
-      - name: 移动数字
+      - name: 广西移动数字
         url: https://tv.gxtv.cn/channel/channelivePlay_78dbfd44e6b74ab687204d2d8113cbf5.html
   - tag: dbtv
     name: 东北
     vods:
       - name: 吉林卫视
-        url: https://tv.utao.tv/tv-web/live.html?url=https://hls.avap.jilintv.cn/zqvk7vpj/channel/0533b55e42354f4f802bdec78e26b571/1.m3u8?txSecret=b6a1a3b1406044cfb187a3e302a3c7e7&txTime=67C58D7C
-        #https://www.jlntv.cn/tv?id=104
+        url: https://www.jlntv.cn/tv?tag=0
       - name: 吉林都市
-        url: https://tv.utao.tv/tv-web/live.html?url=https://hls.avap.jilintv.cn/zqvk7vpj/channel/7e8474e6daea44ccaa5aa2300191439e/index.m3u8?txSecret=32fdf32d9491a1c3e80ef6df1456a4c6&txTime=67C58D98
+        url: https://www.jlntv.cn/tv?tag=1
       - name: 吉林生活
-        url: https://tv.utao.tv/tv-web/live.html?url=https://hls.avap.jilintv.cn/zqvk7vpj/channel/0a76740c72b74fabae611845aa21e06a/index.m3u8?txSecret=32fdf32d9491a1c3e80ef6df1456a4c6&txTime=67C58D98
+        url: https://www.jlntv.cn/tv?tag=2
       - name: 吉林影视
-        url: https://tv.utao.tv/tv-web/live.html?url=https://hls.avap.jilintv.cn/zqvk7vpj/channel/906341e6f19b4c4bacdc89941eb85d12/index.m3u8?txSecret=32fdf32d9491a1c3e80ef6df1456a4c6&txTime=67C58D98
+        url: https://www.jlntv.cn/tv?tag=3
       - name: 吉林乡村
-        url: https://tv.utao.tv/tv-web/live.html?url=https://hls.avap.jilintv.cn/zqvk7vpj/channel/3ffc4824dce54b92be185555923ce382/index.m3u8?txSecret=32fdf32d9491a1c3e80ef6df1456a4c6&txTime=67C58D98
-      - name: 吉林综艺
-        url: https://tv.utao.tv/tv-web/live.html?url=https://hls.avap.jilintv.cn/zqvk7vpj/channel/b3925adaf01e41f287f482f0aea3d233/index.m3u8?txSecret=32fdf32d9491a1c3e80ef6df1456a4c6&txTime=67C58D98
+        url: https://www.jlntv.cn/tv?tag=4
+      - name: 吉林综艺文化
+        url: https://www.jlntv.cn/tv?tag=5
+      - name: 长春新闻综合
+        url: https://chinactv.com/live/1442880654565093377.html
+      - name: 长春文旅体育
+        url: https://chinactv.com/live/1442880767035355137.html
+      - name: 长春市民生活
+        url: https://chinactv.com/live/1442880854423678977.html
       - name: 黑龙江卫视
         url: https://www.hljtv.com/live/folder418/
       - name: 黑龙江文体

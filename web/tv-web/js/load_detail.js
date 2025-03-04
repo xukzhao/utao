@@ -68,6 +68,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.jxntv.cn/")){
             return "tv/jxntv"
         }
+        if(url.startsWith("https://www.jlntv.cn/")){
+            return "tv/jltv"
+        }
         if(url.startsWith("https://tv.hoolo.tv")){
             return "tv/hztv"
         }

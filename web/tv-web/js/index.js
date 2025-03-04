@@ -153,7 +153,7 @@ const _html={
                     let dataArr= JSON.parse(data);
                     let newArr=[];
                     dataArr.forEach(item=>{
-                        if(item.site.trim()!==""&&item.site.trim()!=="tv"){
+                        if(item.site&&item.site.trim()!==""&&item.site.trim()!=="tv"){
                             newArr.push(item);
                         }
                     })

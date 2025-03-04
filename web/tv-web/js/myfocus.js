@@ -20,7 +20,9 @@ let TvFocus={
             menu(){
                 //_this.keyMenuEvent();
                 _this.menu();
-                _apiX.message("menu",_detailData());
+                let data = _detailData();
+                //console.log("menu",data);
+                _apiX.message("menu",data);
             },
             ok(){
                 _this.keyOkEvent();
@@ -284,11 +286,11 @@ let TvFocus={
         this.isShow= _layer.toggle(_tv_menuId);
         if(!this.isShow){
             this.focus=null;
-            _apiX.msgStr("menu","0");
+            _apiX.msgStr("menuShow","0");
         }else{
             this.menu();
             this.focus=this.found(this.focusId);
-            _apiX.msgStr("menu","1");
+            _apiX.msgStr("menuShow","1");
         }
     },
     focusEvent(){

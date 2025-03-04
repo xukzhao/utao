@@ -408,6 +408,9 @@ var _layer={
             if(id.startsWith(".")){
                 document.getElementsByClassName(chooseId)[0].appendChild(myDiv);
             }
+            if(id.startsWith("&")){
+                document.getElementsByTagName(chooseId)[0].appendChild(myDiv);
+            }
         }
         return idName;
     },

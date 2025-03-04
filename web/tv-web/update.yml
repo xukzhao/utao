@@ -1,11 +1,11 @@
 res:
   url: http://qn.vonchange.com/utao/res/tv-web.zip
   skipFirst: true
-  version: 21
+  version: 22
   update: true
 apk:
-  version: 24
-  url: http://qn.vonchange.com/utao/release/utao-20250303.apk
+  version: 25
+  url: http://qn.vonchange.com/utao/release/utao-20250304.apk
   force: false
   desc: 旧版应用内升级有问题 请手动下载新版更新 新增快速切台和全网搜索功能
 x5Url:
