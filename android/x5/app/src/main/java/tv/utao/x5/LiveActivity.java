@@ -1,6 +1,7 @@
 package tv.utao.x5;
 
 import android.app.Activity;
+import android.app.Instrumentation;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -29,6 +31,7 @@ import com.tencent.smtt.sdk.WebView;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import tv.utao.x5.call.StringCallback;
@@ -124,6 +127,14 @@ public class LiveActivity extends Activity {
             toast.setText(text);//如果不为空，则直接改变当前toast的文本
         }
         toast.show();
+    }
+
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if(!isMenuShow&&event.getAction() == KeyEvent.ACTION_DOWN){
+            ctrl("menu");
+            return true;
+        }
+        return super.dispatchTouchEvent(event);
     }
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
@@ -316,7 +327,7 @@ public class LiveActivity extends Activity {
                 HistoryDaoX.update(thisContext,data);
                 return;
             }
-            if("menu".equals(service)){
+            if("menuShow".equals(service)){
                 //Util.evalOnUi(lWebView,data);
                 if(data.equals("1")){
                     isMenuShow =true;
@@ -329,14 +340,14 @@ public class LiveActivity extends Activity {
                 Util.evalOnUi(lWebView,data);
                 return;
             }
-           /* if("key".equals(service)){
+            if("key".equals(service)){
                 keyCodeAllByCode(data);
                 return;
             }
             if("keyNum".equals(service)){
                 keyEventAll(Integer.parseInt(data));
                 return;
-            }*/
+            }
         }
         @JavascriptInterface
         public String postJson(String url,String header, String requestBody){
@@ -369,5 +380,32 @@ public class LiveActivity extends Activity {
 
     }
 
+
+    //key event
+    private static Instrumentation inst = new Instrumentation();
+    private static Map<String,Integer> keyCodeMap=new HashMap<>();
+    static {
+        keyCodeMap.put("SPACE",62);
+        keyCodeMap.put("F",34);
+    }
+    protected void keyCodeAllByCode(String keyCode){
+        Integer keyCodeNum=  keyCodeMap.get(keyCode);
+        if(null==keyCodeNum){return;}
+        Log.i("onKeyEvent", "keyCodeStr "+keyCode);
+        keyEventAll(keyCodeNum);
+    }
+    protected void keyEventAll(final int keyCode){
+        new Thread() {
+            public void run() {
+                try {
+                    Log.i("onKeyEvent", "onKeyEvent"+keyCode);
+                    inst.sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, keyCode));
+                    inst.sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+    }
 
 }
