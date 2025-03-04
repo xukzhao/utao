@@ -150,22 +150,30 @@ const _html={
                 let _this=this;
                 _apiX.queryByService("queryHistory",null,function (data){
                     console.log("history.all"+data);
-                    _this.historys=JSON.parse(data);
+                    let dataArr= JSON.parse(data);
+                    let newArr=[];
+                    dataArr.forEach(item=>{
+                        if(item.site.trim()!==""&&item.site.trim()!=="tv"){
+                            newArr.push(item);
+                        }
+                    })
+                    _this.historys=newArr;
                 });
             },
             appChoose(item){
                 console.log(`appChoose item ${item.name} ${item.url}`)
                 let dataUrl = item.url;
-                if (""!==dataUrl) {
-                    if(dataUrl==="tv.html"&& _tvFunc.isApp()){
-                        _apiX.msg("activity","live");
-                    }else{
-                        _layer.wait("请耐心等待跳转。。。");
-                        window.location.href = dataUrl;
-                    }
-                } else {
-                    _layer.notify("抱歉 还未适配 正在加急开发中。。。 敬请期待");
+                if(_utao_version&&(_utao_version==="{version}"||_utao_version<=20)){
+                    _layer.wait("请耐心等待跳转。。。");
+                    window.location.href = dataUrl;
+                    return;
                 }
+                if(dataUrl==="tv.html"&& _tvFunc.isApp()){
+                        _apiX.msg("activity","live");
+                        return;
+                }
+                _layer.wait("请耐心等待跳转。。。");
+                window.location.href = dataUrl;
             },
             moveDown(id){
                 return "#tvd-"+id+":.tv-item";

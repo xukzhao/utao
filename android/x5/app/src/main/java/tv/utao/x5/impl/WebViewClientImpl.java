@@ -12,10 +12,13 @@ import com.tencent.smtt.sdk.WebViewClient;
 
 import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
-import tv.utao.x5.LiveActivity;
+import tv.utao.x5.util.AppVersionUtils;
 import tv.utao.x5.util.ConstantMy;
 import tv.utao.x5.util.FileUtil;
+import tv.utao.x5.util.TplUtil;
 import tv.utao.x5.util.Util;
 
 public class WebViewClientImpl extends WebViewClient {
@@ -147,6 +150,10 @@ public class WebViewClientImpl extends WebViewClient {
             if(index>0) {
                 String fileName = url.substring(index);
                 Log.i(TAG, "fileName js " + fileName);
+                if(fileName.endsWith("basex.js")){
+                    return new WebResourceResponse("text/html",
+                            ConstantMy.UTF8, new ByteArrayInputStream(baseJs(fileName).getBytes(Charset.defaultCharset())));
+                }
                 return new WebResourceResponse("text/javascript",
                         ConstantMy.UTF8, FileUtil.readExtIn( fileName));
             }
@@ -179,6 +186,13 @@ public class WebViewClientImpl extends WebViewClient {
         }
         return super.shouldInterceptRequest(webView, webResourceRequest);
 
+    }
+
+    private String baseJs(String fileName){
+       String baseStr= FileUtil.readExt(fileName);
+        Map<String, Object> data = new HashMap<>();
+        data.put("version", AppVersionUtils.getVersionCode());
+       return TplUtil.tpl(baseStr,data);
     }
 
 

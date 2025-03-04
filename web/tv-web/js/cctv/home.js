@@ -22,5 +22,7 @@ let _data={
     }
 };
 $$(function(){
+
     _tvHtmlInit();
+    _layer.notify("请到设置里升级到新版");
 });

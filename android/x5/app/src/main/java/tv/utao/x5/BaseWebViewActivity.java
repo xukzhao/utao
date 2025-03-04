@@ -500,6 +500,9 @@ public class BaseWebViewActivity extends Activity {
         //binding.webView.setFocusable(false);
         //binding.tvMenu.setFocusable(true);
         Log.i(TAG,"data:: "+data);
+        if(null==data||!data.startsWith("{")){
+            return;
+        }
         DetailMenu detailMenu = JsonUtil.fromJson(data, DetailMenu.class);
         binding.setMenu(detailMenu);
         xjBlind(detailMenu.getXjs());

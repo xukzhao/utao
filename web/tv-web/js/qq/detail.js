@@ -204,7 +204,7 @@ let _data={
                 }
                 //console.log("item",item);
                 let url =`https://v.qq.com/x/cover/${item.cid}/${item.vid}.html`;
-                let itemData={vodId:item.cid,id:item.vid,name:item.play_title,url:url,isVip:isVip,remark:remark,title:title,index:itemNum};
+                let itemData={vodId:item.cid,id:item.vid,name:item.play_title,url:url,isVip:isVip,remark:remark,title:title,index:itemNum,site:"qq"};
                 itemNum++;
                 if(itemData.id===vId){
                     _tvFunc.currentXj(itemData);

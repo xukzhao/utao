@@ -1,5 +1,6 @@
 _tvIsApp=false;
 _tvIsGecko=true;
+_utao_version="20";
 let _browser={
    getURL(src){
       return browser.runtime.getURL(src);
