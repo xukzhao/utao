@@ -80,7 +80,7 @@ import tv.utao.x5.util.WebService;
 public class BaseWebViewActivity extends Activity {
     protected String TAG = "BaseWebViewActivity";
 
-    public static   com.tencent.smtt.sdk.WebView mWebView;
+    protected     com.tencent.smtt.sdk.WebView mWebView;
 
 
 
@@ -114,7 +114,7 @@ public class BaseWebViewActivity extends Activity {
         initWebView();
         //file:///android_asset/tv-web/index.html http://www.utao.tv/tv-web/index.html
         mWebView.loadUrl(mHomeUrl);
-        new WebService(10240);
+        new WebService(10240,mWebView);
         ConfigApi.syncIsX5Ok(this);
        /* new Thread(()-> {
             //https://raw.githubusercontent.com/hxh19950701/WebViewTvLive/main/app/channels/2.0/%E5%AE%8C%E6%95%B4.json

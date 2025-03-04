@@ -2,6 +2,9 @@ package tv.utao.x5.util;
 
 import android.util.Log;
 
+
+import com.tencent.smtt.sdk.WebView;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -11,14 +14,15 @@ import java.util.List;
 import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
-import tv.utao.x5.BaseWebViewActivity;
 
 public class WebService extends NanoHTTPD {
     protected String TAG = "WebService";
-    public WebService(int port) {
+    private WebView webview;
+    public WebService(int port, WebView webView) {
         super(port);
         try {
             start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
+            this.webview=webView;
         }catch (Exception e){
             Log.i(TAG,e.getMessage());
         }
@@ -48,7 +52,14 @@ public class WebService extends NanoHTTPD {
         }
         if(uri.endsWith("ctrl")){
             String url= stringListMap.get("url").get(0);
-            BaseWebViewActivity.mWebView.loadUrl(url);
+            //BaseWebViewActivity.mWebView.loadUrl(url);
+            Util.mainHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    webview.loadUrl(url);
+                }
+            });
+
             return newFixedLengthResponse(Response.Status.OK, mimetype, "ok");
         }
 
