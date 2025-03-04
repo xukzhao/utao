@@ -244,6 +244,10 @@ const _ctrlx={
         _menuCtrl.menu=function (){
             TvFocus.keyMenuEvent();
         };
+    /*    $$("video").on("click", function(){
+            console.log("video click")
+            _menuCtrl.menu();
+        });*/
         return menuId;
     }
     window._detailData=function(){
