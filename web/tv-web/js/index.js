@@ -60,7 +60,8 @@ const _html={
             tab: "index",
             info:{
               sys:"当前系统",
-              version:"当前版本"
+              version:"当前版本",
+                x5Ok:true
             },
             initData(){
                 _data.initData(this);

@@ -51,6 +51,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.fengshows.com/")){
             return "tv/fengshows"
         }
+        if(url.startsWith("https://www.rzw.com.cn")){
+            return "tv/rztv"
+        }
         return "tv/common"
     }
     let detailPath=loadDetailByUrl(window.location.href);

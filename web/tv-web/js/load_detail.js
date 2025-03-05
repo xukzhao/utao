@@ -53,15 +53,13 @@ if(typeof _tvload == "undefined"){
     }
     let detailPath=loadDetailByUrl(window.location.href);
     console.log("detailPath:: "+detailPath);
-    if(null==detailPath){
-        return;
+    if(null!=detailPath){
+        _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));
+        _tvLoadRes.js(_browser.getURL("js/zepto.min.js?v=x"));
+        _tvLoadRes.js(_browser.getURL("js/common.js?v=x"));
+        _tvLoadRes.js(_browser.getURL("js/myfocus.js?v=x"));
+        _tvLoadRes.js(_browser.getURL("js/vuex.min.js?v=x"));
+        _tvLoadRes.js(_browser.getURL("js/detailBase.js?v=x"));
+        _tvLoadRes.js(_browser.getURL(`js/${detailPath}/detail.js?v=x`));//"js/youku/detail.js?v=x"
     }
-    _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/zepto.min.js?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/common.js?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/myfocus.js?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/vuex.min.js?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/detailBase.js?v=x"));
-    _tvLoadRes.js(_browser.getURL(`js/${detailPath}/detail.js?v=x`));//"js/youku/detail.js?v=x"
-
 })();

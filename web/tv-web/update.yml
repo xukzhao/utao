@@ -1,13 +1,13 @@
 res:
   url: http://qn.vonchange.com/utao/res/tv-web.zip
   skipFirst: true
-  version: 23
+  version: 24
   update: true
 apk:
-  version: 26
-  url: http://qn.vonchange.com/utao/release/utao-20250304.apk
+  version: 27
+  url: http://qn.vonchange.com/utao/release/utao-20250305.apk
   force: false
-  desc: 新增快速切台和全网搜索功能
+  desc: 新增快速切台和全网搜索功能 修复卡顿问题
 x5Url:
   64:
     - https://tbsall.imtt.qq.com/mtt/release/component/tbs_core_046285_20240613152541_nolog_fs_obfs_arm64-v8a_release.tbs

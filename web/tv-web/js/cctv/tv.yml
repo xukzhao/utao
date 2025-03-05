@@ -24,7 +24,7 @@ data:
         url: https://tv.cctv.com/live/cctv7/
       - name: CCTV-8 电视剧
         url: https://tv.cctv.com/live/cctv8/
-      - name: CCTV-9 记录
+      - name: CCTV-9 纪录
         url: https://tv.cctv.com/live/cctvjilu/
       - name: CCTV-10 科教
         url: https://tv.cctv.com/live/cctv10/
@@ -84,7 +84,7 @@ data:
         url: https://www.cztv.com/liveTV/110
       - name: 浙江好易购
         url: https://www.cztv.com/liveTV/111
-      - name: 浙江之江记录
+      - name: 浙江之江纪录
         url: https://www.cztv.com/liveTV/112
       - name: 杭州综合
         url: https://tv.hoolo.tv/hzzh/
@@ -147,8 +147,11 @@ data:
         url: http://www.qtv.com.cn/live/tv/tv_qtv5.shtml
       - name: 青岛教育
         url: http://www.qtv.com.cn/live/tv/tv_qtv6.shtml
+      - name: 日照新闻综合
+        url: https://www.rzw.com.cn/folder247/folder2217/?tag=1
       - name: 日照公共
-        url: https://tv.utao.tv/tv-web/live.html?url=https://live.rzw.com.cn/kzpd/sd/live.m3u8?_upt=c8469c7e1738387682
+        url: https://www.rzw.com.cn/folder247/folder2217/?tag=3
+        #https://tv.utao.tv/tv-web/live.html?url=https://live.rzw.com.cn/kzpd/sd/live.m3u8?_upt=c8469c7e1738387682
       - name: 威海新闻综合
         url: http://lv.weihai.tv/live_13705e35636b2136b590e5a015bb801c.html
       - name: 威海都市生活
@@ -175,6 +178,15 @@ data:
         url: https://www.lcxw.cn/kands/?tag=0
       - name: 聊城民生
         url: https://www.lcxw.cn/kands/?tag=1
+      - name: 潍坊新闻综合
+        url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=1
+      - name: 潍坊经济生活
+        url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=2
+      - name: 潍坊影视综艺
+        url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=3
+      - name: 潍坊科教文旅
+        url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=4
+
   - tag: jstv
     name: 江苏
     vods:
