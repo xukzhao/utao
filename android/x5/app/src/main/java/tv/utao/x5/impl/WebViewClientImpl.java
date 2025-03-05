@@ -11,6 +11,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Map;
 import tv.utao.x5.util.AppVersionUtils;
 import tv.utao.x5.util.ConstantMy;
 import tv.utao.x5.util.FileUtil;
+import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.TplUtil;
 import tv.utao.x5.util.Util;
 
@@ -29,9 +31,11 @@ public class WebViewClientImpl extends WebViewClient {
     private static  String lastUrl=null;
     private static  String rootUrl=null;
     private static  String currentUrl=null;
-    public WebViewClientImpl(Context context,WebView mWebView){
+    private int type;
+    public WebViewClientImpl(Context context,WebView mWebView,int type){
         this.context=context;
         this.mWebView=mWebView;
+        this.type=type;
     }
     @Override
     public boolean onRenderProcessGone(WebView view, RenderProcessGoneDetail detail) {
@@ -79,7 +83,11 @@ public class WebViewClientImpl extends WebViewClient {
             return null;
         }
         String fileContent = FileUtil.readExt(baseFolder +"js/end.js");
-        return fileContent +FileUtil.readExt(  baseFolder + "js/load_detail.js");
+        String detailFile =  "js/load_detail_video.js";
+        if(type==1){
+            detailFile="js/load_detail_tv.js";
+        }
+        return fileContent +FileUtil.readExt(  baseFolder + detailFile);
     }
     @Override
     public void onPageFinished(WebView view, String url) {
@@ -112,6 +120,7 @@ public class WebViewClientImpl extends WebViewClient {
         //无图 Dec-Fetch-Dest
         String accept=  webResourceRequest.getRequestHeaders().get("Accept");
         String url=webResourceRequest.getUrl().toString();
+        String orgUrl=url;
         //Log.i(TAG,"shouldInterceptRequest "+url);
         //Log.i(TAG,"XXXXXX getMethod "+webResourceRequest.getMethod());
         //Log.i(TAG,"XXXXXX heades "+webResourceRequest.getRequestHeaders());
@@ -121,6 +130,18 @@ public class WebViewClientImpl extends WebViewClient {
       *//*      return new WebResourceResponse("text/plain",
                     "null", new ByteArrayInputStream("utao".getBytes()));*//*
         }*/
+        //Log.i(TAG,"XX"+orgUrl);
+        if(orgUrl.startsWith("https://tlive.fengshows.com/live/")||orgUrl.startsWith("https://hkmolive.fengshows.com/live/")){
+            String realUrl= "https://qctv.fengshows.cn"+orgUrl.substring(orgUrl.indexOf("/live"),orgUrl.length());
+            Log.i(TAG,realUrl);
+            Map<String,String> headerMap = new HashMap<>();
+           InputStream inputStream = HttpUtil.get(realUrl,new HashMap<>());
+            WebResourceResponse resp=new WebResourceResponse("video/x-flv",
+                    ConstantMy.UTF8, inputStream);
+            headerMap.put("access-control-allow-origin","*");
+            resp.setResponseHeaders(headerMap);
+            return resp;
+        }
         if(null!=accept&&accept.startsWith("image/")&&!imageLoad(url)){
             return new WebResourceResponse(null,
                     null, null);
@@ -184,9 +205,13 @@ public class WebViewClientImpl extends WebViewClient {
                         ConstantMy.UTF8, FileUtil.readExtIn(fileName));
             }
         }
+
         return super.shouldInterceptRequest(webView, webResourceRequest);
 
     }
+
+
+
 
     private String baseJs(String fileName){
        String baseStr= FileUtil.readExt(fileName);

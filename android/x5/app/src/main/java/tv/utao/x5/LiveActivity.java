@@ -3,6 +3,7 @@ package tv.utao.x5;
 import android.app.Activity;
 import android.app.Instrumentation;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.Handler;
@@ -48,7 +49,7 @@ import tv.utao.x5.util.Util;
 
 public class LiveActivity extends Activity {
     protected String TAG = "LiveActivity";
-    protected  com.tencent.smtt.sdk.WebView lWebView;
+    protected WebView lWebView;
     protected ActivityLiveBinding binding;
     private  Context thisContext;
     private static Vod currentLive=null;
@@ -180,8 +181,17 @@ public class LiveActivity extends Activity {
         if(keyCode==KeyEvent.KEYCODE_DPAD_UP){
             return goNext("up");
         }
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            toHome();
+            return true;
+        }
         return super.dispatchKeyEvent(event);
                 //ctrl("menu");
+    }
+    private void toHome(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
     private boolean ctrl(String code){
         String  js= "_menuCtrl."+code+"()";
@@ -239,7 +249,7 @@ public class LiveActivity extends Activity {
             //无图
              webSettingsExtension.setPicModel(IX5WebSettingsExtension.PicModel_NoPic);
         }
-        lWebView.setWebViewClient(new WebViewClientImpl(getBaseContext(),lWebView));
+        lWebView.setWebViewClient(new WebViewClientImpl(getBaseContext(),lWebView,1));
         initWebChromeClient();
         //禁止上下左右滚动(不显示滚动条)
         lWebView.setScrollContainer(false);
@@ -254,6 +264,21 @@ public class LiveActivity extends Activity {
         //mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
         //mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         lWebView.addJavascriptInterface(new JsInterface(),"_api");
+    }
+  /*  @Override
+    public void onPause() {
+        super.onPause();  // Always call the superclass method first
+        toHome();
+    }*/
+    @Override
+    public void onDestroy() {
+        if(lWebView!=null){
+            Log.i(TAG,"onDestroy");
+            lWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            lWebView.clearHistory();
+            lWebView.destroy();
+        }
+        super.onDestroy();
     }
 
     private void initWebChromeClient() {

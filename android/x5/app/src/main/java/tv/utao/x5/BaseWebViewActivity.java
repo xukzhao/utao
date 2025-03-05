@@ -80,7 +80,7 @@ import tv.utao.x5.util.WebService;
 public class BaseWebViewActivity extends Activity {
     protected String TAG = "BaseWebViewActivity";
 
-    protected     com.tencent.smtt.sdk.WebView mWebView;
+    public static com.tencent.smtt.sdk.WebView mWebView;
 
 
 
@@ -114,15 +114,7 @@ public class BaseWebViewActivity extends Activity {
         initWebView();
         //file:///android_asset/tv-web/index.html http://www.utao.tv/tv-web/index.html
         mWebView.loadUrl(mHomeUrl);
-        new WebService(10240,mWebView);
         ConfigApi.syncIsX5Ok(this);
-       /* new Thread(()-> {
-            //https://raw.githubusercontent.com/hxh19950701/WebViewTvLive/main/app/channels/2.0/%E5%AE%8C%E6%95%B4.json
-            String json= HttpUtil.getJson("http://www.vonchange.com/doc/host.html",new HashMap<>());
-             Log.i(TAG,json);
-            json=HttpUtil.getJson("https://tv.utao.tv",new HashMap<>());
-            Log.i(TAG,json);
-            }).start();*/
     }
 
 
@@ -199,7 +191,7 @@ public class BaseWebViewActivity extends Activity {
 
 
     private void initWebViewClient() {
-        mWebView.setWebViewClient(new WebViewClientImpl(getBaseContext(),mWebView));
+        mWebView.setWebViewClient(new WebViewClientImpl(getBaseContext(),mWebView,0));
     }
 
     private void initWebChromeClient() {
@@ -535,7 +527,7 @@ public class BaseWebViewActivity extends Activity {
     private void toLive(){
         Intent intent = new Intent(this, LiveActivity.class);
         startActivity(intent);
-        //finish();
+        finish();
     }
     protected void killAppProcess()
     {
@@ -551,6 +543,12 @@ public class BaseWebViewActivity extends Activity {
         }
         android.os.Process.killProcess(android.os.Process.myPid());
         System.exit(0);
+    }
+    private  static  WebService webService=null;
+    private void newWebService(){
+        if(null==webService){
+            webService=new WebService(10240);
+        }
     }
     //js
     public class JsInterface{
@@ -598,9 +596,10 @@ public class BaseWebViewActivity extends Activity {
             }
             if("openX5".equals(service)){
                 ValueUtil.putString(getApplicationContext(),"openX5","1");
-                //Toast.makeText(thisContext, "开启内核成功 重启应用后生效",Toast.LENGTH_SHORT).show();
+                Toast.makeText(thisContext, "开启内核成功 重启应用后生效",Toast.LENGTH_SHORT).show();
+                killAppProcess();
                 //showToastOrg("开启内核成功 重启应用后生效",thisContext);
-                toStart();
+                //toStart();
                 return;
             }
             if("closeApp".equals(service)){
@@ -651,6 +650,8 @@ public class BaseWebViewActivity extends Activity {
                 return JsonUtil.toJson(HistoryDaoX.queryHistory(thisContext));
             }
             if("queryIp".equals(service)){
+                //开启服务 有且只有一次
+                newWebService();
                 return Util.getLocalIPAddress(thisContext);
             }
             if("querySysInfo".equals(service)){

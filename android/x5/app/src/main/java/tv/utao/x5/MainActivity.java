@@ -1,14 +1,10 @@
 package tv.utao.x5;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.res.Configuration;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.Toast;
-
-import java.util.List;
 
 import tv.utao.x5.impl.WebViewClientImpl;
 
@@ -106,6 +102,16 @@ public class MainActivity extends BaseWebViewActivity {
         }
         //detail-> home-> index
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        if(mWebView!=null){
+            Log.i(TAG,"onDestroy");
+            mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            mWebView.destroy();
+        }
+        super.onDestroy();
     }
 
 

@@ -9,9 +9,16 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -58,9 +65,51 @@ public class HttpUtil {
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .sslSocketFactory(new SSLSocketFactoryCompat(SSLSocketFactoryCompat.trustAllCert), SSLSocketFactoryCompat.trustAllCert);
-          defaultClient = builder
-                  //.dns(new HttpDns())
+        builder=ignoreSSL(builder);
+        defaultClient = builder
+                  .dns(new HttpDns())
                   .build();
+    }
+    public static OkHttpClient.Builder ignoreSSL (OkHttpClient.Builder builder) {
+        builder.sslSocketFactory(createSSLSocketFactory())
+                .hostnameVerifier((s, sslSession) -> true);
+        return builder;
+    }
+
+    private static SSLSocketFactory createSSLSocketFactory () {
+
+        SSLSocketFactory sSLSocketFactory = null;
+
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, new TrustManager[]{new TrustAllManager()}, new SecureRandom());
+            sSLSocketFactory = sc.getSocketFactory();
+        } catch (Exception e) {
+            //LOGGER.info(e.getMessage(), e);
+        }
+
+        return sSLSocketFactory;
+    }
+
+    private static class TrustAllManager implements X509TrustManager {
+
+        @Override
+        public void checkClientTrusted (java.security.cert.X509Certificate[] x509Certificates,
+                                        String s) throws java.security.cert.CertificateException {
+
+        }
+
+        @Override
+        public void checkServerTrusted (java.security.cert.X509Certificate[] x509Certificates,
+                                        String s) throws java.security.cert.CertificateException {
+
+        }
+
+
+        @Override
+        public java.security.cert.X509Certificate[] getAcceptedIssuers () {
+            return new X509Certificate[0];
+        }
     }
     public static boolean isErrorResponse(String json){
         if(!json.startsWith("{")||json.equals("400")||json.equals("500")){
@@ -195,6 +244,31 @@ public class HttpUtil {
                 }
             });
         }
+    public static   InputStream get(String url,
+                                   Map<String, String> headerMap){
+        Request.Builder builder =new Request.Builder()
+                .url(url);
+        if(null!=headerMap&&!headerMap.isEmpty()){
+            for (Map.Entry<String, String> entry : headerMap.entrySet()) {
+                Log.i(TAG,entry.getKey()+" "+entry.getValue());
+                if(entry.getKey().equals("tv-ref")){
+                    builder.addHeader("Referer",entry.getValue());
+                    continue;
+                }
+                builder.addHeader(entry.getKey(),entry.getValue());
+            }
+        }
+        Request request = builder
+                .get()
+                .build();
+        Response  response = null;
+        try {
+            response = defaultClient.newCall(request).execute();
+        } catch (IOException e) {
+          Log.e(TAG,e.getMessage());
+        }
+        return response.body().byteStream();
+    }
 
     public static   String getJson(String url,
                            Map<String, String> headerMap){
