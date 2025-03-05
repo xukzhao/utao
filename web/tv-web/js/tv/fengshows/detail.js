@@ -1,6 +1,6 @@
 
 (function(){
-    //_tvFunc.fixedW("body");
+    _tvFunc.fixedW("body");
     _detailInit(null,999990,true);
     _tvFunc.check(function (){return $$(".fs-live-banner-cluster-schedule-station").length>0},function (){
         let url = window.location.href;
@@ -22,6 +22,7 @@
             $$(".vjs-error-modal").hide();
             $$(".fs-cookies-dialog-ok-btn").click();
             $$(".fs-video").addClass("utv-video-full");
+            $$(".vjs-controlbar").hide();
             if($$(".vjs-icon-muted").length>0){
                 $$(".vjs-icon-muted").click();
             }
