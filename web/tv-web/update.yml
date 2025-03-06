@@ -1,11 +1,11 @@
 res:
   url: http://qn.vonchange.com/utao/res/tv-web.zip
   skipFirst: true
-  version: 24
+  version: 25
   update: true
 apk:
-  version: 27
-  url: http://qn.vonchange.com/utao/release/utao-20250305.apk
+  version: 29
+  url: http://qn.vonchange.com/utao/release/utao-20250306.apk
   force: false
   desc: 新增快速切台和全网搜索功能 修复卡顿问题
 x5Url:
