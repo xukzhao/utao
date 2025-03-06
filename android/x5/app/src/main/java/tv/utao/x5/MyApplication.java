@@ -45,7 +45,7 @@ public class MyApplication extends Application {
         CrashHandler.getInstance().init(this);
         CrashHandler.uploadExceptionToServer(this);
         //startX5WebProcessPreinitService();
-        initPieWebView();
+        //initPieWebView();
     }
     private static final String PROCESS = "tv.utao.x5";
     private void initPieWebView() {
@@ -54,6 +54,12 @@ public class MyApplication extends Application {
             if (!PROCESS.equals(processName)) {
                 WebView.setDataDirectorySuffix(getString(processName, "utao"));
             }
+        }
+    }
+    private void initWebView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            String processName = getProcessName();
+            WebView.setDataDirectorySuffix(processName);
         }
     }
     public String getProcessName(Context context) {
