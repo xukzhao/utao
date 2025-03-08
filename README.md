@@ -48,6 +48,7 @@
 ### 如何开发迭代
 1. 由于基于火狐插件开发 故参考[火狐插件开发](https://developer.mozilla.org/zh-CN/docs/Mozilla/Add-ons/WebExtensions/Build_a_cross_browser_extension)
 2. 项目根目录 执行web-ext run 每次执行是个全新浏览器 每个平台无法自动播放 需手动处理下 可以进爱奇艺平台(iqiyi.com)跳出登录二维码后按Q进主页
+3. 安卓开发debug运行app需打包tv-web到assets下 参考[util/util.md](util/util.md)
 3. 爱奇艺和腾讯页面请求数过多 会卡 平台如何优化是个大问题
 ### todolist
 - UI待优化(>-<)
