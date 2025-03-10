@@ -136,6 +136,9 @@ public class WebViewClientImpl extends WebViewClient {
             Log.i(TAG,realUrl);
             Map<String,String> headerMap = new HashMap<>();
            InputStream inputStream = HttpUtil.get(realUrl,new HashMap<>());
+           if(null==inputStream){
+               return super.shouldInterceptRequest(webView, webResourceRequest);
+           }
             WebResourceResponse resp=new WebResourceResponse("video/x-flv",
                     ConstantMy.UTF8, inputStream);
             headerMap.put("access-control-allow-origin","*");

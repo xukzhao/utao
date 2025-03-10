@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -90,8 +91,10 @@ public class FileUtil {
        try {
            return new FileInputStream(fullPath);
        } catch (FileNotFoundException e) {
-           throw new RuntimeException(e);
+           Log.e(TAG, Objects.requireNonNull(e.getMessage()));
+           //throw new RuntimeException(e);
        }
+       return null;
    }
     public static String readExt(String extFileName) {
         return getStringFromInputStream(readExtIn(extFileName));
@@ -105,6 +108,9 @@ public class FileUtil {
     }
 
     public static String getStringFromInputStream(InputStream a_is) {
+       if(null==a_is){
+           return "";
+       }
         BufferedReader br = null;
         StringBuilder sb = new StringBuilder();
         String line;

@@ -267,6 +267,9 @@ public class HttpUtil {
         } catch (IOException e) {
           Log.e(TAG,e.getMessage());
         }
+        if(null==response){
+            return null;
+        }
         return response.body().byteStream();
     }
 
