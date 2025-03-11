@@ -249,16 +249,63 @@ let TvFocus={
           rect.right <= (window.innerWidth || document.documentElement.clientWidth)
         );
       },
-      scrollTo() {
-              var el = document.querySelector(this.focusId);
-              var flag= this.isElementInViewport(el);
-               if(!flag){
-                 el.scrollIntoView();
-               }
-               // el.scrollIntoView();
-              //console.log(offset);
-              //element.scrollIntoView({behavior: "instant", block: "end", inline: "nearest"});
-              //el.scrollIntoView();
+      scrollTo: function() {
+        var el = document.querySelector(this.focusId);
+        var flag = this.isElementInViewport(el);
+        if (!flag) {
+            // 找到可滚动的父容器
+            var parent = el.parentElement;
+            var isHeader = el.closest('.tv-header') !== null; // 检查是否在header中
+            
+            // 如果是header中的元素，直接找到header作为滚动容器
+            if (isHeader) {
+                parent = el.closest('.tv-header');
+            } else {
+                while (parent && (!parent.scrollHeight || parent.scrollHeight <= parent.clientHeight)) {
+                    parent = parent.parentElement;
+                }
+            }
+            
+            if (parent) {
+                var elementRect = el.getBoundingClientRect();
+                var parentRect = parent.getBoundingClientRect();
+                
+                // 计算目标位置
+                var targetScrollTop = parent.scrollTop;
+                var targetScrollLeft = parent.scrollLeft;
+                
+                // 特殊处理header的滚动
+                if (isHeader) {
+                    if (elementRect.right > window.innerWidth) {
+                        targetScrollLeft = parent.scrollLeft + (elementRect.right - window.innerWidth) + 60;
+                    } else if (elementRect.left < 0) {
+                        targetScrollLeft = Math.max(0, parent.scrollLeft + elementRect.left - 60);
+                    }
+                } else {
+                    // 普通元素的垂直滚动
+                    if (elementRect.bottom > window.innerHeight) {
+                        targetScrollTop = parent.scrollTop + (elementRect.bottom - window.innerHeight) + 20;
+                    } else if (elementRect.top < 0) {
+                        targetScrollTop = parent.scrollTop + elementRect.top - 20;
+                    }
+                    
+                    // 普通元素的水平滚动
+                    if (elementRect.right > window.innerWidth) {
+                        targetScrollLeft = parent.scrollLeft + (elementRect.right - window.innerWidth) + 40;
+                    } else if (elementRect.left < 0) {
+                        targetScrollLeft = Math.max(0, parent.scrollLeft + elementRect.left - 40);
+                    }
+                }
+                
+                // 应用滚动
+                if (targetScrollTop !== parent.scrollTop) {
+                    parent.scrollTop = targetScrollTop;
+                }
+                if (targetScrollLeft !== parent.scrollLeft) {
+                    parent.scrollLeft = targetScrollLeft;
+                }
+            }
+        }
     },
     keyOkEvent() {
         console.log("点击了确认键");
