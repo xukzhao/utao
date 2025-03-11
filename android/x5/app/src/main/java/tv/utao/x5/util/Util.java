@@ -1,5 +1,6 @@
 package tv.utao.x5.util;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -10,6 +11,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.core.content.FileProvider;
 
@@ -108,16 +110,39 @@ public class Util {
     }
 
     public static void installApk(Context context, File apkFile) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(context,
-                    context.getPackageName() + ".fileProvider", apkFile);
-            intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
-        } else {
-            intent.setDataAndType(Uri.parse("file://" + apkFile.toString()), "application/vnd.android.package-archive");
+        try {
+            if (context == null || apkFile == null || !apkFile.exists()) {
+                Log.e(TAG, "Invalid context or APK file");
+                return;
+            }
+
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                Uri contentUri = FileProvider.getUriForFile(context,
+                        BuildConfig.APPLICATION_ID + ".fileProvider", apkFile);
+                intent.setDataAndType(contentUri, "application/vnd.android.package-archive");
+            } else {
+                intent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+            }
+            
+            // Ensure we're using activity context
+            Context activityContext = context;
+            if (!(context instanceof Activity)) {
+                if (context.getApplicationContext() != null) {
+                    activityContext = context.getApplicationContext();
+                }
+            }
+            
+            activityContext.startActivity(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "Error installing APK: " + e.getMessage());
+            e.printStackTrace();
+            Toast.makeText(context, "安装APK时出错，请重试", Toast.LENGTH_LONG).show();
         }
-        context.startActivity(intent);
     }
 
     public  static  boolean isNotNeedX5(){

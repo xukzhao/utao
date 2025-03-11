@@ -150,13 +150,20 @@ public class StartActivity extends Activity {
 
             @Override
             public void onDownloadResult(File target, boolean done) {
-                String fileName = target.getName();
-                String toFilePath=targetDir+fileName;
-                runOnUiThread(()->{
-                    Toast.makeText(content,"下载成功 正在安装启动中", Toast.LENGTH_SHORT).show();
-                    binding.progressWrapper.setVisibility(View.GONE);
-                    initX5(toFilePath);
-                });
+                if (target != null && target.exists()) {
+                    runOnUiThread(() -> {
+                        try {
+                            Util.installApk(StartActivity.this, target);
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error starting APK installation: " + e.getMessage());
+                            Toast.makeText(StartActivity.this, "启动安装失败，请重试", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } else {
+                    runOnUiThread(() -> {
+                        Toast.makeText(StartActivity.this, "下载文件不存在，请重试", Toast.LENGTH_LONG).show();
+                    });
+                }
             }
 
             @Override
@@ -247,31 +254,44 @@ public class StartActivity extends Activity {
         }
     }
 
-    public  class UpdateHandler{
+    public class UpdateHandler {
         private Context thisContext;
-        public UpdateHandler(Context context){
-            this.thisContext=context;
+        public UpdateHandler(Context context) {
+            this.thisContext = context;
         }
-        public  void updateOk(){
+        public void updateOk() {
             binding.progressApk.setVisibility(View.VISIBLE);
-            File targetFile = new File(thisContext.getFilesDir().getPath(),"x5.apk");
+            File targetFile = new File(thisContext.getFilesDir().getPath(), "x5.apk");
             HttpUtil.downloadByProgress(thisConfigDTO.getApk().getUrl(),
                     targetFile, new DownloadProgressListener() {
                         @Override
                         public void onDownloadProgress(long sumReaded, long content, boolean done) {
                             int num = (int)(sumReaded*100/content);
-                            binding.progressApk.setProgress(num);
+                            runOnUiThread(() -> {
+                                binding.progressApk.setProgress(num);
+                            });
                         }
 
                         @Override
                         public void onDownloadResult(File target, boolean done) {
-                                  Util.installApk(thisContext,target);
+                            runOnUiThread(() -> {
+                                if (target != null && target.exists()) {
+                                    try {
+                                        Util.installApk(StartActivity.this, target);
+                                    } catch (Exception e) {
+                                        Log.e(TAG, "Error installing APK: " + e.getMessage());
+                                        Toast.makeText(StartActivity.this, "安装失败，请重试", Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Toast.makeText(StartActivity.this, "下载文件不存在，请重试", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
 
                         @Override
                         public void onFailResponse() {
-                            runOnUiThread(()->{
-                                Toast.makeText(thisContext,"下载失败 请检查网络 2次返回退出重进", Toast.LENGTH_SHORT).show();
+                            runOnUiThread(() -> {
+                                Toast.makeText(thisContext, "下载失败，请检查网络后重试", Toast.LENGTH_SHORT).show();
                             });
                         }
                     });
