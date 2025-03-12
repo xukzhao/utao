@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,7 @@ public class UpdateService {
     protected static Map<String,Vod> indexVodMap = new HashMap<>();
     protected static Map<Integer,Integer> tagMaxMap = new HashMap<>();
     protected static Map<String,String> urlKeyMap= new HashMap<>();
+    protected static List<Live> newLives= new ArrayList<>();
     public static  void initTvData(){
         String json= FileUtil.readExt("tv-web/js/cctv/tv.json");
         if(json.trim().isEmpty()){
@@ -88,6 +90,10 @@ public class UpdateService {
             tagMaxMap.put(i,j-1);
             i++;
         }
+        newLives=lives;
+    }
+    public static List<Live> getByLives(){
+        return newLives;
     }
     public static Vod getByKey(String key){
         return indexVodMap.get(key);

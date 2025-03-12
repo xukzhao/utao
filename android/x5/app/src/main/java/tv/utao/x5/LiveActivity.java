@@ -5,6 +5,7 @@ import android.app.Instrumentation;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -13,12 +14,16 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
 import com.google.gson.reflect.TypeToken;
@@ -31,13 +36,16 @@ import com.tencent.smtt.sdk.WebView;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import tv.utao.x5.call.StringCallback;
 import tv.utao.x5.dao.HistoryDaoX;
 import tv.utao.x5.databinding.ActivityLiveBinding;
+import tv.utao.x5.domain.live.Live;
 import tv.utao.x5.domain.live.Vod;
 import tv.utao.x5.impl.WebViewClientImpl;
 import tv.utao.x5.impl.X5WebChromeClientExtension;
@@ -51,8 +59,11 @@ public class LiveActivity extends Activity {
     protected String TAG = "LiveActivity";
     protected WebView lWebView;
     protected ActivityLiveBinding binding;
-    private  Context thisContext;
-    private static Vod currentLive=null;
+    private Context thisContext;
+    private static Vod currentLive = null;
+    private List<Live> provinces = new ArrayList<>();
+    private int currentProvinceIndex = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +81,14 @@ public class LiveActivity extends Activity {
             currentLive = HistoryDaoX.currentChannel(this);
                     //UpdateService.getByKey("0_0");
         }
+        initData();
         //更新数据
         initWebView();
         //数据库获取最新数据
         //String liveUrl= "https://tv.cctv.com/live/cctv13/";
         lWebView.loadUrl(currentLive.getUrl());
         showToastOrg("已支持遥控器上下左右可快速切台",this);
+
     }
     private long lastTime = 0;
 
@@ -133,10 +146,17 @@ public class LiveActivity extends Activity {
 
     public boolean dispatchTouchEvent(MotionEvent event) {
         if(!isMenuShow&&event.getAction() == KeyEvent.ACTION_DOWN){
-            ctrl("menu");
+            showMenu();
             return true;
         }
         return super.dispatchTouchEvent(event);
+    }
+    protected     boolean isMenuShow(){
+        int visible=  binding.menuContainer.getVisibility();
+        if(visible== View.VISIBLE){
+            return true;
+        }
+        return false;
     }
     public boolean dispatchKeyEvent(KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_UP) {
@@ -144,50 +164,51 @@ public class LiveActivity extends Activity {
         }
         int keyCode = event.getKeyCode();
         Log.i("keyDown keyCode ", keyCode+" event" + event);
+        boolean isMenuShow=isMenuShow();
         if(isMenuShow){
-            if(keyCode==KeyEvent.KEYCODE_DPAD_CENTER||keyCode==KeyEvent.KEYCODE_ENTER){
-                return ctrl("ok");
+            if(keyCode==KeyEvent.KEYCODE_BACK||keyCode==KeyEvent.KEYCODE_MENU||keyCode==KeyEvent.KEYCODE_TAB){
+                hideMenu();
+                return true;
             }
-            if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
-                return ctrl("right");
-            }
-            if(keyCode==KeyEvent.KEYCODE_DPAD_LEFT){
-                return ctrl("left");
-            }
-            if(keyCode==KeyEvent.KEYCODE_DPAD_DOWN){
-                return ctrl("down");
-            }
-            if(keyCode==KeyEvent.KEYCODE_MENU||keyCode==KeyEvent.KEYCODE_TAB||keyCode==KeyEvent.KEYCODE_BACK){
-                return ctrl("menu");
-            }
-            if(keyCode==KeyEvent.KEYCODE_DPAD_UP){
-                return ctrl("up");
+            if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+                if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+                    currentProvinceIndex--;
+                    if (currentProvinceIndex < 0) {
+                        currentProvinceIndex = provinces.size() - 1;
+                    }
+                } else {
+                    currentProvinceIndex++;
+                    if (currentProvinceIndex >= provinces.size()) {
+                        currentProvinceIndex = 0;
+                    }
+                }
+                showCurrentProvince();
+                return true;
             }
             return super.dispatchKeyEvent(event);
         }
-        if(keyCode==KeyEvent.KEYCODE_DPAD_CENTER||keyCode==KeyEvent.KEYCODE_ENTER||keyCode==KeyEvent.KEYCODE_MENU||keyCode==KeyEvent.KEYCODE_TAB){
-            return ctrl("menu");
-            //showMenu();
-           // return true;
+        if(keyCode==KeyEvent.KEYCODE_MENU|| keyCode == KeyEvent.KEYCODE_TAB||keyCode==KeyEvent.KEYCODE_DPAD_CENTER||keyCode==KeyEvent.KEYCODE_ENTER){
+            showMenu();
+            return true;
         }
-        if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT){
+
+        if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
             return goNext("right");
         }
-        if(keyCode==KeyEvent.KEYCODE_DPAD_LEFT){
+        if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
             return goNext("left");
         }
-        if(keyCode==KeyEvent.KEYCODE_DPAD_DOWN){
+        if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
             return goNext("down");
         }
-        if(keyCode==KeyEvent.KEYCODE_DPAD_UP){
+        if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
             return goNext("up");
         }
-        if(keyCode==KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             toHome();
             return true;
         }
         return super.dispatchKeyEvent(event);
-                //ctrl("menu");
     }
     private void toHome(){
         Intent intent = new Intent(this, MainActivity.class);
@@ -434,4 +455,126 @@ public class LiveActivity extends Activity {
         }.start();
     }
 
+    private void initData() {
+        // 创建测试数据
+        provinces = UpdateService.getByLives();
+        currentProvinceIndex=currentLive.getTagIndex();
+        showCurrentProvince();
+    }
+
+    private Vod createVod(String name, String key, String url) {
+        Vod vod = new Vod();
+        vod.setName(name);
+        vod.setKey(key);
+        vod.setUrl(url);
+        return vod;
+    }
+
+    private void showCurrentProvince() {
+        Live currentProvince = provinces.get(currentProvinceIndex);
+        binding.provinceName.setText(currentProvince.getName() + "(" + currentProvince.getVods().size() + ")");
+        setupChannelList(currentProvince.getVods());
+    }
+
+    private void setupChannelList(List<Vod> channels) {
+        ArrayAdapter<Vod> adapter = new ArrayAdapter<Vod>(this, android.R.layout.simple_list_item_1, channels) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                Button btn;
+                if (convertView == null) {
+                    btn = new Button(getContext());
+                    btn.setLayoutParams(new ViewGroup.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT));
+                    btn.setTextColor(Color.WHITE);
+                    btn.setTextSize(16);
+                    btn.setPadding(24, 16, 24, 16);
+                    btn.setBackgroundResource(R.drawable.menu_button_background);
+                    btn.setClickable(false);
+                    btn.setFocusable(false);
+                } else {
+                    btn = (Button) convertView;
+                }
+                
+                Vod item = getItem(position);
+                btn.setText(item.getName());
+                return btn;
+            }
+        };
+        
+        binding.channelList.setAdapter(adapter);
+        binding.channelList.setOnItemClickListener((parent, view, position, id) -> {
+            try {
+                Vod channel = channels.get(position);
+                if (channel.getUrl() != null) {
+                    currentLive = channel;
+                    // 在主线程中执行WebView操作
+                    runOnUiThread(() -> {
+                        try {
+                            Log.i(TAG, "Loading URL in WebView: " + channel.getUrl());
+                            lWebView.loadUrl(channel.getUrl());
+                            Log.i(TAG, "URL loaded successfully");
+                        } catch (Exception e) {
+                            Log.e(TAG, "Error loading URL in WebView: " + e.getMessage());
+                            e.printStackTrace();
+                        }
+                    });
+                    
+                    // 更新历史记录
+                    HistoryDaoX.updateChannel(thisContext, channel.getUrl());
+                    
+                    // 显示提示
+                    showToast(channel.getName(), this);
+                    
+                    // 隐藏菜单
+                    hideMenu();
+                } else {
+                    Log.e(TAG, "Channel or URL is null");
+                }
+            } catch (Exception e) {
+                Log.e(TAG, "Error handling channel click: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private void showMenu() {
+        binding.menuContainer.setVisibility(View.VISIBLE);
+        isMenuShow = true;
+        showCurrentProvince();
+        setupProvinceButtons();
+        // 默认选中第一个频道
+        if (binding.channelList.getAdapter() != null && binding.channelList.getCount() > 0) {
+            binding.channelList.setSelection(0);
+            binding.channelList.requestFocus();
+        }
+        
+        // 点击空白处关闭菜单
+        binding.menuContainer.setOnClickListener(v -> hideMenu());
+    }
+
+    private void setupProvinceButtons() {
+        binding.prevProvince.setOnClickListener(v -> {
+            currentProvinceIndex--;
+            if (currentProvinceIndex < 0) {
+                currentProvinceIndex = provinces.size() - 1;
+            }
+            showCurrentProvince();
+        });
+
+        binding.nextProvince.setOnClickListener(v -> {
+            currentProvinceIndex++;
+            if (currentProvinceIndex >= provinces.size()) {
+                currentProvinceIndex = 0;
+            }
+            showCurrentProvince();
+        });
+    }
+
+    private void hideMenu() {
+        binding.menuContainer.setVisibility(View.GONE);
+        isMenuShow = false;
+        binding.menuContainer.setOnClickListener(null);
+    }
 }
