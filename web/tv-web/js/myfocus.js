@@ -251,6 +251,8 @@ let TvFocus={
       },
       scrollTo: function() {
         var el = document.querySelector(this.focusId);
+        if (!el) return; // 防止元素不存在时的错误
+        
         var flag = this.isElementInViewport(el);
         if (!flag) {
             // 找到可滚动的父容器
@@ -259,71 +261,66 @@ let TvFocus={
             
             if (isHeader) {
                 parent = el.closest('.tv-header');
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-                
-                var elementRect = el.getBoundingClientRect();
-                if (elementRect.right > window.innerWidth) {
-                    parent.scrollLeft += (elementRect.right - window.innerWidth) + 60;
-                } else if (elementRect.left < 0) {
-                    parent.scrollLeft = Math.max(0, parent.scrollLeft + elementRect.left - 60);
-                }
+                // 轻微延迟以确保DOM更新
+                setTimeout(() => {
+                    document.body.scrollTop = 0;
+                    document.documentElement.scrollTop = 0;
+                    
+                    var elementRect = el.getBoundingClientRect();
+                    if (elementRect.right > window.innerWidth) {
+                        parent.scrollLeft += (elementRect.right - window.innerWidth) + 60;
+                    } else if (elementRect.left < 0) {
+                        parent.scrollLeft = Math.max(0, parent.scrollLeft + elementRect.left - 60);
+                    }
+                }, 50);
                 return;
             }
             
-            // 改进滚动容器检测
+            // 查找最近的可滚动容器
             while (parent) {
                 var style = window.getComputedStyle(parent);
                 var overflow = style.getPropertyValue('overflow');
                 var overflowY = style.getPropertyValue('overflow-y');
                 
-                // 检查元素是否可滚动
                 var isScrollable = (overflow === 'auto' || overflow === 'scroll' || 
                                   overflowY === 'auto' || overflowY === 'scroll') &&
                                  parent.scrollHeight > parent.clientHeight;
                 
-                if (isScrollable) {
-                    break;
-                }
+                if (isScrollable) break;
                 parent = parent.parentElement;
-                
-                // 如果到达文档根部，使用body或documentElement作为滚动容器
-                if (!parent) {
-                    parent = document.scrollingElement || document.documentElement;
-                    break;
-                }
             }
             
-            if (parent) {
-                var elementRect = el.getBoundingClientRect();
-                var parentRect = parent.getBoundingClientRect();
-                
-                // 计算目标位置
-                var targetScrollTop = parent.scrollTop;
-                var targetScrollLeft = parent.scrollLeft;
-                
-                // 普通元素的垂直滚动
-                if (elementRect.bottom > window.innerHeight) {
-                    targetScrollTop = parent.scrollTop + (elementRect.bottom - window.innerHeight) + 20;
-                } else if (elementRect.top < 0) {
-                    targetScrollTop = parent.scrollTop + elementRect.top - 20;
-                }
-                
-                // 普通元素的水平滚动
-                if (elementRect.right > window.innerWidth) {
-                    targetScrollLeft = parent.scrollLeft + (elementRect.right - window.innerWidth) + 40;
-                } else if (elementRect.left < 0) {
-                    targetScrollLeft = Math.max(0, parent.scrollLeft + elementRect.left - 40);
-                }
-                
-                // 应用滚动
-                if (targetScrollTop !== parent.scrollTop) {
-                    parent.scrollTop = targetScrollTop;
-                }
-                if (targetScrollLeft !== parent.scrollLeft) {
-                    parent.scrollLeft = targetScrollLeft;
-                }
+            // 如果没找到可滚动容器，使用document.scrollingElement
+            if (!parent) {
+                parent = document.scrollingElement || document.documentElement;
             }
+            
+            var elementRect = el.getBoundingClientRect();
+            var viewportHeight = window.innerHeight;
+            var viewportWidth = window.innerWidth;
+            
+            // 使用 requestAnimationFrame 确保平滑滚动
+            requestAnimationFrame(() => {
+                // 计算垂直滚动
+                if (elementRect.bottom > viewportHeight) {
+                    // 向下滚动时，确保元素完全可见
+                    var scrollOffset = elementRect.bottom - viewportHeight + 20;
+                    parent.scrollTop += scrollOffset;
+                } else if (elementRect.top < 0) {
+                    // 向上滚动时，确保元素完全可见
+                    parent.scrollTop += elementRect.top - 20;
+                }
+                
+                // 计算水平滚动
+                if (elementRect.right > viewportWidth) {
+                    parent.scrollLeft += elementRect.right - viewportWidth + 40;
+                } else if (elementRect.left < 0) {
+                    parent.scrollLeft = Math.max(0, parent.scrollLeft + elementRect.left - 40);
+                }
+                
+                // 强制重绘以防止白屏
+                parent.style.transform = 'translateZ(0)';
+            });
         }
     },
     keyOkEvent() {
