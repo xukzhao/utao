@@ -255,28 +255,43 @@ let TvFocus={
         if (!flag) {
             // 找到可滚动的父容器
             var parent = el.parentElement;
-            var isHeader = el.closest('.tv-header') !== null; // 检查是否在header中
+            var isHeader = el.closest('.tv-header') !== null;
             
-            // 如果是header中的元素，直接找到header作为滚动容器
             if (isHeader) {
                 parent = el.closest('.tv-header');
-                // 确保回到顶部时页面完全重置
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
                 
-                // 处理header的水平滚动
                 var elementRect = el.getBoundingClientRect();
                 if (elementRect.right > window.innerWidth) {
                     parent.scrollLeft += (elementRect.right - window.innerWidth) + 60;
                 } else if (elementRect.left < 0) {
                     parent.scrollLeft = Math.max(0, parent.scrollLeft + elementRect.left - 60);
                 }
-                return; // 对于header元素，处理完直接返回
+                return;
             }
             
-            // 非header元素的处理
-            while (parent && (!parent.scrollHeight || parent.scrollHeight <= parent.clientHeight)) {
+            // 改进滚动容器检测
+            while (parent) {
+                var style = window.getComputedStyle(parent);
+                var overflow = style.getPropertyValue('overflow');
+                var overflowY = style.getPropertyValue('overflow-y');
+                
+                // 检查元素是否可滚动
+                var isScrollable = (overflow === 'auto' || overflow === 'scroll' || 
+                                  overflowY === 'auto' || overflowY === 'scroll') &&
+                                 parent.scrollHeight > parent.clientHeight;
+                
+                if (isScrollable) {
+                    break;
+                }
                 parent = parent.parentElement;
+                
+                // 如果到达文档根部，使用body或documentElement作为滚动容器
+                if (!parent) {
+                    parent = document.scrollingElement || document.documentElement;
+                    break;
+                }
             }
             
             if (parent) {
