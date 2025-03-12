@@ -15,20 +15,21 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
 
         <Button
             android:id="@+id/jdItem"
             android:textSize="@dimen/fontDefault"
-            android:textColor="@color/black"
+            android:textColor="#FFFFFF"
             android:tag="jdItem"
             android:text="@{item.name}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/login_btn_select"
+            android:background="@drawable/menu_button_background"
             android:focusable="true"
-            android:onClick="@{() -> itemPresenter.onClick(item)}"
-            android:padding="8dp"
-            android:layout_margin="8dp"/>
+            android:padding="12dp"
+            android:gravity="center"
+            android:onClick="@{() -> itemPresenter.onClick(item)}" />
     </LinearLayout>
 </layout>
