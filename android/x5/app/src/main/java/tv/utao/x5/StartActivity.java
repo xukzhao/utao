@@ -58,7 +58,7 @@ public class StartActivity extends Activity {
             public void getConfig(ConfigDTO configDTO) {
                 if(null==configDTO){
                     runOnUiThread(()->{
-                        if(x5Ok()|(Util.isNotNeedX5()&&!openX5())){
+                        if(Util.isX86()||x5Ok()||(Util.isNotNeedX5()&&!openX5())){
                             to();
                         }else{
                             Toast.makeText(thisContext,"请求接口失败 请检查网络 2次返回键退出重进", Toast.LENGTH_SHORT).show();
@@ -123,14 +123,14 @@ public class StartActivity extends Activity {
         }
         //Build.VERSION_CODES.R 安卓11
         //Build.VERSION_CODES.P 安卓9
-        boolean isOpenX5=openX5();
-        Log.i(TAG,"isOpenX5::::"+isOpenX5);
-        if(Util.isNotNeedX5()&&!isOpenX5){
+        if(isX86){
+            Log.i(TAG, "system  isX86");
             to();
             return;
         }
-        if(isX86){
-            Log.i(TAG, "system  isX86");
+        boolean isOpenX5=openX5();
+        Log.i(TAG,"isOpenX5::::"+isOpenX5);
+        if(Util.isNotNeedX5()&&!isOpenX5){
             to();
             return;
         }

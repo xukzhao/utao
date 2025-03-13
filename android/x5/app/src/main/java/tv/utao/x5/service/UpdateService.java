@@ -98,10 +98,13 @@ public class UpdateService {
     public static Vod getByKey(String key){
         return indexVodMap.get(key);
     }
+    /*public static String getKeyByUrl(String url){
+        return  urlKeyMap.get(url);
+    }*/
     public static Vod getByUrl(String url){
         String key= urlKeyMap.get(url);
         if(null==key){
-            return getByKey("0_0");
+            return null;
         }
         return indexVodMap.get(key);
     }

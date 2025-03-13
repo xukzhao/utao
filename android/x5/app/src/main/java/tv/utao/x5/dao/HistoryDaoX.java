@@ -49,12 +49,19 @@ public class HistoryDaoX {
         if(null==history){
             return UpdateService.getByKey("0_0");
         }
-        return UpdateService.getByUrl(history.url);
+        Vod vod= UpdateService.getByUrl(history.url);
+        if(null==vod){
+            return UpdateService.getByKey("0_0");
+        }
+        return vod;
     }
     public static void updateChannel(Context context, String url){
         HistoryDao historyDao = AppDatabase.getInstance(context).historyDao();
         History history =   historyDao.queryOneBySite("tv");
         Vod vod = UpdateService.getByUrl(url);
+        if(null==vod){
+            return;
+        }
         if(null==history){
             History historyNew = new History();
             historyNew.url=vod.getUrl();

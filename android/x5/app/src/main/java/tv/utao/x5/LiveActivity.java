@@ -316,8 +316,10 @@ public class LiveActivity extends Activity {
                 }
                 Log.i(TAG,"onProgressChangedX"+url);
                 Vod vod = UpdateService.getByUrl(url);
-                currentLive=vod;
-                binding.liveName.setText(currentLive.getName()+" "+newProgress+"%");
+                if(null!=vod){
+                    currentLive=vod;
+                    binding.liveName.setText(currentLive.getName()+" "+newProgress+"%");
+                }
                 if(newProgress==100){
                     HistoryDaoX.updateChannel(thisContext,url);
                     handler.sendMessageDelayed (handler.obtainMessage(2, "noText"),1000);
