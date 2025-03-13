@@ -61,10 +61,9 @@ if(typeof _tvload == "undefined"){
     _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));
     _tvLoadRes.js(_browser.getURL("js/zepto.min.js?v=x"));
     _tvLoadRes.js(_browser.getURL("js/common.js?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/myfocus.js?v=x"));
-    _tvLoadRes.js(_browser.getURL("js/vuex.min.js?v=x"));
-
-    _tvLoadRes.js(_browser.getURL(`js/tv/common.js?v=x`));
+    //_tvLoadRes.js(_browser.getURL("js/myfocus.js?v=x"));
+   // _tvLoadRes.js(_browser.getURL("js/vuex.min.js?v=x"));
+   // _tvLoadRes.js(_browser.getURL(`js/tv/common.js?v=x`));
     /*if(detailPath.startsWith("tv/")){
         _tvLoadRes.js(_browser.getURL(`js/tv/common.js?v=x`));
     }else{

@@ -1,29 +1,4 @@
-TvFocus.left=function (){
-    _apiX.msgStr("live","left");
-    return true;
-}
-TvFocus.right=function (){
-    _apiX.msgStr("live","right");
-    return true;
-}
-/*TvFocus.up=function (){
-    _apiX.msgStr("live","up");
-    return true;
-}
-TvFocus.down=function (){
-    _apiX.msgStr("live","down");
-    return true;
-}*/
 
-const _ctrlx={
-    ok(){
-        //$$(".vjs-play-control").click();
-        _menuCtrl.menu();
-    },
-    menu(){
-        console.log("menuxxx");
-    },
-};
 (function(){
     const _html={
         _ctrl:{
@@ -36,39 +11,7 @@ const _ctrlx={
                     }
                     $$("#xhz-"+item.id).click();
                 },1000);
-            },
-            xjChoose(item){
-                let waitId= _layer.wait("请耐心等待跳转。。。");
-                if(""!==item.url){
-                    window.location.href=item.url;
-                    return;
-                }
-                $$("#xxj-"+item.id).click();
-                _data.xjExt(item);
-                _layer.close(waitId);
-            },
-
-            next(){
-                let index=_data.vue.now.xj.index+1;
-                let item=_data.vue.xjs[index];
-                this.xjChoose(item);
             }
-        },
-        xjList(_this){
-            let requestUrl="js/cctv/tv.json";
-            if(_tvFunc.isGecko()||!_tvFunc.isApp()){
-                requestUrl= _browser.getURL("js/cctv/tv.json");
-            }
-            _this.focusId="cctv";
-            console.log("requestUrl",requestUrl);
-            _apiX.getJson(requestUrl, {}, function(text) {
-                console.log("text::: "+text)
-                let data = JSON.parse(text);
-                data.data.forEach((item,index)=>{
-                    item.id=index;
-                    _this.channels.push(item);
-                })
-            });
         },
         init(id,index,notReload){
             let menuId= this.initApp(id,index);
