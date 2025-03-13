@@ -221,7 +221,9 @@ FOCUS.prototype =  {
               var flag= my.isElementInViewport(el);
               console.log(flag);
               if(!flag){
-                el.scrollIntoView();
+                  setTimeout(() => {
+                      el.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+                  },50);
               }
               //console.log(offset);
               //element.scrollIntoView({behavior: "instant", block: "end", inline: "nearest"});
