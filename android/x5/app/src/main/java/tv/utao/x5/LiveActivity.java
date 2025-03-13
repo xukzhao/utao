@@ -297,7 +297,7 @@ public class LiveActivity extends Activity {
     public void onDestroy() {
         if(lWebView!=null){
             Log.i(TAG,"onDestroy");
-            lWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+           //lWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             lWebView.clearHistory();
             lWebView.destroy();
         }
@@ -577,5 +577,12 @@ public class LiveActivity extends Activity {
         binding.menuContainer.setVisibility(View.GONE);
         isMenuShow = false;
         binding.menuContainer.setOnClickListener(null);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 在这里处理Activity变为可见时的逻辑
+    /*    lWebView.requestFocus();
+        lWebView.loadUrl(currentLive.getUrl());*/
     }
 }

@@ -151,13 +151,12 @@ public class StartActivity extends Activity {
             @Override
             public void onDownloadResult(File target, boolean done) {
                 if (target != null && target.exists()) {
-                    runOnUiThread(() -> {
-                        try {
-                            Util.installApk(StartActivity.this, target);
-                        } catch (Exception e) {
-                            Log.e(TAG, "Error starting APK installation: " + e.getMessage());
-                            Toast.makeText(StartActivity.this, "启动安装失败，请重试", Toast.LENGTH_LONG).show();
-                        }
+                    String fileName = target.getName();
+                    String toFilePath=targetDir+fileName;
+                    runOnUiThread(()->{
+                        Toast.makeText(content,"下载成功 正在安装启动中", Toast.LENGTH_SHORT).show();
+                        binding.progressWrapper.setVisibility(View.GONE);
+                        initX5(toFilePath);
                     });
                 } else {
                     runOnUiThread(() -> {

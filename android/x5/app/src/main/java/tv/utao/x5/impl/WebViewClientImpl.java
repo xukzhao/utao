@@ -115,6 +115,23 @@ public class WebViewClientImpl extends WebViewClient {
                 + ", url: " + failingUrl);
     }
 
+    private Map<String,String> toHeader(Map<String,String> orgHeader){
+        Map<String,String> headerMap = new HashMap<>();
+        if(orgHeader.containsKey("Referer")){
+            headerMap.put("Referer",orgHeader.get("Referer"));
+        }
+        if(orgHeader.containsKey("Origin")){
+            headerMap.put("Origin",orgHeader.get("Origin"));
+        }
+        if(orgHeader.containsKey("User-Agent")){
+            headerMap.put("User-Agent",orgHeader.get("User-Agent"));
+        }
+        if(orgHeader.containsKey("Host")){
+            headerMap.put("Host",orgHeader.get("Host"));
+        }
+        return headerMap;
+    }
+
     @Override
     public WebResourceResponse shouldInterceptRequest(WebView webView, WebResourceRequest webResourceRequest) {
         //无图 Dec-Fetch-Dest
@@ -131,19 +148,21 @@ public class WebViewClientImpl extends WebViewClient {
                     "null", new ByteArrayInputStream("utao".getBytes()));*//*
         }*/
         //Log.i(TAG,"XX"+orgUrl);
-        if(orgUrl.startsWith("https://tlive.fengshows.com/live/")||orgUrl.startsWith("https://hkmolive.fengshows.com/live/")){
-            String realUrl= "https://qctv.fengshows.cn"+orgUrl.substring(orgUrl.indexOf("/live"),orgUrl.length());
-            Log.i(TAG,realUrl);
-            Map<String,String> headerMap = new HashMap<>();
-           InputStream inputStream = HttpUtil.get(realUrl,new HashMap<>());
-           if(null==inputStream){
-               return super.shouldInterceptRequest(webView, webResourceRequest);
-           }
-            WebResourceResponse resp=new WebResourceResponse("video/x-flv",
-                    ConstantMy.UTF8, inputStream);
-            headerMap.put("access-control-allow-origin","*");
-            resp.setResponseHeaders(headerMap);
-            return resp;
+        if(type==1){
+            if(orgUrl.startsWith("https://tlive.fengshows.com/live/")||orgUrl.startsWith("https://hkmolive.fengshows.com/live/")){
+                String realUrl= "https://qctv.fengshows.cn"+orgUrl.substring(orgUrl.indexOf("/live"),orgUrl.length());
+                Log.i(TAG,realUrl);
+                Map<String,String> headerMap = new HashMap<>();
+                InputStream inputStream = HttpUtil.get(realUrl,new HashMap<>());
+                if(null==inputStream){
+                    return super.shouldInterceptRequest(webView, webResourceRequest);
+                }
+                WebResourceResponse resp=new WebResourceResponse("video/x-flv",
+                        ConstantMy.UTF8, inputStream);
+                headerMap.put("access-control-allow-origin","*");
+                resp.setResponseHeaders(headerMap);
+                return resp;
+            }
         }
         if(null!=accept&&accept.startsWith("image/")&&!imageLoad(url)){
             return new WebResourceResponse(null,
@@ -170,6 +189,7 @@ public class WebViewClientImpl extends WebViewClient {
         if(indexWen>0){
             url=url.substring(0,indexWen);
         }
+
         if(url.endsWith("js")){
             if(index>0) {
                 String fileName = url.substring(index);
