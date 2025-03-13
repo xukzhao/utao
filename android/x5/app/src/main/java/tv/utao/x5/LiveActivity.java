@@ -84,6 +84,7 @@ public class LiveActivity extends Activity {
         initData();
         //更新数据
         initWebView();
+        lWebView.requestFocus();
         //数据库获取最新数据
         //String liveUrl= "https://tv.cctv.com/live/cctv13/";
         lWebView.loadUrl(currentLive.getUrl());
@@ -145,7 +146,7 @@ public class LiveActivity extends Activity {
     }
 
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if(!isMenuShow&&event.getAction() == KeyEvent.ACTION_DOWN){
+        if(!isMenuShow()&&event.getAction() == KeyEvent.ACTION_DOWN){
             showMenu();
             return true;
         }
@@ -233,7 +234,7 @@ public class LiveActivity extends Activity {
         webSetting.setAllowFileAccess(true);
         webSetting.setDatabaseEnabled(true);
         webSetting.setDomStorageEnabled(true);
-        webSetting.setNeedInitialFocus(false);
+        //webSetting.setNeedInitialFocus(false);
         // 禁用缩放
         webSetting.setSupportZoom(false);
         webSetting.setBuiltInZoomControls(false);
@@ -326,8 +327,8 @@ public class LiveActivity extends Activity {
             @Override
             public void onShowCustomView(View view, IX5WebChromeClient.CustomViewCallback callback) {
                 Log.i("WebChromeClient","onShowCustomView");
-                //binding.fullscreen.addView(view);
-                //binding.fullscreen.setVisibility(View.VISIBLE);
+                binding.fullscreen.addView(view);
+                binding.fullscreen.setVisibility(View.VISIBLE);
             }
             @Override
             public void onPermissionRequest(PermissionRequest request) {
@@ -338,8 +339,8 @@ public class LiveActivity extends Activity {
             @Override
             public void onHideCustomView() {
                 Log.i("WebChromeClient","onHideCustomView");
-                //binding.fullscreen.removeAllViews();
-                //binding.fullscreen.setVisibility(View.GONE);
+                binding.fullscreen.removeAllViews();
+                binding.fullscreen.setVisibility(View.GONE);
             }
         });
         lWebView.setWebChromeClientExtension(new X5WebChromeClientExtension());
@@ -433,7 +434,7 @@ public class LiveActivity extends Activity {
     private static Map<String,Integer> keyCodeMap=new HashMap<>();
     static {
         keyCodeMap.put("SPACE",62);
-        keyCodeMap.put("F",34);
+        keyCodeMap.put("F",KeyEvent.KEYCODE_F);  // 使用Android标准键码
     }
     protected void keyCodeAllByCode(String keyCode){
         Integer keyCodeNum=  keyCodeMap.get(keyCode);

@@ -20,9 +20,8 @@
             android:layout_height="match_parent"
             android:background="#E3EDCD"
             android:gravity="center"
-            android:focusable="false"
+            android:focusable="true"
             android:visibility="visible"
-            android:descendantFocusability="blocksDescendants"
             android:orientation="vertical">
             <com.tencent.smtt.sdk.WebView
                 android:id="@+id/webView"
@@ -32,6 +31,16 @@
                 android:focusable="false" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/fullscreen"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#E3EDCD"
+            android:focusable="true"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical">
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/notify"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -39,7 +48,6 @@
             android:gravity="center"
             android:focusable="false"
             android:visibility="visible"
-            android:descendantFocusability="blocksDescendants"
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="wrap_content"
