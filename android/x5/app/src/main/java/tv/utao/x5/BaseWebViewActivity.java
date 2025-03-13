@@ -255,9 +255,9 @@ public class BaseWebViewActivity extends Activity {
         if(!(newFocus instanceof Button)){
             return null;
         }
-        if(null!=oldFocus){  oldFocus.setScaleX(1.0f); oldFocus.setScaleY(1.0f);}
+     /*   if(null!=oldFocus){  oldFocus.setScaleX(1.0f); oldFocus.setScaleY(1.0f);}
         newFocus.setScaleX(1.1f);
-        newFocus.setScaleY(1.1f);
+        newFocus.setScaleY(1.1f);*/
         return (Button) newFocus;
 
     }
