@@ -6,6 +6,18 @@ if(typeof _tvIsGecko === "undefined"){
     _tvIsGecko=false;
 }
 var _tvFunc={
+    // 获取url请求参数
+    getQueryParams() {
+      var query = location.search.substring(1)
+      var arr = query.split('&')
+      var params = {}
+      for (var i = 0; i < arr.length; i++) {
+          var pair = arr[i].split('=')
+         params[pair[0]] = pair[1]
+      }
+     console.log(params)
+     return params
+   },
     isApp(){
         return _tvIsApp;
     },

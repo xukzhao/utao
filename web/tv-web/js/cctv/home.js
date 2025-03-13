@@ -24,5 +24,5 @@ let _data={
 $$(function(){
 
     _tvHtmlInit();
-    _layer.notify("请手动下载最新版升级(应用内升级部分版本和设备有问题)");
+    //_layer.notify("请手动下载最新版升级(应用内升级部分版本和设备有问题)");
 });

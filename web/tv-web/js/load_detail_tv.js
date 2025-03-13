@@ -38,12 +38,12 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.jlntv.cn/")){
             return "tv/jltv"
         }
-        if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
+      /*  if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
             return "tv/gdtv"
-        }
-        if(url.startsWith("https://tv.hoolo.tv")){
+        }*/
+      /*  if(url.startsWith("https://tv.hoolo.tv")){
             return "tv/hztv"
-        }
+        }*/
         if(url.startsWith("https://www.lcxw.cn/")){
             _tvLoadRes.js("https://cdn.bootcdn.net/ajax/libs/hls.js/1.5.13/hls.js");
             return "tv/lctv"

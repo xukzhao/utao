@@ -384,6 +384,45 @@ data:
         url: https://www.hrbtv.net/folder79/folder87/
       - name: 延边卫视
         url: https://www.yb983.com/cys/index.html
+  - tag: hbtv
+    name: 湖北
+    vods:
+      - name: 湖北卫视
+        url: https://news.hbtv.com.cn/app/tv/431
+      - name: 湖北经视
+        url: https://news.hbtv.com.cn/app/tv/432
+      - name: 湖北综合
+        url: https://news.hbtv.com.cn/app/tv/433
+      - name: 湖北公共
+        url: https://news.hbtv.com.cn/app/tv/434
+      - name: 湖北影视
+        url: https://news.hbtv.com.cn/app/tv/435
+      - name: 湖北生活
+        url: https://news.hbtv.com.cn/app/tv/436
+      - name: 湖北教育
+        url: https://news.hbtv.com.cn/app/tv/437
+      - name: 湖北垄上
+        url: https://news.hbtv.com.cn/app/tv/438
+      - name: 襄阳综合
+        url: https://xiangyang.cjyun.org/app/streamradio/142?utaot=9
+      - name: 襄阳经济
+        url: https://xiangyang.cjyun.org/app/streamradio/138?utaot=9
+      - name: 襄阳公共
+        url: https://xiangyang.cjyun.org/app/streamradio/130?utaot=9
+      - name: 十堰新闻综合
+        url: https://www.syiptv.com/tv?station_id=1
+      - name: 十堰经济旅游
+        url: https://www.syiptv.com/tv?station_id=3
+      - name: 孝感综合
+        url: https://share.xgrb.cn/live_details?newsid=25009136_xgrb
+      - name: 孝感生活
+        url: https://share.xgrb.cn/live_detail?newsid=25009684_xgrb
+      - name: 荆州新闻综合@
+        url: http://m-jingzhou.cjyun.org/dszb
+      - name: 咸宁新闻综合
+        url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=91&page=canvas&live_type=1&utaot=1&utaoId=player-con
+      - name: 咸宁经济生活
+        url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=80&page=canvas&live_type=1&utaot=1&utaoId=player-con
 #  - tag: jxntv
 #    name: 江西
 #    vods:
