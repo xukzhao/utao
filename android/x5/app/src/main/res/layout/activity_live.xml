@@ -86,38 +86,63 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    android:gravity="center">
+                    android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/prevProvince"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:text="←"
-                        android:textColor="#FFFFFF"
-                        android:background="@drawable/menu_button_background"
-                        android:focusable="false"/>
-
-                    <TextView
-                        android:id="@+id/provinceName"
-                        android:layout_width="0dp"
+                    <!-- 左右切换按钮区域 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:gravity="center"
-                        android:textColor="#FFFFFF"
-                        android:textSize="20sp"/>
+                        android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/nextProvince"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:text="→"
-                        android:textColor="#FFFFFF"
-                        android:background="@drawable/menu_button_background"
-                        android:focusable="false"/>
+                        <Button
+                            android:id="@+id/prevProvince"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:text="←"
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"
+                            android:background="#80000000"
+                            android:focusable="false"/>
+
+                        <Button
+                            android:id="@+id/nextProvince"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:text="→"
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"
+                            android:background="#80000000"
+                            android:focusable="false"/>
+
+                    </LinearLayout>
+
+                    <!-- 省份名称显示区域 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/provinceName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:id="@+id/provinceCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:gravity="center"
+                            android:textColor="#FFFFFF"
+                            android:textSize="16sp"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
