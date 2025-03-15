@@ -459,10 +459,18 @@ public class LiveActivity extends Activity {
     }
 
     private void initData() {
-        // 创建测试数据
-        provinces = UpdateService.getByLives();
-        currentProvinceIndex=currentLive.getTagIndex();
-        showCurrentProvince();
+        // 使用异步任务加载数据
+        new Thread(() -> {
+            // 在后台线程执行耗时操作
+            List<Live> result = UpdateService.getByLives();
+            
+            // 在UI线程更新界面
+            runOnUiThread(() -> {
+                provinces = result;
+                currentProvinceIndex = currentLive.getTagIndex();
+                showCurrentProvince();
+            });
+        }).start();
     }
 
     private Vod createVod(String name, String key, String url) {
@@ -474,6 +482,20 @@ public class LiveActivity extends Activity {
     }
 
     private void showCurrentProvince() {
+        if (provinces == null || provinces.isEmpty()) {
+            // 处理空数据情况
+            binding.provinceName.setText("无数据");
+            setupChannelList(new ArrayList<>());
+            return;
+        }
+        
+        // 确保索引在有效范围内
+        if (currentProvinceIndex < 0) {
+            currentProvinceIndex = 0;
+        } else if (currentProvinceIndex >= provinces.size()) {
+            currentProvinceIndex = provinces.size() - 1;
+        }
+        
         Live currentProvince = provinces.get(currentProvinceIndex);
         binding.provinceName.setText(currentProvince.getName() + "(" + currentProvince.getVods().size() + ")");
         setupChannelList(currentProvince.getVods());
@@ -500,12 +522,14 @@ public class LiveActivity extends Activity {
                     btn = (Button) convertView;
                 }
                 
-                Vod item = getItem(position);
-                btn.setText(item.getName());
+                Vod channel = getItem(position);
+                if (channel != null) {
+                    btn.setText(channel.getName());
+                }
+                
                 return btn;
             }
         };
-        
         binding.channelList.setAdapter(adapter);
         binding.channelList.setOnItemClickListener((parent, view, position, id) -> {
             try {
