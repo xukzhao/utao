@@ -79,8 +79,8 @@ public class MainActivity extends BaseWebViewActivity {
                 ||keyCode==KeyEvent.KEYCODE_VOLUME_MUTE){
             return super.dispatchKeyEvent(event);
         }
-        return ctrl("menu");
-        //return super.dispatchKeyEvent(event);
+       // return ctrl("menu");
+        return super.dispatchKeyEvent(event);
     }
     private boolean keyBack(){
         String url = WebViewClientImpl.backUrl();

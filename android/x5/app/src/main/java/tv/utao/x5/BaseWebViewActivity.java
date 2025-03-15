@@ -112,6 +112,7 @@ public class BaseWebViewActivity extends Activity {
         thisContext=this;
         UpdateService.updateRes(thisContext);
         initWebView();
+        //mWebView.requestFocus();
         //file:///android_asset/tv-web/index.html http://www.utao.tv/tv-web/index.html
         mWebView.loadUrl(mHomeUrl);
         ConfigApi.syncIsX5Ok(this);
