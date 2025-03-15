@@ -58,7 +58,11 @@ public class MainActivity extends BaseWebViewActivity {
             return keyBack();
         }
         if(keyCode==KeyEvent.KEYCODE_DPAD_CENTER||keyCode==KeyEvent.KEYCODE_ENTER){
+            if(openOkMenu()&&!WebViewClientImpl.currentUrlIsHome()){
+                return ctrl("menu");
+            }
             return ctrl("ok");
+           // return super.dispatchKeyEvent(event);
         }
         if(keyCode==KeyEvent.KEYCODE_MENU||keyCode==KeyEvent.KEYCODE_TAB){
             return ctrl("menu");

@@ -551,6 +551,9 @@ public class BaseWebViewActivity extends Activity {
             webService=new WebService(10240);
         }
     }
+    protected boolean openOkMenu(){
+        return "1".equals(ValueUtil.getString(getApplicationContext(),"openOkMenu","0"));
+    }
     //js
     public class JsInterface{
 
@@ -601,6 +604,16 @@ public class BaseWebViewActivity extends Activity {
                 killAppProcess();
                 //showToastOrg("开启内核成功 重启应用后生效",thisContext);
                 //toStart();
+                return;
+            }
+            if("openOkMenu".equals(service)){
+                ValueUtil.putString(getApplicationContext(),"openOkMenu",data);
+                if(data.equals("1")){
+                    Toast.makeText(thisContext, "开启OK键是菜单成功",Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(thisContext, "关闭OK键是菜单成功",Toast.LENGTH_SHORT).show();
+                }
+
                 return;
             }
             if("closeApp".equals(service)){
@@ -657,6 +670,11 @@ public class BaseWebViewActivity extends Activity {
             }
             if("querySysInfo".equals(service)){
                ConfigDTO configDTO= ConfigApi.getConfig();
+                String oldJson= FileUtil.readExt("tv-web/update.json");
+                ConfigDTO oldConfig = null;
+                if(!oldJson.trim().isEmpty()){
+                     oldConfig = JsonUtil.fromJson(oldJson,ConfigDTO.class);
+                }
                 int versionCode=  AppVersionUtils.getVersionCode();
                 ApkInfo apkInfo = configDTO.getApk();
                 int updateCode= apkInfo.getVersion();
@@ -665,12 +683,19 @@ public class BaseWebViewActivity extends Activity {
                     sysInfo.setHaveNew(true);
                 }
                 boolean is64= Util.is64();
-                sysInfo.setIs64(is64);
+                sysInfo.setSys64(is64);
                 sysInfo.setVersionCode(Build.VERSION.SDK_INT);
                 sysInfo.setX5Ok(x5Ok());
+                sysInfo.setX86(Util.isX86());
+                sysInfo.setDeviceId(MyApplication.androidId);
+                sysInfo.setOpenOkMenu(openOkMenu());
                 sysInfo.setCacheSize(DataCleanManager.getCacheSize(thisContext));
                 //Build.VERSION.SDK_INT
                 sysInfo.setVersionName(AppVersionUtils.getVersionName());
+                if(null!=oldConfig){
+                    sysInfo.setResVersion(""+oldConfig.getRes().getVersion());
+                }
+
                 return JsonUtil.toJson(sysInfo);
             }
             return null;

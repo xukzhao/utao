@@ -2,12 +2,15 @@ package tv.utao.x5.domain;
 
 public class SysInfo {
     private String versionName;
-    private Boolean is64;
-
+    private Boolean sys64;
+    private Boolean x86;
     private Integer versionCode;
     private Boolean haveNew;
     private Boolean x5Ok;
     private String cacheSize;
+    private String deviceId;
+    private String resVersion;
+    private Boolean openOkMenu;
 
     public String getVersionName() {
         return versionName;
@@ -17,13 +20,7 @@ public class SysInfo {
         this.versionName = versionName;
     }
 
-    public Boolean getIs64() {
-        return is64;
-    }
 
-    public void setIs64(Boolean is64) {
-        this.is64 = is64;
-    }
 
     public Integer getVersionCode() {
         return versionCode;
@@ -55,5 +52,45 @@ public class SysInfo {
 
     public void setCacheSize(String cacheSize) {
         this.cacheSize = cacheSize;
+    }
+
+    public Boolean getSys64() {
+        return sys64;
+    }
+
+    public void setSys64(Boolean sys64) {
+        this.sys64 = sys64;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public Boolean getX86() {
+        return x86;
+    }
+
+    public void setX86(Boolean x86) {
+        this.x86 = x86;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
+
+    public String getResVersion() {
+        return resVersion;
+    }
+
+    public void setResVersion(String resVersion) {
+        this.resVersion = resVersion;
+    }
+
+    public Boolean getOpenOkMenu() {
+        return openOkMenu;
+    }
+
+    public void setOpenOkMenu(Boolean openOkMenu) {
+        this.openOkMenu = openOkMenu;
     }
 }

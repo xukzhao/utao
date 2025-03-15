@@ -328,6 +328,15 @@ public class WebViewClientImpl extends WebViewClient {
         return false;
     }
 
+    public  static Boolean currentUrlIsHome(){
+        if(null==currentUrl){
+            return  false;
+        }
+        if(currentUrl.contains("tv-web")){
+            return true;
+        }
+        return false;
+    }
     public static String  backUrl(){
         if(null==currentUrl){
             return null;
