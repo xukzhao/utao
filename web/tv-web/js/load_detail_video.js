@@ -6,9 +6,9 @@ if(typeof _tvload == "undefined"){
         return;
     }
     _tvload=true;
-  /*  if(window.location.href.startsWith("https://v.qq.com/x/cover/")){
+    if(window.location.href.startsWith("https://www.bilibili.com/")){
         return ;
-    }*/
+    }
     function loadDetailByUrl(url){
         if(url.startsWith("https://www.yangshipin.cn/tv/home")){
             return "cctv";
@@ -48,6 +48,9 @@ if(typeof _tvload == "undefined"){
         }
         if(url.startsWith("https://movie.douban.com/subject/")){
             return "douban";
+        }
+        if(url.startsWith("https://www.douyin.com/?recommend=1")){
+            return "dytj";
         }
         return null;
     }

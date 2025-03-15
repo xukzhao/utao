@@ -34,6 +34,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.iqiyi.com/")){
             return "iqiyi";
         }
+        if(url.startsWith("https://www.douyin.com/?recommend=1")){
+            return "dytj";
+        }
         if(url.startsWith("https://www.miguvideo.com/p/live")){
             return "ty/mg";
         }

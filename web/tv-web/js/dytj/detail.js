@@ -15,6 +15,8 @@ const  _ctrlx={
     fullscreen() {
         // 全屏
         _tvFunc.fullscreenW("#slidelist");
+        //H
+       // _apiX.msgStr("keyNum","36");
        // $$("video").css("position","fixed !important")
     }
 };
@@ -59,7 +61,7 @@ const  _ctrlx={
             console.log("isLogin:: "+qrCodeLength)
             if(qrCodeLength>0){
                 //登录
-                _login.init();
+                //_login.init();
             }
         });
         _ctrlx.fullscreen();
