@@ -45,7 +45,11 @@ public class UpdateService {
         baseFolder= context.getFilesDir().getPath();
         String toZipFilePath=baseFolder+"/"+tvWebZip+".zip";
         File toZipFile =new File(toZipFilePath);
-        if(!toZipFile.exists()){
+        String html= FileUtil.readExt("tv-web/index.html").trim();
+        if(!toZipFile.exists()||html.isEmpty()){
+            if(html.isEmpty()){
+                Log.i(TAG,"html isEmpty");
+            }
             //不存在 copy assert 下文件
             FileUtil.copyFileFromAssert(context, tvWebZip+".zip",toZipFilePath);
             FileUtil.unzipFile(toZipFilePath,baseFolder+"/tv-web",true);

@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.widget.Toast;
 
 import tv.utao.x5.impl.WebViewClientImpl;
+import tv.utao.x5.utils.ToastUtils;
 
 public class MainActivity extends BaseWebViewActivity {
     private long mClickBackTime = 0;
@@ -98,7 +99,7 @@ public class MainActivity extends BaseWebViewActivity {
                 //super.onBackPressed();
                 //System.exit(0);
             } else {
-                Toast.makeText(this, "再按一次返回键退出", Toast.LENGTH_SHORT).show();
+                ToastUtils.show(this, "再按一次返回键退出", Toast.LENGTH_SHORT);
                 mClickBackTime = currentTime;
             }
         }else{

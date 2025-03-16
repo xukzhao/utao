@@ -74,6 +74,7 @@ import tv.utao.x5.util.JsonUtil;
 import tv.utao.x5.util.Util;
 import tv.utao.x5.util.ValueUtil;
 import tv.utao.x5.util.WebService;
+import tv.utao.x5.utils.ToastUtils;
 
 
 /**
@@ -557,8 +558,7 @@ public class BaseWebViewActivity extends Activity {
         @JavascriptInterface
         public void toast(String message){
             Log.i(TAG,"message "+message);
-            Toast.makeText(MyApplication.getContext(),message, Toast.LENGTH_SHORT)
-                    .show();
+            ToastUtils.show(MyApplication.getContext(),message, Toast.LENGTH_SHORT);
         }
         @JavascriptInterface
         public void message(String service,String data){
@@ -596,7 +596,7 @@ public class BaseWebViewActivity extends Activity {
             }
             if("openX5".equals(service)){
                 ValueUtil.putString(getApplicationContext(),"openX5","1");
-                Toast.makeText(thisContext, "开启内核成功 重启应用后生效",Toast.LENGTH_SHORT).show();
+                ToastUtils.show(thisContext, "开启内核成功 重启应用后生效",Toast.LENGTH_SHORT);
                 killAppProcess();
                 //showToastOrg("开启内核成功 重启应用后生效",thisContext);
                 //toStart();
@@ -605,9 +605,9 @@ public class BaseWebViewActivity extends Activity {
             if("openOkMenu".equals(service)){
                 ValueUtil.putString(getApplicationContext(),"openOkMenu",data);
                 if(data.equals("1")){
-                    Toast.makeText(thisContext, "开启OK键是菜单成功",Toast.LENGTH_SHORT).show();
+                    ToastUtils.show(thisContext, "开启OK键是菜单成功",Toast.LENGTH_SHORT);
                 }else{
-                    Toast.makeText(thisContext, "关闭OK键是菜单成功",Toast.LENGTH_SHORT).show();
+                    ToastUtils.show(thisContext, "关闭OK键是菜单成功",Toast.LENGTH_SHORT);
                 }
 
                 return;
@@ -631,7 +631,7 @@ public class BaseWebViewActivity extends Activity {
             if("clearCache".equals(service)){
                 DataCleanManager.cleanInternalCache(thisContext);
                 DataCleanManager.cleanExternalCache(thisContext);
-                Toast.makeText(thisContext, "清理缓存成功 网站可能会要求重新扫码登录",Toast.LENGTH_SHORT).show();
+                ToastUtils.show(thisContext, "清理缓存成功 网站可能会要求重新扫码登录",Toast.LENGTH_SHORT);
                 return;
             }
             if("updateApk".equals(service)){
@@ -650,8 +650,6 @@ public class BaseWebViewActivity extends Activity {
                             }
                 });
             }
-            //Toast.makeText(MyApplication.getContext(),data, Toast.LENGTH_SHORT)
-            // .show();
         }
         @JavascriptInterface
         public String queryByService(String service,String extPraram){

@@ -23,6 +23,7 @@ import java.text.MessageFormat;
 import java.util.Date;
 
 import tv.utao.x5.BuildConfig;
+import tv.utao.x5.utils.ToastUtils;
 
 public class Util {
     private static String TAG = "Util";
@@ -140,8 +141,8 @@ public class Util {
             activityContext.startActivity(intent);
         } catch (Exception e) {
             Log.e(TAG, "Error installing APK: " + e.getMessage());
-            e.printStackTrace();
-            Toast.makeText(context, "安装APK时出错，请重试", Toast.LENGTH_LONG).show();
+           // e.printStackTrace();
+            ToastUtils.show(context, "安装APK时出错，请重试", Toast.LENGTH_LONG);
         }
     }
 

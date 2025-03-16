@@ -33,6 +33,7 @@ import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.Util;
 import tv.utao.x5.util.ValueUtil;
+import tv.utao.x5.utils.ToastUtils;
 
 public class StartActivity extends Activity {
     private long mClickBackTime = 0;
@@ -61,7 +62,7 @@ public class StartActivity extends Activity {
                         if(Util.isX86()||x5Ok()||(Util.isNotNeedX5()&&!openX5())){
                             to();
                         }else{
-                            Toast.makeText(thisContext,"请求接口失败 请检查网络 2次返回键退出重进", Toast.LENGTH_SHORT).show();
+                            ToastUtils.show(thisContext,"请求接口失败 请检查网络 2次返回键退出重进", Toast.LENGTH_SHORT);
                         }
                     });
                     return;
@@ -154,13 +155,13 @@ public class StartActivity extends Activity {
                     String fileName = target.getName();
                     String toFilePath=targetDir+fileName;
                     runOnUiThread(()->{
-                        Toast.makeText(content,"下载成功 正在安装启动中", Toast.LENGTH_SHORT).show();
+                        ToastUtils.show(content,"下载成功 正在安装启动中", Toast.LENGTH_SHORT);
                         binding.progressWrapper.setVisibility(View.GONE);
                         initX5(toFilePath);
                     });
                 } else {
                     runOnUiThread(() -> {
-                        Toast.makeText(StartActivity.this, "下载文件不存在，请重试", Toast.LENGTH_LONG).show();
+                        ToastUtils.show(StartActivity.this, "下载文件不存在，请重试", Toast.LENGTH_LONG);
                     });
                 }
             }
@@ -168,14 +169,14 @@ public class StartActivity extends Activity {
             @Override
             public void onFailResponse() {
                 runOnUiThread(()->{
-                    Toast.makeText(content,"下载失败 请检查网络 2次返回退出重进", Toast.LENGTH_SHORT).show();
+                    ToastUtils.show(content,"下载失败 请检查网络 2次返回退出重进", Toast.LENGTH_SHORT);
                 });
             }
         });
         if(null!=toFilePath){
             runOnUiThread(()->{
                 if("error".equals(toFilePath)){
-                    Toast.makeText(content,"获取数据出错 请检查网络", Toast.LENGTH_SHORT).show();
+                    ToastUtils.show(content,"获取数据出错 请检查网络", Toast.LENGTH_SHORT);
                     return;
                 }
                 binding.progressWrapper.setVisibility(View.GONE);
@@ -248,7 +249,7 @@ public class StartActivity extends Activity {
             //super.onBackPressed();
            // System.exit(0);
         } else {
-            Toast.makeText(this, "再按一次返回键退出", Toast.LENGTH_SHORT).show();
+            ToastUtils.show(this, "再按一次返回键退出", Toast.LENGTH_SHORT);
             mClickBackTime = currentTime;
         }
     }
@@ -279,10 +280,10 @@ public class StartActivity extends Activity {
                                         Util.installApk(StartActivity.this, target);
                                     } catch (Exception e) {
                                         Log.e(TAG, "Error installing APK: " + e.getMessage());
-                                        Toast.makeText(StartActivity.this, "安装失败，请重试", Toast.LENGTH_LONG).show();
+                                        ToastUtils.show(StartActivity.this, "安装失败，请重试", Toast.LENGTH_LONG);
                                     }
                                 } else {
-                                    Toast.makeText(StartActivity.this, "下载文件不存在，请重试", Toast.LENGTH_LONG).show();
+                                    ToastUtils.show(StartActivity.this, "下载文件不存在，请重试", Toast.LENGTH_LONG);
                                 }
                             });
                         }
@@ -290,7 +291,7 @@ public class StartActivity extends Activity {
                         @Override
                         public void onFailResponse() {
                             runOnUiThread(() -> {
-                                Toast.makeText(thisContext, "下载失败，请检查网络后重试", Toast.LENGTH_SHORT).show();
+                                ToastUtils.show(thisContext, "下载失败，请检查网络后重试", Toast.LENGTH_SHORT);
                             });
                         }
                     });

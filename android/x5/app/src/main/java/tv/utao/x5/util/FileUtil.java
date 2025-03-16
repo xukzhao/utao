@@ -150,9 +150,11 @@ public class FileUtil {
         // 打开压缩文件
         InputStream inputStream = new FileInputStream(zipPath); ;
         ZipInputStream zipInputStream = new ZipInputStream(inputStream);
-
         // 读取一个进入点
         ZipEntry zipEntry = zipInputStream.getNextEntry();
+        if(null==zipEntry){
+            return;
+        }
         String firstName=null;
         if(skipFirst){
             int index = zipEntry.getName().indexOf("/");

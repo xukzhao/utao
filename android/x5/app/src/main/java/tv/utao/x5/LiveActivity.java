@@ -55,6 +55,7 @@ import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.JsonUtil;
 import tv.utao.x5.util.Util;
+import tv.utao.x5.utils.ToastUtils;
 
 public class LiveActivity extends Activity {
     protected String TAG = "LiveActivity";
@@ -83,7 +84,7 @@ public class LiveActivity extends Activity {
                     //UpdateService.getByKey("0_0");
         }
         if(null==currentLive){
-            showToastOrg("获取数据错误 请重启",this);
+            ToastUtils.show(this,"获取数据错误 请重启",Toast.LENGTH_SHORT);
             finish();
             return;
         }
@@ -94,7 +95,7 @@ public class LiveActivity extends Activity {
         //数据库获取最新数据
         //String liveUrl= "https://tv.cctv.com/live/cctv13/";
         lWebView.loadUrl(currentLive.getUrl());
-        showToastOrg("已支持遥控器上下左右可快速切台",this);
+        ToastUtils.show(this,"已支持遥控器上下左右可快速切台",Toast.LENGTH_SHORT);
 
     }
     private long lastTime = 0;
@@ -141,15 +142,7 @@ public class LiveActivity extends Activity {
         binding.liveName.setText(text);
         //showToastOrg(text,context);
     }
-    private static Toast toast;
-    protected  void showToastOrg(String text, Context context){
-        if(toast==null){
-            toast = Toast.makeText(context, text,Toast.LENGTH_SHORT);
-        }else {
-            toast.setText(text);//如果不为空，则直接改变当前toast的文本
-        }
-        toast.show();
-    }
+
 
     public boolean dispatchTouchEvent(MotionEvent event) {
         if(!isMenuShow()&&event.getAction() == KeyEvent.ACTION_DOWN){
@@ -348,8 +341,7 @@ public class LiveActivity extends Activity {
         @JavascriptInterface
         public void toast(String message){
             Log.i(TAG,"message "+message);
-            Toast.makeText(MyApplication.getContext(),message, Toast.LENGTH_SHORT)
-                    .show();
+            ToastUtils.show(MyApplication.getContext(),message, Toast.LENGTH_SHORT);
         }
         @JavascriptInterface
         public void message(String service,String data){
