@@ -7,6 +7,8 @@ let _data={
     vue:null,
     initData(vue){
        this.vue=vue;
+       //_layer.notifyLess("该平台在安卓端需要极高性能才可使用 如果电视老旧不推荐使用");
+       this.vue.desc="该平台在安卓端需要较高性能才可使用(安卓手机千元机就可以 但电视设备就不一定) 如果电视老旧不推荐使用"
        this.channels();
        this.channelPage();
     },

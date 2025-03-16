@@ -99,6 +99,11 @@ const _html={
             openX5(){
                 _apiX.msg("openX5",null);
             },
+            openOkMenu(){
+                this.info.openOkMenu=!this.info.openOkMenu;
+                _apiX.msgStr("openOkMenu",this.info.openOkMenu?"1":"0");
+
+            },
             closeApp(){
                 _apiX.msg("closeApp",null);
             },
@@ -128,8 +133,8 @@ const _html={
                 _apiX.queryByService("querySysInfo",null,function (data){
                     console.log("querySysInfo"+data);
                     let sysInfo=JSON.parse(data);
-                    _this.info.x5Ok=sysInfo.x5Ok;
-                    _this.info.cacheSize=sysInfo.cacheSize;
+                    _this.info=sysInfo;
+                   // _this.info.cacheSize=sysInfo.cacheSize;
                     let  version="当前版本:"+sysInfo.versionName;
                     if(sysInfo.haveNew){
                         version=version+" 发现新版 点击更新";
@@ -138,7 +143,7 @@ const _html={
                     let sysDesc="当前系统:";
                     let androidVer=getAndroidName(sysInfo.versionCode);
                     sysDesc=sysDesc+androidVer;
-                    if(sysInfo.is64){
+                    if(sysInfo.sys64){
                         sysDesc+=" 64位"
                     }else{
                         sysDesc+=" 32位"

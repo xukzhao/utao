@@ -13,6 +13,9 @@ const Filter = {
             const html = `
             <div class="tv-body" id="tv-body" @vue:mounted="initData()">
               <div class="tv-header">
+                {{desc}}
+              </div>
+              <div class="tv-header">
                 <div  tabindex="0" v-for="item in filters" class="tv-btn" :id="tvId(item,'fi-')" :class="{'tv-active':item==currentChannel.filter}"
                 @focus="switchFilter(item)" @click="switchFilter(item)"
                    :move-down="tvId(currentChannel.tag,'#tv-')">{{filterName(item)}}</div>

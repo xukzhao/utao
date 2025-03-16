@@ -90,16 +90,20 @@
                     </div>
                 </div>
                 <div id="tv-set-content" class="tv-tab" style="flex-direction: column;" :style="{display:(tab == 'set' ? 'flex' : 'none')}">
-                    <div v-if="!info.x5Ok" class="tv-btn" @click="openX5" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
+                    <div v-if="!info.x5Ok&&!info.x86" class="tv-btn" @click="openX5" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
                         开启X5内核(会关闭应用 请手动重启后启用)</div>
                     <div class="tv-btn" @click="closeApp" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
                         完全关闭应用</div>
+                    <div class="tv-btn" @click="openOkMenu" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
+                        使用OK键调出菜单 点击{{info.openOkMenu?"关闭":"开启"}}</div>
                     <div class="tv-btn" @click="clearCache" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
                         缓存大小{{info.cacheSize}} 点击清理缓存</div>
                     <div class="tv-btn" @click="updateApk" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
                         {{info.version}}</div>
                     <div class="tv-btn" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
                         {{info.sys}}</div>
+                    <div class="tv-btn" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
+                        设备ID {{info.deviceId}} {{info.resVersion}}</div>
                     <div class="tv-btn" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">
                          官网 https://www.utao.tv</div>
                     <div class="tv-btn" style="white-space:normal;margin: 1vh 0;max-width:100%;" move-updown="1" move-up="#tv-set">

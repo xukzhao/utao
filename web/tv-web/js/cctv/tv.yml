@@ -403,12 +403,6 @@ data:
         url: https://news.hbtv.com.cn/app/tv/437
       - name: 湖北垄上
         url: https://news.hbtv.com.cn/app/tv/438
-      - name: 襄阳综合
-        url: https://xiangyang.cjyun.org/app/streamradio/142?utaot=9
-      - name: 襄阳经济
-        url: https://xiangyang.cjyun.org/app/streamradio/138?utaot=9
-      - name: 襄阳公共
-        url: https://xiangyang.cjyun.org/app/streamradio/130?utaot=9
       - name: 十堰新闻综合
         url: https://www.syiptv.com/tv?station_id=1
       - name: 十堰经济旅游
