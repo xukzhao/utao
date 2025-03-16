@@ -15,6 +15,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
@@ -80,6 +81,11 @@ public class LiveActivity extends Activity {
         if(null==currentLive){
             currentLive = HistoryDaoX.currentChannel(this);
                     //UpdateService.getByKey("0_0");
+        }
+        if(null==currentLive){
+            showToastOrg("获取数据错误 请重启",this);
+            finish();
+            return;
         }
         initData();
         //更新数据
@@ -288,21 +294,8 @@ public class LiveActivity extends Activity {
         //mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         lWebView.addJavascriptInterface(new JsInterface(),"_api");
     }
-  /*  @Override
-    public void onPause() {
-        super.onPause();  // Always call the superclass method first
-        toHome();
-    }*/
-    @Override
-    public void onDestroy() {
-        if(lWebView!=null){
-            Log.i(TAG,"onDestroy");
-           //lWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            lWebView.clearHistory();
-            lWebView.destroy();
-        }
-        super.onDestroy();
-    }
+
+
 
     private void initWebChromeClient() {
         lWebView.setWebChromeClient(new WebChromeClient() {
@@ -604,11 +597,111 @@ public class LiveActivity extends Activity {
         isMenuShow = false;
         binding.menuContainer.setOnClickListener(null);
     }
+
+
+    private boolean isWebViewDestroyed = false;
+
+    @Override
+    protected void onPause() {
+        if (lWebView != null) {
+            try {
+                // 暂停 WebView 以减少资源使用
+                lWebView.onPause();
+                // 暂停 JS 执行
+                lWebView.getSettings().setJavaScriptEnabled(false);
+            } catch (Exception e) {
+                Log.e(TAG, "Error pausing WebView", e);
+            }
+        }
+        super.onPause();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
-        // 在这里处理Activity变为可见时的逻辑
-    /*    lWebView.requestFocus();
-        lWebView.loadUrl(currentLive.getUrl());*/
+        if (lWebView != null && !isWebViewDestroyed) {
+            try {
+                // 恢复 WebView
+                lWebView.onResume();
+                // 恢复 JS 执行
+                lWebView.getSettings().setJavaScriptEnabled(true);
+            } catch (Exception e) {
+                Log.e(TAG, "Error resuming WebView", e);
+            }
+        }
     }
+    /**
+     * 安全地销毁 WebView
+     */
+    private void destroyWebView() {
+        if (lWebView != null && !isWebViewDestroyed) {
+            // 标记 WebView 已销毁，防止重复操作
+            isWebViewDestroyed = true;
+
+            try {
+                // 移除所有 JS 接口
+                lWebView.removeJavascriptInterface("android");
+                // 其他可能的 JS 接口...
+
+                // 加载空白页面
+                lWebView.loadUrl("about:blank");
+
+                // 清除历史
+                lWebView.clearHistory();
+
+                // 从父视图中移除
+                ViewParent parent = lWebView.getParent();
+                if (parent instanceof ViewGroup) {
+                    ((ViewGroup) parent).removeView(lWebView);
+                }
+
+                // 停止加载
+                lWebView.stopLoading();
+
+                // 清除缓存
+                lWebView.clearCache(true);
+                lWebView.clearFormData();
+                lWebView.clearSslPreferences();
+
+                // 销毁 WebView
+                lWebView.destroy();
+                // 设置为 null
+                lWebView = null;
+            } catch (Exception e) {
+                Log.e(TAG, "Error destroying WebView", e);
+            }
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        destroyWebView();
+        super.onDestroy();
+    }
+ /*   @Override
+    public void onDestroy() {
+        if(lWebView!=null){
+            Log.i(TAG,"onDestroy");
+            //lWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
+            lWebView.clearHistory();
+            lWebView.destroy();
+        }
+        super.onDestroy();
+    }*/
+    /**
+     * 防止内存泄漏的额外措施
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (lWebView != null) {
+            try {
+                // 停止所有可能的后台处理
+                lWebView.stopLoading();
+            } catch (Exception e) {
+                Log.e(TAG, "Error stopping WebView", e);
+            }
+        }
+    }
+
+
 }

@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
@@ -242,13 +244,7 @@ public class BaseWebViewActivity extends Activity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        if (mWebView != null) {
-            mWebView.destroy();
-        }
-        super.onDestroy();
-    }
+
 
 
     //菜单
@@ -760,6 +756,99 @@ public class BaseWebViewActivity extends Activity {
                 }
             }
         }.start();
+    }
+    private boolean isWebViewDestroyed = false;
+
+    @Override
+    protected void onPause() {
+        if (mWebView != null) {
+            try {
+                // 暂停 WebView 以减少资源使用
+                mWebView.onPause();
+                // 暂停 JS 执行
+                mWebView.getSettings().setJavaScriptEnabled(false);
+            } catch (Exception e) {
+                Log.e(TAG, "Error pausing WebView", e);
+            }
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mWebView != null && !isWebViewDestroyed) {
+            try {
+                // 恢复 WebView
+                mWebView.onResume();
+                // 恢复 JS 执行
+                mWebView.getSettings().setJavaScriptEnabled(true);
+            } catch (Exception e) {
+                Log.e(TAG, "Error resuming WebView", e);
+            }
+        }
+    }
+    /**
+     * 安全地销毁 WebView
+     */
+    private void destroyWebView() {
+        if (mWebView != null && !isWebViewDestroyed) {
+            // 标记 WebView 已销毁，防止重复操作
+            isWebViewDestroyed = true;
+
+            try {
+                // 移除所有 JS 接口
+                mWebView.removeJavascriptInterface("android");
+                // 其他可能的 JS 接口...
+
+                // 加载空白页面
+                mWebView.loadUrl("about:blank");
+
+                // 清除历史
+                mWebView.clearHistory();
+
+                // 从父视图中移除
+                ViewParent parent = mWebView.getParent();
+                if (parent instanceof ViewGroup) {
+                    ((ViewGroup) parent).removeView(mWebView);
+                }
+
+                // 停止加载
+                mWebView.stopLoading();
+
+                // 清除缓存
+                mWebView.clearCache(true);
+                mWebView.clearFormData();
+                mWebView.clearSslPreferences();
+
+                // 销毁 WebView
+                mWebView.destroy();
+                // 设置为 null
+                mWebView = null;
+            } catch (Exception e) {
+                Log.e(TAG, "Error destroying WebView", e);
+            }
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        destroyWebView();
+        super.onDestroy();
+    }
+    /**
+     * 防止内存泄漏的额外措施
+     */
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mWebView != null) {
+            try {
+                // 停止所有可能的后台处理
+                mWebView.stopLoading();
+            } catch (Exception e) {
+                Log.e(TAG, "Error stopping WebView", e);
+            }
+        }
     }
 
 }

@@ -163,45 +163,6 @@ public class WebViewClientImpl extends WebViewClient {
                 resp.setResponseHeaders(headerMap);
                 return resp;
             }
-            int indexWen=url.indexOf("?");
-            String preUrl=orgUrl;
-            if(indexWen>0){
-                preUrl=url.substring(0,indexWen);
-            }
-            if (preUrl.endsWith(".ts")&&null!=webView.getUrl()&&webView.getUrl().endsWith("a=1")){
-                Map<String,String> header= webResourceRequest.getRequestHeaders();
-                Map<String,String> headerMap = toHeader(header);
-                if(null==headerMap.get("Referer")){
-                    headerMap.put("Referer",preUrl);
-                }
-                InputStream inputStream = HttpUtil.get(orgUrl,headerMap);
-                WebResourceResponse resp=new WebResourceResponse("video/mp2t",
-                        ConstantMy.UTF8, inputStream);
-                headerMap.put("access-control-allow-origin","*");
-                resp.setResponseHeaders(headerMap);
-                return resp;
-            }
-            if(preUrl.endsWith(".m3u8")){
-                if(null!=webView.getUrl()&&webView.getUrl().endsWith("utaot=9")){
-                    Log.i(TAG,"m3u8 "+orgUrl);
-                    // Util.evalOnUi(webView,Util.sessionStorageWithTime("m3u8",orgUrl));
-                    webView.loadUrl("https://tv.utao.tv/tv-web/live.html?url="+orgUrl+"&a=1");
-                }
-                if(orgUrl.endsWith("a=1")){
-                    Map<String,String> header= webResourceRequest.getRequestHeaders();
-                    Map<String,String> headerMap = toHeader(header);
-                    if(null==headerMap.get("Referer")){
-                        headerMap.put("Referer",preUrl);
-                    }
-                    String response = HttpUtil.getJson(orgUrl,headerMap);
-                    WebResourceResponse resp=new WebResourceResponse("application/vnd.apple.mpegurl",
-                            ConstantMy.UTF8, new ByteArrayInputStream(response.getBytes(Charset.defaultCharset())));
-                    headerMap.put("access-control-allow-origin","*");
-                    resp.setResponseHeaders(headerMap);
-                    return resp;
-                }
-
-            }
         }
         if(null!=accept&&accept.startsWith("image/")&&!imageLoad(url)){
             return new WebResourceResponse(null,

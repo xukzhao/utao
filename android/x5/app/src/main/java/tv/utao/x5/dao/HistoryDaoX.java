@@ -21,7 +21,6 @@ public class HistoryDaoX {
                 //vodId
                 history.id=null;
                 String vodId = history.vodId;
-                Log.i(TAG,history.name);
                 List<History> historyListOrg =   historyDao.queryByVodId(vodId,history.site);
                 String url=null;
                 if(historyListOrg.isEmpty()){
