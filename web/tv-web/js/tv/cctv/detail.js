@@ -48,7 +48,7 @@ let _data={
             }
             hzList.push(itemData);
         });
-        if(currentLevelHz.id!==hzList[0].id){
+        if(currentLevelHz.id!==hzList[0].id&&hzList[0].level>=720){
             console.log(hzList[0]);
             _layer.notifyLess("切换到 "+hzList[0].name);
             $$("#"+hzList[0].id).click();
