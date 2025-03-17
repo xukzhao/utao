@@ -44,6 +44,7 @@ public class UpdateService {
         LogUtil.i(TAG,"isDev "+isDev);
         baseFolder= context.getFilesDir().getPath();
         String toZipFilePath=baseFolder+"/"+tvWebZip+".zip";
+        new Thread(()->{ checkOnlineVersion(toZipFilePath);}).start();
        // File toZipFile =new File(toZipFilePath);
     /*    String html= FileUtil.readExt(MyApplication.getAppContext(),"tv-web/index.html").trim();
         if(!toZipFile.exists()||html.isEmpty()){
