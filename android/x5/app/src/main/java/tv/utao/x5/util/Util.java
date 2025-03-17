@@ -34,13 +34,13 @@ public class Util {
             @Override
             public void run() {
                 // 在这里调用你的View方法
-                Log.i(TAG,"evalOnUi "+javascript);
+                LogUtil.i(TAG,"evalOnUi "+javascript);
                 eval(webView,javascript,null);
             }
         });
     }
     public static  boolean isDev(){
-        Log.i(TAG,"BUILD_ENV_TYPE "+ BuildConfig.BUILD_ENV_TYPE);
+        LogUtil.i(TAG,"BUILD_ENV_TYPE "+ BuildConfig.BUILD_ENV_TYPE);
         return  "dev".equals(BuildConfig.BUILD_ENV_TYPE);
     }
     public static void  eval(WebView webView , String javascript){
@@ -113,7 +113,7 @@ public class Util {
     public static void installApk(Context context, File apkFile) {
         try {
             if (context == null || apkFile == null || !apkFile.exists()) {
-                Log.e(TAG, "Invalid context or APK file");
+                LogUtil.e(TAG, "Invalid context or APK file");
                 return;
             }
 
@@ -140,7 +140,7 @@ public class Util {
             
             activityContext.startActivity(intent);
         } catch (Exception e) {
-            Log.e(TAG, "Error installing APK: " + e.getMessage());
+            LogUtil.e(TAG, "Error installing APK: " + e.getMessage());
            // e.printStackTrace();
             ToastUtils.show(context, "安装APK时出错，请重试", Toast.LENGTH_LONG);
         }

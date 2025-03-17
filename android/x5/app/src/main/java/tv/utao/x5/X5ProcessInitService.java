@@ -3,9 +3,11 @@ package tv.utao.x5;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
+
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.QbSdk.PreInitCallback;
+
+import tv.utao.x5.util.LogUtil;
 
 public class X5ProcessInitService extends Service {
 
@@ -22,14 +24,14 @@ public class X5ProcessInitService extends Service {
 
             @Override
             public void onViewInitFinished(boolean b) {
-                Log.i(TAG, "init web process x5: " + b);
+                LogUtil.i(TAG, "init web process x5: " + b);
             }
         });
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG, "Service OnBind");
+        LogUtil.i(TAG, "Service OnBind");
         return null;
     }
 }

@@ -31,6 +31,7 @@ import tv.utao.x5.service.UpdateX5Service;
 import tv.utao.x5.util.AppVersionUtils;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
+import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.Util;
 import tv.utao.x5.util.ValueUtil;
 import tv.utao.x5.utils.ToastUtils;
@@ -71,7 +72,7 @@ public class StartActivity extends Activity {
                 int versionCode=  AppVersionUtils.getVersionCode();
                 ApkInfo apkInfo = configDTO.getApk();
                 int updateCode= apkInfo.getVersion();
-                Log.i(TAG,updateCode+" old "+versionCode);
+                LogUtil.i(TAG,updateCode+" old "+versionCode);
                 if(updateCode>versionCode){
                     //更新数据
                     runOnUiThread(()->{
@@ -112,25 +113,25 @@ public class StartActivity extends Activity {
     private  void installX5(Context content,ConfigDTO configDTO){
         boolean isX5Ok=x5Ok();
         boolean is64=Util.is64();
-        Log.i(TAG,"is64::: "+is64+" id "+MyApplication.androidId);
+        LogUtil.i(TAG,"is64::: "+is64+" id "+MyApplication.androidId);
         //new File(toFilePath).exists()
         //x5Ok.equals("ok")
         //boolean is64=Util.is64();
         boolean isX86 = Util.isX86();
         if(isX5Ok){
-            Log.i(TAG, "x5  install  "+isX5Ok);
+            LogUtil.i(TAG, "x5  install  "+isX5Ok);
             to();
             return;
         }
         //Build.VERSION_CODES.R 安卓11
         //Build.VERSION_CODES.P 安卓9
         if(isX86){
-            Log.i(TAG, "system  isX86");
+            LogUtil.i(TAG, "system  isX86");
             to();
             return;
         }
         boolean isOpenX5=openX5();
-        Log.i(TAG,"isOpenX5::::"+isOpenX5);
+        LogUtil.i(TAG,"isOpenX5::::"+isOpenX5);
         if(Util.isNotNeedX5()&&!isOpenX5){
             to();
             return;
@@ -203,29 +204,29 @@ public class StartActivity extends Activity {
 
     }
     public void initX5(String toFilePath){
-        Log.i(TAG, "initX5  begin  "+toFilePath);
+        LogUtil.i(TAG, "initX5  begin  "+toFilePath);
         resetSdk();
         QbSdk.installLocalTbsCore(getApplicationContext(), 1,
                 toFilePath);
         QbSdk.setTbsListener(new TbsListener() {
             @Override
             public void onDownloadFinish(int i) {
-                Log.i(TAG, "onDownload Finish " + i);
+                LogUtil.i(TAG, "onDownload Finish " + i);
             }
 
             @Override
             public void onDownloadProgress(int i) {
-                Log.i(TAG, "onDownload Progress " + i);
+                LogUtil.i(TAG, "onDownload Progress " + i);
             }
 
             @Override
             public void onInstallFinish(int i) {
-                Log.i(TAG, "onInstallFinish " + i);
+                LogUtil.i(TAG, "onInstallFinish " + i);
                 if(i==200){
                     //记录
                     ValueUtil.putString(getApplicationContext(),"x5","ok");
                     boolean canLoadX5 = QbSdk.canLoadX5(getApplicationContext());
-                    Log.i(TAG, "升级成功 canLoadX5:"+canLoadX5+" isX5Core "
+                    LogUtil.i(TAG, "升级成功 canLoadX5:"+canLoadX5+" isX5Core "
                              +" versionX5 "+QbSdk.getTbsVersion(getApplicationContext()));
                     to();
                 }
@@ -279,7 +280,7 @@ public class StartActivity extends Activity {
                                     try {
                                         Util.installApk(StartActivity.this, target);
                                     } catch (Exception e) {
-                                        Log.e(TAG, "Error installing APK: " + e.getMessage());
+                                        LogUtil.e(TAG, "Error installing APK: " + e.getMessage());
                                         ToastUtils.show(StartActivity.this, "安装失败，请重试", Toast.LENGTH_LONG);
                                     }
                                 } else {

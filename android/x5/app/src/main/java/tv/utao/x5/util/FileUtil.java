@@ -87,11 +87,11 @@ public class FileUtil {
    public static InputStream readExtIn(String extFileName) {
        String baseFolder= UpdateService.baseFolder+"/";
        String fullPath=baseFolder+extFileName;
-       Log.i(TAG,fullPath);
+       LogUtil.i(TAG,fullPath);
        try {
            return new FileInputStream(fullPath);
        } catch (FileNotFoundException e) {
-           Log.e(TAG, Objects.requireNonNull(e.getMessage()));
+           LogUtil.e(TAG, Objects.requireNonNull(e.getMessage()));
            //throw new RuntimeException(e);
        }
        return null;
@@ -103,7 +103,7 @@ public class FileUtil {
        File file = new File(filePath);
        if(file.exists()){
           boolean delete= file.delete();
-          Log.i(TAG,filePath+" del "+delete);
+          LogUtil.i(TAG,filePath+" del "+delete);
        }
     }
 
@@ -140,7 +140,7 @@ public class FileUtil {
          * @throws IOException
          */
 
-        Log.i(TAG,"开始解压的文件： "  + zipPath + "\n" + "解压的目标路径：" + outputDirectory );
+        LogUtil.i(TAG,"开始解压的文件： "  + zipPath + "\n" + "解压的目标路径：" + outputDirectory );
         // 创建解压目标目录
         File file = new File(outputDirectory);
         // 如果目标目录不存在，则创建
@@ -171,16 +171,16 @@ public class FileUtil {
         int count = 0;
         // 如果进入点为空说明已经遍历完所有压缩包中文件和目录
         while (zipEntry != null) {
-            //Log.i(TAG,"解压文件 入口 1： " +zipEntry );
+            //LogUtil.i(TAG,"解压文件 入口 1： " +zipEntry );
             String fileName = zipEntry.getName();
             if(skipFirst){
                 fileName=fileName.substring(firstName.length());
             }
             if (!zipEntry.isDirectory()) {  //如果是一个文件
                 // 如果是文件
-                //Log.i(TAG,"解压文件 原来 文件的位置： " + fileName);
+                //LogUtil.i(TAG,"解压文件 原来 文件的位置： " + fileName);
                 //fileName = fileName.substring(fileName.lastIndexOf("/") + 1);  //截取文件的名字 去掉原文件夹名字
-               // Log.i(TAG,"解压文件 的名字： " + fileName);
+               // LogUtil.i(TAG,"解压文件 的名字： " + fileName);
                 file = new File(outputDirectory + File.separator + fileName);  //放到新的解压的文件路径
 
                 file.createNewFile();
@@ -198,10 +198,10 @@ public class FileUtil {
 
             // 定位到下一个文件入口
             zipEntry = zipInputStream.getNextEntry();
-           // Log.i(TAG,"解压文件 入口 2： " + zipEntry );
+           // LogUtil.i(TAG,"解压文件 入口 2： " + zipEntry );
         }
         zipInputStream.close();
-        Log.i(TAG,"解压完成");
+        LogUtil.i(TAG,"解压完成");
 
     }
 

@@ -140,7 +140,7 @@ public class HttpUtil {
                 .url(url);
         if(null!=headerMap&&!headerMap.isEmpty()){
             for (Map.Entry<String, String> entry : headerMap.entrySet()) {
-                Log.i(TAG,entry.getKey()+" "+entry.getValue());
+                LogUtil.i(TAG,entry.getKey()+" "+entry.getValue());
                 if(entry.getKey().equals("tv-ref")){
                     builder.addHeader("Referer",entry.getValue());
                     continue;
@@ -176,7 +176,7 @@ public class HttpUtil {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.e(TAG, e.getMessage());
+                LogUtil.e(TAG, e.getMessage());
             }
 
             @Override
@@ -250,7 +250,7 @@ public class HttpUtil {
                 .url(url);
         if(null!=headerMap&&!headerMap.isEmpty()){
             for (Map.Entry<String, String> entry : headerMap.entrySet()) {
-                Log.i(TAG,entry.getKey()+" "+entry.getValue());
+                LogUtil.i(TAG,entry.getKey()+" "+entry.getValue());
                 if(entry.getKey().equals("tv-ref")){
                     builder.addHeader("Referer",entry.getValue());
                     continue;
@@ -265,7 +265,7 @@ public class HttpUtil {
         try {
             response = defaultClient.newCall(request).execute();
         } catch (IOException e) {
-          Log.e(TAG,e.getMessage());
+          LogUtil.e(TAG,e.getMessage());
         }
         if(null==response){
             return null;
@@ -279,7 +279,7 @@ public class HttpUtil {
                 .url(url);
         if(null!=headerMap&&!headerMap.isEmpty()){
             for (Map.Entry<String, String> entry : headerMap.entrySet()) {
-                Log.i(TAG,entry.getKey()+" "+entry.getValue());
+                LogUtil.i(TAG,entry.getKey()+" "+entry.getValue());
                 if(entry.getKey().equals("tv-ref")){
                     builder.addHeader("Referer",entry.getValue());
                     continue;
@@ -299,18 +299,18 @@ public class HttpUtil {
             response = defaultClient.newCall(request).execute();
         }catch (IOException e){
             e.printStackTrace();
-            Log.e(TAG,"500 error: "+e.getMessage());
+            LogUtil.e(TAG,"500 error: "+e.getMessage());
             return "500";
         }
         if(!response.isSuccessful()){
-            Log.e(TAG,"400 code: "+response.code());
+            LogUtil.e(TAG,"400 code: "+response.code());
             return "400";
         }
         try{
             return  response.body().string();
         }catch (IOException e){
             e.printStackTrace();
-            Log.e(TAG," 500 error response: "+e.getMessage());
+            LogUtil.e(TAG," 500 error response: "+e.getMessage());
             return "500";
         }
     }

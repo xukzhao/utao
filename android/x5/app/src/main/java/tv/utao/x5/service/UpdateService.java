@@ -23,6 +23,7 @@ import tv.utao.x5.domain.live.Vod;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.JsonUtil;
+import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.Util;
 
 public class UpdateService {
@@ -34,21 +35,21 @@ public class UpdateService {
             updateResWithError(context);
         }catch (Exception e){
             //e.printStackTrace();
-            //Log.e(TAG, Objects.requireNonNull(e.getMessage()));
+            //LogUtil.e(TAG, Objects.requireNonNull(e.getMessage()));
         }
     }
     public static   void updateResWithError(Context context) throws IOException {
         //copyAssets 到应用目录
         String tvWebZip="tv-web";
         boolean isDev = Util.isDev();
-        Log.i(TAG,"isDev "+isDev);
+        LogUtil.i(TAG,"isDev "+isDev);
         baseFolder= context.getFilesDir().getPath();
         String toZipFilePath=baseFolder+"/"+tvWebZip+".zip";
         File toZipFile =new File(toZipFilePath);
         String html= FileUtil.readExt("tv-web/index.html").trim();
         if(!toZipFile.exists()||html.isEmpty()){
             if(html.isEmpty()){
-                Log.i(TAG,"html isEmpty");
+                LogUtil.i(TAG,"html isEmpty");
             }
             //不存在 copy assert 下文件
             FileUtil.copyFileFromAssert(context, tvWebZip+".zip",toZipFilePath);
@@ -59,7 +60,7 @@ public class UpdateService {
         }
         if(isDev){
             //开发 每次都copy
-            Log.i(TAG,"isDev");
+            LogUtil.i(TAG,"isDev");
             FileUtil.copyFileFromAssert(context,
                     tvWebZip+".zip",toZipFilePath);
             FileUtil.unzipFile(toZipFilePath,baseFolder+"/tv-web",true);
@@ -147,29 +148,29 @@ public class UpdateService {
              return;
          }
          if(null==newConfig.getRes()||!newConfig.getRes().getUpdate()){
-             Log.i(TAG,"checkOnlineVersion updateRes false");
+             LogUtil.i(TAG,"checkOnlineVersion updateRes false");
              return;
          }
         Res resNew = newConfig.getRes();
          String oldJson= FileUtil.readExt("tv-web/update.json");
-        Log.i(TAG,"checkOnlineVersion old "+oldJson);
+        LogUtil.i(TAG,"checkOnlineVersion old "+oldJson);
         if(oldJson.trim().isEmpty()){
             return;
         }
          ConfigDTO oldConfig = JsonUtil.fromJson(oldJson,ConfigDTO.class);
          Res resOld = oldConfig.getRes();
          if(null!=resOld&&resNew.getVersion()>resOld.getVersion()){//res版本更新
-             Log.i(TAG,"版本更新到 "+resNew.getVersion()+" toZipFilePath"+toZipFilePath);
+             LogUtil.i(TAG,"版本更新到 "+resNew.getVersion()+" toZipFilePath"+toZipFilePath);
             // FileUtil.del(toZipFilePath);
              //下载zip 到
              HttpUtil.download(resNew.getUrl(), baseFolder, "tv-web.zip", new DownloadCallback() {
                  @Override
                  public void downloaded() {
                      try {
-                         Log.i(TAG,"downloaded");
+                         LogUtil.i(TAG,"downloaded");
                          FileUtil.unzipFile(toZipFilePath,baseFolder+"/tv-web",resNew.getSkipFirst());
                      } catch (IOException e) {
-                         Log.e(TAG, "downloaded: "+e.getMessage());
+                         LogUtil.e(TAG, "downloaded: "+e.getMessage());
                      }
                  }
              });

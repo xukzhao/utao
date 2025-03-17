@@ -1,12 +1,12 @@
 package tv.utao.x5;
 
 import android.content.res.Configuration;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
 import tv.utao.x5.impl.WebViewClientImpl;
+import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.utils.ToastUtils;
 
 public class MainActivity extends BaseWebViewActivity {
@@ -15,7 +15,7 @@ public class MainActivity extends BaseWebViewActivity {
         if(event.getAction() == KeyEvent.ACTION_DOWN){
             float x= event.getX();
             float y= event.getY();
-            //Log.i("dispatchTouchEvent", "x" + x+"y "+y);
+            //LogUtil.i("dispatchTouchEvent", "x" + x+"y "+y);
             if(x<100f&&y<100f) {
                 ctrl("menu");
             }
@@ -25,13 +25,13 @@ public class MainActivity extends BaseWebViewActivity {
 
     private boolean ctrl(String code){
         String  js= "_menuCtrl."+code+"()";
-        Log.i(TAG,js);
+        LogUtil.i(TAG,js);
         mWebView.evaluateJavascript(js,null);
         return true;
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
-        Log.i(TAG,"onConfigurationChanged...."+newConfig.orientation);
+        LogUtil.i(TAG,"onConfigurationChanged...."+newConfig.orientation);
         super.onConfigurationChanged(newConfig);
         // 检查屏幕方向是否改变
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -46,7 +46,7 @@ public class MainActivity extends BaseWebViewActivity {
             return super.dispatchKeyEvent(event);
         }
         int keyCode = event.getKeyCode();
-        Log.i("keyDown keyCode ", keyCode+" event" + event);
+        LogUtil.i("keyDown keyCode ", keyCode+" event" + event);
         boolean isMenuShow=isMenuShow();
         if(isMenuShow){
             if(keyCode==KeyEvent.KEYCODE_BACK||keyCode==KeyEvent.KEYCODE_MENU||keyCode==KeyEvent.KEYCODE_TAB){
@@ -89,7 +89,7 @@ public class MainActivity extends BaseWebViewActivity {
     }
     private boolean keyBack(){
         String url = WebViewClientImpl.backUrl();
-        Log.i("keyBack","keyBack "+url);
+        LogUtil.i("keyBack","keyBack "+url);
         //NextPlusNavigationDelegate.backUrl();
         if(null==url){
             long currentTime = System.currentTimeMillis();
@@ -112,7 +112,7 @@ public class MainActivity extends BaseWebViewActivity {
     @Override
     public void onDestroy() {
         if(mWebView!=null){
-            Log.i(TAG,"onDestroy");
+            LogUtil.i(TAG,"onDestroy");
             mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             mWebView.destroy();
         }

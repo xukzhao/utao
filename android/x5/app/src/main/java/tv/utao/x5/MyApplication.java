@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
-import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
@@ -20,6 +19,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import tv.utao.x5.service.CrashHandler;
+import tv.utao.x5.util.LogUtil;
 
 public class MyApplication extends Application {
 
@@ -35,11 +35,11 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.i(TAG, "onViewInitBegin: ");
+        LogUtil.i(TAG, "onViewInitBegin: ");
         context = getApplicationContext();
         androidId = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         if(null==androidId){
-            Log.i(TAG, "androidId: getUUID");
+            LogUtil.i(TAG, "androidId: getUUID");
             androidId=getUUID();
         }
         CrashHandler.getInstance().init(this);
@@ -124,7 +124,7 @@ public class MyApplication extends Application {
         String currentProcessName = QbSdk.getCurrentProcessName(this);
         // 设置多进程数据目录隔离，不设置的话系统内核多个进程使用WebView会crash，X5下可能ANR
         WebView.setDataDirectorySuffix(QbSdk.getCurrentProcessName(this));
-        Log.i(TAG, currentProcessName);
+        LogUtil.i(TAG, currentProcessName);
         if (currentProcessName.equals(this.getPackageName())) {
             this.startService(new Intent(this, X5ProcessInitService.class));
             return true;
@@ -151,7 +151,7 @@ public class MyApplication extends Application {
             return;
         }
         //TbsDownloader.startDownload(this);
-        Log.i(TAG, "onViewInitBegin: ");
+        LogUtil.i(TAG, "onViewInitBegin: ");
         /* 设置允许移动网络下进行内核下载。默认不下载，会导致部分一直用移动网络的用户无法使用x5内核 */
         // resetSdk();
         QbSdk.setDownloadWithoutWifi(true);
@@ -166,7 +166,7 @@ public class MyApplication extends Application {
              */
             @Override
             public void onDownloadFinish(int stateCode) {
-                Log.i(TAG, "onDownloadFinished: " + stateCode);
+                LogUtil.i(TAG, "onDownloadFinished: " + stateCode);
             }
 
             /**
@@ -174,7 +174,7 @@ public class MyApplication extends Application {
              */
             @Override
             public void onInstallFinish(int stateCode) {
-                Log.i(TAG, "onInstallFinished: " + stateCode);
+                LogUtil.i(TAG, "onInstallFinished: " + stateCode);
             }
 
             /**
@@ -183,7 +183,7 @@ public class MyApplication extends Application {
              */
             @Override
             public void onDownloadProgress(int progress) {
-                Log.i(TAG, "Core Downloading: " + progress);
+                LogUtil.i(TAG, "Core Downloading: " + progress);
             }
         });
 
@@ -204,7 +204,7 @@ public class MyApplication extends Application {
              */
             @Override
             public void onViewInitFinished(boolean isX5) {
-                Log.i(TAG, "onViewInitFinished: " + isX5);
+                LogUtil.i(TAG, "onViewInitFinished: " + isX5);
                 // hint: you can use QbSdk.getX5CoreLoadHelp(context) anytime to get help.
             }
         });

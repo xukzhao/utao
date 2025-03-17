@@ -2,7 +2,6 @@ package tv.utao.x5.api;
 
 import android.content.Context;
 import android.os.Build;
-import android.util.Log;
 
 import java.text.MessageFormat;
 import java.util.HashMap;
@@ -13,6 +12,7 @@ import tv.utao.x5.domain.ConfigDTO;
 import tv.utao.x5.util.AppVersionUtils;
 import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.JsonUtil;
+import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.Util;
 import tv.utao.x5.util.ValueUtil;
 
@@ -35,7 +35,7 @@ public class ConfigApi {
             new Thread(()->{
                 String androidId= MyApplication.androidId;
                 String reqUrl =updateUrl+"?isOk=1&id="+androidId;
-                Log.i("isOk getConfig","reqUrl "+reqUrl);
+                LogUtil.i("isOk getConfig","reqUrl "+reqUrl);
                 HttpUtil.getJson(reqUrl,new HashMap<>());
                 firstUpX5Ok="1";
                //ValueUtil.putString(context,"firstUpX5Ok","1");
@@ -61,12 +61,12 @@ public class ConfigApi {
                     AppVersionUtils.getVersionCode();
             String paramStr=   MessageFormat.format("?id={0}&num={1}&api={2}&remark={3}",androidId,num,api,remark);
             String reqUrl =updateUrl+paramStr;
-            Log.i("getConfig","reqUrl "+reqUrl);
+            LogUtil.i("getConfig","reqUrl "+reqUrl);
              json = HttpUtil.getJson(reqUrl,new HashMap<>());
         }catch (Exception e){
             return  null;
         }
-        Log.i("getConfig","getConfig "+json);
+        LogUtil.i("getConfig","getConfig "+json);
         if(HttpUtil.isErrorResponse(json)){
             return null;
         }

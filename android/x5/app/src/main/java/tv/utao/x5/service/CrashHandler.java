@@ -22,6 +22,7 @@ import tv.utao.x5.MyApplication;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.JsonUtil;
+import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.Util;
 import tv.utao.x5.util.ValueUtil;
 
@@ -87,7 +88,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         //导入异常信息到SD卡中
         try {
             String path= dumpExceptionToSDCard(ex);
-            Log.e("PATH",path);
+            LogUtil.e("PATH",path);
             ValueUtil.putString(mContext,"errorLog",path);
             ValueUtil.putString(mContext,"errorLogRead","0");
            //String error=  dumpExceptionToStr(ex);
@@ -123,7 +124,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             e.printStackTrace(pw);
             pw.close();//关闭输入流
         } catch (Exception e1) {
-            Log.e(TAG,"dump crash info failed");
+            LogUtil.e(TAG,"dump crash info failed");
         }finally {
             pw.close();//关闭输入流
         }
@@ -139,7 +140,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         //如果SD卡不存在或无法使用，则无法将异常信息写入SD卡
       /*  if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             if (DEBUG) {
-                Log.w(TAG, "sdcard unmounted,skip dump exception");
+                LogUtil.w(TAG, "sdcard unmounted,skip dump exception");
                 return;
             }
         }*/
@@ -165,7 +166,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
             e.printStackTrace(pw);
             pw.close();//关闭输入流
         } catch (Exception e1) {
-           Log.e(TAG,"dump crash info failed");
+           LogUtil.e(TAG,"dump crash info failed");
         }
         return path;
     }
@@ -217,10 +218,10 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * 将错误信息上传至服务器
      */
     public static void uploadExceptionToServer(Context context)  {
-        //Log.e("ERORRR",content);
+        //LogUtil.e("ERORRR",content);
         //HttpUtil.postJson("http://api.vonchange.com/utao/error",null,content);
         //String body=  HttpRequest.post("http://api.vonchange.com/utao/error").send(content).body();
-       // Log.e("body",body);
+       // LogUtil.e("body",body);
        String errorRead=  ValueUtil.getString(context,"errorLogRead");
        if("0".equals(errorRead)){
           String path=  ValueUtil.getString(context,"errorLog");
@@ -233,13 +234,13 @@ public class CrashHandler implements UncaughtExceptionHandler {
           if(null==errLog){
               return;
           }
-           Log.e("errLog",errLog);
+           LogUtil.e("errLog",errLog);
            String finalErrLog = errLog;
            new Thread(()->{
                //HttpRequest.post("http://api.vonchange.com/utao/error").send(finalErrLog).body();
 
                HttpUtil.postJson("http://api.vonchange.com/utao/error",null, finalErrLog);
-               Log.i("POST","http://api.vonchange.com/utao/error");
+               LogUtil.i("POST","http://api.vonchange.com/utao/error");
                ValueUtil.putString(context,"errorLogRead","1");
            }).start();
        }

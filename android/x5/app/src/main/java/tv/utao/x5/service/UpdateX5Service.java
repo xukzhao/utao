@@ -3,7 +3,6 @@ package tv.utao.x5.service;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
 
 import java.io.File;
 import java.util.List;
@@ -13,6 +12,7 @@ import tv.utao.x5.call.DownloadProgressListener;
 import tv.utao.x5.domain.ConfigDTO;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
+import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.Util;
 
 public class UpdateX5Service {
@@ -24,7 +24,7 @@ public class UpdateX5Service {
         if(null==url){
             return "error";
         }
-        Log.i(TAG,"updateX5 url "+url);
+        LogUtil.i(TAG,"updateX5 url "+url);
         String targetDir = FileUtil.getTBSFileDir(context).getPath()+"/";
         String fileName = fileNameByUrl(url);
         File targetFile = new File(targetDir+fileName);

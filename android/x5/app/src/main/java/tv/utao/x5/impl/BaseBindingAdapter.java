@@ -1,6 +1,5 @@
 package tv.utao.x5.impl;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,6 +9,8 @@ import androidx.databinding.ViewDataBinding;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import tv.utao.x5.util.LogUtil;
 
 public abstract class BaseBindingAdapter<T, D extends ViewDataBinding> extends RecyclerView.Adapter<BaseViewHolder<D>> {
 
@@ -38,7 +39,7 @@ public abstract class BaseBindingAdapter<T, D extends ViewDataBinding> extends R
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder<D> holder, int position) {
-        Log.i("tag", "onBindViewHolder");
+        LogUtil.i("tag", "onBindViewHolder");
         doBindViewHolder(holder,datas.get(position));
         // holder.getBinding().setVariable(BR.data, mDatas.get(position));
         //holder.getBinding().setVariable(BR.itemPresenter, ItemPresenter);

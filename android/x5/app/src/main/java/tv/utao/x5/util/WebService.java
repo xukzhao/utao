@@ -21,7 +21,7 @@ public class WebService extends NanoHTTPD {
         try {
             start(NanoHTTPD.SOCKET_READ_TIMEOUT, false);
         }catch (Exception e){
-            Log.i(TAG,e.getMessage());
+            LogUtil.i(TAG,e.getMessage());
         }
 
         System.out.println("\nRunning! Point your browsers to http://localhost:" + port + "/ \n");
@@ -115,9 +115,9 @@ public class WebService extends NanoHTTPD {
             try {
                 requestUrl= URLDecoder.decode(requestUrl, "UTF-8");
             } catch (UnsupportedEncodingException e) {
-                Log.e(TAG,e.getMessage());
+                LogUtil.e(TAG,e.getMessage());
             }
-            Log.i(TAG,requestUrl);
+            LogUtil.i(TAG,requestUrl);
             Map<String, String> headerMap=new HashMap<>();
             //headerMap.remove("rel-url");
             Map<String,String> headerMapInSession = session.getHeaders();
@@ -129,12 +129,12 @@ public class WebService extends NanoHTTPD {
             }
             if(method.equals(Method.GET)){
                 String data= HttpUtil.getJson(requestUrl,headerMap);
-                Log.i(TAG,data);
+                LogUtil.i(TAG,data);
                 return data;
             }
             if(method.equals(Method.POST)){
                 String requestBody= getRequestBody(session);
-                Log.i("requestBody",requestBody);
+                LogUtil.i("requestBody",requestBody);
                 String data= HttpUtil.postJson(requestUrl,headerMap,requestBody);
                 return data;
             }

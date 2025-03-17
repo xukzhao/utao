@@ -1,6 +1,5 @@
 package tv.utao.x5.impl;
 
-import android.util.Log;
 import android.view.View;
 
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient;
@@ -11,6 +10,8 @@ import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 
 import java.util.Arrays;
+
+import tv.utao.x5.util.LogUtil;
 
 public class WebChromeClientImpl extends WebChromeClient {
     private static String TAG="WebChromeClient";
@@ -23,12 +24,12 @@ public class WebChromeClientImpl extends WebChromeClient {
 
     @Override
     public void onProgressChanged(WebView view, int newProgress) {
-        Log.i(TAG, "onProgressChanged, newProgress:" + newProgress + ", view:" + view);
+        LogUtil.i(TAG, "onProgressChanged, newProgress:" + newProgress + ", view:" + view);
     }
 
     @Override
     public boolean onJsAlert(WebView webView, String url, String message, JsResult result) {
-        Log.i(TAG,"onJsAlert "+url);
+        LogUtil.i(TAG,"onJsAlert "+url);
 /*                new AlertDialog.Builder(context).setTitle("JS弹窗Override")
                         .setMessage(message)
                         .setPositiveButton("OK", (dialogInterface, i) -> result.confirm())
@@ -39,7 +40,7 @@ public class WebChromeClientImpl extends WebChromeClient {
 
     @Override
     public boolean onJsConfirm(WebView webView, String url, String message, JsResult result) {
-        Log.i(TAG,"onJsConfirm "+url);
+        LogUtil.i(TAG,"onJsConfirm "+url);
                /* new AlertDialog.Builder(context).setTitle("JS弹窗Override")
                         .setMessage(message)
                         .setPositiveButton("OK", (dialogInterface, i) -> result.confirm())
@@ -51,7 +52,7 @@ public class WebChromeClientImpl extends WebChromeClient {
 
     @Override
     public boolean onJsBeforeUnload(WebView webView, String url, String message, JsResult result) {
-        Log.i(TAG,"onJsBeforeUnload "+url);
+        LogUtil.i(TAG,"onJsBeforeUnload "+url);
             /*    new AlertDialog.Builder(context).setTitle("页面即将跳转")
                         .setMessage(message)
                         .setPositiveButton("OK", (dialogInterface, i) -> result.confirm())
@@ -63,7 +64,7 @@ public class WebChromeClientImpl extends WebChromeClient {
 
     @Override
     public boolean onJsPrompt(WebView webView, String url, String message, String defaultValue, JsPromptResult result) {
-        Log.i(TAG,"onJsPrompt");
+        LogUtil.i(TAG,"onJsPrompt");
                 /*final EditText input = new EditText(context);
                 input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);*/
                /* new AlertDialog.Builder(context).setTitle("JS弹窗Override")
@@ -77,13 +78,13 @@ public class WebChromeClientImpl extends WebChromeClient {
 
     @Override
     public void onPermissionRequest(PermissionRequest request) {
-        Log.i(TAG,"onPermissionRequest "+request.getOrigin());
-            Log.i(TAG,request.getOrigin()+" "+ Arrays.toString(request.getResources()));
+        LogUtil.i(TAG,"onPermissionRequest "+request.getOrigin());
+            LogUtil.i(TAG,request.getOrigin()+" "+ Arrays.toString(request.getResources()));
             request.deny();
             //request.grant(request.getResources());
     }
     @Override
     public void onShowCustomView(View view, IX5WebChromeClient.CustomViewCallback callback) {
-        Log.i(TAG,"onShowCustomView ");
+        LogUtil.i(TAG,"onShowCustomView ");
     }
 }

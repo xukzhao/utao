@@ -55,6 +55,7 @@ import tv.utao.x5.service.UpdateService;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
 import tv.utao.x5.util.JsonUtil;
+import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.Util;
 import tv.utao.x5.utils.ToastUtils;
 
@@ -166,7 +167,7 @@ public class LiveActivity extends Activity {
             return super.dispatchKeyEvent(event);
         }
         int keyCode = event.getKeyCode();
-        Log.i("keyDown keyCode ", keyCode+" event" + event);
+        LogUtil.i("keyDown keyCode ", keyCode+" event" + event);
         boolean isMenuShow=isMenuShow();
         if(isMenuShow){
             if(keyCode==KeyEvent.KEYCODE_BACK||keyCode==KeyEvent.KEYCODE_MENU||keyCode==KeyEvent.KEYCODE_TAB){
@@ -220,7 +221,7 @@ public class LiveActivity extends Activity {
     }
     private boolean ctrl(String code){
         String  js= "_menuCtrl."+code+"()";
-        Log.i(TAG,js);
+        LogUtil.i(TAG,js);
         lWebView.evaluateJavascript(js,null);
         return true;
     }
@@ -263,7 +264,7 @@ public class LiveActivity extends Activity {
         // 在WebView的初始化代码中启用缓存
         IX5WebSettingsExtension webSettingsExtension=  lWebView.getSettingsExtension();
         if(null!=webSettingsExtension){
-            Log.i(TAG,"isX5 webSettingsExtension");
+            LogUtil.i(TAG,"isX5 webSettingsExtension");
             //webSettingsExtension.setDayOrNight(false);
             //webSettingsExtension.setFitScreen(true);//会乱适配 // webSettingsExtension.setSmartFullScreenEnabled(true);
             webSettingsExtension.setAcceptCookie(true);
@@ -303,7 +304,7 @@ public class LiveActivity extends Activity {
                     url=  URLDecoder.decode(url, "UTF-8");
                 } catch (UnsupportedEncodingException e) {
                 }
-                Log.i(TAG,"onProgressChangedX"+url);
+                LogUtil.i(TAG,"onProgressChangedX"+url);
                 Vod vod = UpdateService.getByUrl(url);
                 if(null!=vod){
                     currentLive=vod;
@@ -313,23 +314,23 @@ public class LiveActivity extends Activity {
                     HistoryDaoX.updateChannel(thisContext,url);
                     handler.sendMessageDelayed (handler.obtainMessage(2, "noText"),1000);
                 }
-                Log.i("WebChromeClient", "onProgressChanged, newProgress:" + newProgress + ", view:" + view);
+                LogUtil.i("WebChromeClient", "onProgressChanged, newProgress:" + newProgress + ", view:" + view);
             }
             @Override
             public void onShowCustomView(View view, IX5WebChromeClient.CustomViewCallback callback) {
-                Log.i("WebChromeClient","onShowCustomView");
+                LogUtil.i("WebChromeClient","onShowCustomView");
                 binding.fullscreen.addView(view);
                 binding.fullscreen.setVisibility(View.VISIBLE);
             }
             @Override
             public void onPermissionRequest(PermissionRequest request) {
-                Log.i("WebChromeClient","onPermissionRequest "+request.getOrigin());
-                Log.i("WebChromeClient",request.getOrigin()+" "+ Arrays.toString(request.getResources()));
+                LogUtil.i("WebChromeClient","onPermissionRequest "+request.getOrigin());
+                LogUtil.i("WebChromeClient",request.getOrigin()+" "+ Arrays.toString(request.getResources()));
                 request.deny();
             }
             @Override
             public void onHideCustomView() {
-                Log.i("WebChromeClient","onHideCustomView");
+                LogUtil.i("WebChromeClient","onHideCustomView");
                 binding.fullscreen.removeAllViews();
                 binding.fullscreen.setVisibility(View.GONE);
             }
@@ -343,12 +344,12 @@ public class LiveActivity extends Activity {
         // Android 调用 Js 方法1 中的返回值
         @JavascriptInterface
         public void toast(String message){
-            Log.i(TAG,"message "+message);
+            LogUtil.i(TAG,"message "+message);
             ToastUtils.show(MyApplication.getContext(),message, Toast.LENGTH_SHORT);
         }
         @JavascriptInterface
         public void message(String service,String data){
-            Log.i(TAG,"service "+service+" data "+data);
+            LogUtil.i(TAG,"service "+service+" data "+data);
             if("history.save".equals(service)){
                 //final AppDatabase db = AppDatabase.getInstance(this);
                 HistoryDaoX.save(thisContext, data, new StringCallback() {
@@ -395,7 +396,7 @@ public class LiveActivity extends Activity {
             if(!url.startsWith("http")){
                 return FileUtil.readExt("tv-web/"+url);
             }
-            Log.i(TAG,headerMap.toString()+"url "+url+" "+requestBody);
+            LogUtil.i(TAG,headerMap.toString()+"url "+url+" "+requestBody);
             return HttpUtil.postJson(url,headerMap,requestBody);
         }
         @JavascriptInterface
@@ -405,14 +406,14 @@ public class LiveActivity extends Activity {
             if(!url.startsWith("http")){
                 return FileUtil.readExt("tv-web/"+url);
             }
-            Log.i(TAG,headerMap.toString()+"url "+url);
+            LogUtil.i(TAG,headerMap.toString()+"url "+url);
             return HttpUtil.getJson(url,headerMap);
         }
         @JavascriptInterface
         public String getHtml(String url,String header){
             Map<String, String> headerMap= JsonUtil.fromJson(header,
                     new TypeToken<Map<String, String>>() {}.getType());
-            Log.i(TAG,headerMap.toString()+" getHtml "+url);
+            LogUtil.i(TAG,headerMap.toString()+" getHtml "+url);
             return HttpUtil.getJson(url,headerMap);
         }
 
@@ -429,14 +430,14 @@ public class LiveActivity extends Activity {
     protected void keyCodeAllByCode(String keyCode){
         Integer keyCodeNum=  keyCodeMap.get(keyCode);
         if(null==keyCodeNum){return;}
-        Log.i("onKeyEvent", "keyCodeStr "+keyCode);
+        LogUtil.i("onKeyEvent", "keyCodeStr "+keyCode);
         keyEventAll(keyCodeNum);
     }
     protected void keyEventAll(final int keyCode){
         new Thread() {
             public void run() {
                 try {
-                    Log.i("onKeyEvent", "onKeyEvent"+keyCode);
+                    LogUtil.i("onKeyEvent", "onKeyEvent"+keyCode);
                     inst.sendKeySync(new KeyEvent(KeyEvent.ACTION_DOWN, keyCode));
                     inst.sendKeySync(new KeyEvent(KeyEvent.ACTION_UP, keyCode));
                 } catch (Exception e) {
@@ -533,11 +534,11 @@ public class LiveActivity extends Activity {
                     // 在主线程中执行WebView操作
                     runOnUiThread(() -> {
                         try {
-                            Log.i(TAG, "Loading URL in WebView: " + channel.getUrl());
+                            LogUtil.i(TAG, "Loading URL in WebView: " + channel.getUrl());
                             lWebView.loadUrl(channel.getUrl());
-                            Log.i(TAG, "URL loaded successfully");
+                            LogUtil.i(TAG, "URL loaded successfully");
                         } catch (Exception e) {
-                            Log.e(TAG, "Error loading URL in WebView: " + e.getMessage());
+                            LogUtil.e(TAG, "Error loading URL in WebView: " + e.getMessage());
                             e.printStackTrace();
                         }
                     });
@@ -551,10 +552,10 @@ public class LiveActivity extends Activity {
                     // 隐藏菜单
                     hideMenu();
                 } else {
-                    Log.e(TAG, "Channel or URL is null");
+                    LogUtil.e(TAG, "Channel or URL is null");
                 }
             } catch (Exception e) {
-                Log.e(TAG, "Error handling channel click: " + e.getMessage());
+                LogUtil.e(TAG, "Error handling channel click: " + e.getMessage());
                 e.printStackTrace();
             }
         });
@@ -611,7 +612,7 @@ public class LiveActivity extends Activity {
                 // 暂停 JS 执行
                 lWebView.getSettings().setJavaScriptEnabled(false);
             } catch (Exception e) {
-                Log.e(TAG, "Error pausing WebView", e);
+                LogUtil.e(TAG, "Error pausing WebView", e);
             }
         }
         super.onPause();
@@ -627,7 +628,7 @@ public class LiveActivity extends Activity {
                 // 恢复 JS 执行
                 lWebView.getSettings().setJavaScriptEnabled(true);
             } catch (Exception e) {
-                Log.e(TAG, "Error resuming WebView", e);
+                LogUtil.e(TAG, "Error resuming WebView", e);
             }
         }
     }
@@ -669,7 +670,7 @@ public class LiveActivity extends Activity {
                 // 设置为 null
                 lWebView = null;
             } catch (Exception e) {
-                Log.e(TAG, "Error destroying WebView", e);
+                LogUtil.e(TAG, "Error destroying WebView", e);
             }
         }
     }
@@ -681,7 +682,7 @@ public class LiveActivity extends Activity {
  /*   @Override
     public void onDestroy() {
         if(lWebView!=null){
-            Log.i(TAG,"onDestroy");
+            LogUtil.i(TAG,"onDestroy");
             //lWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
             lWebView.clearHistory();
             lWebView.destroy();
@@ -699,7 +700,7 @@ public class LiveActivity extends Activity {
                 // 停止所有可能的后台处理
                 lWebView.stopLoading();
             } catch (Exception e) {
-                Log.e(TAG, "Error stopping WebView", e);
+                LogUtil.e(TAG, "Error stopping WebView", e);
             }
         }
     }

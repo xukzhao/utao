@@ -1,7 +1,6 @@
 package tv.utao.x5.dao;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.Date;
 import java.util.List;
@@ -10,6 +9,7 @@ import tv.utao.x5.call.StringCallback;
 import tv.utao.x5.domain.live.Vod;
 import tv.utao.x5.service.UpdateService;
 import tv.utao.x5.util.JsonUtil;
+import tv.utao.x5.util.LogUtil;
 
 public class HistoryDaoX {
     private static String TAG="HistoryDaoX";
@@ -31,7 +31,7 @@ public class HistoryDaoX {
                 }else{
                     url=historyListOrg.get(0).url;
                 }
-                Log.i(TAG,"loadUrl"+url);
+                LogUtil.i(TAG,"loadUrl"+url);
                 stringCallback.data(url);
         }).start();
     }
@@ -72,7 +72,7 @@ public class HistoryDaoX {
             historyDao.insertAll(historyNew);
             return ;
         }
-        Log.i(TAG,vod.getName()+vod.getUrl());
+        LogUtil.i(TAG,vod.getName()+vod.getUrl());
         historyDao.updateChannel(history.id,vod.getName(),vod.getUrl(),new Date().getTime());
 
     }
