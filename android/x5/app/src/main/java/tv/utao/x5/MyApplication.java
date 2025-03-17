@@ -48,6 +48,7 @@ public class MyApplication extends Application {
             System.setProperty("persist.sys.media.use-mediaDrm", "false");
         } catch (Exception e) {
             // 安全处理异常
+            LogUtil.e("use-mediaDrm:"+e.getMessage());
         }
         //startX5WebProcessPreinitService();
         //initPieWebView();

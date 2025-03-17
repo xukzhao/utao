@@ -164,12 +164,6 @@ public class WebViewClientImpl extends WebViewClient {
                 return resp;
             }
         }
-        if (url.contains("widevine") || url.contains("playready") ||
-                url.contains("clearkey") || url.contains("primetime")) {
-            // 返回空响应，阻止 DRM 相关请求
-            LogUtil.i(TAG,"DRM"+url);
-            return new WebResourceResponse("text/plain", "UTF-8", null);
-        }
         if(null!=accept&&accept.startsWith("image/")&&!imageLoad(url)){
             return new WebResourceResponse(null,
                     null, null);
