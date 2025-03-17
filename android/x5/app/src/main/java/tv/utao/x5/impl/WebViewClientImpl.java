@@ -2,7 +2,6 @@ package tv.utao.x5.impl;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
@@ -164,6 +163,12 @@ public class WebViewClientImpl extends WebViewClient {
                 resp.setResponseHeaders(headerMap);
                 return resp;
             }
+        }
+        if (url.contains("widevine") || url.contains("playready") ||
+                url.contains("clearkey") || url.contains("primetime")) {
+            // 返回空响应，阻止 DRM 相关请求
+            LogUtil.i(TAG,"DRM"+url);
+            return new WebResourceResponse("text/plain", "UTF-8", null);
         }
         if(null!=accept&&accept.startsWith("image/")&&!imageLoad(url)){
             return new WebResourceResponse(null,

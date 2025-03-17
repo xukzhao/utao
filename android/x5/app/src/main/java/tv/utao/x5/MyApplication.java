@@ -44,6 +44,11 @@ public class MyApplication extends Application {
         }
         CrashHandler.getInstance().init(this);
         CrashHandler.uploadExceptionToServer(this);
+        try {
+            System.setProperty("persist.sys.media.use-mediaDrm", "false");
+        } catch (Exception e) {
+            // 安全处理异常
+        }
         //startX5WebProcessPreinitService();
         //initPieWebView();
     }
