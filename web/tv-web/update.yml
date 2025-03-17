@@ -4,7 +4,7 @@ res:
   version: 32
   update: true
 apk:
-  version: 30
+  version: 31
   url: http://qn.vonchange.com/utao/release/utao-20250316.apk
   force: false
   desc: 修复部分闪退问题 UI优化

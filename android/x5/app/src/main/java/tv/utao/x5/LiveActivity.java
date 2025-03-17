@@ -19,6 +19,7 @@ import android.view.ViewParent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
@@ -110,7 +111,9 @@ public class LiveActivity extends Activity {
                     String messageContent = (String) msg.obj;
                     // 处理接收到的消息（例如，显示 Toast）
                     if(currentLive.getKey().equals(messageContent)){
-                        lWebView.loadUrl(currentLive.getUrl());
+                        if (lWebView != null) {
+                            lWebView.loadUrl(currentLive.getUrl());
+                        }
                         //记录到db
                     }
                     break;
@@ -494,7 +497,7 @@ public class LiveActivity extends Activity {
                 Button btn;
                 if (convertView == null) {
                     btn = new Button(getContext());
-                    btn.setLayoutParams(new ViewGroup.LayoutParams(
+                    btn.setLayoutParams(new AbsListView.LayoutParams(
                             ViewGroup.LayoutParams.MATCH_PARENT,
                             ViewGroup.LayoutParams.WRAP_CONTENT));
                     btn.setTextColor(Color.WHITE);
@@ -505,6 +508,12 @@ public class LiveActivity extends Activity {
                     btn.setFocusable(false);
                 } else {
                     btn = (Button) convertView;
+                    
+                    if (!(btn.getLayoutParams() instanceof AbsListView.LayoutParams)) {
+                        btn.setLayoutParams(new AbsListView.LayoutParams(
+                                ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT));
+                    }
                 }
                 
                 Vod channel = getItem(position);
