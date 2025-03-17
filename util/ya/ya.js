@@ -136,17 +136,18 @@ let ya={
         }
 }
 //D:\work\utao\utao\android\x5\app\src\main
-let toAppRes="D:/work/utao/utao/android/x5/app/src/main/assets";
+//let toAppRes="D:/work/utao/utao/android/x5/app/src/main/assets";
 ya.yamlToJson(basePath);
 ya.rootPath(basePath,toPath);
 //let tvWeb="tv-web";
- toPathBase="D:/work/web/gen";
+ toPathBase="D:/work/utao/utao/android/x5/app/src/main/assets";
+ //D:/work/utao/utao/android/x5/app/src/main/assets D:/work/web/gen
  toPath=toPathBase+"/tv-web";
 ya.rootPath(basePath,toPath);
 setTimeout(function (){
         let tvWeb="tv-web";
         let toPathBase="D:/work/web/gen";
-        let toAppRes="D:/work/utao/utao/android/x5/app/src/main/assets";
+        //let toAppRes="D:/work/utao/utao/android/x5/app/src/main/assets";
         function  zip(pathBase,folder){
                 // 第二步，创建可写流来写入数据
                 const output = fs.createWriteStream(pathBase + "/"+folder+".zip");// 将压缩包保存到当前项目的目录下，并且压缩包名为test.zip
@@ -158,10 +159,10 @@ setTimeout(function (){
 // 第五步，完成压缩
                 archive.finalize();
         }
-        zip(toPathBase,"tv-web");
-        setTimeout(function (){
+        //zip(toPathBase,"tv-web");
+      /*  setTimeout(function (){
                 fs.copyFileSync(toPathBase+"/"+tvWeb+".zip",toAppRes+"/"+tvWeb+".zip");
                 console.log("copy file");
-        },1000);
+        },1000);*/
 },2000);
 //fs.copyFileSync(toPathBase+"/"+tvWeb+".zip",toAppRes+"/"+tvWeb+".zip");
