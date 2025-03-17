@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -394,7 +393,7 @@ public class LiveActivity extends Activity {
             Map<String, String> headerMap= JsonUtil.fromJson(header,
                     new TypeToken<Map<String, String>>() {}.getType());
             if(!url.startsWith("http")){
-                return FileUtil.readExt("tv-web/"+url);
+                return FileUtil.readExt(MyApplication.getAppContext(),"tv-web/"+url);
             }
             LogUtil.i(TAG,headerMap.toString()+"url "+url+" "+requestBody);
             return HttpUtil.postJson(url,headerMap,requestBody);
@@ -404,7 +403,7 @@ public class LiveActivity extends Activity {
             Map<String, String> headerMap= JsonUtil.fromJson(header,
                     new TypeToken<Map<String, String>>() {}.getType());
             if(!url.startsWith("http")){
-                return FileUtil.readExt("tv-web/"+url);
+                return FileUtil.readExt(MyApplication.getAppContext(),"tv-web/"+url);
             }
             LogUtil.i(TAG,headerMap.toString()+"url "+url);
             return HttpUtil.getJson(url,headerMap);

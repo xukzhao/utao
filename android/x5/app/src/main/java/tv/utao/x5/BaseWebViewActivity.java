@@ -665,7 +665,7 @@ public class BaseWebViewActivity extends Activity {
             }
             if("querySysInfo".equals(service)){
                ConfigDTO configDTO= ConfigApi.getConfig();
-                String oldJson= FileUtil.readExt("tv-web/update.json");
+                String oldJson= FileUtil.readExt(MyApplication.getAppContext(),"tv-web/update.json");
                 ConfigDTO oldConfig = null;
                 if(!oldJson.trim().isEmpty()){
                      oldConfig = JsonUtil.fromJson(oldJson,ConfigDTO.class);
@@ -701,7 +701,7 @@ public class BaseWebViewActivity extends Activity {
             Map<String, String> headerMap= JsonUtil.fromJson(header,
                     new TypeToken<Map<String, String>>() {}.getType());
             if(!url.startsWith("http")){
-                return FileUtil.readExt("tv-web/"+url);
+                return FileUtil.readExt(MyApplication.getAppContext(),"tv-web/"+url);
             }
             LogUtil.i(TAG,headerMap.toString()+"url "+url+" "+requestBody);
             return HttpUtil.postJson(url,headerMap,requestBody);
@@ -711,7 +711,7 @@ public class BaseWebViewActivity extends Activity {
             Map<String, String> headerMap= JsonUtil.fromJson(header,
                     new TypeToken<Map<String, String>>() {}.getType());
             if(!url.startsWith("http")){
-                return FileUtil.readExt("tv-web/"+url);
+                return FileUtil.readExt(MyApplication.getAppContext(),"tv-web/"+url);
             }
             LogUtil.i(TAG,headerMap.toString()+"url "+url);
             return HttpUtil.getJson(url,headerMap);

@@ -53,6 +53,9 @@ public class MyApplication extends Application {
         //startX5WebProcessPreinitService();
         //initPieWebView();
     }
+    public static Context getAppContext() {
+        return context;
+    }
     private static final String PROCESS = "tv.utao.x5";
     private void initPieWebView() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

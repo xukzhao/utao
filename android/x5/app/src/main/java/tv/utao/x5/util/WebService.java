@@ -1,7 +1,5 @@
 package tv.utao.x5.util;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -12,6 +10,7 @@ import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
 import tv.utao.x5.BaseWebViewActivity;
+import tv.utao.x5.MyApplication;
 
 public class WebService extends NanoHTTPD {
     protected String TAG = "WebService";
@@ -45,7 +44,7 @@ public class WebService extends NanoHTTPD {
         }
         String baseFolder = "tv-web/";
         if (uri.endsWith(".woff2")) {
-            return newChunkedResponse(Response.Status.OK, "font/woff2", FileUtil.readExtIn(baseFolder+uri));
+            return newChunkedResponse(Response.Status.OK, "font/woff2", FileUtil.readExtIn(MyApplication.getAppContext(),baseFolder+uri));
         }
         if(uri.endsWith("ctrl")){
             String url= stringListMap.get("url").get(0);
@@ -143,7 +142,7 @@ public class WebService extends NanoHTTPD {
 
 
         String baseFolder = "tv-web/";
-        return FileUtil.readExt(baseFolder+pathname);
+        return FileUtil.readExt(MyApplication.getAppContext(),baseFolder+pathname);
     }
  
 }

@@ -2,7 +2,6 @@ package tv.utao.x5.util;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,7 +11,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -75,29 +73,33 @@ public class FileUtil {
         }
         return strResponse;
     }
-   /* public static InputStream readAssertIn(Context context, String strAssertFileName) {
+    public static InputStream readAssertIn(Context context, String strAssertFileName) {
         AssetManager assetManager = context.getAssets();
         try {
            return assetManager.open(strAssertFileName);
         } catch (IOException e) {
-            e.printStackTrace();
+            LogUtil.e(TAG, e.getMessage());
         }
         return null;
-    }*/
-   public static InputStream readExtIn(String extFileName) {
+    }
+   public static InputStream readExtIn(Context context,String extFileName) {
        String baseFolder= UpdateService.baseFolder+"/";
        String fullPath=baseFolder+extFileName;
        LogUtil.i(TAG,fullPath);
+       if(!new File(fullPath).exists()){
+           LogUtil.i(TAG,"assert:: "+fullPath);
+           return readAssertIn(context,extFileName);
+       }
        try {
            return new FileInputStream(fullPath);
        } catch (FileNotFoundException e) {
-           LogUtil.e(TAG, Objects.requireNonNull(e.getMessage()));
+           LogUtil.e(TAG, e.getMessage());
            //throw new RuntimeException(e);
        }
        return null;
    }
-    public static String readExt(String extFileName) {
-        return getStringFromInputStream(readExtIn(extFileName));
+    public static String readExt(Context context,String extFileName) {
+        return getStringFromInputStream(readExtIn(context,extFileName));
     }
     public static void  del(String filePath) {
        File file = new File(filePath);

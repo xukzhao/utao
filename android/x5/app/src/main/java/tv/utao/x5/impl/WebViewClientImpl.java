@@ -15,6 +15,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
+import tv.utao.x5.MyApplication;
 import tv.utao.x5.util.AppVersionUtils;
 import tv.utao.x5.util.ConstantMy;
 import tv.utao.x5.util.FileUtil;
@@ -82,12 +83,12 @@ public class WebViewClientImpl extends WebViewClient {
         if(url.contains(baseFolder)){
             return null;
         }
-        String fileContent = FileUtil.readExt(baseFolder +"js/end.js");
+        String fileContent = FileUtil.readExt(MyApplication.getAppContext(),baseFolder +"js/end.js");
         String detailFile =  "js/load_detail_video.js";
         if(type==1){
             detailFile="js/load_detail_tv.js";
         }
-        return fileContent +FileUtil.readExt(  baseFolder + detailFile);
+        return fileContent +FileUtil.readExt(  MyApplication.getAppContext(),baseFolder + detailFile);
     }
     @Override
     public void onPageFinished(WebView view, String url) {
@@ -182,7 +183,7 @@ public class WebViewClientImpl extends WebViewClient {
                 String fileName = url.substring(index,url.indexOf("?"));
                 LogUtil.i(TAG, "fileName image " + fileName);
                 return new WebResourceResponse("image/jpeg",
-                        ConstantMy.UTF8, FileUtil.readExtIn(fileName));
+                        ConstantMy.UTF8, FileUtil.readExtIn(MyApplication.getAppContext(),fileName));
             }
         }
         int indexWen=url.indexOf("?");
@@ -199,7 +200,7 @@ public class WebViewClientImpl extends WebViewClient {
                             ConstantMy.UTF8, new ByteArrayInputStream(baseJs(fileName).getBytes(Charset.defaultCharset())));
                 }
                 return new WebResourceResponse("text/javascript",
-                        ConstantMy.UTF8, FileUtil.readExtIn( fileName));
+                        ConstantMy.UTF8, FileUtil.readExtIn( MyApplication.getAppContext(),fileName));
             }
         }
         if(url.endsWith("css")){
@@ -207,14 +208,14 @@ public class WebViewClientImpl extends WebViewClient {
                 String fileName = url.substring(index);
                 LogUtil.i(TAG, "fileName css " + fileName);
                 return new WebResourceResponse("text/css",
-                        ConstantMy.UTF8, FileUtil.readExtIn(fileName));
+                        ConstantMy.UTF8, FileUtil.readExtIn(MyApplication.getAppContext(),fileName));
             }
         }
         if(url.endsWith(".html")){
             if(index>0){
                 String fileName=url.substring(index);
                 LogUtil.i(TAG,"fileName html "+fileName);
-                String html = FileUtil.readExt(fileName);
+                String html = FileUtil.readExt(MyApplication.getAppContext(),fileName);
                 html= html.replace("base.js","basex.js");
                 return new WebResourceResponse("text/html",
                         ConstantMy.UTF8, new ByteArrayInputStream(html.getBytes(Charset.defaultCharset())));
@@ -225,7 +226,7 @@ public class WebViewClientImpl extends WebViewClient {
                 String fileName = url.substring(index);
                 LogUtil.i(TAG, "fileName woff2 " + fileName);
                 return new WebResourceResponse("font/woff2",
-                        ConstantMy.UTF8, FileUtil.readExtIn(fileName));
+                        ConstantMy.UTF8, FileUtil.readExtIn(MyApplication.getAppContext(),fileName));
             }
         }
 
@@ -237,7 +238,7 @@ public class WebViewClientImpl extends WebViewClient {
 
 
     private String baseJs(String fileName){
-       String baseStr= FileUtil.readExt(fileName);
+       String baseStr= FileUtil.readExt(MyApplication.getAppContext(),fileName);
         Map<String, Object> data = new HashMap<>();
         data.put("version", AppVersionUtils.getVersionCode());
        return TplUtil.tpl(baseStr,data);

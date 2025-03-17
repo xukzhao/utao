@@ -1,11 +1,9 @@
 package tv.utao.x5.service;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import tv.utao.x5.MyApplication;
 import tv.utao.x5.api.ConfigApi;
 import tv.utao.x5.call.DownloadCallback;
 import tv.utao.x5.domain.ConfigDTO;
@@ -45,8 +44,8 @@ public class UpdateService {
         LogUtil.i(TAG,"isDev "+isDev);
         baseFolder= context.getFilesDir().getPath();
         String toZipFilePath=baseFolder+"/"+tvWebZip+".zip";
-        File toZipFile =new File(toZipFilePath);
-        String html= FileUtil.readExt("tv-web/index.html").trim();
+       // File toZipFile =new File(toZipFilePath);
+    /*    String html= FileUtil.readExt(MyApplication.getAppContext(),"tv-web/index.html").trim();
         if(!toZipFile.exists()||html.isEmpty()){
             if(html.isEmpty()){
                 LogUtil.i(TAG,"html isEmpty");
@@ -56,22 +55,23 @@ public class UpdateService {
             FileUtil.unzipFile(toZipFilePath,baseFolder+"/tv-web",true);
         }else{
             //校验线上版本 不一致 更新
-            new Thread(()->{ checkOnlineVersion(toZipFilePath);}).start();
-        }
-        if(isDev){
+
+        }*/
+       // new Thread(()->{ checkOnlineVersion(toZipFilePath);}).start();
+      /*  if(isDev){
             //开发 每次都copy
             LogUtil.i(TAG,"isDev");
             FileUtil.copyFileFromAssert(context,
                     tvWebZip+".zip",toZipFilePath);
             FileUtil.unzipFile(toZipFilePath,baseFolder+"/tv-web",true);
-        }
+        }*/
     }
     protected static Map<String,Vod> indexVodMap = new HashMap<>();
     protected static Map<Integer,Integer> tagMaxMap = new HashMap<>();
     protected static Map<String,String> urlKeyMap= new HashMap<>();
     protected static List<Live> newLives= new ArrayList<>();
     public static  void initTvData(){
-        String json= FileUtil.readExt("tv-web/js/cctv/tv.json");
+        String json= FileUtil.readExt(MyApplication.getAppContext(),"tv-web/js/cctv/tv.json");
         if(json.trim().isEmpty()){
             return;
         }
@@ -152,7 +152,7 @@ public class UpdateService {
              return;
          }
         Res resNew = newConfig.getRes();
-         String oldJson= FileUtil.readExt("tv-web/update.json");
+         String oldJson= FileUtil.readExt(MyApplication.getAppContext(),"tv-web/update.json");
         LogUtil.i(TAG,"checkOnlineVersion old "+oldJson);
         if(oldJson.trim().isEmpty()){
             return;
