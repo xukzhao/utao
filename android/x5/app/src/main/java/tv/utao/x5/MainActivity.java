@@ -24,9 +24,11 @@ public class MainActivity extends BaseWebViewActivity {
     }
 
     private boolean ctrl(String code){
-        String  js= "_menuCtrl."+code+"()";
-        LogUtil.i(TAG,js);
-        mWebView.evaluateJavascript(js,null);
+        if (mWebView != null) {
+            String  js= "_menuCtrl."+code+"()";
+            LogUtil.i(TAG,js);
+            mWebView.evaluateJavascript(js,null);
+        }
         return true;
     }
     @Override
