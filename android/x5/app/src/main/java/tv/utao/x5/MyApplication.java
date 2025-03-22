@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
@@ -37,6 +38,7 @@ public class MyApplication extends Application {
         super.onCreate();
         LogUtil.i(TAG, "onViewInitBegin: ");
         context = getApplicationContext();
+        initX5();
         androidId = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         if(null==androidId){
             LogUtil.i(TAG, "androidId: getUUID");
@@ -52,6 +54,37 @@ public class MyApplication extends Application {
         }
         //startX5WebProcessPreinitService();
         //initPieWebView();
+    }
+    private void  initX5(){
+        // 先初始化设置，再初始化环境
+        try {
+            // 设置参数
+            HashMap<String, Object> map = new HashMap<>();
+            map.put(TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER, true);
+            map.put(TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE, true);
+            QbSdk.initTbsSettings(map);
+
+            // 设置不依赖 WiFi 下载
+            QbSdk.setDownloadWithoutWifi(true);
+
+            // 禁止使用系统 WebView
+            QbSdk.unForceSysWebView();
+
+            // 初始化 X5 环境
+            QbSdk.initX5Environment(getApplicationContext(), new QbSdk.PreInitCallback() {
+                @Override
+                public void onCoreInitFinished() {
+                    Log.d("App", "X5 Core 初始化完成");
+                }
+
+                @Override
+                public void onViewInitFinished(boolean success) {
+                    Log.d("App", "X5 内核加载 " + (success ? "成功" : "失败"));
+                }
+            });
+        } catch (Exception e) {
+            Log.e("App", "X5 初始化失败", e);
+        }
     }
     public static Context getAppContext() {
         return context;
