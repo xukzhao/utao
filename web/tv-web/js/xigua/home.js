@@ -49,12 +49,14 @@ let _data={
             "offset":offset,"limit":18},
             function(text){
                 channelItem.loading=false;
+                console.log(text);
                 let data = JSON.parse(text);
                 channelItem.pageNum++;
                 data.data.albumList.forEach(item => {
                     let imageUrl=_tvFunc.image(_data.getImage(item.coverList));
                     let remark = _data.remark(item);
-                    channelItem.vods.push({id:item.albumId,name:item.title,pic:imageUrl,url:item.shareUrl,remark:remark,site:"xigua"});
+                    let url="https://www.ixigua.com/"+item.albumId;
+                    channelItem.vods.push({id:item.albumId,name:item.title,pic:imageUrl,url:url,remark:remark,site:"xigua"});
                 });
             },function () {
                 channelItem.loading=false;

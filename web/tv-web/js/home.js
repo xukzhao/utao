@@ -41,6 +41,7 @@ const Filter = {
                 currentChannel:null,
                 focusId:"tv",
                 filters:[],
+                desc:null,
                 initData(){
                     _data.initData(this);
                     if(this.channels.length>0){
