@@ -1,4 +1,4 @@
-
+LA.init({id:"3Kwwp7VWLvVgtOND",ck:"3Kwwp7VWLvVgtOND"});
 new FOCUS({
     event: {
         keyOkEvent: function () {
@@ -265,3 +265,4 @@ let _data={
 $$(function() {
     _html.init();
 });
+

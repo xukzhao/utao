@@ -15,15 +15,15 @@ const  _ctrlx={
     fullscreen() {
         // 全屏
         //弹幕
-
         _tvFunc.check(function (){
             if($$("#barrage_off").length > 0&&$$("#barrage_off").hasClass("dn")){
-                $$("#barrage_switch").click()
+                console.log("弹幕关");
+                $$("#barrage_switch").click();
             }
             return  $$("#barrage_off").length > 0&&!$$("#barrage_off").hasClass("dn");
         },function (){
 
-        });
+        },2000);
     /*    setInterval(function (){
             if($$("#barrage_off").hasClass("dn")){
                 $$("#barrage_switch").click();
