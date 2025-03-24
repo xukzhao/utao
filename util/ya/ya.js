@@ -43,7 +43,7 @@ let ya={
         });
     },
     notInPath(folder){
-        let folders= [".git",".idea","doc","test","back","web-ext-artifacts","node_modules"];
+        let folders= [".git",".idea","img","doc","test","back","web-ext-artifacts","node_modules"];
         return folders.indexOf(folder) !== -1;
     },
     writeFile(src,to){

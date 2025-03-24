@@ -164,7 +164,9 @@ public class UpdateService {
              LogUtil.i(TAG,"版本更新到 "+resNew.getVersion()+" toZipFilePath"+toZipFilePath);
             // FileUtil.del(toZipFilePath);
              //下载zip 到
-             HttpUtil.download(resNew.getUrl(), baseFolder, "tv-web.zip", new DownloadCallback() {
+             String downloadUrl= resNew.getUrl();
+             //String downloadUrl ="http://qn.vonchange.com/utao/test/tv-web.zip";
+             HttpUtil.download(downloadUrl, baseFolder, "tv-web.zip", new DownloadCallback() {
                  @Override
                  public void downloaded() {
                      try {
