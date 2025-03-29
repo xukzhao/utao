@@ -161,11 +161,12 @@ public class UpdateService {
          ConfigDTO oldConfig = JsonUtil.fromJson(oldJson,ConfigDTO.class);
          Res resOld = oldConfig.getRes();
          if(null!=resOld&&resNew.getVersion()>resOld.getVersion()){//res版本更新
-             LogUtil.i(TAG,"版本更新到 "+resNew.getVersion()+" toZipFilePath"+toZipFilePath);
+
             // FileUtil.del(toZipFilePath);
              //下载zip 到
              String downloadUrl= resNew.getUrl();
              //String downloadUrl ="http://qn.vonchange.com/utao/test/tv-web.zip";
+             LogUtil.i(TAG,"版本更新到 "+resNew.getVersion()+" toZipFilePath"+toZipFilePath+" download:"+downloadUrl);
              HttpUtil.download(downloadUrl, baseFolder, "tv-web.zip", new DownloadCallback() {
                  @Override
                  public void downloaded() {
