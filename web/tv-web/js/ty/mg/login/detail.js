@@ -3,7 +3,7 @@
         loginHtml(html) {
             return `
             <div style="font-size:2vw;line-height:3vw; color: black;text-align: center;padding:1vh 1vw">该平台需要登录才可观看视频<br/>
-            请打开手机端微信扫一扫登录</div>
+            请打开手机端咪咕视频扫一扫登录</div>
             <div class="tv-header tv-flex-around">
                <div class="tv-btn tv-focus"  id="tv-reload" onclick="window.location.reload();">刷新</div>
             </div>

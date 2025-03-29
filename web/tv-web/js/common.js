@@ -89,6 +89,22 @@ var _tvFunc={
  `;
         this.loadCssCode(css);
     },
+    fullscreenWW(id){
+        var css=`
+   ${id}{
+        position: fixed !important;
+       z-index: 99990 !important;
+       width: 100vw !important;
+       height: 100vh !important;
+      top: 0 !important;
+      left: 0 !important;
+      right:0 !important;
+         background-color: rgb(0, 0, 0); 
+      bottom: 0 !important;
+    }
+ `;
+        this.loadCssCode(css);
+    },
     toggleFullScreen(elem) {
         if (!document.fullscreenElement) {
             if (elem.requestFullscreen) {

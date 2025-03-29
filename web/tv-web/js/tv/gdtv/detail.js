@@ -5,9 +5,12 @@
         console.log("video found")
         // document.getElementsByTagName("video")[0].classList.add("utv-video-full");
         _layer.open(`<div></div>`, 9980, null, "tv-index", "tv-bg-black");
-        _tvFunc.fullscreen("video");
+       // _tvFunc.addKeyFullScreen("")
+        _tvFunc.fullscreen("#video");
+        //$$("video").css({width:"auto !important"});
+        //$$("video").css("margin-left","none !important");
         //$$("video").css("position","fixed !important");
-        $$("video").css({position:"fixed !important",margin:"auto",width:"auto !important"});
+       // $$("video").css({position:"fixed !important",margin:"auto",width:"auto !important"});
         $$(".head-nav").hide();
     });
     _tvFunc.volume100();

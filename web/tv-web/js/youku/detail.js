@@ -24,8 +24,9 @@ const  _ctrlx={
  
     const _login={
         init(){
+            //crmusercenter_avatar
             $$("[data-spm='usercenter']").find("img").trigger("click");
-          // $$(".crmusercenter_avatar img").click();
+           $$(".crmusercenter_avatar img").click();
            //return document.getElementById("alibaba-login-box")&&sessionStorage.getItem("youkuQr");
          /*  _tvFunc.check(function(){return _tvFunc.sessionStorageCheckTime("youkuQr");},function(){
                     let qrUrl =   sessionStorage.getItem("youkuQr");

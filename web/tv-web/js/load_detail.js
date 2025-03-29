@@ -28,7 +28,10 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://v.qq.com/x/cover/")){
             return "qq";
         }
-        if(url.startsWith("https://v.youku.com/v_show/")){
+      /*  if(url.startsWith("https://v.youku.com/v_show/")){
+            return "youku";
+        }*/
+        if(url.startsWith("https://v.youku.com/")){
             return "youku";
         }
         if(url.startsWith("https://www.iqiyi.com/")){
