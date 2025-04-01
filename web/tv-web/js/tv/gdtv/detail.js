@@ -1,12 +1,13 @@
 
 (function(){
-    _tvFunc.fixedW("body");
+    //_tvFunc.fixedW("body");
     _tvFunc.check(function (){return document.getElementsByTagName("video").length>0;},function (){
         console.log("video found")
-        // document.getElementsByTagName("video")[0].classList.add("utv-video-full");
+         document.getElementsByTagName("video")[0].classList.add("utv-video-full");
         _layer.open(`<div></div>`, 9980, null, "tv-index", "tv-bg-black");
-       // _tvFunc.addKeyFullScreen("")
-        _tvFunc.fullscreen("#video");
+       // _tvFunc.addKeyFullScreen(document.getElementById("video_html5_api"));
+       // _apiX.msgStr("key","F");
+        //_tvFunc.fullscreen("#video");
         //$$("video").css({width:"auto !important"});
         //$$("video").css("margin-left","none !important");
         //$$("video").css("position","fixed !important");
