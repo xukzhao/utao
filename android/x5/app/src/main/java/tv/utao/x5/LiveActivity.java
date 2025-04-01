@@ -93,6 +93,7 @@ public class LiveActivity extends Activity {
         //更新数据
         initWebView();
         lWebView.requestFocus();
+        binding.webviewWrapper.requestFocus();
         //数据库获取最新数据
         //String liveUrl= "https://tv.cctv.com/live/cctv13/";
         lWebView.loadUrl(currentLive.getUrl());
@@ -227,7 +228,12 @@ public class LiveActivity extends Activity {
     private void bind(){
         binding = DataBindingUtil.setContentView(this, R.layout.activity_live);
         //binding.setMenuTitleHandler(new BaseWebViewActivity.MenuTitleHandler());
-        lWebView=binding.webView;
+        ViewGroup container = binding.webviewWrapper;
+        lWebView = new com.tencent.smtt.sdk.WebView(this);
+        container.addView(lWebView, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+       // lWebView=binding.webView;
         //focusChange();
     }
     protected void initWebView() {

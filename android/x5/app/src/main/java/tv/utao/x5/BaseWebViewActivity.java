@@ -126,7 +126,12 @@ public class BaseWebViewActivity extends Activity {
     private void bind(){
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMenuTitleHandler(new MenuTitleHandler());
-        mWebView=binding.webView;
+        ViewGroup container = binding.webviewWrapper;
+        mWebView = new com.tencent.smtt.sdk.WebView(this);
+        container.addView(mWebView, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        //mWebView=binding.webView;
         focusChange();
     }
 
