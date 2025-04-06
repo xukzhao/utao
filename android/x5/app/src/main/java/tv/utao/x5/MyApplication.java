@@ -39,7 +39,7 @@ public class MyApplication extends Application {
         super.onCreate();
         LogUtil.i(TAG, "onViewInitBegin: ");
         context = getApplicationContext();
-        initX5();
+        //initX5();会自动初始化
         androidId = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         if(null==androidId){
             LogUtil.i(TAG, "androidId: getUUID");

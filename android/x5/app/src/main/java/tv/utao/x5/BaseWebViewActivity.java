@@ -108,6 +108,10 @@ public class BaseWebViewActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 或者如果使用旧的 ActionBar
+        if (getActionBar() != null) {
+            getActionBar().hide();
+        }
         requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
@@ -180,6 +184,8 @@ public class BaseWebViewActivity extends Activity {
            // webSettingsExtension.setHttpDnsDomains(Arrays.asList("dns.alidns.com"));
             //无图
            // webSettingsExtension.setPicModel(IX5WebSettingsExtension.PicModel_NoPic);
+        }else {
+            ToastUtils.show(this,"未开启x5浏览器内核 可能有兼容性问题 建议设置里开启",Toast.LENGTH_SHORT);
         }
         initWebViewClient();
         initWebChromeClient();

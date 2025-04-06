@@ -156,12 +156,21 @@ public class Util {
     }
     // wifi下获取本地网络IP地址（局域网地址）
     public static String getLocalIPAddress(Context context) {
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (wifiManager != null) {
-           // @SuppressLint("MissingPermission")
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());
-            return ipAddress;
+            String ipv4Address = intIP2StringIP(wifiInfo.getIpAddress());
+            
+            // 检查IPv4地址是否为0.0.0.0或空
+            if (ipv4Address == null || ipv4Address.equals("0.0.0.0") || ipv4Address.isEmpty()) {
+                // IPv4无效，尝试获取IPv6地址
+                String ipv6Address = getLocalIPv6Address();
+                LogUtil.i(TAG, "IPv4地址无效，使用IPv6地址: " + ipv6Address);
+                return "["+ipv6Address+"]";
+            }
+            
+            LogUtil.i(TAG, "使用IPv4地址: " + ipv4Address);
+            return ipv4Address;
         }
         return "";
     }
@@ -172,4 +181,73 @@ public class Util {
                 (ip >> 24 & 0xFF);
     }
 
+    // 添加获取IPv6地址的方法
+    public static String getLocalIPv6Address() {
+        try {
+            // 遍历所有网络接口
+            java.util.Enumeration<java.net.NetworkInterface> networkInterfaces = java.net.NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                java.net.NetworkInterface networkInterface = networkInterfaces.nextElement();
+                
+                // 排除回环接口、虚拟接口等
+                if (!networkInterface.isUp() || networkInterface.isLoopback() || networkInterface.isVirtual()) {
+                    continue;
+                }
+                
+                // 遍历接口的所有IP地址
+                java.util.Enumeration<java.net.InetAddress> addresses = networkInterface.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    java.net.InetAddress address = addresses.nextElement();
+                    
+                    // 检查是否是IPv6地址且不是回环地址
+                    if (!address.isLoopbackAddress() && address instanceof java.net.Inet6Address) {
+                        String ipv6 = address.getHostAddress();
+                        
+                        // 处理本地链接地址，移除%后面的内容
+                        int delimIndex = ipv6.indexOf('%');
+                        if (delimIndex >= 0) {
+                            ipv6 = ipv6.substring(0, delimIndex);
+                        }
+                        
+                        // 不使用临时地址和Privacy扩展生成的地址
+                        if (!ipv6.startsWith("fe80") && !ipv6.startsWith("fd")) {
+                            LogUtil.i(TAG, "找到IPv6地址: " + ipv6);
+                            return ipv6;
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LogUtil.e(TAG, "获取IPv6地址失败: " + e.getMessage());
+        }
+        
+        // 如果没有找到公网IPv6地址，返回本地链接地址（如果有）
+        try {
+            java.util.Enumeration<java.net.NetworkInterface> networkInterfaces = java.net.NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                java.net.NetworkInterface networkInterface = networkInterfaces.nextElement();
+                if (!networkInterface.isUp() || networkInterface.isLoopback() || networkInterface.isVirtual()) {
+                    continue;
+                }
+                
+                java.util.Enumeration<java.net.InetAddress> addresses = networkInterface.getInetAddresses();
+                while (addresses.hasMoreElements()) {
+                    java.net.InetAddress address = addresses.nextElement();
+                    if (!address.isLoopbackAddress() && address instanceof java.net.Inet6Address) {
+                        String ipv6 = address.getHostAddress();
+                        int delimIndex = ipv6.indexOf('%');
+                        if (delimIndex >= 0) {
+                            ipv6 = ipv6.substring(0, delimIndex);
+                        }
+                        LogUtil.i(TAG, "使用本地链接IPv6地址: " + ipv6);
+                        return ipv6;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            LogUtil.e(TAG, "获取本地链接IPv6地址失败: " + e.getMessage());
+        }
+        
+        return "::1"; // 如果没有找到任何IPv6地址，返回回环地址
+    }
 }
