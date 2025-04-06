@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import tv.utao.x5.service.CrashHandler;
 import tv.utao.x5.util.LogUtil;
+import tv.utao.x5.util.ValueUtil;
 
 public class MyApplication extends Application {
 
@@ -80,6 +81,7 @@ public class MyApplication extends Application {
                 @Override
                 public void onViewInitFinished(boolean success) {
                     Log.d("App", "X5 内核加载 " + (success ? "成功" : "失败"));
+                    ValueUtil.putString(getApplicationContext(), "x5", success ? "ok" : "0");
                 }
             });
         } catch (Exception e) {
