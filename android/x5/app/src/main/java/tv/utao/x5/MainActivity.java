@@ -93,19 +93,19 @@ public class MainActivity extends BaseWebViewActivity {
         String url = WebViewClientImpl.backUrl();
         LogUtil.i("keyBack","keyBack "+url);
         //NextPlusNavigationDelegate.backUrl();
-        if(null==url){
-            long currentTime = System.currentTimeMillis();
-            if (currentTime - mClickBackTime < 3000) {
-                //killAppProcess();
-                 finish();
-                //super.onBackPressed();
-                //System.exit(0);
-            } else {
-                ToastUtils.show(this, "再按一次返回键退出", Toast.LENGTH_SHORT);
-                mClickBackTime = currentTime;
-            }
-        }else{
+        if(null!=url&&null!=mWebView){
             mWebView.loadUrl(url);
+            return true;
+        }
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - mClickBackTime < 3000) {
+            //killAppProcess();
+            finish();
+            //super.onBackPressed();
+            //System.exit(0);
+        } else {
+            ToastUtils.show(this, "再按一次返回键退出", Toast.LENGTH_SHORT);
+            mClickBackTime = currentTime;
         }
         //detail-> home-> index
         return true;
