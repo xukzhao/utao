@@ -138,6 +138,9 @@ const _data={
                         return false;
                     }
                 });
+                if(null==xjItem){
+                    return;
+                }
                // let itemStr=dataListStrs[0];
                // let dataListStr = itemStr.substring(18,itemStr.length-13);
               //  console.log("html::"+dataListStr);
@@ -211,6 +214,17 @@ const _data={
               newIndex++;
             });
             hzCallback();
+            if($$(".kui-language-language-container").find(".control-item").length>1){
+                $$(".kui-language-language-container").find(".control-item").each(function(index,item){
+                    let hzName = $$(item).text();
+                    let id=newIndex.toString();
+                    $$(item).attr("id","xhz-"+id);
+                    let itemData={id:id,name:hzName,isVip:false,level:null};
+                    _data.vue.hzs.push(itemData);
+                    newIndex++;
+                });
+            }
+
     }
 };
 

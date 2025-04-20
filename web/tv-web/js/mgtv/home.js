@@ -52,7 +52,8 @@ let _data={
                     //console.log(item.image_url_normal)
                     let imageUrl=_tvFunc.image(item.img);
                     let remark=_data.remark(item);
-                    let url=`https://www.mgtv.com/b/${item.clipId}/${item.playPartId}.html?lastp=list_index`;
+                    ///${item.playPartId}.html?lastp=list_index
+                    let url=`https://www.mgtv.com/b/${item.clipId}`;
                     channelItem.vods.push({id:item.clipId,name:item.title,pic:imageUrl,url:url,remark:remark,site:"mgtv"});
                 });
             },function () {

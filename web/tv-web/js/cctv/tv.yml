@@ -201,6 +201,32 @@ data:
         url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=3
       - name: 潍坊科教文旅
         url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=4
+      - name: 青岛李沧
+        url: https://iapp.licangmedia.cn/share/dHZsLTE3My0x.html
+      - name: 青岛崂山
+        url: https://iapp.laoshanrongmei.cn/share/dHZsLTI5NS0x.html
+      - name: 城阳综合
+        url: https://iapp.hichengyang.cn/share/dHZsLTQwMy01.html
+      - name: 胶州综合
+        url: https://iapp.yunshangjiaozhou.cn/share/dHZsLTMwNS0x.html
+      - name: 胶州生活
+        url: https://iapp.yunshangjiaozhou.cn/share/dHZsLTMwNS0z.html
+      - name: 黄岛综合
+        url: https://iapp.qwmedia.cn/share/dHZsLTIyNy0x.html
+      - name: 黄岛生活
+        url: https://iapp.qwmedia.cn/share/dHZsLTIyNy0z.html
+      - name: 即墨综合
+        url: https://iapp.jimorongmei.com/share/dHZsLTIyMS0y.html
+      - name: 即墨生活服务
+        url: https://iapp.jimorongmei.com/share/dHZsLTIyMS0z.html
+      - name: 莱西综合
+        url: https://iapp.laixirongmei.cn/share/dHZsLTI1My0x.html
+      - name: 莱西生活
+        url: https://iapp.laixirongmei.cn/share/dHZsLTI1My0z.html
+      - name: 平度新闻综合
+        url: https://iapp.aipingduapp.com/share/dHZsLTQ1LTQ.html
+      - name: 平度生活服务
+        url: https://iapp.aipingduapp.com/share/dHZsLTQ1LTU.html
   - tag: cztv
     name: 浙江
     vods:
