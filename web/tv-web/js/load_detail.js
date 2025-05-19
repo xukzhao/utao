@@ -28,7 +28,10 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://v.qq.com/x/cover/")){
             return "qq";
         }
-        if(url.startsWith("https://v.youku.com/v_show/")){
+      /*  if(url.startsWith("https://v.youku.com/v_show/")){
+            return "youku";
+        }*/
+        if(url.startsWith("https://v.youku.com/")){
             return "youku";
         }
         if(url.startsWith("https://www.iqiyi.com/")){
@@ -74,9 +77,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.jlntv.cn/")){
             return "tv/jltv"
         }
-        if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
+    /*    if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
             return "tv/gdtv"
-        }
+        }*/
         if(url.startsWith("https://tv.hoolo.tv")){
             return "tv/hztv"
         }

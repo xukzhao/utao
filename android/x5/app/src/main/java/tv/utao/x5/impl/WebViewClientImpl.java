@@ -274,7 +274,8 @@ public class WebViewClientImpl extends WebViewClient {
             Util.evalOnUi(mWebView, code);
             return true;
         }
-        if(url.contains("ssl.ptlogin2.qq.com/ptqrshow")){
+        //ssl.ptlogin2.qq.com/ptqrshow
+        if(url.contains("ptlogin2.qq.com/ssl/ptqrshow")){
             String code=Util.loginQr(url,"手机端qq");
             LogUtil.i(TAG, "imageLoad: "+code);
             Util.evalOnUi(mWebView, code);

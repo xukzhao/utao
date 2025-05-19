@@ -68,6 +68,7 @@ const  _ctrlx={
             console.log("isLogin:: "+loginNum)
             if(loginNum===0){
                 console.log("login not");
+                //_app.init();
                 _login.init();
             }else{
                  _app.init();
@@ -107,11 +108,16 @@ const _data={
         this.vue.isVip=isVip;
 
     },
+    totalPage:1,
     xjList(){
+        _data.xjListPage(1);
+    },
+
+    xjListPage(pageNo){
        let nowId =mgtvPlayer.vid;
        let vodId= mgtvPlayer.config.cid;
        //请求手机端html 获取数据
-       let requestUrl=`https://pcweb.api.mgtv.com/episode/list?video_id=${nowId}&page=0&size=50&platform=4&src=mgtv`;
+       let requestUrl=`https://pcweb.api.mgtv.com/episode/list?video_id=${nowId}&page=${pageNo}&size=50&platform=4&src=mgtv`;
         console.log("requestUrl::"+requestUrl);
         _apiX.getJson(requestUrl,   { "User-Agent": _apiX.userAgent(false), "tv-ref": "https://www.mgtv.com/" },function(text){
          console.log("text::"+text);   
@@ -148,6 +154,10 @@ const _data={
                 }
                 _data.vue.xjs.push(itemData);
             });
+            console.log("{{{{{}}}}}",data,data.total_page)
+            if(data.data.current_page!=data.data.total_page){
+                _data.xjListPage(pageNo+1);
+            }
     
        });
     },

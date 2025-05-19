@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import tv.utao.x5.service.CrashHandler;
 import tv.utao.x5.util.LogUtil;
+import tv.utao.x5.util.ValueUtil;
 
 public class MyApplication extends Application {
 
@@ -37,8 +38,9 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         LogUtil.i(TAG, "onViewInitBegin: ");
+        allErrorCatch();
         context = getApplicationContext();
-        initX5();
+        //initX5();会自动初始化
         androidId = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
         if(null==androidId){
             LogUtil.i(TAG, "androidId: getUUID");
@@ -54,6 +56,42 @@ public class MyApplication extends Application {
         }
         //startX5WebProcessPreinitService();
         //initPieWebView();
+    }
+
+    private void allErrorCatch(){
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable throwable) {
+                // 检查是否为 SurfaceTexture 相关异常
+                if (throwable != null && throwable.getMessage() != null &&
+                        (throwable instanceof NullPointerException) &&
+                        (throwable.getStackTrace() != null && throwable.getStackTrace().length > 0 &&
+                                containsSurfaceTextureInStackTrace(throwable.getStackTrace()))) {
+
+                    LogUtil.e("Application", "捕获到 SurfaceTexture 相关异常: " + throwable.getMessage());
+
+                    // 记录异常但不终止应用
+                    return;
+                }
+
+                // 其他异常，使用默认处理器
+                Thread.UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
+                if (defaultHandler != null) {
+                    defaultHandler.uncaughtException(thread, throwable);
+                }
+            }
+
+            // 检查堆栈跟踪是否包含 SurfaceTexture 相关内容
+            private boolean containsSurfaceTextureInStackTrace(StackTraceElement[] stackTrace) {
+                for (StackTraceElement element : stackTrace) {
+                    if (element.getClassName().contains("SurfaceTexture") ||
+                            element.getMethodName().contains("SurfaceTexture")) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
     }
     private void  initX5(){
         // 先初始化设置，再初始化环境
@@ -80,6 +118,7 @@ public class MyApplication extends Application {
                 @Override
                 public void onViewInitFinished(boolean success) {
                     Log.d("App", "X5 内核加载 " + (success ? "成功" : "失败"));
+                    ValueUtil.putString(getApplicationContext(), "x5", success ? "ok" : "0");
                 }
             });
         } catch (Exception e) {

@@ -93,11 +93,15 @@ public class LiveActivity extends Activity {
         //更新数据
         initWebView();
         lWebView.requestFocus();
+        binding.webviewWrapper.requestFocus();
         //数据库获取最新数据
         //String liveUrl= "https://tv.cctv.com/live/cctv13/";
         lWebView.loadUrl(currentLive.getUrl());
         ToastUtils.show(this,"已支持遥控器上下左右可快速切台",Toast.LENGTH_SHORT);
-
+        // 或者如果使用旧的 ActionBar
+        if (getActionBar() != null) {
+            getActionBar().hide();
+        }
     }
     private long lastTime = 0;
 
@@ -227,7 +231,12 @@ public class LiveActivity extends Activity {
     private void bind(){
         binding = DataBindingUtil.setContentView(this, R.layout.activity_live);
         //binding.setMenuTitleHandler(new BaseWebViewActivity.MenuTitleHandler());
-        lWebView=binding.webView;
+        ViewGroup container = binding.webviewWrapper;
+        lWebView = new com.tencent.smtt.sdk.WebView(this);
+        container.addView(lWebView, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+       // lWebView=binding.webView;
         //focusChange();
     }
     protected void initWebView() {

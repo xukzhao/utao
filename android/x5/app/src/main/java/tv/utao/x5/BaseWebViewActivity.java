@@ -112,6 +112,7 @@ public class BaseWebViewActivity extends Activity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+          // 2. 然后设置内容视图
         bind();
         thisContext=this;
         UpdateService.updateRes(thisContext);
@@ -120,13 +121,22 @@ public class BaseWebViewActivity extends Activity {
         //file:///android_asset/tv-web/index.html http://www.utao.tv/tv-web/index.html
         mWebView.loadUrl(mHomeUrl);
         ConfigApi.syncIsX5Ok(this);
+          // 或者如果使用旧的 ActionBar
+        if (getActionBar() != null) {
+            getActionBar().hide();
+        }
     }
 
 
     private void bind(){
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setMenuTitleHandler(new MenuTitleHandler());
-        mWebView=binding.webView;
+        ViewGroup container = binding.webviewWrapper;
+        mWebView = new com.tencent.smtt.sdk.WebView(this);
+        container.addView(mWebView, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        //mWebView=binding.webView;
         focusChange();
     }
 
@@ -162,19 +172,22 @@ public class BaseWebViewActivity extends Activity {
         webSetting.setCacheMode(WebSettings.LOAD_DEFAULT);
         webSetting.setJavaScriptCanOpenWindowsAutomatically(false);
         webSetting.setGeolocationEnabled(false);
-        // 在WebView的初始化代码中启用缓存
-        IX5WebSettingsExtension webSettingsExtension=  mWebView.getSettingsExtension();
-        if(null!=webSettingsExtension){
-            LogUtil.i(TAG,"isX5 webSettingsExtension");
-            //webSettingsExtension.setDayOrNight(false);
-            //webSettingsExtension.setFitScreen(true);//会乱适配 // webSettingsExtension.setSmartFullScreenEnabled(true);
+        // 检查X5内核状态并提示
+        IX5WebSettingsExtension webSettingsExtension = mWebView.getSettingsExtension();
+        if (null != webSettingsExtension) {
+            LogUtil.i(TAG, "isX5 webSettingsExtension");
             webSettingsExtension.setAcceptCookie(true);
             webSettingsExtension.setWebViewInBackground(true);
-            webSettingsExtension.setForcePinchScaleEnabled(false);//缩放
-            //webSettingsExtension.setUseQProxy(true);
-           // webSettingsExtension.setHttpDnsDomains(Arrays.asList("dns.alidns.com"));
-            //无图
-           // webSettingsExtension.setPicModel(IX5WebSettingsExtension.PicModel_NoPic);
+            webSettingsExtension.setForcePinchScaleEnabled(false); // 缩放
+        } else {
+            // 检查是否已经提示过
+            boolean hasShowedX5Tip = ValueUtil.getBoolean(getApplicationContext(), "has_showed_x5_tip", false);
+            if (!hasShowedX5Tip) {
+                // 只有第一次才提示
+                ToastUtils.show(this, "未开启x5浏览器内核，可能有兼容性问题，建议设置里开启", Toast.LENGTH_LONG);
+                // 标记为已提示
+                ValueUtil.putBoolean(getApplicationContext(), "has_showed_x5_tip", true);
+            }
         }
         initWebViewClient();
         initWebChromeClient();
@@ -573,8 +586,12 @@ public class BaseWebViewActivity extends Activity {
                 HistoryDaoX.save(thisContext, data, new StringCallback() {
                     @Override
                     public void data(String data) {
-                        runOnUiThread(()->{
-                            mWebView.loadUrl(data);
+                        runOnUiThread(() -> {
+                            if (mWebView != null) {
+                                mWebView.loadUrl(data);
+                            } else {
+                                Log.e(TAG, "WebView is null when trying to load URL");
+                            }
                         });
                     }
                 });

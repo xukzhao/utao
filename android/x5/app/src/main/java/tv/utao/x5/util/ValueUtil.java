@@ -74,10 +74,9 @@ public class ValueUtil {
     }
     /**存储boolean类型数据*/
     public static boolean putBoolean(Context context, String key, boolean value) {
-        SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_NAME, 0);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(key, value);
-        return editor.commit();
+        SharedPreferences sp = context.getSharedPreferences("app_config", Context.MODE_PRIVATE);
+        sp.edit().putBoolean(key, value).apply();
+        return true;
     }
     /**读取boolean类型数据*/
     public static boolean getBoolean(Context context, String key) {
@@ -85,8 +84,8 @@ public class ValueUtil {
     }
     /**读取boolean类型数据（带默认值的）*/
     public static boolean getBoolean(Context context, String key, boolean defaultValue) {
-        SharedPreferences preferences = context.getSharedPreferences(PREFERENCE_NAME, 0);
-        return preferences.getBoolean(key, defaultValue);
+        SharedPreferences sp = context.getSharedPreferences("app_config", Context.MODE_PRIVATE);
+        return sp.getBoolean(key, defaultValue);
     }
     /**清除数据*/
     public static boolean clearPreferences(Context context) {

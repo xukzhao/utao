@@ -31,6 +31,9 @@ public class WebService extends NanoHTTPD {
     public Response serve(IHTTPSession session) {
         Method method = session.getMethod();
         String uri = session.getUri();
+        if(uri.startsWith("/")){
+            uri= uri.substring(1);
+        }
         if(uri.endsWith(".ico")){
             return newFixedLengthResponse("404!!");
         }

@@ -42,7 +42,8 @@ let _data={
         channelItem.loading=true;
         let pageNum=channelItem.pageNum+1;
         let sort= this.genSort(channelItem.filter);
-        let requestUrl=`https://mesh.if.iqiyi.com/portal/lw/videolib/data?version=12.94.20247&channel_id=${channelItem.id}&page_id=${pageNum}&filter=%7B%22mode%22%3A%22${sort}%22%7D`;
+        //version=12.94.20247
+        let requestUrl=`https://mesh.if.iqiyi.com/portal/lw/videolib/data?uid=2031491668&dfp=a0084c0da76be643b0a05372146eea18b798c84cee1ed81771b4319b9851e353f2&channel_id=${channelItem.id}&page_id=${pageNum}&filter=%7B%22mode%22%3A%22${sort}%22%7D`;
         //_tvFunc.paramStr({p:channelItem.pageNum+1,fc:channelItem.name}); %7B%22mode%22%3A%2211%22%7D %7B%22mode%22%3A%224%22%7D
         _apiX.getJson(requestUrl,
             { "User-Agent": _apiX.userAgent(false), "tv-ref": "https://www.iqiyi.com/" },

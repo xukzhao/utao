@@ -49,6 +49,8 @@ function setupVideo(video) {
         }
 
     });
+    let viewport = document.getElementById("viewport");
+    viewport.content = "width=device-width, initial-scale=1";
   /*  _tvFunc.videoReady(function (video){
         //let elem= $$("video").prop("outerHTML");
         //$$("body").html(elem);

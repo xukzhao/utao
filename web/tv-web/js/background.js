@@ -128,7 +128,8 @@ const  _listener={
         portWeb.postMessage({service:"loginQr",data:{type:"微信",url:url}});
         return true;
     }
-    if(url.includes("ssl.ptlogin2.qq.com/ptqrshow")){
+    //xui.ptlogin2.qq.com/ssl/ptqrshow?
+    if(url.includes("ptlogin2.qq.com/ssl/ptqrshow")){
         portWeb.postMessage({service:"loginQr",data:{type:"手机端qq",url:url}});
         return true;
     }

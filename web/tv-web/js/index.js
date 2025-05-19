@@ -1,4 +1,3 @@
-LA.init({id:"3Kwwp7VWLvVgtOND",ck:"3Kwwp7VWLvVgtOND"});
 new FOCUS({
     event: {
         keyOkEvent: function () {
@@ -230,11 +229,12 @@ let _data={
         apps.push({id:0,url:"https://www.yangshipin.cn/tv/home?pid=600002475",name:"CCTV直播",pic:"img/cctv.jpg"});
         apps.push({id:0,url:"cctv.html",name:"央视片库",pic:"img/cctv-video.jpg"});
         apps.push({id:0,url:"bestv.html",name:"百视通",pic:"img/bestv.png"});
-        if(!isGecko){
+        apps.push({id:0,url:bili,name:"哔哩哔哩",pic:"img/bilibili.png"});
+     /*   if(!isGecko){
             apps.push({id:0,url:"xigua.html",name:"西瓜视频",pic:"img/xigua.png"});
         }else{
             apps.push({id:0,url:bili,name:"哔哩哔哩",pic:"img/bilibili.png"});
-        }
+        }*/
         let dou="douban.html";
         if(!isGecko){
             dou="https://movie.douban.com/tv-web/douban.html";
@@ -248,9 +248,9 @@ let _data={
         }
         apps.push({id:0,url:iqiyi,name:"爱奇艺",pic:"img/iqiyi.jpg"});
         apps.push({id:0,url:"qq.html",name:"腾讯视频",pic:"img/vqq.png"});
-        if(!isGecko){
+       /* if(!isGecko){
             apps.push({id:0,url:bili,name:"哔哩哔哩",pic:"img/bilibili.png"});
-        }
+        }*/
         //apps.push({id:0,url:"https://www.douyin.com/?recommend=1",name:"抖音推荐",pic:"img/dy2.jpg"});
         apps.push({id:0,url:"ty.html",name:"体育",pic:"img/utao.jpg"});
         apps.push({id:0,url:"letv.html",name:"乐视",pic:"img/letv.jpg"});
@@ -264,5 +264,8 @@ let _data={
 }
 $$(function() {
     _html.init();
+    if(LA){
+        LA.init({id:"3Kwwp7VWLvVgtOND",ck:"3Kwwp7VWLvVgtOND"});
+    }
 });
 
