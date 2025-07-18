@@ -72,6 +72,8 @@ data:
     vods:
       - name: 广东卫视
         url: https://www.gdtv.cn/tvChannelDetail/43
+      - name: 广东4K超高清
+        url: https://www.gdtv.cn/tvChannelDetail/110
       - name: 荔枝台
         url: https://www.gdtv.cn/tvChannelDetail/100
       - name: 广东珠江
@@ -87,8 +89,6 @@ data:
       - name: 大湾区卫视（海外版）
         url: https://www.gdtv.cn/tvChannelDetail/46
       - name: 广东影视
-        url: https://www.gdtv.cn/tvChannelDetail/53
-      - name: 广东4K超高清
         url: https://www.gdtv.cn/tvChannelDetail/53
       - name: 广东南方购物
         url: https://www.gdtv.cn/tvChannelDetail/42
@@ -342,6 +342,8 @@ data:
         url: https://live.kankanews.com/huikan?tag=都市频道
       - name: 深圳卫视
         url: https://www.sztv.com.cn/pindao/index.html?id=7867
+      - name: 深圳卫视4K
+        url: https://www.sztv.com.cn/pindao/index.html?id=24725
       - name: 深圳都市
         url: https://www.sztv.com.cn/pindao/index.html?id=7868
       - name: 深圳电视
@@ -501,8 +503,10 @@ data:
         url: http://m-jingzhou.cjyun.org/dszb
       - name: 咸宁新闻综合
         url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=91&page=canvas&live_type=1&utaot=1&utaoId=player-con
-      - name: 咸宁经济生活
-        url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=80&page=canvas&live_type=1&utaot=1&utaoId=player-con
+      - name: 恩施综合
+        url: https://web.guangdianyun.tv/tv/1812?uin=3179
+      - name: 恩施文旅
+        url: https://web.guangdianyun.tv/tv/1811?uin=3179
   - tag: hntv
     name: 湖南
     vods:
@@ -532,6 +536,10 @@ data:
         url: https://live.mgtv.com/?channelId=269
       - name: 长沙政法
         url: https://live.mgtv.com/?channelId=254
+      - name: 湘西文化旅游
+        url: https://web.guangdianyun.tv/tv/2582?uin=3815&aid=17hnxxz&pt=2&fxbs=1
+      - name: 湘西综合
+        url: https://web.guangdianyun.tv/tv/2581?uin=3815&aid=17hnxxz&pt=2&fxbs=1
 #  - tag: jxntv
 #    name: 江西
 #    vods:
