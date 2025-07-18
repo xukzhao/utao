@@ -6,9 +6,6 @@ if(typeof _tvload == "undefined"){
         return;
     }
     _tvload=true;
-    if(window.location.href.startsWith("https://www.bilibili.com/")){
-        return ;
-    }
     function loadDetailByUrl(url){
         if(url.startsWith("https://www.yangshipin.cn/tv/home")){
             return "cctv";

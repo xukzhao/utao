@@ -62,6 +62,7 @@ var _data={
                     return;
                 }
                 let data = JSON.parse(text);
+                console.log(data)
                 channelItem.pageNum++;
                 data.data.list.forEach(item => {
                   

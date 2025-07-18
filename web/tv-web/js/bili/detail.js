@@ -56,9 +56,9 @@ const  _ctrlx={
     $$(function(){
         //__BiliUser__.isLogin
         _tvFunc.check(function(){return __playinfo__;},function(){
-            let isLogin = __playinfo__.result.play_view_business_info.user_status.is_login;
+            let isLogin = __playinfo__.result.user_status.is_login;
             console.log("isLogin:: "+isLogin)
-            if(isLogin===0){
+            if(isLogin===false){
                 console.log("login not");
                 _login.init();
             }else{
@@ -106,7 +106,7 @@ const _data={
          $$(".bui-danmaku-switch-input").click();
        }
        $$(".bpx-player-row-dm-wrap").remove();
-       let isVip=__playinfo__.result.play_view_business_info.user_status.vip_info.real_vip;
+       let isVip=__playinfo__.result.user_status.vip_info.status==1;
         this.vue.isVip=isVip;
         console.log("isVip::: "+isVip);
         setInterval(function(){
@@ -115,8 +115,8 @@ const _data={
 
     },
     xjList(){
-       let nowId = __playinfo__.result.play_view_business_info.episode_info.ep_id;
-       let vodId= __playinfo__.result.play_view_business_info.season_info.season_id;
+       let nowId = __playinfo__.result.supplement.ogv_episode_info.episode_id;
+       let vodId= __playinfo__.result.supplement.ogv_season_info.season_id;
        //请求手机端html 获取数据
        let requestUrl=`https://api.bilibili.com/pgc/view/web/ep/list?ep_id=${nowId}`;
        _apiX.getJson(requestUrl,   { "User-Agent": _apiX.userAgent(false), "tv-ref": "https://www.bilibili.com/" },function(text){
