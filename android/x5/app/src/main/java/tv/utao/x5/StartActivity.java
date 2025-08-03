@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -132,7 +131,8 @@ public class StartActivity extends Activity {
         }
         boolean isOpenX5=openX5();
         LogUtil.i(TAG,"isOpenX5::::"+isOpenX5);
-        if(Util.isNotNeedX5()&&!isOpenX5){
+        //Util.isNotNeedX5()&&!isOpenX5
+        if(true){
             to();
             return;
         }

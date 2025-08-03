@@ -42,8 +42,9 @@ let _data={
         channelItem.loading=true;
         let pageNum=channelItem.pageNum+1;
         let sort= this.genSort(channelItem.filter);
-        //version=12.94.20247
-        let requestUrl=`https://mesh.if.iqiyi.com/portal/lw/videolib/data?uid=2031491668&dfp=a0084c0da76be643b0a05372146eea18b798c84cee1ed81771b4319b9851e353f2&channel_id=${channelItem.id}&page_id=${pageNum}&filter=%7B%22mode%22%3A%22${sort}%22%7D`;
+        //version=12.94.20247 uid=2031491668 &dfp=a0084c0da76be643b0a05372146eea18b798c84cee1ed81771b4319b9851e353f2
+        let requestUrl=`https://pub.m.iqiyi.com/h5/main/recVideos/lib/?page_id=${pageNum}&mode=${sort}&channel_id=${channelItem.id}&post=list&from=mobile_videolib&is_unified_interface=1&version=1.0.0&play_platform=H5_QIYI`;
+            //`https://mesh.if.iqiyi.com/portal/lw/videolib/data?uid=&device_id=6d737a6d3077a5ffff16e45e6c970467&channel_id=${channelItem.id}&page_id=${pageNum}&filter=%7B%22mode%22%3A%22${sort}%22%7D`;
         //_tvFunc.paramStr({p:channelItem.pageNum+1,fc:channelItem.name}); %7B%22mode%22%3A%2211%22%7D %7B%22mode%22%3A%224%22%7D
         _apiX.getJson(requestUrl,
             { "User-Agent": _apiX.userAgent(false), "tv-ref": "https://www.iqiyi.com/" },
@@ -52,13 +53,18 @@ let _data={
                 channelItem.loading=false;
                 let data = JSON.parse(text);
                 channelItem.pageNum++;
-                data.data.forEach(item => {
-                    if(!item.image_url_normal){
+                data.data.videos.forEach(item => {
+                  /*  if(!item.image_url_normal){
                         return true;
-                    }
-                    let imageUrl=_tvFunc.image(item.image_url_normal);
+                    }*/
+                    let imageUrl=_tvFunc.image(_tvFunc.link(item.imageUrl));
                     let remark=_data.remark(item);
-                    channelItem.vods.push({id:item.album_id,name:item.title,pic:imageUrl,url:item.page_url,remark:remark,"site":"iqiyi.html"});
+                    let title=item.albumName;
+                    if(!title&&""===title){
+                        title=item.shortTitle;
+                    }
+                    channelItem.vods.push({id:item.albumId,name:title,pic:imageUrl,
+                        url:_tvFunc.link(item.pageUrl.replace("m.iqiyi.com","www.iqiyi.com")),remark:remark,"site":"iqiyi.html"});
                 });
             },function () {
                 channelItem.loading=false;
@@ -66,7 +72,7 @@ let _data={
         )
     },
     remark(item){
-        let remark=" "+item.dq_updatestatus.replace("更新至","今");
+        let remark=" "+item.lowerRightCorner.replace("更新至","今");
         return remark.replace("全","");
     }
 };

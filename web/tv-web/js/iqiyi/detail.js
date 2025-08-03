@@ -1,8 +1,11 @@
 const  _ctrlx={
     ok(){
        console.log("playplayplay");
-       $$(".play-btn").click();
+       $$("[class^=player-buttons_resumeBtn]").click();
+        $$("[class^=player-buttons_pauseBtn]").click();
        $$(".iqp-btn-pause").click();
+       //player-buttons_resumeBtn__diOgO
+        //player-buttons_pauseBtn__dnTvv
         _layer.notifyLess("OK键暂停或播放")
        // _apiX.msgStr("key","SPACE");
        //全屏
@@ -15,7 +18,7 @@ const  _ctrlx={
     fullscreen() {
         // 全屏
         //弹幕
-        _tvFunc.check(function (){
+   /*     _tvFunc.check(function (){
             if($$("#barrage_off").length > 0&&$$("#barrage_off").hasClass("dn")){
                 console.log("弹幕关");
                 $$("#barrage_switch").click();
@@ -23,12 +26,12 @@ const  _ctrlx={
             return  $$("#barrage_off").length > 0&&!$$("#barrage_off").hasClass("dn");
         },function (){
 
-        },2000);
-    /*    setInterval(function (){
-            if($$("#barrage_off").hasClass("dn")){
-                $$("#barrage_switch").click();
-            }
         },2000);*/
+        setInterval(function (){
+            if($$("#pcaBarrageContainer").length > 0){
+                $$("#pcaBarrageContainer").remove();
+            }
+        },2000);
         _tvFunc.fullscreenW("#video");
    /*     _tvFunc.check(function (){return $$("#video").length>0},function (){
             $$("#video").addClass("utv-video-full");
@@ -99,7 +102,7 @@ const _data={
     initData(vue,hzCallback){
        this.vue=vue;
         //#video  .iqp-txt-stream
-       _tvFunc.check(function(){return $$(".iqp-txt-stream").length>0},function(){
+       _tvFunc.check(function(){return $$("#right").length>0},function(){
         //网页全屏
         _data.fullscreen();
         _data.hzList(hzCallback);
@@ -116,8 +119,8 @@ const _data={
          let isVip= $$("#btn_user").parent().attr("class").includes("topbar_vipBox");
          console.log("isVip "+isVip)
          this.vue.isVip=isVip;
-        //关闭弹幕
-       // $$(".iqp-barrage").remove();
+        //关闭弹幕 iqp-barrage-stage
+        //$$("#pcaBarrageContainer").remove();
         // 悬浮图片
         //data-player-hook="plgcontainer"
        //$$("[data-player-hook='plgcontainer']").remove();//1

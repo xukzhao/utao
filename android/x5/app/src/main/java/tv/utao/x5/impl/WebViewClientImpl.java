@@ -151,7 +151,7 @@ public class WebViewClientImpl extends WebViewClient {
         //LogUtil.i(TAG,"XX"+orgUrl);
         if(type==1){
             if(orgUrl.startsWith("https://tlive.fengshows.com/live/")||orgUrl.startsWith("https://hkmolive.fengshows.com/live/")){
-                String realUrl= "https://qctv.fengshows.cn"+orgUrl.substring(orgUrl.indexOf("/live"),orgUrl.length());
+                String realUrl= "https://qctv.fengshows.cn"+orgUrl.substring(orgUrl.indexOf("/live"));
                 LogUtil.i(TAG,realUrl);
                 Map<String,String> headerMap = new HashMap<>();
                 InputStream inputStream = HttpUtil.get(realUrl,new HashMap<>());
@@ -176,6 +176,27 @@ public class WebViewClientImpl extends WebViewClient {
                     Util.evalOnUi(webView,Util.sessionStorageWithTime("iqiyiXj",url));
                 }
             }
+           // String json = FileUtil.readExt( MyApplication.getAppContext(),"tv-web/match.json");
+         /*   if(!json.isEmpty()){
+                ExtConfig extConfig =   JsonUtil.fromJson(json, ExtConfig.class);
+                List<StartWith> startWiths= extConfig.getStartWith();
+                for (StartWith startWith : startWiths) {
+                    if(url.startsWith(startWith.getKey())){
+                        Map<String,String> headerMap = new HashMap<>();
+                        headerMap.put("Referer",startWith.getReferer());
+                        //headerMap.put("Access-Control-Allow-Origin","*");
+                        InputStream inputStream = HttpUtil.get(orgUrl,headerMap);
+                        if(null==inputStream){
+                            return super.shouldInterceptRequest(webView, webResourceRequest);
+                        }
+                        WebResourceResponse resp=new WebResourceResponse(startWith.getType(),
+                                ConstantMy.UTF8, inputStream);
+                        headerMap.put("access-control-allow-origin","*");
+                        resp.setResponseHeaders(headerMap);
+                        return resp;
+                    }
+                }
+            }*/
             return super.shouldInterceptRequest(webView, webResourceRequest);
         }
         if(url.endsWith("tvImg=1")){
@@ -229,6 +250,7 @@ public class WebViewClientImpl extends WebViewClient {
                         ConstantMy.UTF8, FileUtil.readExtIn(MyApplication.getAppContext(),fileName));
             }
         }
+        //webResourceRequest.getRequestHeaders()
 
         return super.shouldInterceptRequest(webView, webResourceRequest);
 

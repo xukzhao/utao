@@ -16,28 +16,57 @@ import com.tencent.smtt.sdk.QbSdk.PreInitCallback;
 import com.tencent.smtt.sdk.TbsListener;
 import com.tencent.smtt.sdk.WebView;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 import tv.utao.x5.service.CrashHandler;
 import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.ValueUtil;
 
-public class MyApplication extends Application {
+public class MyApplication extends Application implements InvocationHandler {
 
     private static Context context;
+    private String realPackageName;
+    private String targetPackageName="android";
+    private Object originalPM;
     private static final String TAG = "MyApplication";
+    private final List<String> prefixes = Arrays.asList("com", "org", "net", "io", "app");
    // private String DIR = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath();
    @Override
    protected void attachBaseContext(Context base) {
+       realPackageName = base.getPackageName();
+       hookPackageManager(base);
        super.attachBaseContext(base);
        MultiDex.install(base);
    }
    public static  String androidId=null;
+
+   @Override
+   public String  getPackageName(){
+       for (StackTraceElement trace : Thread.currentThread().getStackTrace()) {
+           if ("org.chromium.base.BuildInfo" .equalsIgnoreCase( trace.getClassName())) {
+               String m = trace.getMethodName();
+               // 判断当前调用是否来自 Chromium（BuildInfo 类的方法）
+               // 在部分旧版是 getAll 或 getPackageName 在较新版本是 <init>
+               if (m.equalsIgnoreCase("getAll") || m.equalsIgnoreCase("getPackageName") || m.equalsIgnoreCase("<init>")) {
+                   return targetPackageName;
+               }
+              // return "";// 返回空字符串移除包名
+           }
+       }
+       return super.getPackageName();// 其他场景返回真实包名
+   }
     @Override
     public void onCreate() {
         super.onCreate();
         LogUtil.i(TAG, "onViewInitBegin: ");
+        targetPackageName=generateRandomPackageName();
         allErrorCatch();
         context = getApplicationContext();
         //initX5();会自动初始化
@@ -57,7 +86,57 @@ public class MyApplication extends Application {
         //startX5WebProcessPreinitService();
         //initPieWebView();
     }
+    private String randomStr(int length){
+        StringBuilder result = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            // 生成97-122之间的随机整数，对应ASCII码中的a-z
+            int randomInt = random.nextInt(26) + 97;
+            result.append((char) randomInt);
+        }
+        return result.toString();
+    }
+    private String generateRandomPackageName() {
+        // 生成随机包名（格式：com.xxx.yyy.zzz）
+        String prefix = prefixes.get(new Random().nextInt(prefixes.size()));
+        String segment =randomStr(4);
+        String suffix = randomStr(3);
+        return prefix + "." + segment + "." + suffix;
+    }
+    private void hookPackageManager(Context context) {
+        try {
+            // 获取ActivityThread实例
+            Class<?> activityThreadClass = Class.forName("android.app.ActivityThread");
+            Method currentActivityThreadMethod = activityThreadClass.getMethod("currentActivityThread");
+            Object activityThread = currentActivityThreadMethod.invoke(null);
 
+            // 获取原始IPackageManager
+            java.lang.reflect.Field sPackageManagerField = activityThreadClass.getDeclaredField("sPackageManager");
+            sPackageManagerField.setAccessible(true);
+            originalPM = sPackageManagerField.get(activityThread);
+
+            // 创建代理并替换
+            Object proxy = createProxy();
+            sPackageManagerField.set(activityThread, proxy);
+
+            // 替换Context中的mPM
+            java.lang.reflect.Field mPMField = context.getPackageManager().getClass().getDeclaredField("mPM");
+            mPMField.setAccessible(true);
+            mPMField.set(context.getPackageManager(), proxy);
+
+            Log.d("PackageHook", "Hook成功: 拦截" + targetPackageName + "请求");
+        } catch (Exception e) {
+            Log.e("PackageHook", "Hook失败: " + e.getMessage());
+            e.printStackTrace();
+            targetPackageName="android";
+        }
+    }
+    private Object createProxy() throws ClassNotFoundException {
+        return Proxy.newProxyInstance(
+                Class.forName("android.content.pm.IPackageManager").getClassLoader(),
+                new Class<?>[]{Class.forName("android.content.pm.IPackageManager")},
+                this);
+    }
     private void allErrorCatch(){
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
@@ -291,4 +370,17 @@ public class MyApplication extends Application {
         });
     }
 
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        // 检查是否有参数，并且第一个参数是 targetPackageName
+        if (args != null && args.length > 0 && targetPackageName.equals(args[0])) {
+            // 修改 args 的第一个参数为 realPackageName（自身包名）
+            Object[] modifiedArgs = args.clone();
+            modifiedArgs[0] = realPackageName;
+            // 仍然调用原始方法 originalPM，并返回结果
+            return method.invoke(originalPM, modifiedArgs);
+        }
+        // 否则正常调用原始方法
+        return method.invoke(originalPM, args);
+    }
 }

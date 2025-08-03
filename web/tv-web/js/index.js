@@ -49,6 +49,11 @@ const _html={
     },
     initApp(){
         console.log("initAppinitApp")
+        if (typeof PetiteVue === 'undefined') {
+           // _api.message("activity","live");
+            _api.toast("内置浏览器内核过低或开启x5内核失败 可官网utao.tv下载火狐版");
+            return;
+        }
         PetiteVue.createApp({
             channels:[],
             apps:[],
@@ -174,8 +179,12 @@ const _html={
                     return;
                 }
                 if(dataUrl==="tv.html"&& _tvFunc.isApp()){
-                        _apiX.msg("activity","live");
+                        _apiX.msgStr("activity","live");
                         return;
+                }
+                if(dataUrl.startsWith("https://www.douyin.com")&& _tvFunc.isApp()){
+                    _apiX.msgStr("activity","douyin");
+                    return;
                 }
                 _layer.wait("请耐心等待跳转。。。");
                 window.location.href = dataUrl;
@@ -254,6 +263,8 @@ let _data={
         //apps.push({id:0,url:"https://www.douyin.com/?recommend=1",name:"抖音推荐",pic:"img/dy2.jpg"});
         apps.push({id:0,url:"ty.html",name:"体育",pic:"img/utao.jpg"});
         apps.push({id:0,url:"letv.html",name:"乐视",pic:"img/letv.jpg"});
+        //https://www.douyin.com/?recommend=1
+        //apps.push({id:0,url:"https://www.douyin.com/?recommend=1",name:"抖音推荐",pic:"img/dy2.jpg"});
         //apps.push({id:0,url:"douyin.html",name:"抖音推荐",pic:"img/douyin.jpeg"});
         apps.forEach((item,index)=>{
             item.id=index;

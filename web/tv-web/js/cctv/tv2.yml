@@ -39,17 +39,130 @@ data:
       - name: CCTV-17 农业农村
         url: https://tv.cctv.com/live/cctv17/
   - tag: cctv2
-    name: 央卫
+    name: 央视2
     vods:
-      - name: CCTV-1
+      - name: CCTV13 新闻
+        url: https://www.yangshipin.cn/tv/home?pid=600001811
+      - name: CCTV1 综合
         url: https://www.yangshipin.cn/tv/home?pid=600001859
-      - name: CCTV-1
-        url: https://www.yangshipin.cn/tv/home?pid=600001859
+      - name: CCTV14 少儿
+        url: https://www.yangshipin.cn/tv/home?pid=600001809
+      - name: CCTV2 财经
+        url: https://www.yangshipin.cn/tv/home?pid=600001800
+      - name: CCTV4 中文国际
+        url: https://www.yangshipin.cn/tv/home?pid=600001814
+      - name: CCTV5 体育
+        url: https://www.yangshipin.cn/tv/home?pid=600001818
+      - name: CCTV5+ 体育赛事
+        url: https://www.yangshipin.cn/tv/home?pid=600001817
+      - name: CCTV6 电影
+        url: https://www.yangshipin.cn/tv/home?pid=600108442
+      - name: CCTV7 国防军事
+        url: https://www.yangshipin.cn/tv/home?pid=600004092
+      - name: CCTV8 电视剧
+        url: https://www.yangshipin.cn/tv/home?pid=600001803
+      - name: CCTV9 记录
+        url: https://www.yangshipin.cn/tv/home?pid=600004078
+      - name: CCTV10 科教
+        url: https://www.yangshipin.cn/tv/home?pid=600001805
+      - name: CCTV11 戏曲
+        url: https://www.yangshipin.cn/tv/home?pid=600001806
+      - name: CCTV12 社区与法
+        url: https://www.yangshipin.cn/tv/home?pid=600001807=
+      - name: CCTV15 音乐
+        url: https://www.yangshipin.cn/tv/home?pid=600001815
+      - name: CCTV16 奥林匹克
+        url: https://www.yangshipin.cn/tv/home?pid=600098637
+      - name: CCTV17 农业农村
+        url: https://www.yangshipin.cn/tv/home?pid=600001810
+      - name: CCTV4K
+        url: https://www.yangshipin.cn/tv/home?pid=600002264
+      - name: CCTV8K
+        url: https://www.yangshipin.cn/tv/home?pid=600156816
+      - name: CGTN
+        url: https://www.yangshipin.cn/tv/home?pid=600014550
+      - name: CCTV 风云剧场
+        url: https://www.yangshipin.cn/tv/home?pid=600099658
+      - name: CCTV 第一剧场
+        url: https://www.yangshipin.cn/tv/home?pid=600099655
+      - name: CCTV 怀旧剧场
+        url: https://www.yangshipin.cn/tv/home?pid=600099620
+  - tag: ws
+    name: 各大卫视
+    vods:
+      - name: 湖南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002475
+      - name: 江苏卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002521
+      - name: 东方卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002483
+      - name: 浙江卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002520
+      - name: 北京卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002309
+      - name: 湖北卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002508
+      - name: 广东卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002485
+      - name: 广西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002509
+      - name: 黑龙江卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002498
+      - name: 海南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002506
+      - name: 重庆卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002531
+      - name: 深圳卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002481
+      - name: 四川卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002516
+      - name: 河南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002525
+      - name: 福建卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002484
+      - name: 贵州卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002490
+      - name: 江西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002503
+      - name: 辽宁卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002505
+      - name: 安徽卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002532
+      - name: 河北卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002493
+      - name: 山东卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002513
+      - name: 天津卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600152137
+      - name: 吉林卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190405
+      - name: 陕西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190400
+      - name: 甘肃卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190408
+      - name: 宁夏卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190737
+      - name: 内蒙古卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190401
+      - name: 云南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190402
+      - name: 山西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190407
+      - name: 青海卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190406
+      - name: 西藏卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190403
+      - name: 新疆卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600152138
+      - name: 中国教育频道1
+        url: https://www.yangshipin.cn/tv/home?pid=600171827
   - tag: shaoer
     name: 少儿
     vods:
       - name: CCTV-14 少儿
         url: https://tv.cctv.com/live/cctvchild/
+      - name: CCTV14 少儿2
+        url: https://www.yangshipin.cn/tv/home?pid=600001809
       - name: 浙江少儿
         url: https://www.cztv.com/liveTV/108
       - name: 山东少儿
@@ -74,62 +187,6 @@ data:
         url: https://www.sztv.com.cn/pindao/index.html?id=7881
       - name: 金鹰卡通
         url: https://live.mgtv.com/?channelId=287
-  - tag: gdtv
-    name: 广东
-    vods:
-      - name: 广东卫视
-        url: https://www.gdtv.cn/tvChannelDetail/43
-      - name: 广东4K超高清
-        url: https://www.gdtv.cn/tvChannelDetail/110
-      - name: 荔枝台
-        url: https://www.gdtv.cn/tvChannelDetail/100
-      - name: 广东珠江
-        url: https://www.gdtv.cn/tvChannelDetail/44
-      - name: 广东新闻
-        url: https://www.gdtv.cn/tvChannelDetail/45
-      - name: 广东民生
-        url: https://www.gdtv.cn/tvChannelDetail/48
-      - name: 广东体育
-        url: https://www.gdtv.cn/tvChannelDetail/47
-      - name: 大湾区卫视
-        url: https://www.gdtv.cn/tvChannelDetail/51
-      - name: 大湾区卫视（海外版）
-        url: https://www.gdtv.cn/tvChannelDetail/46
-      - name: 广东影视
-        url: https://www.gdtv.cn/tvChannelDetail/53
-      - name: 广东南方购物
-        url: https://www.gdtv.cn/tvChannelDetail/42
-      - name: 广东现代教育
-        url: https://www.gdtv.cn/tvChannelDetail/13
-      - name: 广东岭南戏曲
-        url: https://www.gdtv.cn/tvChannelDetail/15
-      - name: 广东纪录片
-        url: https://www.gdtv.cn/tvChannelDetail/94
-      - name: 广州综合
-        url: https://tv.utao.tv/tv-web/live.html?url=https://tencentplaywebsite.gztv.com/live/zonghes.m3u8?txSecret=4528666d03404f24e44c1cc45d6d98f5&txTime=1955a3c2631
-        # https://app.gztv.com/plusshare/#/tvDetail?code=3001
-      - name: 广州新闻
-        url: https://tv.utao.tv/tv-web/live.html?url=https://tencentplaywebsite.gztv.com/live/xinwen.m3u8?txSecret=43247f9f631aa76741fcc3f24d327e28&txTime=1955a3c2632
-        #https://app.gztv.com/plusshare/#/tvDetail?code=3002
-      - name: 广州南国都市
-        url: https://tv.utao.tv/tv-web/live.html?url=https://tencentplaywebsite.gztv.com/live/nanguodushi.m3u8?txSecret=c7ce576433a98a3f183566962be4c82e&txTime=1955a3c2632
-        #https://app.gztv.com/plusshare/#/tvDetail?code=3003
-      - name: 广州法制
-        url: https://tv.utao.tv/tv-web/live.html?url=https://tencentplaywebsite.gztv.com/live/fazhi.m3u8?txSecret=88d702639352e25f3c6a6bff53ac2166&txTime=1955a3c2632
-        #https://app.gztv.com/plusshare/#/tvDetail?code=3004
-      - name: 广州影视
-        url: https://tv.utao.tv/tv-web/live.html?url=https://tencentplaywebsite.gztv.com/live/yingshi.m3u8?txSecret=b36762904ae1f1f64fa92d4ee25be85e&txTime=1955a3c2632
-        #https://app.gztv.com/plusshare/#/tvDetail?code=3006
-      - name: 东莞新闻综合
-        url: https://dgrtv.sun0769.com/index.php/online2/4
-      - name: 东莞生活
-        url: https://dgrtv.sun0769.com/index.php/online2/5
-      - name: 凤凰资讯
-        url: https://www.fengshows.com/live?tag=0
-      - name: 凤凰中文
-        url: https://www.fengshows.com/live?tag=1
-      - name: 香港台
-        url: https://www.fengshows.com/live?tag=2
   - tag: sdtv
     name: 山东
     vods:
@@ -152,11 +209,11 @@ data:
       - name: 山东教育
         url: https://www.sdetv.com.cn/guanwang/live.html
       - name: 济宁综合
-        url: https://tv.utao.tv/tv-web/live.html?url=https://lives.jnnews.tv/video/s10001-JNTV-1/index.m3u8
+        url: live.html?url=https://lives.jnnews.tv/video/s10001-JNTV-1/index.m3u8
       - name: 济宁生活
-        url: https://tv.utao.tv/tv-web/live.html?url=https://lives.jnnews.tv/video/s10001-JNTV2-2023/index.m3u8
+        url: live.html?url=https://lives.jnnews.tv/video/s10001-JNTV2-2023/index.m3u8
       - name: 济宁公共
-        url: https://tv.utao.tv/tv-web/live.html?url=https://lives.jnnews.tv/video/s10001-JNTV3/index.m3u8
+        url: live.html?url=https://lives.jnnews.tv/video/s10001-JNTV3/index.m3u8
       - name: 青岛新闻综合
         url: http://www.qtv.com.cn/live/tv/index.shtml
       - name: 青岛经济生活
@@ -173,7 +230,6 @@ data:
         url: https://www.rzw.com.cn/folder247/folder2217/?tag=1
       - name: 日照公共
         url: https://www.rzw.com.cn/folder247/folder2217/?tag=3
-        #https://tv.utao.tv/tv-web/live.html?url=https://live.rzw.com.cn/kzpd/sd/live.m3u8?_upt=c8469c7e1738387682
       - name: 威海新闻综合
         url: http://lv.weihai.tv/live_13705e35636b2136b590e5a015bb801c.html
       - name: 威海都市生活
@@ -277,7 +333,28 @@ data:
         url: https://www.ncmc.nbtv.cn/gbds/folder8458/NBTV4/index.shtml
       - name: 宁波1
         url: https://www.ncmc.nbtv.cn/gbds/folder8458/NBTV1/index.shtml
-
+  - tag: gdtv
+    name: 广东
+    vods:
+      - name: 广州综合
+        url: live.html?url=https://tencentplaywebsite.gztv.com/live/zonghes.m3u8?txSecret=4528666d03404f24e44c1cc45d6d98f5&txTime=1955a3c2631
+        # https://app.gztv.com/plusshare/#/tvDetail?code=3001
+      - name: 广州新闻
+        url: live.html?url=https://tencentplaywebsite.gztv.com/live/xinwen.m3u8?txSecret=43247f9f631aa76741fcc3f24d327e28&txTime=1955a3c2632
+        #https://app.gztv.com/plusshare/#/tvDetail?code=3002
+      - name: 广州南国都市
+        url: live.html?url=https://tencentplaywebsite.gztv.com/live/nanguodushi.m3u8?txSecret=c7ce576433a98a3f183566962be4c82e&txTime=1955a3c2632
+        #https://app.gztv.com/plusshare/#/tvDetail?code=3003
+      - name: 广州法制
+        url: live.html?url=https://tencentplaywebsite.gztv.com/live/fazhi.m3u8?txSecret=88d702639352e25f3c6a6bff53ac2166&txTime=1955a3c2632
+        #https://app.gztv.com/plusshare/#/tvDetail?code=3004
+      - name: 广州影视
+        url: live.html?url=https://tencentplaywebsite.gztv.com/live/yingshi.m3u8?txSecret=b36762904ae1f1f64fa92d4ee25be85e&txTime=1955a3c2632
+        #https://app.gztv.com/plusshare/#/tvDetail?code=3006
+      - name: 东莞新闻综合
+        url: https://dgrtv.sun0769.com/index.php/online2/4
+      - name: 东莞生活
+        url: https://dgrtv.sun0769.com/index.php/online2/5
   - tag: jstv
     name: 江苏
     vods:
@@ -298,15 +375,15 @@ data:
       - name: 江苏国际
         url: https://live.jstv.com/?tag=江苏国际
       - name: 苏州新闻综合
-        url: https://tv.utao.tv/tv-web/live.html?url=https://live-auth.51kandianshi.com/szgd/csztv1.m3u8
+        url: live.html?url=https://live-auth.51kandianshi.com/szgd/csztv1.m3u8
       - name: 苏州社会经济
-        url: https://tv.utao.tv/tv-web/live.html?url=https://live-auth.51kandianshi.com/szgd/csztv2.m3u8
+        url: live.html?url=https://live-auth.51kandianshi.com/szgd/csztv2.m3u8
       - name: 苏州电影娱乐
-        url: https://tv.utao.tv/tv-web/live.html?url=https://live-auth.51kandianshi.com/szgd/csztv4.m3u8
+        url: live.html?url=https://live-auth.51kandianshi.com/szgd/csztv4.m3u8
       - name: 苏州生活资讯
-        url: https://tv.utao.tv/tv-web/live.html?url=https://live-auth.51kandianshi.com/szgd/csztv5.m3u8
+        url: live.html?url=https://live-auth.51kandianshi.com/szgd/csztv5.m3u8
       - name: 苏州4K
-        url: https://tv.utao.tv/tv-web/live.html?url=https://live-auth.51kandianshi.com/szgd/csztv4k_4k.m3u8
+        url: live.html?url=https://live-auth.51kandianshi.com/szgd/csztv4k_4k.m3u8
       - name: 南京新闻综合
         url: https://www.nbs.cn/live/?id=109152
       - name: 南京生活
@@ -365,13 +442,13 @@ data:
     name: 川渝
     vods:
       - name: 四川卫视
-        url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=1
+        url: js/tv/sctv/live.html?tag=1
       - name: 四川新闻
-        url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=2
+        url: js/tv/sctv/live.html?tag=2
       - name: 四川经济
-        url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=3
+        url: js/tv/sctv/live.html?tag=3
       - name: 四川文化旅游
-        url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=4
+        url: js/tv/sctv/live.html?tag=4
       - name: 四川影视文艺
         url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=5
       - name: 四川7

@@ -182,7 +182,7 @@ public class FileUtil {
                 // 如果是文件
                 //LogUtil.i(TAG,"解压文件 原来 文件的位置： " + fileName);
                 //fileName = fileName.substring(fileName.lastIndexOf("/") + 1);  //截取文件的名字 去掉原文件夹名字
-               // LogUtil.i(TAG,"解压文件 的名字： " + fileName);
+                LogUtil.i(TAG,"解压文件 的名字： " + fileName);
                 file = new File(outputDirectory + File.separator + fileName);  //放到新的解压的文件路径
 
                 file.createNewFile();
