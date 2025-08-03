@@ -159,6 +159,7 @@ var _tvFunc={
             return this.video;
         }
         let videos = document.getElementsByTagName("video");
+            //document.getElementsByTagName("video");
         if(videos.length > 0){
             this.video=videos[0];
         }

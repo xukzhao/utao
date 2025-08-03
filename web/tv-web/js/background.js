@@ -51,9 +51,11 @@ const _connect={
 
 const  _listener={
     init(){
+        //this.startListener();
         this.CompletedListener();
         this.headerListener();
         this.imageLoadListener();
+
     },
     CompletedListener(){
         function logURL(requestDetails) {
@@ -72,6 +74,41 @@ const  _listener={
             //<all_urls>
             urls: ["https://mesh.if.iqiyi.com/tvg/v2/lw/base_info*"]
         });
+    },
+    startListener(){
+        function logURL(requestDetails) {
+            console.log("requestDetails" + requestDetails.url);
+            let originalUrl = requestDetails.url;
+            // 示例：将 example.com 替换为 example.org
+            let modifiedUrl = originalUrl.replace("tlive.fengshows.com", "qctv.fengshows.cn");
+            console.log("modifiedUrl"+modifiedUrl);
+            // 2. 修改请求头
+            let newHeaders = new Headers(requestDetails.requestHeaders || {});
+
+            // 添加/修改头
+            newHeaders.set("Origin", "qctv.fengshows.cn");
+            //newHeaders.set("User-Agent", "Mozilla/5.0 (Custom GeckoView)");, requestHeaders: Array.from(newHeaders.entries())
+            return {redirectUrl: modifiedUrl};
+        }
+        browser.webRequest.onBeforeRequest.addListener(logURL, {
+            //<all_urls>
+            urls: ["https://tlive.fengshows.com/live/*"]
+        },  ["blocking"] );
+    },
+    ssl(){
+        // 拦截证书错误并允许加载
+        browser.webRequest.onHeadersReceived.addListener(
+            details => {
+                return {
+                    cancel: false, // 不取消请求
+                    responseHeaders: details.responseHeaders.filter(h =>
+                        !(h.name.toLowerCase() === 'strict-transport-security')
+                    )
+                };
+            },
+            { urls: ["https://qctv.fengshows.cn/live/*"] },
+            ["blocking", "responseHeaders", "extraHeaders"]
+        );
     },
     headerListener(){
         function headerListener(e) {

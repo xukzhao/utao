@@ -1,10 +1,12 @@
 TvFocus.up=function (){
-    //_apiX.msgStr("live","left");
-    return true;
+    console.log("UPUP")
+    //_apiX.msgStr("keyNum","19");
+    //return true;
 }
 TvFocus.down=function (){
-    //_apiX.msgStr("live","right");
-    return true;
+    console.log("down")
+    //_apiX.msgStr("keyNum","20");
+    //return true;
 }
 const  _ctrlx={
     ok(){
@@ -28,6 +30,7 @@ const  _ctrlx={
     };
     const _login={
         init(){
+            //slidelist
             _tvFunc.check(function(){return $$("#animate_qrcode_container").find("img").attr("src");},function(){
                 let qr = $$("#animate_qrcode_container").find("img").attr("src");
                 console.log(qr);

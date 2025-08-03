@@ -4,7 +4,32 @@ let tag = url.substring(index+4,url.length);
 //api.vonchange.com
 let playUrl=null;
 let initPlayer=function (){
-    fetch("http://api.vonchange.com/utao/sctv?tag="+tag)
+    _apiX.getJson("http://api.vonchange.com/utao/sctv?tag="+tag,   { "User-Agent": _apiX.userAgent(false), "tv-ref": "http://api.vonchange.com" },function(data){
+        console.log(data);
+        if(data&&data.trim()!==""){
+            playUrl=data;
+            const config = {
+                "id": "mse",
+                "url": data,
+                "hlsOpts": {
+                    xhrSetup: function(xhr, url) {
+                       // xhr.setRequestHeader('tv-ref', 'https://www.sctv.com/');
+                    }
+                },
+                "playsinline": true,
+                "plugins": [],
+                "isLive": true,
+                "autoplay": true,
+                volume: 1,
+                "width": "100%",
+                "height": "100%"
+            }
+            //config.plugins.push(HlsPlayer);
+//config.plugins.push(FlvPlayer)
+            player = new HlsJsPlayer(config);
+        }
+    });
+   /* fetch("http://api.vonchange.com/utao/sctv?tag="+tag)
         .then((response) => response.text())
         .then((data) => {console.log(data);
             if(data&&data.trim()!==""){
@@ -12,6 +37,11 @@ let initPlayer=function (){
                 const config = {
                     "id": "mse",
                     "url": data,
+                    "hlsOpts": {
+                        xhrSetup: function(xhr, url) {
+                            xhr.setRequestHeader('Referer', 'https://www.sctv.com/');
+                        }
+                    },
                     "playsinline": true,
                     "plugins": [],
                     "isLive": true,
@@ -20,16 +50,15 @@ let initPlayer=function (){
                     "width": "100%",
                     "height": "100%"
                 }
-                config.plugins.push(HlsPlayer);
+                //config.plugins.push(HlsPlayer);
 //config.plugins.push(FlvPlayer)
-                player = new Player(config);
+                player = new HlsJsPlayer(config);
             }
-        });
+        });*/
 }
 let reloadLive=function (){
-    fetch("http://api.vonchange.com/utao/sctv?tag="+tag)
-        .then((response) => response.text())
-        .then((data) => {console.log(data);
+    _apiX.getJson("http://api.vonchange.com/utao/sctv?tag="+tag,   { "User-Agent": _apiX.userAgent(false), "tv-ref": "http://api.vonchange.com" },function(data){
+        console.log(data);
             if(data&&data.trim()!==""){
                 if(data!==playUrl){
                     playUrl=data;

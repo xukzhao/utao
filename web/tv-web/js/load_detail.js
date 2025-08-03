@@ -93,6 +93,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.rzw.com.cn")){
             return "tv/rztv"
         }
+        if(url.startsWith("https://www.nmtv.cn")){
+            return "tv/nmtv"
+        }
         return "tv/common"
     }
     _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));

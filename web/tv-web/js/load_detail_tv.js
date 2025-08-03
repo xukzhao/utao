@@ -38,9 +38,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.jlntv.cn/")){
             return "tv/jltv"
         }
-    /*    if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
+        if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
             return "tv/gdtv"
-        }*/
+        }
       /*  if(url.startsWith("https://tv.hoolo.tv")){
             return "tv/hztv"
         }*/
@@ -53,6 +53,9 @@ if(typeof _tvload == "undefined"){
         }
         if(url.startsWith("https://www.rzw.com.cn")){
             return "tv/rztv"
+        }
+        if(url.startsWith("https://www.nmtv.cn")){
+            return "tv/nmtv"
         }
         return "tv/common"
     }
