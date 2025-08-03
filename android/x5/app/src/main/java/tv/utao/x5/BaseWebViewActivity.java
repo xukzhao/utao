@@ -541,6 +541,11 @@ public class BaseWebViewActivity extends Activity {
         startActivity(intent);
         finish();
     }
+    private void toDouyin(){
+        Intent intent = new Intent(this, DouyinActivity.class);
+        startActivity(intent);
+        finish();
+    }
     protected void killAppProcess()
     {
         //注意：不能先杀掉主进程，否则逻辑代码无法继续执行，需先杀掉相关进程最后杀掉主进程
@@ -578,7 +583,12 @@ public class BaseWebViewActivity extends Activity {
         public void message(String service,String data){
             LogUtil.i(TAG,"service "+service+" data "+data);
             if("activity".equals(service)){
-                toLive();
+                if(data.equals("live")){
+                    toLive();
+                }
+                if(data.equals("douyin")){
+                    toDouyin();
+                }
                 return;
             }
             if("history.save".equals(service)){
