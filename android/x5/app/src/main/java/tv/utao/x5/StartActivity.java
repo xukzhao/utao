@@ -132,7 +132,7 @@ public class StartActivity extends Activity {
         boolean isOpenX5=openX5();
         LogUtil.i(TAG,"isOpenX5::::"+isOpenX5);
         //Util.isNotNeedX5()&&!isOpenX5
-        if(true){
+        if(Util.isNotNeedX5()&&!isOpenX5){
             to();
             return;
         }
@@ -191,13 +191,19 @@ public class StartActivity extends Activity {
         startActivity(intent);
         finish();
     }
-    private static void resetSdk() {
+    private  void resetSdk() {
         // 在调用TBS初始化、创建WebView之前进行如下配置
         HashMap<String, Object> map = new HashMap<>();
         map.put(TbsCoreSettings.TBS_SETTINGS_USE_SPEEDY_CLASSLOADER, true);
         map.put(TbsCoreSettings.TBS_SETTINGS_USE_DEXLOADER_SERVICE, true);
+        map.put("disable_foreground_service", true); // 关键参数
+        map.put("TBS_DISABLE_AUTO_INIT", true); // 禁止自动后台初始化
+        // 关键参数：禁用无障碍相关功能
+        map.put("TBS_DISABLE_ACCESSIBILITY", true);
         QbSdk.initTbsSettings(map);
-        QbSdk.setDownloadWithoutWifi(true);
+        //QbSdk.setDownloadWithoutWifi(true);
+       // QbSdk.initX5Environment(this, null);
+       // QbSdk.setDisableUMLog(true);
 //        QbSdk.disableAutoCreateX5Webview();
         //强制使用系统内核
         //QbSdk.forceSysWebView();

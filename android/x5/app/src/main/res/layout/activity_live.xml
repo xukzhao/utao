@@ -60,7 +60,7 @@
 
         </LinearLayout>
         <!-- 菜单容器 -->
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/menuContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -153,6 +153,6 @@
                     android:descendantFocusability="afterDescendants"/>
 
             </LinearLayout>
-        </FrameLayout>
+        </LinearLayout>
     </FrameLayout>
 </layout>

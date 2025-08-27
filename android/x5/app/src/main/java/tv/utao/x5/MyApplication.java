@@ -45,6 +45,7 @@ public class MyApplication extends Application implements InvocationHandler {
        super.attachBaseContext(base);
        MultiDex.install(base);
    }
+
    public static  String androidId=null;
 
    @Override
@@ -186,6 +187,7 @@ public class MyApplication extends Application implements InvocationHandler {
 
             // 禁止使用系统 WebView
             QbSdk.unForceSysWebView();
+
 
             // 初始化 X5 环境
             QbSdk.initX5Environment(getApplicationContext(), new QbSdk.PreInitCallback() {

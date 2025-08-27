@@ -5,7 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Process;
-import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,6 +37,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
      * 文件名
      */
     public static final String FILE_NAME = "crash";
+    private boolean mIsHandling = false; // 新增：防止重入
     /**
      * 异常日志 存储位置为根目录下的 Crash文件夹
      */
@@ -84,7 +84,14 @@ public class CrashHandler implements UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-
+        if (mIsHandling) {
+            // 如果正在处理，直接交给系统默认处理
+            if (mDefaultCrashHandler != null) {
+                mDefaultCrashHandler.uncaughtException(thread, ex);
+            }
+            return;
+        }
+        mIsHandling = true;
         //导入异常信息到SD卡中
         try {
             String path= dumpExceptionToSDCard(ex);
@@ -208,6 +215,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         pw.print("CPU ABI: ");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             pw.println(JsonUtil.toJson(Build.SUPPORTED_ABIS));
+            pw.println(JsonUtil.toJson(Build.SUPPORTED_64_BIT_ABIS));
         }else {
             pw.println(Build.CPU_ABI);
         }

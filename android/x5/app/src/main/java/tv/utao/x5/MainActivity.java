@@ -111,15 +111,6 @@ public class MainActivity extends BaseWebViewActivity {
         return true;
     }
 
-    @Override
-    public void onDestroy() {
-        if(mWebView!=null){
-            LogUtil.i(TAG,"onDestroy");
-            mWebView.loadDataWithBaseURL(null, "", "text/html", "utf-8", null);
-            mWebView.destroy();
-        }
-        super.onDestroy();
-    }
 
 
 

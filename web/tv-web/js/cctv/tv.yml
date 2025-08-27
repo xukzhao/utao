@@ -39,12 +39,123 @@ data:
       - name: CCTV-17 农业农村
         url: https://tv.cctv.com/live/cctv17/
   - tag: cctv2
-    name: 央卫
+    name: 央视源2
     vods:
-      - name: CCTV-1
+      - name: CCTV13 新闻
+        url: https://www.yangshipin.cn/tv/home?pid=600001811
+      - name: CCTV1 综合
         url: https://www.yangshipin.cn/tv/home?pid=600001859
-      - name: CCTV-1
-        url: https://www.yangshipin.cn/tv/home?pid=600001859
+      - name: CCTV14 少儿
+        url: https://www.yangshipin.cn/tv/home?pid=600001809
+      - name: CCTV2 财经
+        url: https://www.yangshipin.cn/tv/home?pid=600001800
+      - name: CCTV4 中文国际
+        url: https://www.yangshipin.cn/tv/home?pid=600001814
+      - name: CCTV5 体育
+        url: https://www.yangshipin.cn/tv/home?pid=600001818
+      - name: CCTV5+ 体育赛事
+        url: https://www.yangshipin.cn/tv/home?pid=600001817
+      - name: CCTV6 电影
+        url: https://www.yangshipin.cn/tv/home?pid=600108442
+      - name: CCTV7 国防军事
+        url: https://www.yangshipin.cn/tv/home?pid=600004092
+      - name: CCTV8 电视剧
+        url: https://www.yangshipin.cn/tv/home?pid=600001803
+      - name: CCTV9 记录
+        url: https://www.yangshipin.cn/tv/home?pid=600004078
+      - name: CCTV10 科教
+        url: https://www.yangshipin.cn/tv/home?pid=600001805
+      - name: CCTV11 戏曲
+        url: https://www.yangshipin.cn/tv/home?pid=600001806
+      - name: CCTV12 社区与法
+        url: https://www.yangshipin.cn/tv/home?pid=600001807=
+      - name: CCTV15 音乐
+        url: https://www.yangshipin.cn/tv/home?pid=600001815
+      - name: CCTV16 奥林匹克
+        url: https://www.yangshipin.cn/tv/home?pid=600098637
+      - name: CCTV17 农业农村
+        url: https://www.yangshipin.cn/tv/home?pid=600001810
+      - name: CCTV4K
+        url: https://www.yangshipin.cn/tv/home?pid=600002264
+      - name: CCTV8K
+        url: https://www.yangshipin.cn/tv/home?pid=600156816
+      - name: CGTN
+        url: https://www.yangshipin.cn/tv/home?pid=600014550
+      - name: CCTV 风云剧场
+        url: https://www.yangshipin.cn/tv/home?pid=600099658
+      - name: CCTV 第一剧场
+        url: https://www.yangshipin.cn/tv/home?pid=600099655
+      - name: CCTV 怀旧剧场
+        url: https://www.yangshipin.cn/tv/home?pid=600099620
+  - tag: ws
+    name: 各大卫视
+    vods:
+      - name: 湖南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002475
+      - name: 江苏卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002521
+      - name: 东方卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002483
+      - name: 浙江卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002520
+      - name: 北京卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002309
+      - name: 湖北卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002508
+      - name: 广东卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002485
+      - name: 广西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002509
+      - name: 黑龙江卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002498
+      - name: 海南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002506
+      - name: 重庆卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002531
+      - name: 深圳卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002481
+      - name: 四川卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002516
+      - name: 河南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002525
+      - name: 福建卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002484
+      - name: 贵州卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002490
+      - name: 江西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002503
+      - name: 辽宁卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002505
+      - name: 安徽卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002532
+      - name: 河北卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002493
+      - name: 山东卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600002513
+      - name: 天津卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600152137
+      - name: 吉林卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190405
+      - name: 陕西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190400
+      - name: 甘肃卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190408
+      - name: 宁夏卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190737
+      - name: 内蒙古卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190401
+      - name: 云南卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190402
+      - name: 山西卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190407
+      - name: 青海卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190406
+      - name: 西藏卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600190403
+      - name: 新疆卫视
+        url: https://www.yangshipin.cn/tv/home?pid=600152138
+      - name: 中国教育频道1
+        url: https://www.yangshipin.cn/tv/home?pid=600171827
   - tag: shaoer
     name: 少儿
     vods:
@@ -234,6 +345,10 @@ data:
         url: https://iapp.aipingduapp.com/share/dHZsLTQ1LTQ.html
       - name: 平度生活服务
         url: https://iapp.aipingduapp.com/share/dHZsLTQ1LTU.html
+      - name: 山东乐陵综合
+        url: https://iapp.dztv.tv/share/dHZsLTE3OS02OQ.html
+      - name: 山东乐陵宁津综合
+        url: https://iapp.dztv.tv/share/dHZsLTE3OS02Mw.html
   - tag: cztv
     name: 浙江
     vods:

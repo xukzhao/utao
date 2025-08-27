@@ -22,4 +22,4 @@ yamlToJson("js/cctv/");
 const yamlString = fs.readFileSync('update.yml', utf8);
 const jsonData = yaml.load(yamlString);
 fs.writeFileSync("update.json",JSON.stringify(jsonData),utf8);
-console.log(JSON.stringify(jsonData));
+console.log("node "+JSON.stringify(jsonData));

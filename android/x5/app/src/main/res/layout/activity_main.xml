@@ -195,25 +195,29 @@
                         android:id="@+id/jds_view"
                         android:visibility="@{menu.tab.equals(`jd`)?View.VISIBLE:View.GONE}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:saveEnabled="false"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/hzs_view"
                         android:visibility="@{menu.tab.equals(`hz`)?View.VISIBLE:View.GONE}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:saveEnabled="false"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/xjs_view"
                         android:visibility="@{menu.tab.equals(`xj`)?View.VISIBLE:View.GONE}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:saveEnabled="false"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rates_view"
                         android:visibility="@{menu.tab.equals(`rate`)?View.VISIBLE:View.GONE}"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:saveEnabled="false"/>
                 </FrameLayout>
             </LinearLayout>
         </FrameLayout>
