@@ -633,31 +633,31 @@ data:
     name: 湖南
     vods:
       - name: 湖南经视
-        url: https://live.mgtv.com/?channelId=280
+        url: https://www.mgtv.com/live/?tag=湖南经视
       - name: 湖南娱乐
-        url: https://live.mgtv.com/?channelId=344
+        url: https://www.mgtv.com/live/?tag=湖南娱乐
       - name: 湖南电影
-        url: https://live.mgtv.com/?channelId=221
+        url: https://www.mgtv.com/live/?tag=湖南电影
       - name: 湖南都市
-        url: https://live.mgtv.com/?channelId=346
+        url: https://www.mgtv.com/live/?tag=湖南都市
       - name: 湖南电视剧
-        url: https://live.mgtv.com/?channelId=484
+        url: https://www.mgtv.com/live/?tag=湖南电视剧
       - name: 金鹰纪实
-        url: https://live.mgtv.com/?channelId=316
+        url: https://www.mgtv.com/live/?tag=金鹰纪实
       - name: 湖南爱晚
-        url: https://live.mgtv.com/?channelId=261
+        url: https://www.mgtv.com/live/?tag=湖南爱晚
       - name: 国际频道
-        url: https://live.mgtv.com/?channelId=229
+        url: https://www.mgtv.com/live/?tag=国际频道
       - name: 先锋乒羽
-        url: https://live.mgtv.com/?channelId=329
+        url: https://www.mgtv.com/live/?tag=先锋乒羽
       - name: 茶频道
-        url: https://live.mgtv.com/?channelId=578
+        url: https://www.mgtv.com/live/?tag=茶频道
       - name: 快乐垂钓
-        url: https://live.mgtv.com/?channelId=218
+        url: https://www.mgtv.com/live/?tag=快乐垂钓
       - name: 长沙新闻综合
-        url: https://live.mgtv.com/?channelId=269
+        url: https://www.mgtv.com/live/?tag=长沙新闻综合
       - name: 长沙政法
-        url: https://live.mgtv.com/?channelId=254
+        url: https://www.mgtv.com/live/?tag=长沙政法
       - name: 湘西文化旅游
         url: https://web.guangdianyun.tv/tv/2582?uin=3815&aid=17hnxxz&pt=2&fxbs=1
       - name: 湘西综合
