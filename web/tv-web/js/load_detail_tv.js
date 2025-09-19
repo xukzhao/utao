@@ -10,9 +10,9 @@ if(typeof _tvload == "undefined"){
         return ;
     }*/
     function loadDetailByUrl(url){
-        if(url.startsWith("https://www.yangshipin.cn/tv/home")){
+       /* if(url.startsWith("https://www.yangshipin.cn/tv/home")){
             return "cctv";
-        }
+        }*/
         if(url.startsWith("https://tv.cctv.com/live")){
             return "tv/cctv";
         }

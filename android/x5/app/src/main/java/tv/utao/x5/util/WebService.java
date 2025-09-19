@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
-import tv.utao.x5.BaseWebViewActivity;
 import tv.utao.x5.MyApplication;
 
 public class WebService extends NanoHTTPD {
@@ -55,9 +54,9 @@ public class WebService extends NanoHTTPD {
             Util.mainHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if(null!=BaseWebViewActivity.mWebView){
-                        BaseWebViewActivity.mWebView.loadUrl(url);
-                    }
+                   /* if(null!=BaseActivity.getmWebView()){
+                        BaseActivity.getmWebView().loadUrl(url);
+                    }*/
                 }
             });
 
