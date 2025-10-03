@@ -99,6 +99,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.mgtv.com/live")){
             return "tv/hntv"
         }
+        if(url.startsWith("https://www.cbg.cn/")){
+            return "tv/cqtv";
+        }
         return "tv/common"
     }
     _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));

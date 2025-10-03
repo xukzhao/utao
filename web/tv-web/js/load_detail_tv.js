@@ -57,21 +57,26 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.nmtv.cn")){
             return "tv/nmtv"
         }
+        if(url.startsWith("https://www.mgtv.com/live")){
+            return "tv/hntv"
+        }
+        if(url.startsWith("https://www.cbg.cn/")){
+            return "tv/cqtv";
+        }
         return "tv/common"
     }
     let detailPath=loadDetailByUrl(window.location.href);
     console.log("detailPath:: "+detailPath);
+    if(window.location.href.startsWith("https://www.huya.com")){
+        _tvLoadRes.css(`https://www.huya.com/tv-web/css/my.css`);
+        _tvLoadRes.js(`https://www.huya.com/tv-web/js/zepto.min.js?v=x`);
+        _tvLoadRes.js(`https://www.huya.com/tv-web/js/common.js?v=x`);
+        _tvLoadRes.js(`https://www.huya.com/tv-web/js/${detailPath}/detail.js`);
+        return;
+    }
     _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));
     _tvLoadRes.js(_browser.getURL("js/zepto.min.js?v=x"));
     _tvLoadRes.js(_browser.getURL("js/common.js?v=x"));
-    //_tvLoadRes.js(_browser.getURL("js/myfocus.js?v=x"));
-   // _tvLoadRes.js(_browser.getURL("js/vuex.min.js?v=x"));
-   // _tvLoadRes.js(_browser.getURL(`js/tv/common.js?v=x`));
-    /*if(detailPath.startsWith("tv/")){
-        _tvLoadRes.js(_browser.getURL(`js/tv/common.js?v=x`));
-    }else{
-        _tvLoadRes.js(_browser.getURL("js/detailBase.js?v=x"));
-    }*/
     _tvLoadRes.js(_browser.getURL(`js/${detailPath}/detail.js?v=x`));//"js/youku/detail.js?v=x"
 
 })();

@@ -315,7 +315,99 @@ var _tvFunc={
          }
      }
      return false;
-   }
+   },
+    //网友改
+    waitForVideoElement() {
+        const timeout = 1000 * 35;  //************************
+        return new Promise((resolve) => {
+                // 优先查找已存在的 video 元素
+                const existing = document.querySelector('video');
+                if (existing) {
+                    //_apiX.videoFind("ok");
+                    resolve(existing);
+                    return;
+                }
+
+                const startTime = Date.now();
+                let intervalId = null;
+
+                // 使用 MutationObserver 监听 DOM 变化
+                const observer = new MutationObserver(() => {
+                        const video = document.querySelector('video');
+                        if (video) {
+                            observer.disconnect();
+                            clearInterval(intervalId);
+                            //_apiX.videoFind("ok");
+                            resolve(video);
+                        }
+                    }
+                );
+
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+
+                // 每隔 200ms 轮询一次作为兜底
+                intervalId = setInterval(() => {
+                    const video = document.querySelector('video');
+                    if (video) {
+                        observer.disconnect();
+                        clearInterval(intervalId);
+                        //_apiX.videoFind("ok");
+                        resolve(video);
+                    } else if (Date.now() - startTime >= timeout) {
+                        observer.disconnect();
+                        clearInterval(intervalId);
+                        //_apiX.toast(timeout / 1000 + "秒，未找到资源。系统重新加载！");
+                        resolve(null);
+                    }
+                }, 200);
+            }
+        );
+    },
+    async waitForVideoPlay(video, timeout) {
+        if (!video)
+            video = await this.waitForVideoElement();
+        if (!video) {
+            return Promise.resolve(false);
+        }
+
+        if (this.isVideoPlaying(video)) {
+            return Promise.resolve(true);
+        }
+
+        return new Promise((resolve) => {
+                const startTime = Date.now();
+                timeout = timeout || 1000 * 35; //************************
+                const check = () => {
+                    if (this.isVideoPlaying(video)) {
+                        resolve(true);
+
+                        // 注册卡顿回调
+                        const stallDetector = new VideoStallDetector(video);
+                        stallDetector.onStall = (reason) => {
+                            if (reason.toLowerCase() != 'buffering' && reason.toLowerCase() != 'readystate') {
+                                _apiX.toast('卡顿原因：' + reason + "。系统重新加载！");
+                                _apiX.msg("tobackup", "{}");
+                            } else {//_apiX.toast('卡顿原因：' + reason);
+                            }
+                        };
+
+                    } else if (Date.now() - startTime >= timeout) {
+                        //_apiX.toast(timeout / 1000 + "秒，视频未播放。系统重新加载！");
+                        resolve(false);
+                    } else {
+                        setTimeout(check, 200); // 每 200ms 检查一次
+                    }
+                };
+                check();
+            }
+        );
+    },
+    isVideoPlaying(video) {
+        return video.readyState > 2 && !video.paused && !video.ended && video.currentTime > 0;
+    }
 };
 var _apiX={
     userAgent(isH5){
@@ -553,4 +645,73 @@ var _layer={
 }
 var _tvMsg={
     notVip:" 建议在拼多多/抖音/淘宝等购物软件里搜索购买"
+}
+
+class VideoStallDetector {
+    constructor(videoElement, options = {}) {
+        this.video = videoElement;
+        this.checkInterval = options.checkInterval || 1000 * 60;
+        // 默认60秒检查一次
+        this.stallTimeThreshold = options.stallTimeThreshold || 60;
+        // 默认60秒未更新时间视为卡顿
+        this.lastTimeUpdate = 0;
+        this.isStalled = false;
+
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+        this.startPeriodicCheck();
+    }
+
+    bindEvents() {
+        this.video.addEventListener('waiting', this.handleWaiting.bind(this));
+        this.video.addEventListener('timeupdate', this.handleTimeUpdate.bind(this));
+    }
+
+    handleWaiting() {
+        //console.log('视频正在缓冲，可能卡住了');
+        //if (this.onStall) this.onStall('网络掉线，正在缓冲');
+        if (this.onStall)
+            this.onStall('Buffering');
+    }
+
+    handleTimeUpdate() {
+        const currentTime = this.video.currentTime;
+        if (currentTime === this.lastTimeUpdate) {
+            // 如果连续两次时间未更新，可能卡住了
+            if (!this.isStalled) {
+                this.isStalled = true;
+                setTimeout(() => {
+                    if (this.video.currentTime === currentTime) {
+                        //console.log(`视频卡住超过 ${this.stallTimeThreshold} 秒`);
+                        //if (this.onStall) this.onStall('timeupdate');
+                        if (this.onStall)
+                            this.onStall(`视频进度更新超 ${this.stallTimeThreshold} 秒`);
+                    }
+                    this.isStalled = false;
+                }, this.stallTimeThreshold * 1000);
+            }
+        } else {
+            this.isStalled = false;
+        }
+        this.lastTimeUpdate = currentTime;
+    }
+
+    startPeriodicCheck() {
+        setInterval(() => {
+            if (!this.video.paused && this.video.readyState < this.video.HAVE_FUTURE_DATA) {
+                //console.log('视频可能卡住了：没有足够的数据可以播放');
+                //if (this.onStall) this.onStall('没有足够的数据可以播放');
+                if (this.onStall)
+                    this.onStall('readyState');
+            }
+        }, this.checkInterval);
+    }
+
+    // 设置回调函数
+    onStall(callback) {
+        this.onStall = callback;
+    }
 }

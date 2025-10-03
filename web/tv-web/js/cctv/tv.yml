@@ -184,7 +184,54 @@ data:
       - name: 深圳少儿
         url: https://www.sztv.com.cn/pindao/index.html?id=7881
       - name: 金鹰卡通
-        url: https://live.mgtv.com/?channelId=287
+        url: https://www.mgtv.com/live/?tag=金鹰卡通
+  - tag: gdtv
+    name: 虎牙直播
+    vods:
+      - name: 放松音乐
+        url: https://www.huya.com/21241811
+      - name: 百家讲坛
+        url: https://www.huya.com/11602032
+      - name: 陈翔六点半
+        url: https://www.huya.com/11274154
+      - name: 猫和老鼠
+        url: https://www.huya.com/11352879
+      - name: 机器猫
+        url: https://www.huya.com/11601963
+      - name: 七龙珠
+        url: https://www.huya.com/11601966
+      - name: 海绵宝宝
+        url: https://www.huya.com/11352919
+      - name: 茶啊二中
+        url: https://www.huya.com/11213191
+      - name: 星爷
+        url: https://www.huya.com/11336587
+      - name: 刘德华
+        url: https://www.huya.com/11342424
+      - name: 喜剧
+        url: https://www.huya.com/11352877
+      - name: 漫威
+        url: https://www.huya.com/11602034
+      - name: 电影001
+        url: https://www.huya.com/11342428
+      - name: 电影002
+        url: https://www.huya.com/21059577
+      - name: 春晚小品1
+        url: https://www.huya.com/11602068
+      - name: 春晚小品2
+        url: https://www.huya.com/29982631
+      - name: 电影1
+        url: https://www.huya.com/11352887
+      - name: 电影2
+        url: https://www.huya.com/11352884
+      - name: 贺岁电影1
+        url: https://www.huya.com/11601986
+      - name: 贺岁电影2
+        url: https://www.huya.com/11601971
+      - name: LPL
+        url: https://www.huya.com/lpl
+      - name: lck
+        url: https://www.huya.com/lck
   - tag: gdtv
     name: 广东
     vods:
@@ -319,36 +366,389 @@ data:
         url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=3
       - name: 潍坊科教文旅
         url: http://www.wfcmw.cn/wfrtv_pdLive.html?tv=4
-      - name: 青岛李沧
-        url: https://iapp.licangmedia.cn/share/dHZsLTE3My0x.html
-      - name: 青岛崂山
-        url: https://iapp.laoshanrongmei.cn/share/dHZsLTI5NS0x.html
-      - name: 城阳综合
-        url: https://iapp.hichengyang.cn/share/dHZsLTQwMy01.html
-      - name: 胶州综合
-        url: https://iapp.yunshangjiaozhou.cn/share/dHZsLTMwNS0x.html
-      - name: 胶州生活
-        url: https://iapp.yunshangjiaozhou.cn/share/dHZsLTMwNS0z.html
-      - name: 黄岛综合
-        url: https://iapp.qwmedia.cn/share/dHZsLTIyNy0x.html
-      - name: 黄岛生活
-        url: https://iapp.qwmedia.cn/share/dHZsLTIyNy0z.html
-      - name: 即墨综合
-        url: https://iapp.jimorongmei.com/share/dHZsLTIyMS0y.html
       - name: 即墨生活服务
-        url: https://iapp.jimorongmei.com/share/dHZsLTIyMS0z.html
+        url: https://iapp.jimorongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.jimorongmei.com/share/dHZsLTIyMS0z.html
+
+      - name: 长清新闻
+        url: https://iapp.jncqrm.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.jncqrm.cn/share/dHZsLTE3MS0y.html
+      - name: 长清生活
+        url: https://iapp.jncqrm.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.jncqrm.cn/share/dHZsLTE3MS0yMA.html
+      - name: 济铁电视台
+        url: https://jnjapp.jntlj.com/tv-web/js/tv/iapp/live.html?url=https://jnjapp.jntlj.com/share/dHZsLTMwMy0x.html
+      - name: 济阳综合
+        url: https://iapp.jiyangrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.jiyangrongmei.cn/share/dHZsLTg1LTE.html
+      - name: 济阳影视
+        url: https://iapp.jiyangrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.jiyangrongmei.cn/share/dHZsLTg1LTI.html
+      - name: 平阴乡村振兴
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTI1Ny0z.html
+      - name: 商河综合
+        url: https://iapp.shxrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.shxrmtzx.com/share/dHZsLTk3LTE.html
+      - name: 商河影视
+        url: https://iapp.shxrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.shxrmtzx.com/share/dHZsLTk3LTI.html
+      - name: 章丘综合
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTE5NS0x.html
+      - name: 章丘公共
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTE5NS0y.html
+      - name: 东营区新闻综合
+        url: https://iapp.zhidongyingapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.zhidongyingapp.com/share/dHZsLTE2My01.html
+      - name: 东营区科教影视
+        url: https://iapp.zhidongyingapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.zhidongyingapp.com/share/dHZsLTE2My03.html
+      - name: 广饶综合
+        url: https://iapp.grxrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.grxrmtzx.com/share/dHZsLTIzNy0x.html
+      - name: 广饶科教文艺
+        url: https://iapp.grxrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.grxrmtzx.com/share/dHZsLTIzNy01.html
+      - name: 利津综合
+        url: https://iapp.lijinnews.com/tv-web/js/tv/iapp/live.html?url=https://iapp.lijinnews.com/share/dHZsLTE1My0x.html
+      - name: 利津文化生活
+        url: https://iapp.lijinnews.com/tv-web/js/tv/iapp/live.html?url=https://iapp.lijinnews.com/share/dHZsLTE1My0z.html
+      - name: 城阳综合
+        url: https://iapp.hichengyang.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.hichengyang.cn/share/dHZsLTQwMy01.html
+      - name: 黄岛综合
+        url: https://iapp.qwmedia.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.qwmedia.cn/share/dHZsLTIyNy0x.html
+      - name: 黄岛生活
+        url: https://iapp.qwmedia.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.qwmedia.cn/share/dHZsLTIyNy0z.html
+      - name: 即墨综合
+        url: https://iapp.jimorongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.jimorongmei.com/share/dHZsLTIyMS0y.html
+      - name: 胶州综合
+        url: https://iapp.yunshangjiaozhou.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.yunshangjiaozhou.cn/share/dHZsLTMwNS0x.html
+      - name: 胶州生活
+        url: https://iapp.yunshangjiaozhou.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.yunshangjiaozhou.cn/share/dHZsLTMwNS0z.html
+      - name: 李沧TV
+        url: https://iapp.licangmedia.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.licangmedia.cn/share/dHZsLTE3My0x.html
+      - name: 崂山TV
+        url: https://iapp.laoshanrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laoshanrongmei.cn/share/dHZsLTI5NS0x.html
       - name: 莱西综合
-        url: https://iapp.laixirongmei.cn/share/dHZsLTI1My0x.html
+        url: https://iapp.laixirongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laixirongmei.cn/share/dHZsLTI1My0x.html
       - name: 莱西生活
-        url: https://iapp.laixirongmei.cn/share/dHZsLTI1My0z.html
+        url: https://iapp.laixirongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laixirongmei.cn/share/dHZsLTI1My0z.html
       - name: 平度新闻综合
-        url: https://iapp.aipingduapp.com/share/dHZsLTQ1LTQ.html
+        url: https://iapp.aipingduapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.aipingduapp.com/share/dHZsLTQ1LTQ.html
       - name: 平度生活服务
-        url: https://iapp.aipingduapp.com/share/dHZsLTQ1LTU.html
-      - name: 山东乐陵综合
-        url: https://iapp.dztv.tv/share/dHZsLTE3OS02OQ.html
-      - name: 山东乐陵宁津综合
-        url: https://iapp.dztv.tv/share/dHZsLTE3OS02Mw.html
+        url: https://iapp.aipingduapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.aipingduapp.com/share/dHZsLTQ1LTU.html
+      - name: 潍坊新闻综合
+        url: https://iapp.wfcmw.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wfcmw.cn/share/dHZsLTYzNS0x.html
+      - name: 潍坊生活
+        url: https://iapp.wfcmw.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wfcmw.cn/share/dHZsLTYzNS01.html
+      - name: 潍坊影视综艺
+        url: https://iapp.wfcmw.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wfcmw.cn/share/dHZsLTYzNS03.html
+      - name: 潍坊科教文旅
+        url: https://iapp.wfcmw.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wfcmw.cn/share/dHZsLTYzNS05.html
+      - name: 潍坊高新区
+        url: https://iapp.wegood.wang/tv-web/js/tv/iapp/live.html?url=https://iapp.wegood.wang/share/dHZsLTQyMS0xNA.html
+      - name: 安丘综合
+        url: https://iapp.aianqiu.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.aianqiu.cn/share/dHZsLTEzNy0z.html
+      - name: 安丘民生
+        url: https://iapp.aianqiu.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.aianqiu.cn/share/dHZsLTEzNy00.html
+      - name: 滨海新闻综合
+        url: https://iapp.wfbhrmt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wfbhrmt.cn/share/dHZsLTE5OS0x.html
+      - name: 昌乐综合
+        url: https://iapp.clxrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.clxrmtzx.cn/share/dHZsLTEtMw.html
+      - name: 昌邑综合
+        url: https://iapp.changyirongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.changyirongmei.com/share/dHZsLTQ3LTE.html
+      - name: 昌邑经济生活
+        url: https://iapp.changyirongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.changyirongmei.com/share/dHZsLTQ3LTI.html
+      - name: 坊子新闻综合
+        url: https://iapp.fzqrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.fzqrmtzx.cn/share/dHZsLTI4NS0x.html
+      - name: 高密综合
+        url: https://iapp.gaominews.com/tv-web/js/tv/iapp/live.html?url=https://iapp.gaominews.com/share/dHZsLTcxLTI0.html
+      - name: 高密党建农科
+        url: https://iapp.gaominews.com/tv-web/js/tv/iapp/live.html?url=https://iapp.gaominews.com/share/dHZsLTcxLTM4.html
+      - name: 寒亭新闻
+        url: https://iapp.httv.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.httv.cn/share/dHZsLTEzMy0x.html
+      - name: 奎文电视台
+        url: https://iapp.wfkwrm.com/tv-web/js/tv/iapp/live.html?url=https://iapp.wfkwrm.com/share/dHZsLTEyNy0xNw.html
+      - name: 临朐新闻综合
+        url: https://iapp.yunshanglinqu.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.yunshanglinqu.cn/share/dHZsLTIwNS0zOQ.html
+      - name: 青州综合##
+        url: https://iapp.qingzhounews.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.qingzhounews.cn/share/dHZsLTEyNS0y.html
+      - name: 青州文化旅游##
+        url: https://iapp.qingzhounews.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.qingzhounews.cn/share/dHZsLTEyNS0z.html
+      - name: 潍城TV
+        url: https://iapp.wcrmawckhd.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wcrmawckhd.cn/share/dHZsLTE1LTM.html
+      - name: 诸城新闻综合
+        url: https://iapp.52zhucheng.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.52zhucheng.cn/share/dHZsLTExNS0yMw.html
+      - name: 诸城生活娱乐##
+        url: https://iapp.52zhucheng.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.52zhucheng.cn/share/dHZsLTExNS0yNQ.html
+      - name: 寿光综合
+        url: https://iapp.sgrmt.com/tv-web/js/tv/iapp/live.html?url=https://iapp.sgrmt.com/share/dHZsLTI3OS0x.html
+      - name: 寿光蔬菜
+        url: https://iapp.sgrmt.com/tv-web/js/tv/iapp/live.html?url=https://iapp.sgrmt.com/share/dHZsLTI3OS0z.html
+      - name: 长岛TV
+        url: https://iapp.changdaohao.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.changdaohao.cn/share/dHZsLTE3NS0x.html
+      - name: 福山综合
+        url: https://iapp.fuzaifushan.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.fuzaifushan.cn/share/dHZsLTE4OS00.html
+      - name: 福山生活##
+        url: https://iapp.fuzaifushan.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.fuzaifushan.cn/share/dHZsLTE4OS05.html
+      - name: 海阳综合
+        url: https://iapp.hyzc.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.hyzc.cn/share/dHZsLTI1NS0x.html
+      - name: 龙口综合
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTU3LTE.html
+      - name: 莱山综合
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTI0NS00.html
+      - name: 莱山影视
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTI0NS02.html
+      - name: 莱阳综合
+        url: https://iapp.laiyangrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laiyangrongmei.cn/share/dHZsLTI0MS00.html
+      - name: 莱阳民生综艺
+        url: https://iapp.laiyangrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laiyangrongmei.cn/share/dHZsLTI0MS03.html
+      - name: 莱州综合
+        url: https://iapp.laizhourongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laizhourongmei.cn/share/dHZsLTIzOS0x.html
+      - name: 牟平综合
+        url: https://iapp.mprmt.com/tv-web/js/tv/iapp/live.html?url=https://iapp.mprmt.com/share/dHZsLTI4MS0x.html
+      - name: 蓬莱综艺
+        url: https://iapp.xianjingpenglai.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.xianjingpenglai.cn/share/dHZsLTEwOS0y.html
+      - name: 栖霞综合
+        url: https://iapp.aiqixiaapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.aiqixiaapp.com/share/dHZsLTE2NS0xMg.html
+      - name: 栖霞苹果
+        url: https://iapp.aiqixiaapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.aiqixiaapp.com/share/dHZsLTE2NS0xNA.html
+      - name: 招远综合
+        url: https://iapp.zhaoyuanrongmei.com.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.zhaoyuanrongmei.com.cn/share/dHZsLTU1LTI.html
+      - name: 招远综艺
+        url: https://iapp.zhaoyuanrongmei.com.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.zhaoyuanrongmei.com.cn/share/dHZsLTU1LTQ.html
+      - name: 博山新闻
+        url: https://iapp.boshanhao.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.boshanhao.cn/share/dHZsLTE3LTg.html
+      - name: 博山图文
+        url: https://iapp.boshanhao.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.boshanhao.cn/share/dHZsLTE3LTk.html
+      - name: 高青综合
+        url: https://iapp.gqxrmt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.gqxrmt.cn/share/dHZsLTYxLTE.html
+      - name: 高青影视
+        url: https://iapp.gqxrmt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.gqxrmt.cn/share/dHZsLTYxLTI.html
+      - name: 桓台综合
+        url: https://iapp.htxw.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.htxw.cn/share/dHZsLTIzLTE1.html
+      - name: 桓台影视
+        url: https://iapp.htxw.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.htxw.cn/share/dHZsLTIzLTE2.html
+      - name: 临淄新闻综合
+        url: https://iapp.linzirongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.linzirongmei.cn/share/dHZsLTE1MS02.html
+      - name: 临淄生活服务
+        url: https://iapp.linzirongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.linzirongmei.cn/share/dHZsLTE1MS03.html
+      - name: 沂源综合
+        url: https://iapp.yyrmapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.yyrmapp.com/share/dHZsLTIwMy02.html
+      - name: 沂源生活
+        url: https://iapp.yyrmapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.yyrmapp.com/share/dHZsLTIwMy03.html
+      - name: 淄川新闻
+        url: https://iapp.zichuanrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.zichuanrongmei.cn/share/dHZsLTc1LTE.html
+      - name: 张店1
+        url: https://iapp.aizhangdian.com/tv-web/js/tv/iapp/live.html?url=https://iapp.aizhangdian.com/share/dHZsLTEwMS0x.html
+      - name: 张店2
+        url: https://iapp.aizhangdian.com/tv-web/js/tv/iapp/live.html?url=https://iapp.aizhangdian.com/share/dHZsLTEwMS02.html
+      - name: 周村新闻
+        url: https://iapp.izhoucun.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.izhoucun.cn/share/dHZsLTI1OS0x.html
+      - name: 周村生活
+        url: https://iapp.izhoucun.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.izhoucun.cn/share/dHZsLTI1OS0z.html
+      - name: 山亭综合
+        url: https://iapp.stqrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.stqrmtzx.com/share/dHZsLTI0My0x.html
+      - name: 枣庄市中综合
+        url: https://iapp.zzszrm.com/tv-web/js/tv/iapp/live.html?url=https://iapp.zzszrm.com/share/dHZsLTIzMy0x.html
+      - name: 滕州综合
+        url: https://iapp.tzrmt.com/tv-web/js/tv/iapp/live.html?url=https://iapp.tzrmt.com/share/dHZsLTEwMy0y.html
+      - name: 薛城新闻综合
+        url: https://iapp.aixuechengapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.aixuechengapp.com/share/dHZsLTM3LTg.html
+      - name: 峄城综合
+        url: https://iapp.yilan-app.com/tv-web/js/tv/iapp/live.html?url=https://iapp.yilan-app.com/share/dHZsLTIwOS0x.html
+      - name: 滨城TV
+        url: https://iapp.binchengrongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.binchengrongmei.com/share/dHZsLTI0OS0zNQ.html
+      - name: 惠民综合
+        url: https://iapp.aihuimin.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.aihuimin.cn/share/dHZsLTIxMS0y.html
+      - name: 惠民影视
+        url: https://iapp.aihuimin.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.aihuimin.cn/share/dHZsLTIxMS0z.html
+      - name: 无棣综合
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTE2OS0x.html
+      - name: 无棣综艺
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTE2OS0yMQ.html
+      - name: 阳信新闻综合
+        url: https://iapp.yangxinrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.yangxinrongmei.cn/share/dHZsLTIxNy0x.html
+      - name: 沾化综合
+        url: https://iapp.zhanhuarongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.zhanhuarongmei.cn/share/dHZsLTI3Ny0x.html
+      - name: 沾化综艺
+        url: https://iapp.zhanhuarongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.zhanhuarongmei.cn/share/dHZsLTI3Ny05.html
+      - name: 德州经济生活
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS0y.html
+      - name: 德州图文
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS05.html
+      - name: 陵城综合
+        url: https://iapp.lxgdw.com/tv-web/js/tv/iapp/live.html?url=https://iapp.lxgdw.com/share/dHZsLTIxNS02.html
+      - name: 陵城综合2
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS0zNg.html
+      - name: 乐陵新闻综合
+        url: https://iapp.laolingrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laolingrongmei.cn/share/dHZsLTI2Ny0x.html
+      - name: 乐陵城市生活
+        url: https://iapp.laolingrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.laolingrongmei.cn/share/dHZsLTI2Ny01.html
+      - name: 临邑1
+        url: https://iapp.lyxrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.lyxrmtzx.com/share/dHZsLTQ5LTM.html
+      - name: 宁津综合
+        url: https://iapp.njxrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.njxrmtzx.cn/share/dHZsLTE5My0x.html
+      - name: 平原综合
+        url: https://iapp.pyxwapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.pyxwapp.com/share/dHZsLTE5LTI.html
+      - name: 庆云综合
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS02NQ.html
+      - name: 武城综合
+        url: https://iapp.wuchengrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wuchengrmtzx.cn/share/dHZsLTMzLTQ.html
+      - name: 武城综艺影视
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS01OA.html
+      - name: 夏津综合
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS0yMQ.html
+      - name: 夏津公共
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS0yMw.html
+      - name: 禹城综合
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS00OA.html
+      - name: 禹城综艺
+        url: https://iapp.dztv.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.dztv.tv/share/dHZsLTE3OS01MA.html
+      - name: 成武综合
+        url: https://iapp.cwcmc.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.cwcmc.cn/share/dHZsLTEzMS0x.html
+      - name: 成武综艺
+        url: https://iapp.cwcmc.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.cwcmc.cn/share/dHZsLTEzMS0y.html
+      - name: 曹县综合
+        url: https://iapp.caoxianrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.caoxianrongmei.cn/share/dHZsLTg3LTI.html
+      - name: 东明新闻综合
+        url: https://iapp.dongmingrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.dongmingrongmei.cn/share/dHZsLTExMS0y.html
+      - name: 定陶新闻
+        url: https://iapp.aidingtao.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.aidingtao.cn/share/dHZsLTI3LTc.html
+      - name: 巨野新闻
+        url: https://iapp.juyerongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.juyerongmei.cn/share/dHZsLTEzOS0x.html
+      - name: 牡丹区新闻综合
+        url: https://iapp.hzmdrm.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.hzmdrm.cn/share/dHZsLTIxOS02.html
+      - name: 牡丹区综艺
+        url: https://iapp.hzmdrm.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.hzmdrm.cn/share/dHZsLTIxOS0xNw.html
+      - name: 单县综合
+        url: https://iapp.sdmlsz.com/tv-web/js/tv/iapp/live.html?url=https://iapp.sdmlsz.com/share/dHZsLTE1NS0y.html
+      - name: 郓城新闻
+        url: https://iapp.ycrmtzx.com.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.ycrmtzx.com.cn/share/dHZsLTEzNS0z.html
+      - name: 郓城综艺
+        url: https://iapp.ycrmtzx.com.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.ycrmtzx.com.cn/share/dHZsLTEzNS0y.html
+      - name: 金乡综合
+        url: https://iapp.jxrm.net/tv-web/js/tv/iapp/live.html?url=https://iapp.jxrm.net/share/dHZsLTEyOS0y.html
+      - name: 金乡生活
+        url: https://iapp.jxrm.net/tv-web/js/tv/iapp/live.html?url=https://iapp.jxrm.net/share/dHZsLTEyOS00.html
+      - name: 梁山综合
+        url: https://iapp.lsrmapp.com/tv-web/js/tv/iapp/live.html?url=https://iapp.lsrmapp.com/share/dHZsLTg5LTE.html
+      - name: 曲阜新闻综合
+        url: https://iapp.jinriqufu.com/tv-web/js/tv/iapp/live.html?url=https://iapp.jinriqufu.com/share/dHZsLTEzLTE.html
+      - name: 任城新闻综合
+        url: https://iapp.rcrmt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.rcrmt.cn/share/dHZsLTczLTg.html
+      - name: 任城影视娱乐
+        url: https://iapp.rcrmt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.rcrmt.cn/share/dHZsLTczLTk.html
+      - name: 泗水新闻综合
+        url: https://iapp.sishuitv.com/tv-web/js/tv/iapp/live.html?url=https://iapp.sishuitv.com/share/dHZsLTExNy01.html
+      - name: 泗水文化生活
+        url: https://iapp.sishuitv.com/tv-web/js/tv/iapp/live.html?url=https://iapp.sishuitv.com/share/dHZsLTExNy02.html
+      - name: 汶上综合
+        url: https://iapp.wstvs.com/tv-web/js/tv/iapp/live.html?url=https://iapp.wstvs.com/share/dHZsLTMwMS0x.html
+      - name: 鱼台新闻
+        url: https://iapp.ytxrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.ytxrmtzx.com/share/dHZsLTYzLTU.html
+      - name: 鱼台生活
+        url: https://iapp.ytxrmtzx.com/tv-web/js/tv/iapp/live.html?url=https://iapp.ytxrmtzx.com/share/dHZsLTYzLTE1.html
+      - name: 兖州新闻
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTIzMS0x.html
+      - name: 兖州生活
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTIzMS0z.html
+      - name: 茌平综合
+        url: https://iapp.cprmtvs.com/tv-web/js/tv/iapp/live.html?url=https://iapp.cprmtvs.com/share/dHZsLTMxLTY.html
+      - name: 茌平生活
+        url: https://iapp.cprmtvs.com/tv-web/js/tv/iapp/live.html?url=https://iapp.cprmtvs.com/share/dHZsLTMxLTg.html
+      - name: 东昌综合
+        url: https://iapp.dcfrm.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.dcfrm.cn/share/dHZsLTI2NS0x.html
+      - name: 东阿综合
+        url: https://iapp.decmc.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.decmc.cn/share/dHZsLTk1LTIy.html
+      - name: 东阿综艺
+        url: https://iapp.decmc.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.decmc.cn/share/dHZsLTk1LTI5.html
+      - name: 高唐综合
+        url: https://iapp.gaotangrongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.gaotangrongmei.com/share/dHZsLTQzLTE.html
+      - name: 高唐综艺
+        url: https://iapp.gaotangrongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.gaotangrongmei.com/share/dHZsLTQzLTU.html
+      - name: 冠县综合
+        url: https://iapp.guanxianrongmei.com/tv-web/js/tv/iapp/live.html?url=https://iapp.guanxianrongmei.com/share/dHZsLTc5LTE.html
+      - name: 临清综合
+        url: https://iapp.lqrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.lqrmtzx.cn/share/dHZsLTY1LTI.html
+      - name: 临清经济信息
+        url: https://iapp.lqrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.lqrmtzx.cn/share/dHZsLTY1LTU.html
+      - name: 费县综合
+        url: https://iapp.feixianshoufa.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.feixianshoufa.cn/share/dHZsLTQxLTExOQ.html
+      - name: 费县生活
+        url: https://iapp.feixianshoufa.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.feixianshoufa.cn/share/dHZsLTQxLTExNw.html
+      - name: 河东综合
+        url: https://iapp.lyhedong.com/tv-web/js/tv/iapp/live.html?url=https://iapp.lyhedong.com/share/dHZsLTE5MS0x.html
+      - name: 河东影视
+        url: https://iapp.lyhedong.com/tv-web/js/tv/iapp/live.html?url=https://iapp.lyhedong.com/share/dHZsLTE5MS0y.html
+      - name: 莒南综合
+        url: https://iapp.junanrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.junanrongmei.cn/share/dHZsLTEwNS00.html
+      - name: 莒南影视
+        url: https://iapp.junanrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.junanrongmei.cn/share/dHZsLTEwNS01.html
+      - name: 兰山综合
+        url: https://iapp.lylsrm.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.lylsrm.cn/share/dHZsLTIwMS0x.html
+      - name: 临沭综合
+        url: https://iapp.sdlsrm.com/tv-web/js/tv/iapp/live.html?url=https://iapp.sdlsrm.com/share/dHZsLTE2Ny0z.html
+      - name: 临沭生活
+        url: https://iapp.sdlsrm.com/tv-web/js/tv/iapp/live.html?url=https://iapp.sdlsrm.com/share/dHZsLTE2Ny00.html
+      - name: 罗庄综合
+        url: https://iapp.luozhuangshoufa.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.luozhuangshoufa.cn/share/dHZsLTE0Ny0x.html
+      - name: 罗庄影视
+        url: https://iapp.luozhuangshoufa.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.luozhuangshoufa.cn/share/dHZsLTE0Ny0xNw.html
+      - name: 蒙阴综合
+        url: https://iapp.mengyinshoufa.com/tv-web/js/tv/iapp/live.html?url=https://iapp.mengyinshoufa.com/share/dHZsLTE2MS0xMw.html
+      - name: 蒙阴2套
+        url: https://iapp.mengyinshoufa.com/tv-web/js/tv/iapp/live.html?url=https://iapp.mengyinshoufa.com/share/dHZsLTE2MS0xNQ.html
+      - name: 平邑综合
+        url: https://iapp.pyxrmt.com.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.pyxrmt.com.cn/share/dHZsLTM0NS00.html
+      - name: 平邑生活
+        url: https://iapp.pyxrmt.com.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.pyxrmt.com.cn/share/dHZsLTM0NS0xNA.html
+      - name: 郯城综合
+        url: https://iapp.tanchengtv.com/tv-web/js/tv/iapp/live.html?url=https://iapp.tanchengtv.com/share/dHZsLTgzLTE.html
+      - name: 郯城2套
+        url: https://iapp.tanchengtv.com/tv-web/js/tv/iapp/live.html?url=https://iapp.tanchengtv.com/share/dHZsLTgzLTI.html
+      - name: 沂南综合
+        url: https://iapp.12345yinanshoufa.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.12345yinanshoufa.cn/share/dHZsLTE3Ny02.html
+      - name: 沂南红色影视
+        url: https://iapp.12345yinanshoufa.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.12345yinanshoufa.cn/share/dHZsLTE3Ny03.html
+      - name: 沂水综合
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTE0NS0x.html
+      - name: 沂水生活
+        url: https://app.litenews.cn/tv-web/js/tv/iapp/live.html?url=https://app.litenews.cn/share/dHZsLTE0NS0y.html
+      - name: 莒县综合
+        url: https://iapp.jxrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.jxrmtzx.cn/share/dHZsLTE1OS0yMw.html
+      - name: 莒县2套
+        url: https://iapp.jxrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.jxrmtzx.cn/share/dHZsLTE1OS0yNw.html
+      - name: 五莲综合
+        url: https://iapp.wltvlive.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wltvlive.cn/share/dHZsLTI5OS0xMA.html
+      - name: 五莲文化旅游
+        url: https://iapp.wltvlive.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.wltvlive.cn/share/dHZsLTI5OS0xMg.html
+      - name: 东平综合
+        url: https://iapp.dpsjt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.dpsjt.cn/share/dHZsLTE4Ny05.html
+      - name: 东平民生
+        url: https://iapp.dpsjt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.dpsjt.cn/share/dHZsLTE4Ny0xMQ.html
+      - name: 岱岳TV
+        url: https://iapp.daiyuerongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.daiyuerongmei.cn/share/dHZsLTI5My0x.html
+      - name: 肥城生活
+        url: https://iapp.fcrmt.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.fcrmt.cn/share/dHZsLTUxLTY.html
+      - name: 宁阳综合
+        url: https://iapp.nyxrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.nyxrmtzx.cn/share/dHZsLTEyMy0x.html
+      - name: 宁阳2套
+        url: https://iapp.nyxrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.nyxrmtzx.cn/share/dHZsLTEyMy03.html
+      - name: 泰山TV
+        url: https://iapp.tsqrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.tsqrmtzx.cn/share/dHZsLTI2My0x.html
+      - name: 新泰综合
+        url: https://iapp.xintairongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.xintairongmei.cn/share/dHZsLTU5LTI.html
+      - name: 新泰乡村
+        url: https://iapp.xintairongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.xintairongmei.cn/share/dHZsLTU5LTM.html
+      - name: 威海新闻综合
+        url: https://iapp.weihai.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.weihai.tv/share/dHZsLTE1Ny0x.html
+      - name: 威海都市生活
+        url: https://iapp.weihai.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.weihai.tv/share/dHZsLTE1Ny0z.html
+      - name: 威海海洋
+        url: https://iapp.weihai.tv/tv-web/js/tv/iapp/live.html?url=https://iapp.weihai.tv/share/dHZsLTE1Ny0xMg.html
+      - name: 威海环翠综合
+        url: https://iapp.whhccm.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.whhccm.cn/share/dHZsLTIxMy01.html
+      - name: 荣成综合
+        url: https://iapp.rcsrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.rcsrmtzx.cn/share/dHZsLTc3LTEw.html
+      - name: 荣成生活
+        url: https://iapp.rcsrmtzx.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.rcsrmtzx.cn/share/dHZsLTc3LTEx.html
+      - name: 乳山综合
+        url: https://iapp.rushanrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.rushanrongmei.cn/share/dHZsLTE0My04.html
+      - name: 乳山生活
+        url: https://iapp.rushanrongmei.cn/tv-web/js/tv/iapp/live.html?url=https://iapp.rushanrongmei.cn/share/dHZsLTE0My05.html
+      - name: 文登TV1
+        url: https://iapp.wendengsf.com/tv-web/js/tv/iapp/live.html?url=https://iapp.wendengsf.com/share/dHZsLTkxLTc.html
+      - name: 文登TV2
+        url: https://iapp.wendengsf.com/tv-web/js/tv/iapp/live.html?url=https://iapp.wendengsf.com/share/dHZsLTkxLTg.html
   - tag: cztv
     name: 浙江
     vods:
@@ -495,6 +895,8 @@ data:
         url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=8
       - name: 四川康巴卫视
         url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=9
+      - name: 重庆新闻综合
+        url: https://sj.cbg.cn/wap/list/4918/1.html?5DEFC70C1A4AOD5173881C62BD4ACAD0
       - name: 南江卫视
         url: https://web.guangdianyun.tv/tv/?id=1670&uin=1822
       - name: 泸县综合
@@ -504,7 +906,7 @@ data:
       - name: 射洪综合
         url: https://web.guangdianyun.tv/tv/?id=391&uin=1743
   - tag: hebtv
-    name: 河北
+    name: 河北河南
     vods:
       - name: 河北卫视
         url: https://www.hebtv.com/19/19js/st/xdszb/index.shtml?index=0
@@ -534,6 +936,16 @@ data:
         url: https://www.xttv.com.cn/index/channel/index/id/62.html
       - name: 邢台城市生活
         url: https://www.xttv.com.cn/index/channel/index/id/64html
+      - name: 河北卫视
+        url: https://www.hebtv.com/19/19js/st/xdszb/index.shtml?index=0
+      - name: 河南卫视
+        url: https://www.hndyjyfw.gov.cn/livePlay.html?u=14
+      - name: 河北都市
+        url: https://www.hndyjyfw.gov.cn/livePlay.html?u=13
+      - name: 河南民生
+        url: https://www.hndyjyfw.gov.cn/livePlay.html?u=15
+      - name: 河北梨园
+        url: https://www.hndyjyfw.gov.cn/livePlay.html?u=16
   - tag: gxtv
     name: 广西
     vods:
@@ -603,8 +1015,8 @@ data:
         url: https://news.hbtv.com.cn/app/tv/432
       - name: 湖北综合
         url: https://news.hbtv.com.cn/app/tv/433
-      - name: 湖北公共
-        url: https://news.hbtv.com.cn/app/tv/434
+#      - name: 湖北公共
+#        url: https://news.hbtv.com.cn/app/tv/434
       - name: 湖北影视
         url: https://news.hbtv.com.cn/app/tv/435
       - name: 湖北生活
@@ -625,10 +1037,10 @@ data:
         url: http://m-jingzhou.cjyun.org/dszb
       - name: 咸宁新闻综合
         url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=91&page=canvas&live_type=1&utaot=1&utaoId=player-con
-      - name: 恩施综合
-        url: https://web.guangdianyun.tv/tv/1812?uin=3179
-      - name: 恩施文旅
-        url: https://web.guangdianyun.tv/tv/1811?uin=3179
+#      - name: 恩施综合
+#        url: https://web.guangdianyun.tv/tv/1812?uin=3179
+#      - name: 恩施文旅
+#        url: https://web.guangdianyun.tv/tv/1811?uin=3179
   - tag: hntv
     name: 湖南
     vods:
@@ -681,7 +1093,25 @@ data:
 #        url: https://www.jxntv.cn/live/?tag=7#/jxtv8
 #      - name: 江西陶瓷
 #        url: https://www.jxntv.cn/live/?tag=8#/jxtv9
-
+  - tag: xjtvs
+    name: 新疆
+    vods:
+      - name: 新疆1套
+        url: https://www.xjtvs.com.cn/column/tv/434?channelId=1
+      - name: 新疆2套
+        url: https://www.xjtvs.com.cn/column/tv/434?channelId=3
+      - name: 新疆3套
+        url: https://www.xjtvs.com.cn/column/tv/434?channelId=4
+      - name: 新疆4套
+        url: https://www.xjtvs.com.cn/column/tv/434?channelId=16
+      - name: 新疆5套
+        url: https://www.xjtvs.com.cn/column/tv/434?channelId=17
+      - name: 新疆7套
+        url: https://www.xjtvs.com.cn/column/tv/434?channelId=21
+      - name: 新疆8套
+        url: https://www.xjtvs.com.cn/column/tv/434?channelId=23
+      - name: 八师石河子新闻综合
+        url: http://www.shznews.com/TV.html
   - tag: nmtv
     name: 内蒙古
     vods:

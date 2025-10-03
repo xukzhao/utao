@@ -154,7 +154,7 @@ public class UpdateService {
          }
         Res resNew = newConfig.getRes();
          String oldJson= FileUtil.readExt(MyApplication.getAppContext(),"tv-web/update.json");
-        LogUtil.i(TAG,"checkOnlineVersion old "+oldJson);
+        LogUtil.i(TAG," checkOnlineVersion old "+oldJson);
         if(oldJson.trim().isEmpty()){
             return;
         }
