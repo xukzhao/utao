@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+
+    <!-- 退出对话框 - 占据右侧1/3屏幕 -->
+    <LinearLayout
+        android:id="@+id/exitDialogContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- 左侧空白区域（占2/3），点击关闭对话框 -->
+        <View
+            android:id="@+id/dialogBackdrop"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#80000000"
+            android:clickable="true" />
+
+        <!-- 右侧对话框内容（占1/3） -->
+        <LinearLayout
+            android:id="@+id/exitDialogContent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E6000000"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true">
+
+            <!-- 顶部间距 -->
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <!-- 启动首页切换 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="启动首页设置"
+                    android:textColor="#CCCCCC"
+                    android:textSize="18sp"
+                    android:paddingBottom="12dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnStartMain"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="视频点播"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:background="@drawable/menu_button_background"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:clickable="true"
+                        android:nextFocusDown="@id/btnStartLive"
+                        android:nextFocusRight="@id/btnStartLive"
+                        android:nextFocusLeft="@id/btnStartLive" />
+
+                    <Button
+                        android:id="@+id/btnStartLive"
+                        android:layout_width="0dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        android:text="电视直播"
+                        android:textColor="#FFFFFF"
+                        android:textSize="18sp"
+                        android:background="@drawable/menu_button_background"
+                        android:focusable="true"
+                        android:focusableInTouchMode="false"
+                        android:clickable="true"
+                        android:nextFocusDown="@id/btnExit"
+                        android:nextFocusLeft="@id/btnStartMain"
+                        android:nextFocusRight="@id/btnStartMain" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvStartPageHint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="当前启动首页：视频点播"
+                    android:textColor="#FFCC00"
+                    android:textSize="16sp"
+                    android:gravity="center"
+                    android:paddingTop="8dp" />
+            </LinearLayout>
+
+            <!-- 分割线 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#33FFFFFF"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp" />
+
+            <!-- 操作按钮 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnExit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="12dp"
+                    android:text="退出应用"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:background="@drawable/menu_button_background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"
+                    android:nextFocusUp="@id/btnStartLive"
+                    android:nextFocusDown="@id/btnCancel" />
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="取消"
+                    android:textColor="#CCCCCC"
+                    android:textSize="18sp"
+                    android:background="@drawable/menu_button_background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"
+                    android:nextFocusUp="@id/btnExit"
+                    android:nextFocusDown="@id/btnStartMain" />
+            </LinearLayout>
+
+            <!-- 提示信息 -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="提示：再次按返回键退出应用"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
+

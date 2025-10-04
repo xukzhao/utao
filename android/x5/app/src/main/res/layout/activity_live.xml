@@ -154,5 +154,10 @@
 
             </LinearLayout>
         </LinearLayout>
+        
+        <!-- 退出对话框 -->
+        <include
+            android:id="@+id/exitDialog"
+            layout="@layout/dialog_exit" />
     </FrameLayout>
 </layout>
