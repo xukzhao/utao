@@ -23,9 +23,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://live.jstv.com")){
             return "tv/jstv"
         }
-        if(url.startsWith("https://live.kankanews.com/")){
+     /*   if(url.startsWith("https://live.kankanews.com/")){
             return "tv/sh"
-        }
+        }*/
         if(url.startsWith("https://live.fjtv.net/")){
             return "tv/fjtv"
         }

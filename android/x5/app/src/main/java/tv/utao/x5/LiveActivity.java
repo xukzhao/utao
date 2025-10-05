@@ -245,7 +245,19 @@ public class LiveActivity extends BaseActivity {
         }
         isExitDialogShowing = true;
         exitDialogBinding.exitDialogContainer.setVisibility(View.VISIBLE);
+        
+        // 设置对话框中按钮的焦点
+        exitDialogBinding.btnExit.setFocusable(true);
+        exitDialogBinding.btnCancel.setFocusable(true);
+        exitDialogBinding.btnStartToggle.setFocusable(true);
+        
+        // 设置切换按钮的文本
+        String currentStartPage = ValueUtil.getString(this, "startPage", "main");
+        exitDialogBinding.btnStartToggle.setText("切换到" + ("main".equals(currentStartPage) ? "电视直播" : "视频点播"));
+        
+        // 默认焦点在退出按钮上
         exitDialogBinding.btnExit.requestFocus();
+        
         updateStartPageHint();
     }
     
@@ -279,18 +291,21 @@ public class LiveActivity extends BaseActivity {
             hideExitDialog();
         });
         
-        // 启动首页切换 - 视频点播
-        exitDialogBinding.btnStartMain.setOnClickListener(v -> {
-            ValueUtil.putString(this, "startPage", "main");
-            ToastUtils.show(this, "已设置启动首页为：视频点播", Toast.LENGTH_SHORT);
-            hideExitDialog();
-        });
-        
-        // 启动首页切换 - 电视直播
-        exitDialogBinding.btnStartLive.setOnClickListener(v -> {
-            ValueUtil.putString(this, "startPage", "live");
-            ToastUtils.show(this, "已设置启动首页为：电视直播", Toast.LENGTH_SHORT);
-            hideExitDialog();
+        // 启动首页切换按钮
+        exitDialogBinding.btnStartToggle.setOnClickListener(v -> {
+            String currentStartPage = ValueUtil.getString(this, "startPage", "main");
+            if ("main".equals(currentStartPage)) {
+                // 当前是视频点播，切换到电视直播
+                ValueUtil.putString(this, "startPage", "live");
+                ToastUtils.show(this, "已设置启动首页为：电视直播", Toast.LENGTH_SHORT);
+                exitDialogBinding.btnStartToggle.setText("切换到视频点播");
+            } else {
+                // 当前是电视直播，切换到视频点播
+                ValueUtil.putString(this, "startPage", "main");
+                ToastUtils.show(this, "已设置启动首页为：视频点播", Toast.LENGTH_SHORT);
+                exitDialogBinding.btnStartToggle.setText("切换到电视直播");
+            }
+            updateStartPageHint();
         });
     }
     
@@ -493,7 +508,7 @@ public class LiveActivity extends BaseActivity {
         }
         
         Live currentProvince = provinces.get(currentProvinceIndex);
-        binding.provinceName.setText(currentProvince.getName() + "(" + currentProvince.getVods().size() + ")");
+        binding.provinceName.setText(currentProvince.getName());
         setupChannelList(currentProvince.getVods());
     }
 
@@ -584,7 +599,7 @@ public class LiveActivity extends BaseActivity {
     }
 
     private void setupProvinceButtons() {
-        binding.prevProvince.setOnClickListener(v -> {
+        binding.prevProvinceArea.setOnClickListener(v -> {
             currentProvinceIndex--;
             if (currentProvinceIndex < 0) {
                 currentProvinceIndex = provinces.size() - 1;
@@ -592,7 +607,7 @@ public class LiveActivity extends BaseActivity {
             showCurrentProvince();
         });
 
-        binding.nextProvince.setOnClickListener(v -> {
+        binding.nextProvinceArea.setOnClickListener(v -> {
             currentProvinceIndex++;
             if (currentProvinceIndex >= provinces.size()) {
                 currentProvinceIndex = 0;

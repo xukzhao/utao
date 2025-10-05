@@ -13,7 +13,9 @@
         android:orientation="horizontal"
         android:visibility="gone"
         android:clickable="true"
-        android:focusable="true">
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="afterDescendants">
 
         <!-- 左侧空白区域（占2/3），点击关闭对话框 -->
         <View
@@ -22,7 +24,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="#80000000"
-            android:clickable="true" />
+            android:clickable="true"
+            android:focusable="false" />
 
         <!-- 右侧对话框内容（占1/3） -->
         <LinearLayout
@@ -34,7 +37,9 @@
             android:orientation="vertical"
             android:padding="16dp"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:descendantFocusability="afterDescendants">
 
             <!-- 顶部间距 -->
             <Space
@@ -56,45 +61,19 @@
                     android:textSize="18sp"
                     android:paddingBottom="12dp" />
 
-                <LinearLayout
+                <Button
+                    android:id="@+id/btnStartToggle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btnStartMain"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="8dp"
-                        android:text="视频点播"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:background="@drawable/menu_button_background"
-                        android:focusable="true"
-                        android:focusableInTouchMode="false"
-                        android:clickable="true"
-                        android:nextFocusDown="@id/btnStartLive"
-                        android:nextFocusRight="@id/btnStartLive"
-                        android:nextFocusLeft="@id/btnStartLive" />
-
-                    <Button
-                        android:id="@+id/btnStartLive"
-                        android:layout_width="0dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        android:text="电视直播"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp"
-                        android:background="@drawable/menu_button_background"
-                        android:focusable="true"
-                        android:focusableInTouchMode="false"
-                        android:clickable="true"
-                        android:nextFocusDown="@id/btnExit"
-                        android:nextFocusLeft="@id/btnStartMain"
-                        android:nextFocusRight="@id/btnStartMain" />
-                </LinearLayout>
+                    android:layout_height="50dp"
+                    android:text="切换到电视直播"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:background="@drawable/menu_button_background"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:clickable="true"
+                    android:nextFocusDown="@id/btnExit"
+                    android:nextFocusUp="@id/btnCancel" />
 
                 <TextView
                     android:id="@+id/tvStartPageHint"
@@ -132,10 +111,11 @@
                     android:textSize="18sp"
                     android:background="@drawable/menu_button_background"
                     android:focusable="true"
-                    android:focusableInTouchMode="false"
+                    android:focusableInTouchMode="true"
                     android:clickable="true"
-                    android:nextFocusUp="@id/btnStartLive"
-                    android:nextFocusDown="@id/btnCancel" />
+                    android:nextFocusUp="@id/btnStartToggle"
+                    android:nextFocusDown="@id/btnCancel"
+                    android:defaultFocusHighlightEnabled="true" />
 
                 <Button
                     android:id="@+id/btnCancel"
@@ -149,7 +129,7 @@
                     android:focusableInTouchMode="false"
                     android:clickable="true"
                     android:nextFocusUp="@id/btnExit"
-                    android:nextFocusDown="@id/btnStartMain" />
+                    android:nextFocusDown="@id/btnStartToggle" />
             </LinearLayout>
 
             <!-- 提示信息 -->

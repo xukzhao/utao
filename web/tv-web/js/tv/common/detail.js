@@ -50,8 +50,14 @@ function setupVideo(video) {
 
     });
     let viewport = document.getElementById("viewport");
+    console.log("viewport::",viewport);
     if(viewport){
         viewport.content = "width=device-width, initial-scale=1";
+    }
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    console.log("viewportMeta::",viewportMeta);
+    if (viewportMeta) {
+        viewportMeta.setAttribute('content', `width=device-width, initial-scale=1`);
     }
   /*  _tvFunc.videoReady(function (video){
         //let elem= $$("video").prop("outerHTML");
