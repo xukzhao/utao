@@ -1,6 +1,13 @@
 if(typeof _tvload == "undefined"){
      _tvload=false;
 }
+function extractDomain(url) {
+    const match = url.match(/^(https?:\/\/[^/?#]+)/i);
+    return match ? match[1] : null;
+}
+function decodeUnicodeBase64(base64Str) {
+    return decodeURIComponent(escape(atob(base64Str)));
+}
 (function(){
     if(_tvload){
         return;
@@ -23,17 +30,11 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://live.jstv.com")){
             return "tv/jstv"
         }
-     /*   if(url.startsWith("https://live.kankanews.com/")){
-            return "tv/sh"
-        }*/
         if(url.startsWith("https://live.fjtv.net/")){
             return "tv/fjtv"
         }
         if(url.startsWith("https://www.btime.com")){
             return "tv/bjtv"
-        }
-        if(url.startsWith("https://www.jxntv.cn/")){
-            return "tv/jxntv"
         }
         if(url.startsWith("https://www.jlntv.cn/")){
             return "tv/jltv"
@@ -67,16 +68,22 @@ if(typeof _tvload == "undefined"){
     }
     let detailPath=loadDetailByUrl(window.location.href);
     console.log("detailPath:: "+detailPath);
-    if(window.location.href.startsWith("https://www.huya.com")){
-        _tvLoadRes.css(`https://www.huya.com/tv-web/css/my.css`);
-        _tvLoadRes.js(`https://www.huya.com/tv-web/js/zepto.min.js?v=x`);
-        _tvLoadRes.js(`https://www.huya.com/tv-web/js/common.js?v=x`);
-        _tvLoadRes.js(`https://www.huya.com/tv-web/js/${detailPath}/detail.js`);
+    let fullUrl=window.location.href;
+    let domain=extractDomain(fullUrl);
+    _tvLoadRes.css(domain+`/tv-web/css/my.css`);
+    _tvLoadRes.js(domain+`/tv-web/js/zepto.min.js?v=x`);
+    _tvLoadRes.js(domain+`/tv-web/js/common.js?v=x`);
+    _tvLoadRes.js(domain+`/tv-web/js/${detailPath}/detail.js`);
+/*    if(domain==="https://www.huya.com"||domain==="https://www.ntjoy.com"||domain==="https://www.tcsrm.cn"){
+        _tvLoadRes.css(domain+`/tv-web/css/my.css`);
+        _tvLoadRes.js(domain+`/tv-web/js/zepto.min.js?v=x`);
+        _tvLoadRes.js(domain+`/tv-web/js/common.js?v=x`);
+        _tvLoadRes.js(domain+`/tv-web/js/${detailPath}/detail.js`);
         return;
     }
     _tvLoadRes.css(_browser.getURL("css/my.css?v=x"));
     _tvLoadRes.js(_browser.getURL("js/zepto.min.js?v=x"));
     _tvLoadRes.js(_browser.getURL("js/common.js?v=x"));
-    _tvLoadRes.js(_browser.getURL(`js/${detailPath}/detail.js?v=x`));//"js/youku/detail.js?v=x"
+    _tvLoadRes.js(_browser.getURL(`js/${detailPath}/detail.js?v=x`));//"js/youku/detail.js?v=x"*/
 
 })();

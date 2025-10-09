@@ -12,6 +12,8 @@ import com.tencent.smtt.sdk.WebViewClient;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.text.MessageFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +22,7 @@ import tv.utao.x5.util.AppVersionUtils;
 import tv.utao.x5.util.ConstantMy;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
+import tv.utao.x5.util.JsonUtil;
 import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.TplUtil;
 import tv.utao.x5.util.Util;
@@ -164,6 +167,13 @@ public class WebViewClientImpl extends WebViewClient {
                 resp.setResponseHeaders(headerMap);
                 return resp;
             }
+            //拦截m3u8链接
+            if(url.contains(".m3u8")&&webView.getUrl().contains("u-link=1")){
+               String js= MessageFormat.format(
+                        "sessionStorage.setItem(\"{0}\",\"{1}\");sessionStorage.setItem(\"{2}\",\"{3}\");",
+                        "u-m3u8",url,"u-loc",webView.getUrl());
+                Util.evalOnUi(webView,js);
+            }
         }
         if(null!=accept&&accept.startsWith("image/")&&!imageLoad(url)){
             return new WebResourceResponse(null,
@@ -176,27 +186,6 @@ public class WebViewClientImpl extends WebViewClient {
                     Util.evalOnUi(webView,Util.sessionStorageWithTime("iqiyiXj",url));
                 }
             }
-           // String json = FileUtil.readExt( MyApplication.getAppContext(),"tv-web/match.json");
-         /*   if(!json.isEmpty()){
-                ExtConfig extConfig =   JsonUtil.fromJson(json, ExtConfig.class);
-                List<StartWith> startWiths= extConfig.getStartWith();
-                for (StartWith startWith : startWiths) {
-                    if(url.startsWith(startWith.getKey())){
-                        Map<String,String> headerMap = new HashMap<>();
-                        headerMap.put("Referer",startWith.getReferer());
-                        //headerMap.put("Access-Control-Allow-Origin","*");
-                        InputStream inputStream = HttpUtil.get(orgUrl,headerMap);
-                        if(null==inputStream){
-                            return super.shouldInterceptRequest(webView, webResourceRequest);
-                        }
-                        WebResourceResponse resp=new WebResourceResponse(startWith.getType(),
-                                ConstantMy.UTF8, inputStream);
-                        headerMap.put("access-control-allow-origin","*");
-                        resp.setResponseHeaders(headerMap);
-                        return resp;
-                    }
-                }
-            }*/
             return super.shouldInterceptRequest(webView, webResourceRequest);
         }
         if(url.endsWith("tvImg=1")){

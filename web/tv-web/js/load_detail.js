@@ -71,9 +71,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.btime.com")){
             return "tv/bjtv"
         }
-        if(url.startsWith("https://www.jxntv.cn/")){
+ /*       if(url.startsWith("https://www.jxntv.cn/")){
             return "tv/jxntv"
-        }
+        }*/
         if(url.startsWith("https://www.jlntv.cn/")){
             return "tv/jltv"
         }

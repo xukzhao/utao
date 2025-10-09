@@ -55,6 +55,7 @@ public class Util {
                 key,value,key+"Time",String.valueOf(new Date().getTime()));
     }
 
+
     public  static String loginQr(String url,String type){
         return MessageFormat.format(
                 "_loginQr(\"{0}\",\"{1}\")",url,type);

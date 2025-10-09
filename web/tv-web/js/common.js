@@ -48,7 +48,7 @@ var _tvFunc={
       var head = document.getElementsByTagName('head')[0]
       head.appendChild(style);
     },
-    fullscreen(id){
+    fullscreenQQ(id){
         var css=`
    ${id}{
         position: fixed !important;
@@ -62,6 +62,25 @@ var _tvFunc={
           background-color: rgb(0, 0, 0); 
     }
  `;
+        this.loadCssCode(css);
+    },
+    fullscreen(id) {
+        var css = `${id}{
+            position: fixed !important;
+            z-index: 99990 !important;
+            width: 100% !important;
+            height: 100% !important;
+            top: 0 !important;
+            left: 0 !important;
+            right:0 !important;
+            background-color: rgb(0, 0, 0);
+            bottom: 0 !important;}
+            video::-webkit-media-controls {display: none !important;}
+video::-webkit-media-controls-enclosure {display: none !important;}
+video::-webkit-media-controls-panel {display: none !important;}
+video::-webkit-media-controls-play-button {display: none !important;}
+video::-webkit-media-controls-start-playback-button {display: none !important;}
+video::-moz-media-controls {display: none !important;}`;
         this.loadCssCode(css);
     },
     fixedW(id){
@@ -295,14 +314,19 @@ var _tvFunc={
        maxNum=maxNumOrg;
     }
     let index=setInterval(function(){
-          if(check()){
+        try{
+            if(check()){
+                clearInterval(index);
+                callback(index);
+            }
+            console.log("num {} maxNum {}",num,maxNum)
+            num++;
+            if(num>maxNum){
+                clearInterval(index);
+            }
+        }catch (e){
             clearInterval(index);
-            callback(index);
-          }
-          num++;
-          if(num>maxNum){
-            clearInterval(index);
-          }
+        }
     },time);
     return index;
    },
