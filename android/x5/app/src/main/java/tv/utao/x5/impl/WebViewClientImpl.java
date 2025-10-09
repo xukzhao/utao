@@ -168,10 +168,10 @@ public class WebViewClientImpl extends WebViewClient {
                 return resp;
             }
             //拦截m3u8链接
-            if(url.contains(".m3u8")&&webView.getUrl().contains("u-link=1")){
+            if(url.contains(".m3u8")&&currentUrl!=null&&currentUrl.contains("u-link=1")){
                String js= MessageFormat.format(
                         "sessionStorage.setItem(\"{0}\",\"{1}\");sessionStorage.setItem(\"{2}\",\"{3}\");",
-                        "u-m3u8",url,"u-loc",webView.getUrl());
+                        "u-m3u8",url,"u-loc",currentUrl);
                 Util.evalOnUi(webView,js);
             }
         }

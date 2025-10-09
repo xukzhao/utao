@@ -14,6 +14,7 @@ import java.util.Objects;
 import tv.utao.x5.MyApplication;
 import tv.utao.x5.api.ConfigApi;
 import tv.utao.x5.call.DownloadCallback;
+import tv.utao.x5.dao.Favorite;
 import tv.utao.x5.domain.ConfigDTO;
 import tv.utao.x5.domain.Res;
 import tv.utao.x5.domain.live.DataWrapper;
@@ -98,6 +99,48 @@ public class UpdateService {
         }
         newLives=lives;
     }
+    
+    /**
+     * 获取所有直播数据，包括收藏数据
+     * @param context 上下文
+     * @return 包含收藏栏目的直播数据列表
+     */
+    public static List<Live> getByLivesWithFavorites(Context context){
+        // 获取收藏数据
+        List<Favorite> favorites = FavoriteService.getInstance(context).getAllFavorites();
+        List<Live> lives = new ArrayList<>(newLives);
+        if(!favorites.isEmpty()) {
+            // 创建收藏栏目
+            int tagIndex=newLives.size();
+            Live favoriteLive = new Live();
+            favoriteLive.setName("我的收藏");
+            favoriteLive.setTag("favorite");
+            favoriteLive.setIndex(tagIndex);
+            // 将收藏的频道添加到收藏栏目
+            List<Vod> favoriteVods = new ArrayList<>();
+            int index = 0;
+            for(Favorite favorite : favorites) {
+                Vod vod = new Vod();
+                vod.setName(favorite.getVodName());
+                // 为收藏的URL添加usave=1参数
+                String url = favorite.getVodUrl();
+                vod.setUrl(url);
+                vod.setTagIndex(tagIndex);
+                vod.setDetailIndex(index);
+                String key= tagIndex+"_"+index;
+                vod.setKey(key);
+                indexVodMap.put(key,vod);
+                urlKeyMap.put(vod.getUrl(),key);
+                index++;
+                favoriteVods.add(vod);
+            }
+            favoriteLive.setVods(favoriteVods);
+            lives.add(favoriteLive);
+            return lives;
+        }
+        return newLives;
+    }
+    
     public static List<Live> getByLives(){
         return newLives;
     }

@@ -31,6 +31,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,7 @@ import tv.utao.x5.domain.live.Live;
 import tv.utao.x5.domain.live.Vod;
 import tv.utao.x5.impl.WebViewClientImpl;
 import tv.utao.x5.impl.X5WebChromeClientExtension;
+import tv.utao.x5.service.FavoriteService;
 import tv.utao.x5.service.UpdateService;
 import tv.utao.x5.util.FileUtil;
 import tv.utao.x5.util.HttpUtil;
@@ -61,6 +63,9 @@ public class LiveActivity extends BaseActivity {
     private int currentProvinceIndex = 0;
     private DialogExitBinding exitDialogBinding;
     private boolean isExitDialogShowing = false;
+    
+    // 添加收藏服务
+    private FavoriteService favoriteService;
 
 
 
@@ -247,18 +252,34 @@ public class LiveActivity extends BaseActivity {
         exitDialogBinding.exitDialogContainer.setVisibility(View.VISIBLE);
         
         // 设置对话框中按钮的焦点
-        exitDialogBinding.btnExit.setFocusable(true);
+        exitDialogBinding.btnFavorite.setFocusable(true);
         exitDialogBinding.btnCancel.setFocusable(true);
         exitDialogBinding.btnStartToggle.setFocusable(true);
+        
+        // 更新收藏按钮状态
+        updateFavoriteButtonInDialog();
         
         // 设置切换按钮的文本
         String currentStartPage = ValueUtil.getString(this, "startPage", "main");
         exitDialogBinding.btnStartToggle.setText("切换到" + ("main".equals(currentStartPage) ? "电视直播" : "视频点播"));
         
-        // 默认焦点在退出按钮上
-        exitDialogBinding.btnExit.requestFocus();
+        // 默认焦点在收藏按钮上
+        exitDialogBinding.btnFavorite.requestFocus();
         
         updateStartPageHint();
+    }
+    
+    /**
+     * 更新对话框中收藏按钮的状态
+     */
+    private void updateFavoriteButtonInDialog() {
+        if (currentLive != null && favoriteService != null) {
+            if (favoriteService.isFavorite(currentLive.getUrl())) {
+                exitDialogBinding.btnFavorite.setText("取消收藏");
+            } else {
+                exitDialogBinding.btnFavorite.setText("收藏当前频道");
+            }
+        }
     }
     
     private void hideExitDialog() {
@@ -276,9 +297,13 @@ public class LiveActivity extends BaseActivity {
             return;
         }
         
-        // 退出按钮
-        exitDialogBinding.btnExit.setOnClickListener(v -> {
-            finish();
+        // 收藏按钮
+        exitDialogBinding.btnFavorite.setOnClickListener(v -> {
+            if (currentLive != null) {
+                toggleFavorite(currentLive);
+                // 更新按钮状态
+                updateFavoriteButtonInDialog();
+            }
         });
         
         // 取消按钮
@@ -470,10 +495,13 @@ public class LiveActivity extends BaseActivity {
     }
 
     private void initData() {
+        // 初始化收藏服务
+        favoriteService = FavoriteService.getInstance(this);
+        
         // 使用异步任务加载数据
         new Thread(() -> {
             // 在后台线程执行耗时操作
-            List<Live> result = UpdateService.getByLives();
+            List<Live> result = UpdateService.getByLivesWithFavorites(this);
             
             // 在UI线程更新界面
             runOnUiThread(() -> {
@@ -620,6 +648,25 @@ public class LiveActivity extends BaseActivity {
         binding.menuContainer.setVisibility(View.GONE);
         isMenuShow = false;
         binding.menuContainer.setOnClickListener(null);
+    }
+    
+    /**
+     * 切换收藏状态
+     * @param vod 要切换收藏状态的频道
+     */
+    private void toggleFavorite(Vod vod) {
+        if (favoriteService.isFavorite(vod.getUrl())) {
+            // 已收藏，取消收藏
+            favoriteService.removeFavorite(vod.getUrl());
+            ToastUtils.show(this, "已取消收藏: " + vod.getName(), Toast.LENGTH_SHORT);
+        } else {
+            // 未收藏，添加收藏
+            favoriteService.addFavorite(vod);
+            ToastUtils.show(this, "已收藏: " + vod.getName(), Toast.LENGTH_SHORT);
+        }
+        
+        // 重新加载数据以更新界面
+        initData();
     }
 
 

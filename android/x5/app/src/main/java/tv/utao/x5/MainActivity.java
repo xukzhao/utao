@@ -143,7 +143,7 @@ public class MainActivity extends BaseWebViewActivity {
         exitDialogBinding.exitDialogContainer.setVisibility(View.VISIBLE);
         
         // 设置对话框中按钮的焦点
-        exitDialogBinding.btnExit.setFocusable(true);
+        //exitDialogBinding.btnExit.setFocusable(true);
         exitDialogBinding.btnCancel.setFocusable(true);
         exitDialogBinding.btnStartToggle.setFocusable(true);
         
@@ -152,7 +152,7 @@ public class MainActivity extends BaseWebViewActivity {
         exitDialogBinding.btnStartToggle.setText("切换到" + ("main".equals(currentStartPage) ? "电视直播" : "视频点播"));
         
         // 默认焦点在退出按钮上
-        exitDialogBinding.btnExit.requestFocus();
+        exitDialogBinding.btnCancel.requestFocus();
         
         updateStartPageHint();
     }
@@ -171,11 +171,7 @@ public class MainActivity extends BaseWebViewActivity {
         if (exitDialogBinding == null) {
             return;
         }
-        
-        // 退出按钮
-        exitDialogBinding.btnExit.setOnClickListener(v -> {
-            finish();
-        });
+
         
         // 取消按钮
         exitDialogBinding.btnCancel.setOnClickListener(v -> {
