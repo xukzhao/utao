@@ -376,11 +376,6 @@ data:
         url: http://www.qtv.com.cn/live/tv/tv_qtv5.shtml
       - name: 青岛教育
         url: http://www.qtv.com.cn/live/tv/tv_qtv6.shtml
-      - name: 日照新闻综合
-        url: https://www.rzw.com.cn/folder247/folder2217/?tag=1
-      - name: 日照公共
-        url: https://www.rzw.com.cn/folder247/folder2217/?tag=3
-        #https://tv.utao.tv/tv-web/live.html?url=https://live.rzw.com.cn/kzpd/sd/live.m3u8?_upt=c8469c7e1738387682
       - name: 威海新闻综合
         url: http://lv.weihai.tv/live_13705e35636b2136b590e5a015bb801c.html
       - name: 威海都市生活
@@ -1112,7 +1107,7 @@ data:
       - name: 四川康巴卫视
         url: https://www.sctv.com/tv-web/js/tv/sctv/live.html?tag=9
       - name: 重庆新闻综合
-        url: https://sj.cbg.cn/wap/list/4918/1.html?5DEFC70C1A4AOD5173881C62BD4ACAD0
+        url: https://www.cbg.cn/web/list/4918/1.html?5DEFC70C1A4AOD5173881C62BD4ACAD0
       - name: 南江综合
         url: https://web.guangdianyun.tv/tv/?id=1670&uin=1822
       - name: 泸县综合

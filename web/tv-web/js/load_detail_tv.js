@@ -23,28 +23,17 @@ function decodeUnicodeBase64(base64Str) {
         if(url.startsWith("https://tv.cctv.com/live")){
             return "tv/cctv";
         }
-        if(url.startsWith("https://www.miguvideo.com/p/live")){
-            return "ty/mg";
-        }
         //各大tv
         if(url.startsWith("https://live.jstv.com")){
             return "tv/jstv"
         }
-        if(url.startsWith("https://live.fjtv.net/")){
-            return "tv/fjtv"
-        }
+
         if(url.startsWith("https://www.btime.com")){
             return "tv/bjtv"
         }
         if(url.startsWith("https://www.jlntv.cn/")){
             return "tv/jltv"
         }
-        if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
-            return "tv/gdtv"
-        }
-      /*  if(url.startsWith("https://tv.hoolo.tv")){
-            return "tv/hztv"
-        }*/
         if(url.startsWith("https://www.lcxw.cn/")){
             _tvLoadRes.js("https://cdn.bootcdn.net/ajax/libs/hls.js/1.5.13/hls.js");
             return "tv/lctv"
@@ -52,17 +41,11 @@ function decodeUnicodeBase64(base64Str) {
         if(url.startsWith("https://www.fengshows.com/")){
             return "tv/fengshows"
         }
-        if(url.startsWith("https://www.rzw.com.cn")){
-            return "tv/rztv"
-        }
         if(url.startsWith("https://www.nmtv.cn")){
             return "tv/nmtv"
         }
         if(url.startsWith("https://www.mgtv.com/live")){
             return "tv/hntv"
-        }
-        if(url.startsWith("https://www.cbg.cn/")){
-            return "tv/cqtv";
         }
         return "tv/common"
     }
