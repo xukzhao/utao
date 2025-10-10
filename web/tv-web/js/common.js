@@ -45,6 +45,22 @@ var _tvFunc={
         }
         return url;
     },
+    getVideoQuality(videoElement) {
+    // 确保视频元数据已加载
+    if (videoElement.readyState < 1) {
+        console.warn("Video metadata not loaded. Listen for 'loadedmetadata' event.");
+        return "未知";
+    }
+    const width = videoElement.videoWidth;
+    const height = videoElement.videoHeight;
+    const maxDimension = Math.max(width, height);
+    // 主流通用分辨率标准判断 [6,7,8](@ref)
+    if (maxDimension >= 3840) return "4K";       // 4K标准：3840x2160或更高
+    else if (maxDimension >= 1920) return "1080P"; // 全高清：1920x1080
+    else if (maxDimension >= 1280) return "720P";  // 高清：1280x720
+    else if (maxDimension >= 640) return "480P";   // 标清：640x480（部分场景归为360P）
+    else return "360P";                            // 低清：如640x360
+   },
    loadCssCode(code) {
       var style = document.createElement('style')
     // style.type = 'text/css'

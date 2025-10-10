@@ -18,6 +18,7 @@ function setupVideo(video) {
     document.documentElement.style.overflow = 'hidden';
 
 }
+// 这里已经是文档加载后的了
 (function(){
     _tvFunc.waitForVideoElement().then(video => {
         let param=_tvFunc.getQueryParams();
@@ -97,3 +98,14 @@ $$(function (){
 // _tvFunc.videoReady(function (video)
 
 });
+
+
+let _data={
+    hzList(){
+      let hzName =  _tvFunc.getVideoQuality(_tvFunc.getVideo());
+        let hzList=[];
+        let itemData={name:hzName,level:_tvFunc.hzLevel(hzName,1)};
+        hzList.push(itemData);
+        return hzList;
+    }
+};

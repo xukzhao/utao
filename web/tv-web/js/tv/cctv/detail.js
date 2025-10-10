@@ -42,7 +42,9 @@ let _data={
            // $$(item).attr("id","xhz-"+id);
             let hzLevel=$$(item).attr("itemvalue");
             let hzName= $$(item).text().trim().replace(/\s*/g,"");
-            let itemData={id:id,name:hzName,type:"id",isVip:false,level:_tvFunc.hzLevel(hzName,2)};
+            let itemData=
+                {id:id,name:hzName,level:_tvFunc.hzLevel(hzName,2),
+                    action:`$$(#${id}).click()`};
             if(hzLevel===current){
                 currentLevelHz=itemData;
             }
@@ -53,5 +55,6 @@ let _data={
             _layer.notifyLess("切换到 "+hzList[0].name);
             $$("#"+hzList[0].id).click();
         }
+        return hzList;
     }
 };
