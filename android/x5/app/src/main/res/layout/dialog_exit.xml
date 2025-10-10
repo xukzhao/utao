@@ -46,45 +46,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="16dp" />
 
-            <!-- 启动首页切换 -->
-            <LinearLayout
+            <!-- 启动首页设置（只保留一个按钮） -->
+            <Button
+                android:id="@+id/btnStartToggle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="启动首页设置"
-                    android:textColor="#CCCCCC"
-                    android:textSize="18sp"
-                    android:paddingBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btnStartToggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="切换到电视直播"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:background="@drawable/menu_button_background"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:clickable="true"
-                    android:nextFocusDown="@id/btnFavorite"
-                    android:nextFocusUp="@id/btnCancel" />
-
-                <TextView
-                    android:id="@+id/tvStartPageHint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="当前启动首页：视频点播"
-                    android:textColor="#FFCC00"
-                    android:textSize="16sp"
-                    android:gravity="center"
-                    android:paddingTop="8dp" />
-            </LinearLayout>
+                android:layout_height="50dp"
+                android:text="启动电视直播"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:background="@drawable/menu_button_background"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:layout_marginBottom="16dp"
+                android:nextFocusDown="@id/btnFavorite"
+                android:nextFocusUp="@id/btnCancel" />
 
             <!-- 分割线 -->
             <View
@@ -93,6 +69,14 @@
                 android:background="#33FFFFFF"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="24dp" />
+
+            <!-- 画质列表（在收藏栏目上方，仅显示选项） -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/hzListInExit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:overScrollMode="never"/>
 
             <!-- 操作按钮 -->
             <LinearLayout

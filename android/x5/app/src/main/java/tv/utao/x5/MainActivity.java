@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import androidx.databinding.DataBindingUtil;
 
-import tv.utao.x5.databinding.DialogExitBinding;
+import tv.utao.x5.databinding.DialogExitMainBinding;
 import tv.utao.x5.impl.WebViewClientImpl;
 import tv.utao.x5.util.LogUtil;
 import tv.utao.x5.util.ValueUtil;
@@ -19,7 +19,7 @@ import tv.utao.x5.utils.ToastUtils;
 
 public class MainActivity extends BaseWebViewActivity {
     private long mClickBackTime = 0;
-    private DialogExitBinding exitDialogBinding;
+    private DialogExitMainBinding exitDialogBinding;
     private boolean isExitDialogShowing = false;
     public boolean dispatchTouchEvent(MotionEvent event) {
         if(event.getAction() == KeyEvent.ACTION_DOWN){
@@ -147,14 +147,20 @@ public class MainActivity extends BaseWebViewActivity {
         exitDialogBinding.btnCancel.setFocusable(true);
         exitDialogBinding.btnStartToggle.setFocusable(true);
         
-        // 设置切换按钮的文本
+        // 设置启动按钮文案（启动XX）
         String currentStartPage = ValueUtil.getString(this, "startPage", "main");
-        exitDialogBinding.btnStartToggle.setText("切换到" + ("main".equals(currentStartPage) ? "电视直播" : "视频点播"));
+        if ("main".equals(currentStartPage)) {
+            exitDialogBinding.btnStartToggle.setText("启动即电视直播");
+        } else {
+            exitDialogBinding.btnStartToggle.setText("启动即视频点播");
+        }
         
         // 默认焦点在退出按钮上
-        exitDialogBinding.btnCancel.requestFocus();
+        exitDialogBinding.btnCancel.post(() -> exitDialogBinding.btnCancel.requestFocus());
+
+        // Main 返回菜单不显示收藏与画质
+        // 此布局本身不包含这两个控件，无需隐藏
         
-        updateStartPageHint();
     }
     
     private void hideExitDialog() {
@@ -172,7 +178,6 @@ public class MainActivity extends BaseWebViewActivity {
             return;
         }
 
-        
         // 取消按钮
         exitDialogBinding.btnCancel.setOnClickListener(v -> {
             hideExitDialog();
@@ -183,37 +188,21 @@ public class MainActivity extends BaseWebViewActivity {
             hideExitDialog();
         });
         
-        // 启动首页切换按钮
+        // 启动首页切换按钮（仅按钮，点击切换并更新文案）
         exitDialogBinding.btnStartToggle.setOnClickListener(v -> {
             String currentStartPage = ValueUtil.getString(this, "startPage", "main");
             if ("main".equals(currentStartPage)) {
                 // 当前是视频点播，切换到电视直播
                 ValueUtil.putString(this, "startPage", "live");
                 ToastUtils.show(this, "已设置启动首页为：电视直播", Toast.LENGTH_SHORT);
-                exitDialogBinding.btnStartToggle.setText("切换到视频点播");
+                exitDialogBinding.btnStartToggle.setText("启动即视频点播");
             } else {
                 // 当前是电视直播，切换到视频点播
                 ValueUtil.putString(this, "startPage", "main");
                 ToastUtils.show(this, "已设置启动首页为：视频点播", Toast.LENGTH_SHORT);
-                exitDialogBinding.btnStartToggle.setText("切换到电视直播");
+                exitDialogBinding.btnStartToggle.setText("启动即电视直播");
             }
-            updateStartPageHint();
         });
     }
     
-    private void updateStartPageHint() {
-        if (exitDialogBinding == null) {
-            return;
-        }
-        String startPage = ValueUtil.getString(this, "startPage", "main");
-        if ("live".equals(startPage)) {
-            exitDialogBinding.tvStartPageHint.setText("当前启动首页：电视直播");
-        } else {
-            exitDialogBinding.tvStartPageHint.setText("当前启动首页：视频点播");
-        }
-    }
-
-
-
-
 }

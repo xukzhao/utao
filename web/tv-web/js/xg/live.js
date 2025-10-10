@@ -1,6 +1,15 @@
-let url = window.location.href;
-let index= url.indexOf("url=");
-let link = url.substring(index+4,url.length);
+//let url = window.location.href;
+//let index= url.indexOf("url=");
+//let link = url.substring(index+4,url.length);
+_tvFunc= {
+    // 获取url请求参数
+    getQueryParams() {
+        return Object.fromEntries(
+            new URLSearchParams(window.location.search)
+        );
+    }
+}
+let link =  _tvFunc.getQueryParams()["url"];
 const config = {
     "id": "mse",
     "url": link,

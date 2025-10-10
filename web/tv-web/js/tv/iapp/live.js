@@ -1,6 +1,6 @@
 //let url = window.location.href;
 //let index= url.indexOf("url=");
-let tag =  _tvFunc.getQueryParams()["tag"];
+let tag =  _tvFunc.getQueryParams()["url"];
 //api.vonchange.com
 console.log(tag);
 let ref= tag.split('/share')[0]
@@ -33,6 +33,7 @@ let initPlayer=function (){
             //config.plugins.push(HlsPlayer);
 //config.plugins.push(FlvPlayer)
             player = new HlsJsPlayer(config);
+            _data.hzList(_tvFunc.getVideo());
         }
     });
 }

@@ -1,3 +1,30 @@
+_data={
+    hzList(){
+        let current= $$("#player_resolution_show_player").attr("activeresolution");
+        let hzList=[];
+        let currentLevelHz=null;
+        $$("#player_resolution_bar_player").find("[itemvalue]").each(function(i,item){
+            let id=$$(item).attr("id");
+            // $$(item).attr("id","xhz-"+id);
+            let hzLevel=$$(item).attr("itemvalue");
+            let hzName= $$(item).text().trim().replace(/\s*/g,"");
+            let itemData=
+                {id:id,name:hzName,level:_tvFunc.hzLevel(hzName,2),
+                    action:`$$("#${id}").click()`};
+            if(hzLevel===current){
+                currentLevelHz=itemData;
+            }
+            hzList.push(itemData);
+        });
+        if(currentLevelHz.id!==hzList[0].id&&hzList[0].level>=720){
+            console.log(hzList[0]);
+            _layer.notifyLess("切换到 "+hzList[0].name);
+            $$("#"+hzList[0].id).click();
+        }
+        _apiX.msg("videoQuality",hzList);
+        return hzList;
+    }
+};
 
 (function(){
     _tvFunc.fixedW("body");
@@ -11,6 +38,7 @@
             }
         },2000);
         _tvFunc.fullscreenW("#player");
+        _data.hzList();
         //_tvFunc.addKeyFullScreen(document.getElementById("player"));
        // _apiX.msgStr("key","F");
         //document.getElementById("player").classList.add("utv-video-full");
@@ -32,29 +60,3 @@
 
 })();
 
-let _data={
-    hzList(){
-        let current= $$("#player_resolution_show_player").attr("activeresolution");
-        let hzList=[];
-        let currentLevelHz=null;
-        $$("#player_resolution_bar_player").find("[itemvalue]").each(function(i,item){
-            let id=$$(item).attr("id");
-           // $$(item).attr("id","xhz-"+id);
-            let hzLevel=$$(item).attr("itemvalue");
-            let hzName= $$(item).text().trim().replace(/\s*/g,"");
-            let itemData=
-                {id:id,name:hzName,level:_tvFunc.hzLevel(hzName,2),
-                    action:`$$(#${id}).click()`};
-            if(hzLevel===current){
-                currentLevelHz=itemData;
-            }
-            hzList.push(itemData);
-        });
-        if(currentLevelHz.id!==hzList[0].id&&hzList[0].level>=720){
-            console.log(hzList[0]);
-            _layer.notifyLess("切换到 "+hzList[0].name);
-            $$("#"+hzList[0].id).click();
-        }
-        return hzList;
-    }
-};

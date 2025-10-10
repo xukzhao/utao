@@ -222,10 +222,10 @@
             </LinearLayout>
         </FrameLayout>
 
-        <!-- 退出对话框 -->
+        <!-- 退出对话框（Main 专用） -->
         <include
             android:id="@+id/exitDialog"
-            layout="@layout/dialog_exit" />
+            layout="@layout/dialog_exit_main" />
 
     </FrameLayout>
 </layout>

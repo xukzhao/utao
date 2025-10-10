@@ -8,6 +8,16 @@ function extractDomain(url) {
 function decodeUnicodeBase64(base64Str) {
     return decodeURIComponent(escape(atob(base64Str)));
 }
+_data={
+    hzList(video){
+        let hzName =  _tvFunc.getVideoQuality(video);
+        let hzList=[];
+        let itemData={name:hzName,level:_tvFunc.hzLevel(hzName,1)};
+        hzList.push(itemData);
+        _apiX.msg("videoQuality",hzList);
+        return hzList;
+    }
+};
 (function(){
     if(_tvload){
         return;

@@ -47,10 +47,10 @@ var _tvFunc={
     },
     getVideoQuality(videoElement) {
     // 确保视频元数据已加载
-    if (videoElement.readyState < 1) {
+   /* if (videoElement.readyState < 1) {
         console.warn("Video metadata not loaded. Listen for 'loadedmetadata' event.");
         return "未知";
-    }
+    }*/
     const width = videoElement.videoWidth;
     const height = videoElement.videoHeight;
     const maxDimension = Math.max(width, height);
@@ -691,7 +691,7 @@ var _layer={
 var _tvMsg={
     notVip:" 建议在拼多多/抖音/淘宝等购物软件里搜索购买"
 }
-
+_apiX.msg("videoQuality",[]);
 class VideoStallDetector {
     constructor(videoElement, options = {}) {
         this.video = videoElement;

@@ -45,12 +45,13 @@ function setupVideo(video) {
             video.muted = true;
             video.play();
         }
+        //_data.hzList(video);
         _tvFunc.check(function (){
             let videoPlay=_tvFunc.isVideoPlaying(video);
             if(!videoPlay){
                 _tvFunc.getVideo().play();
             }
-            return videoPlay},function (){},1000,5);
+            return videoPlay},function (){_data.hzList(video);},1000,5);
 
     });
 })();
@@ -100,12 +101,4 @@ $$(function (){
 });
 
 
-let _data={
-    hzList(){
-      let hzName =  _tvFunc.getVideoQuality(_tvFunc.getVideo());
-        let hzList=[];
-        let itemData={name:hzName,level:_tvFunc.hzLevel(hzName,1)};
-        hzList.push(itemData);
-        return hzList;
-    }
-};
+

@@ -38,7 +38,12 @@ import java.util.Map;
 import tv.utao.x5.call.StringCallback;
 import tv.utao.x5.dao.HistoryDaoX;
 import tv.utao.x5.databinding.ActivityLiveBinding;
+import tv.utao.x5.databinding.ItemHzLiveBinding;
+import tv.utao.x5.domain.HzItem;
 import tv.utao.x5.databinding.DialogExitBinding;
+import tv.utao.x5.domain.live.DataWrapper;
+import tv.utao.x5.impl.BaseBindingAdapter;
+import tv.utao.x5.impl.BaseViewHolder;
 import tv.utao.x5.domain.live.Live;
 import tv.utao.x5.domain.live.Vod;
 import tv.utao.x5.impl.WebViewClientImpl;
@@ -228,12 +233,12 @@ public class LiveActivity extends BaseActivity {
     }
     
     private void handleBackPress(){
+        // 不再显示悬浮画质层，直接处理退出
         // 如果退出对话框已显示，再次按返回键则退出
         if (isExitDialogShowing) {
             finish();
             return;
         }
-        
         // 显示退出对话框
         showExitDialog();
     }
@@ -250,6 +255,8 @@ public class LiveActivity extends BaseActivity {
         }
         isExitDialogShowing = true;
         exitDialogBinding.exitDialogContainer.setVisibility(View.VISIBLE);
+        // 初始化退出对话框中的画质列表（模拟）
+        setupHzListInExit();
         
         // 设置对话框中按钮的焦点
         exitDialogBinding.btnFavorite.setFocusable(true);
@@ -259,14 +266,17 @@ public class LiveActivity extends BaseActivity {
         // 更新收藏按钮状态
         updateFavoriteButtonInDialog();
         
-        // 设置切换按钮的文本
+        // 设置启动按钮文案（启动XX），不再显示上下提示文字
         String currentStartPage = ValueUtil.getString(this, "startPage", "main");
-        exitDialogBinding.btnStartToggle.setText("切换到" + ("main".equals(currentStartPage) ? "电视直播" : "视频点播"));
+        if ("main".equals(currentStartPage)) {
+            exitDialogBinding.btnStartToggle.setText("启动即电视直播");
+        } else {
+            exitDialogBinding.btnStartToggle.setText("启动即视频点播");
+        }
         
-        // 默认焦点在收藏按钮上
-        exitDialogBinding.btnFavorite.requestFocus();
         
-        updateStartPageHint();
+        // 默认焦点回到收藏按钮，避免按返回后焦点丢失
+        exitDialogBinding.btnFavorite.post(() -> exitDialogBinding.btnFavorite.requestFocus());
     }
     
     /**
@@ -316,35 +326,78 @@ public class LiveActivity extends BaseActivity {
             hideExitDialog();
         });
         
-        // 启动首页切换按钮
+        // 启动首页切换按钮（仅按钮，点击后切换并更新文案）
         exitDialogBinding.btnStartToggle.setOnClickListener(v -> {
             String currentStartPage = ValueUtil.getString(this, "startPage", "main");
             if ("main".equals(currentStartPage)) {
                 // 当前是视频点播，切换到电视直播
                 ValueUtil.putString(this, "startPage", "live");
                 ToastUtils.show(this, "已设置启动首页为：电视直播", Toast.LENGTH_SHORT);
-                exitDialogBinding.btnStartToggle.setText("切换到视频点播");
+                exitDialogBinding.btnStartToggle.setText("启动即视频点播");
             } else {
                 // 当前是电视直播，切换到视频点播
                 ValueUtil.putString(this, "startPage", "main");
                 ToastUtils.show(this, "已设置启动首页为：视频点播", Toast.LENGTH_SHORT);
-                exitDialogBinding.btnStartToggle.setText("切换到电视直播");
+                exitDialogBinding.btnStartToggle.setText("启动即电视直播");
             }
-            updateStartPageHint();
+        });
+    }
+
+    protected static String  videoQualityData=null;
+    private void setupHzListInExit(){
+        // 构造模拟画质项
+        List<HzItem> hzItems=new ArrayList<>();
+        if(null!=videoQualityData){
+            hzItems=JsonUtil.fromJson(videoQualityData,new TypeToken<List<HzItem>>(){}.getType());
+        }
+        BaseBindingAdapter hzAdapter = new BaseBindingAdapter<HzItem, ItemHzLiveBinding>(hzItems,R.layout.item_hz_live) {
+            @Override
+            public void doBindViewHolder(BaseViewHolder<ItemHzLiveBinding> holder, HzItem item) {
+                holder.getBinding().setVariable(BR.item, item);
+                holder.getBinding().setVariable(BR.itemPresenter, ItemPresenter);
+            }
+        };
+        hzAdapter.setItemPresenter(new HzLiveBindPresenter());
+        exitDialogBinding.hzListInExit.setLayoutManager(new androidx.recyclerview.widget.LinearLayoutManager(this, androidx.recyclerview.widget.LinearLayoutManager.HORIZONTAL,false));
+        exitDialogBinding.hzListInExit.setAdapter(hzAdapter);
+        // 所有画质项的上下焦点跳转绑定（上->启动按钮，下->收藏按钮）
+        exitDialogBinding.hzListInExit.addOnChildAttachStateChangeListener(new androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener() {
+            @Override
+            public void onChildViewAttachedToWindow(View view) {
+                View btn = view.findViewById(R.id.hzItem);
+                if (btn != null) {
+                    if (btn.getId() == View.NO_ID) {
+                        btn.setId(View.generateViewId());
+                    }
+                    btn.setNextFocusUpId(exitDialogBinding.btnStartToggle.getId());
+                    btn.setNextFocusDownId(exitDialogBinding.btnFavorite.getId());
+                }
+            }
+            @Override
+            public void onChildViewDetachedFromWindow(View view) { }
+        });
+        // 布局完成后，连接焦点链路（不改变默认焦点）
+        exitDialogBinding.hzListInExit.post(() -> {
+            try {
+                androidx.recyclerview.widget.RecyclerView.ViewHolder vh = exitDialogBinding.hzListInExit.findViewHolderForAdapterPosition(0);
+                if (vh instanceof BaseViewHolder) {
+                    ItemHzLiveBinding b = (ItemHzLiveBinding) ((BaseViewHolder<?>) vh).getBinding();
+                    View first = b.hzItem;
+                    if (first.getId() == View.NO_ID) {
+                        first.setId(View.generateViewId());
+                    }
+                    // 上下焦点：启动按钮 -> 画质第一项 -> 收藏按钮
+                    exitDialogBinding.btnStartToggle.setNextFocusDownId(first.getId());
+                    exitDialogBinding.btnFavorite.setNextFocusUpId(first.getId());
+                    first.setNextFocusUpId(exitDialogBinding.btnStartToggle.getId());
+                    first.setNextFocusDownId(exitDialogBinding.btnFavorite.getId());
+                    // 不改变默认焦点
+                }
+            } catch (Exception ignore) {}
         });
     }
     
-    private void updateStartPageHint() {
-        if (exitDialogBinding == null) {
-            return;
-        }
-        String startPage = ValueUtil.getString(this, "startPage", "main");
-        if ("live".equals(startPage)) {
-            exitDialogBinding.tvStartPageHint.setText("当前启动首页：电视直播");
-        } else {
-            exitDialogBinding.tvStartPageHint.setText("当前启动首页：视频点播");
-        }
-    }
+    
 
     private void bind(){
         binding = DataBindingUtil.setContentView(this, R.layout.activity_live);
@@ -460,6 +513,10 @@ public class LiveActivity extends BaseActivity {
             }
             if("keyNum".equals(service)){
                 keyEventAll(Integer.parseInt(data));
+                return;
+            }
+            if("videoQuality".equals(service)){
+                videoQualityData=data;
                 return;
             }
         }
@@ -648,6 +705,19 @@ public class LiveActivity extends BaseActivity {
         binding.menuContainer.setVisibility(View.GONE);
         isMenuShow = false;
         binding.menuContainer.setOnClickListener(null);
+    }
+
+    // 已移除悬浮画质层逻辑
+
+    public class HzLiveBindPresenter implements tv.utao.x5.impl.IBaseBindingPresenter {
+        public void onClick(HzItem item){
+            if(item.getAction()!=null&&item.getAction().trim().length()>0){
+                Util.evalOnUi(mWebView,item.getAction());
+            }else if(item.getId()!=null){
+                String js = "$$(\\\"#"+item.getId()+"\\\").click()";
+                Util.evalOnUi(mWebView,js);
+            }
+        }
     }
     
     /**
