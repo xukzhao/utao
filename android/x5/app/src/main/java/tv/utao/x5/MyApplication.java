@@ -41,6 +41,7 @@ public class MyApplication extends Application implements InvocationHandler {
    @Override
    protected void attachBaseContext(Context base) {
        realPackageName = base.getPackageName();
+       targetPackageName = generateRandomPackageName();
        hookPackageManager(base);
        super.attachBaseContext(base);
        MultiDex.install(base);
@@ -51,14 +52,11 @@ public class MyApplication extends Application implements InvocationHandler {
    @Override
    public String  getPackageName(){
        for (StackTraceElement trace : Thread.currentThread().getStackTrace()) {
-           if ("org.chromium.base.BuildInfo" .equalsIgnoreCase( trace.getClassName())) {
-               String m = trace.getMethodName();
-               // 判断当前调用是否来自 Chromium（BuildInfo 类的方法）
-               // 在部分旧版是 getAll 或 getPackageName 在较新版本是 <init>
-               if (m.equalsIgnoreCase("getAll") || m.equalsIgnoreCase("getPackageName") || m.equalsIgnoreCase("<init>")) {
-                   return targetPackageName;
-               }
-              // return "";// 返回空字符串移除包名
+           String cls = trace.getClassName();
+           if (cls == null) continue;
+           // 兼容新版 Chromium/X5：来自 org.chromium 或 com.tencent.smtt 的调用一律返回伪装包名
+           if (cls.startsWith("org.chromium") || cls.startsWith("com.tencent.smtt")) {
+               return targetPackageName;
            }
        }
        return super.getPackageName();// 其他场景返回真实包名
@@ -67,7 +65,6 @@ public class MyApplication extends Application implements InvocationHandler {
     public void onCreate() {
         super.onCreate();
         LogUtil.i(TAG, "onViewInitBegin: ");
-        targetPackageName=generateRandomPackageName();
         allErrorCatch();
         context = getApplicationContext();
         //initX5();会自动初始化
