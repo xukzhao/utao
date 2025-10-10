@@ -917,11 +917,11 @@ data:
       - name: 芜湖新闻综合
         url: https://www.wuhubtv.com/folder1194/
       - name: 芜湖生活
-        url: https://www.wuhubtv.com/folder1194/?ujs=$$('.navList a[title="生活频道"]').click()
+        url: https://www.wuhubtv.com/folder1194/?ujs=JCQoJy5uYXZMaXN0IGFbdGl0bGU9IueUn+a0u+mikemBkyJdJykuY2xpY2soKQ==
       - name: 亳州综合
         url: https://www.ahbztv.com/televisi0n.html
       - name: 亳州农村
-        url: https://www.ahbztv.com/televisi0n.html?ujs=$$('#channel .swiper-slide').filter(function() {return $(this).text().trim() === '农村频道';}).click()
+        url: https://www.ahbztv.com/televisi0n.html?ujs=JCQoJyNjaGFubmVsIC5zd2lwZXItc2xpZGUnKS5maWx0ZXIoZnVuY3Rpb24oKSB7cmV0dXJuICQkKHRoaXMpLnRleHQoKS50cmltKCkgPT09ICflhpzmnZHpopHpgZMnO30pLmNsaWNrKCk=
       - name: 淮北新闻综合
         url: https://tv.utao.tv/tv-web/live.html?url=https://vms-x.hbnews.net/video/xwzh/index.m3u8
       - name: 淮北经济生活
@@ -1029,7 +1029,7 @@ data:
       - name: 宁德文化旅游
         url: http://share.nddst.com/?_hgOutLink=live/livedetail&channel_id=42
       - name: 平潭新闻综合
-        url: https://web.guangdianyun.tv/tv/907?uin=1118&utaot=1&ujs=_tvFunc.check(function%20()%7Breturn%20%24%24(%22%23follow-skin%22).length%3E0%7D%2Cfunction%20()%7B%24%24(%22%23follow-skin%22).remove()%3B%7D)%3B
+        url: https://web.guangdianyun.tv/tv/907?uin=1118&utaot=1&ujs=X3R2RnVuYy5jaGVjayhmdW5jdGlvbiAoKXtyZXR1cm4gJCQoIiNmb2xsb3ctc2tpbiIpLmxlbmd0aD4wfSxmdW5jdGlvbiAoKXskJCgiI2ZvbGxvdy1za2luIikucmVtb3ZlKCk7fSk7
   #北京
   - tag: beijing
     name: 北京
@@ -1444,9 +1444,9 @@ data:
       - name: 荆州新闻综合
         url: http://m-jingzhou.cjyun.org/dszb
       - name: 咸宁综合
-        url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=91&page=canvas&live_type=1&ujs=_tvFunc.fullscreenW("video")
+        url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=91&page=canvas&live_type=1&ujs=X3R2RnVuYy5mdWxsc2NyZWVuVygidmlkZW8iKQ==
       - name: 咸宁经济生活
-        url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=91&page=canvas&live_type=1&ujs=64:JCQoJy52aWRlby1saXN0IC5saScpLmZpbHRlcihmdW5jdGlvbigpIHtyZXR1cm4gJCh0aGlzKS50ZXh0KCkudHJpbSgpID09PSAn57uP5rWO55Sf5rS7Jzt9KS5jbGljaygpO190dkZ1bmMuZnVsbHNjcmVlblcoInZpZGVvIik=
+        url: https://app.cjyun.org.cn/video/videojs/index?site_id=10140&id=91&page=canvas&live_type=1&ujs=JCQoJy52aWRlby1saXN0IC5saScpLmZpbHRlcihmdW5jdGlvbigpIHtyZXR1cm4gJCh0aGlzKS50ZXh0KCkudHJpbSgpID09PSAn57uP5rWO55Sf5rS7Jzt9KS5jbGljaygpO190dkZ1bmMuZnVsbHNjcmVlblcoInZpZGVvIik=
       - name: 宜昌三峡综合
         url: https://liveplay.ycrmt.cn/tv-web/live.html?url=https://liveplay.ycrmt.cn/sxgd/zhpd.m3u8
       - name: 宜昌三峡旅游生活
@@ -1511,9 +1511,6 @@ data:
         url: https://web.guangdianyun.tv/tv/356?uin=1648&userSource=weixin
       - name: 邵阳新闻综合
         url: http://www.sytv.net.cn/folder2188/folder2190
-#      - name: 邵阳文旅民生
-#        url: http://www.sytv.net.cn/folder2188/folder2190?ujs=64:JCQoIi5jaGFubmVsX2xpc3RfdWwgbGkiKS5maWx0ZXIoZnVuY3Rpb24oKSB7cmV0dXJuICQkKHRoaXMpLnRleHQoKS50cmltKCkgPT09ICfmlofml4XmsJHnlJ8nO30pLmNsaWNrKCk7X3R2RnVuYy5mdWxsc2NyZWVuV1coIi52aWRlb19kaXYiKTs=
-#        #ujs=$$(".channel_list_ul li").filter(function() {return $$(this).text().trim() === '文旅民生';}).click()
       - name: 岳阳新闻综合
         url: https://web.guangdianyun.tv/tv/1699?uin=2193&u-link=1
       - name: 岳阳文旅都市
@@ -1522,10 +1519,6 @@ data:
         url: http://www.ldntv.cn/folder51/folder154/folder171
       - name: 郴州综合
         url: https://www.ngcz.tv/folder83/folder86
-#      - name: 郴州文旅
-#        #$$(".channel_list p").filter(function() {return $$(this).text().trim() === '郴州文旅频道';}).click()
-#        url: https://www.ngcz.tv/folder83/folder86?ujs=64:JCQoIi5jaGFubmVsX2xpc3QgcCIpLmZpbHRlcihmdW5jdGlvbigpIHtyZXR1cm4gJCQodGhpcykudGV4dCgpLnRyaW0oKSA9PT0gJ+mDtOW3nuaWh+aXhemikemBkyc7fSkuY2xpY2soKQ==
-
 # 江西
   - tag: jxntv
     name: 江西
@@ -1810,15 +1803,15 @@ data:
       - name: 云南卫视
         url: https://www.yntv.cn/mobile/live.html
       - name: 云南都市
-        url: https://www.yntv.cn/mobile/live.html?ujs=64:JCQoIiN5dW5uYW5kdXNoaSIpLmNsaWNrKCk=
+        url: https://www.yntv.cn/mobile/live.html?ujs=JCQoIiN5dW5uYW5kdXNoaSIpLmNsaWNrKCk=
       - name: 云南娱乐
-        url: https://www.yntv.cn/mobile/live.html?ujs=64:JCQoIiN5dW5uYW55dWxlIikuY2xpY2soKQ==
+        url: https://www.yntv.cn/mobile/live.html?ujs=JCQoIiN5dW5uYW55dWxlIikuY2xpY2soKQ==
       - name: 云南康旅
-        url: https://www.yntv.cn/mobile/live.html?ujs=64:JCQoIiN5dW5uYW5nb25nZ29uZyIpLmNsaWNrKCk=
+        url: https://www.yntv.cn/mobile/live.html?ujs=JCQoIiN5dW5uYW5nb25nZ29uZyIpLmNsaWNrKCk=
       - name: 云南少儿
-        url: https://www.yntv.cn/mobile/live.html?ujs=64:JCQoIiN5dW5uYW5zaGFvZXIiKS5jbGljaygp
+        url: https://www.yntv.cn/mobile/live.html?ujs=JCQoIiN5dW5uYW5zaGFvZXIiKS5jbGljaygp
       - name: 澜湄国际
-        url: https://www.yntv.cn/mobile/live.html?ujs=64:JCQoIiN5dW5uYW5ndW9qaSIpLmNsaWNrKCk=
+        url: https://www.yntv.cn/mobile/live.html?ujs=JCQoIiN5dW5uYW5ndW9qaSIpLmNsaWNrKCk=
 #      - name: 德宏新闻综合@@
 #        url: https://www.edehong.com/#zhibo
       - name: 丽江新闻综合

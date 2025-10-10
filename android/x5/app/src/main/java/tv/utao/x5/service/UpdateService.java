@@ -136,6 +136,8 @@ public class UpdateService {
             }
             favoriteLive.setVods(favoriteVods);
             lives.add(favoriteLive);
+            // 让“我的收藏”参与导航映射（index 已经是收藏明细数量）
+            tagMaxMap.put(tagIndex, index - 1);
             return lives;
         }
         return newLives;

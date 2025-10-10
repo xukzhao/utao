@@ -73,23 +73,12 @@ $$(function (){
         ujs=decodeURIComponent(ujs);
         console.log("ujs",ujs);
     }*/
-    let index= url.indexOf("ujs=");
-    if(index>0){
-        //console.log(tag);
-        let ujs= url.substring(index+4,url.length);
-        if(ujs.startsWith("64:")){
-            let ujsContent=decodeUnicodeBase64(ujs.substring(3));
-            console.log("ujsContent",ujsContent);
-            eval(ujsContent);
-        }else {
-            let tag = decodeURIComponent(ujs);
-            console.log(tag);
-            if(tag.endsWith("#")){
-                tag=tag.substring(0,tag.length-1);
-                console.log(tag);
-            }
-            eval(tag);
-        }
+    let ujs=   _tvFunc.getQueryParams()["ujs"];
+        //url.indexOf("ujs=");
+    if(ujs){
+        let ujsContent=decodeUnicodeBase64(ujs.replace(/ /g, '+'));
+        console.log("ujsContent",ujsContent);
+        eval(ujsContent);
         //$$(tag).click();
     }
     //viewport

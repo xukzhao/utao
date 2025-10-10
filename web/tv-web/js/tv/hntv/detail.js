@@ -1,9 +1,9 @@
 (function () {
 
     //window.libreTV_selectItem = selectItem; //将函数赋值到全局对象 libreTV_selectItem('政法频道')
-    let url = window.location.href;
-    let index= url.indexOf("tag=");
-    let tag =  decodeURI(url.substring(index+4,url.length));
+   // let url = window.location.href;
+    //let index= url.indexOf("tag=");
+    let tag =  _tvFunc.getQueryParams()["tag"];
     console.log(tag);
     document.querySelectorAll('video').forEach(v => v.pause());
 

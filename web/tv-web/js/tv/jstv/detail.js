@@ -2,9 +2,7 @@
 (function(){
     _tvFunc.fixedW("body");
     _tvFunc.check(function (){return $$("#programMain .title").length>0},function (){
-        let url = window.location.href;
-         let index= url.indexOf("tag=");
-         let tag =  decodeURI(url.substring(index+4,url.length));
+         let tag =  _tvFunc.getQueryParams()["tag"];
          console.log(tag);
          let currentTag="";
          let tagIndex=0;

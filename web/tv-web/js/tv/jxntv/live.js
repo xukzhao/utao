@@ -1,6 +1,7 @@
-let url = window.location.href;
-let index= url.indexOf("url=");
-let urlTrue = url.substring(index+4,url.length);
+//let url = window.location.href;
+//let index= url.indexOf("url=");
+//let urlTrue = url.substring(index+4,url.length);
+let urlTrue =  _tvFunc.getQueryParams()["url"];
 //api.vonchange.com
 console.log(urlTrue);
 let ref= "https://cdnauth.jxgdw.com";

@@ -1,6 +1,6 @@
-let url = window.location.href;
-let index= url.indexOf("url=");
-let tag = url.substring(index+4,url.length);
+//let url = window.location.href;
+//let index= url.indexOf("url=");
+let tag =  _tvFunc.getQueryParams()["tag"];
 //api.vonchange.com
 console.log(tag);
 let ref= tag.split('/share')[0]
