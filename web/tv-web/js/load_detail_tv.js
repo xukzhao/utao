@@ -33,6 +33,9 @@ _data={
         if(url.startsWith("https://tv.cctv.com/live")){
             return "tv/cctv";
         }
+        if(url.startsWith("https://www.yangshipin.cn")){
+            return "tv/ysptv"
+        }
         //各大tv
         if(url.startsWith("https://live.jstv.com")){
             return "tv/jstv"

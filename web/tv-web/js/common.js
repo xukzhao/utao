@@ -462,6 +462,9 @@ var _apiX={
         }
         return userAgent;
     },
+    toast(message){
+        _api.toast(message);
+    },
     msg(service,data){
         let dataStr=  JSON.stringify(data);
         _api.message(service,dataStr);

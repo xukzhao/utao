@@ -10,19 +10,30 @@ _data={
             let hzName= $$(item).text().trim().replace(/\s*/g,"");
             let itemData=
                 {id:id,name:hzName,level:_tvFunc.hzLevel(hzName,2),
-                    action:`$$("#${id}").click()`};
+                    action:`_data.hzChoose("${id}","${hzName}")`};
             if(hzLevel===current){
                 currentLevelHz=itemData;
             }
             hzList.push(itemData);
         });
-        if(currentLevelHz.id!==hzList[0].id&&hzList[0].level>=720){
+       let chooseHzId= localStorage.getItem("chooseHz");
+       if(chooseHzId&&currentLevelHz.id!==chooseHzId){
+           _data.hzChoose(chooseHzId,localStorage.getItem("chooseHzName"));
+       }
+       /* if(currentLevelHz.id!==hzList[0].id&&hzList[0].level>=720){
             console.log(hzList[0]);
             _layer.notifyLess("切换到 "+hzList[0].name);
             $$("#"+hzList[0].id).click();
-        }
+        }*/
         _apiX.msg("videoQuality",hzList);
         return hzList;
+    },
+    hzChoose(id,name){
+        $$("#"+id).click();
+        //_layer.notifyLess("画质切换到 "+name);
+        _apiX.toast("画质切换到 "+name);
+        localStorage.setItem("chooseHz",id);
+        localStorage.setItem("chooseHzName",name);
     }
 };
 
