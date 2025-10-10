@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+    </data>
+
+    <!-- 退出对话框（Main 专用，精简版） -->
+    <LinearLayout
+        android:id="@+id/exitDialogContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="afterDescendants">
+
+        <!-- 左侧遮罩，点击关闭 -->
+        <View
+            android:id="@+id/dialogBackdrop"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="#80000000"
+            android:clickable="true"
+            android:focusable="false" />
+
+        <!-- 右侧对话框内容（仅启动与取消） -->
+        <LinearLayout
+            android:id="@+id/exitDialogContent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#E6000000"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:descendantFocusability="afterDescendants">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="16dp" />
+
+            <Button
+                android:id="@+id/btnStartToggle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="启动电视直播"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:background="@drawable/menu_button_background"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
+                android:layout_marginBottom="16dp"
+                android:nextFocusDown="@id/btnCancel" />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="取消"
+                android:textColor="#CCCCCC"
+                android:textSize="18sp"
+                android:background="@drawable/menu_button_background"
+                android:focusable="true"
+                android:clickable="true"
+                android:nextFocusUp="@id/btnStartToggle" />
+
+            <!-- 底部提示：再按返回退出应用 -->
+            <TextView
+                android:id="@+id/tvExitHint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="提示：再按返回退出应用"
+                android:textColor="#999999"
+                android:textSize="14sp"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
+
+
