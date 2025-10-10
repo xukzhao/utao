@@ -78,6 +78,7 @@ public class LiveActivity extends BaseActivity {
     protected void createInit() {
         bind();
         UpdateService.baseFolder= this.getFilesDir().getPath();
+        UpdateService.updateRes(this);
         UpdateService.initTvData();
         thisContext=this;
         if(null==currentLive){

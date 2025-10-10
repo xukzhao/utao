@@ -275,7 +275,7 @@ data:
         url: https://www.qyrb.cn/tv/rM834x3d5a.html
       - name: 韶关新闻综合
         url: https://www.sgmsw.cn/v/tv?spm=0.0.0.0.HGiuAr&id=SB05RIYZOU8JR418AUQOF62CAJQ08D0E
-  #虎牙
+  #香港
   - tag: xianggang
     name: 香港
     vods:
@@ -289,53 +289,53 @@ data:
         url: http://www.hkstv.tv/index/live/channel/.html
 
   #虎牙
-  - tag: gdtv
-    name: 虎牙直播
-    vods:
-      - name: 放松音乐
-        url: https://www.huya.com/21241811
-      - name: 百家讲坛
-        url: https://www.huya.com/11602032
-      - name: 陈翔六点半
-        url: https://www.huya.com/11274154
-      - name: 猫和老鼠
-        url: https://www.huya.com/11352879
-      - name: 机器猫
-        url: https://www.huya.com/11601963
-      - name: 七龙珠
-        url: https://www.huya.com/11601966
-      - name: 海绵宝宝
-        url: https://www.huya.com/11352919
-      - name: 茶啊二中
-        url: https://www.huya.com/11213191
-      - name: 星爷
-        url: https://www.huya.com/11336587
-      - name: 刘德华
-        url: https://www.huya.com/11342424
-      - name: 喜剧
-        url: https://www.huya.com/11352877
-      - name: 漫威
-        url: https://www.huya.com/11602034
-      - name: 电影001
-        url: https://www.huya.com/11342428
-      - name: 电影002
-        url: https://www.huya.com/21059577
-      - name: 春晚小品1
-        url: https://www.huya.com/11602068
-      - name: 春晚小品2
-        url: https://www.huya.com/29982631
-      - name: 电影1
-        url: https://www.huya.com/11352887
-      - name: 电影2
-        url: https://www.huya.com/11352884
-      - name: 贺岁电影1
-        url: https://www.huya.com/11601986
-      - name: 贺岁电影2
-        url: https://www.huya.com/11601971
-      - name: LPL
-        url: https://www.huya.com/lpl
-      - name: lck
-        url: https://www.huya.com/lck
+#  - tag: gdtv
+#    name: 虎牙直播
+#    vods:
+#      - name: 放松音乐
+#        url: https://www.huya.com/21241811
+#      - name: 百家讲坛
+#        url: https://www.huya.com/11602032
+#      - name: 陈翔六点半
+#        url: https://www.huya.com/11274154
+#      - name: 猫和老鼠
+#        url: https://www.huya.com/11352879
+#      - name: 机器猫
+#        url: https://www.huya.com/11601963
+#      - name: 七龙珠
+#        url: https://www.huya.com/11601966
+#      - name: 海绵宝宝
+#        url: https://www.huya.com/11352919
+#      - name: 茶啊二中
+#        url: https://www.huya.com/11213191
+#      - name: 星爷
+#        url: https://www.huya.com/11336587
+#      - name: 刘德华
+#        url: https://www.huya.com/11342424
+#      - name: 喜剧
+#        url: https://www.huya.com/11352877
+#      - name: 漫威
+#        url: https://www.huya.com/11602034
+#      - name: 电影001
+#        url: https://www.huya.com/11342428
+#      - name: 电影002
+#        url: https://www.huya.com/21059577
+#      - name: 春晚小品1
+#        url: https://www.huya.com/11602068
+#      - name: 春晚小品2
+#        url: https://www.huya.com/29982631
+#      - name: 电影1
+#        url: https://www.huya.com/11352887
+#      - name: 电影2
+#        url: https://www.huya.com/11352884
+#      - name: 贺岁电影1
+#        url: https://www.huya.com/11601986
+#      - name: 贺岁电影2
+#        url: https://www.huya.com/11601971
+#      - name: LPL
+#        url: https://www.huya.com/lpl
+#      - name: lck
+#        url: https://www.huya.com/lck
   #山东
   - tag: sdtv
     name: 山东
@@ -1464,11 +1464,9 @@ data:
       - name: 襄阳公共
         url: https://xiangyang.cjyun.org/app/streamradio/130&u-link=1
       - name: 随州综合
-        url: https://xiangyang.cjyun.org/app/streamradio/142&u-link=1
-      - name: 襄阳经济生活
-        url: https://xiangyang.cjyun.org/app/streamradio/138&u-link=1
-      - name: 襄阳公共
-        url: https://xiangyang.cjyun.org/app/streamradio/130&u-link=1
+        url: http://m-suizhou.cjyun.org/dsgb?20220318
+      - name: 随州农村
+        url: http://m-suizhou.cjyun.org/dsgb?20220318&ujs=JCQoJyN2aWRlb193cmFwIGxpJykuZmlsdGVyKGZ1bmN0aW9uKCkge3JldHVybiAkJCh0aGlzKS50ZXh0KCkudHJpbSgpID09PSAn6ZqP5bee5Yac5p2RJzt9KS5jbGljaygpOw==
   #湖南
   - tag: hntv
     name: 湖南
