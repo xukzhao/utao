@@ -234,7 +234,7 @@ let _data={
             bili="https://www.bilibili.com/tv-web/bili.html";
         }
         //"https://tv.cctv.com/live/cctv13/" "tv.html"
-        apps.push({id:0,url:"tv.html",name:"电视直播大全",pic:"img/utao.jpg"});
+        apps.push({id:0,url:"tv.html",name:"电视频道",pic:"img/utao.jpg"});
         apps.push({id:0,url:"https://www.yangshipin.cn/tv/home?pid=600002475",name:"CCTV直播",pic:"img/cctv.jpg"});
         apps.push({id:0,url:"cctv.html",name:"央视片库",pic:"img/cctv-video.jpg"});
         apps.push({id:0,url:"bestv.html",name:"百视通",pic:"img/bestv.png"});
@@ -248,8 +248,8 @@ let _data={
         if(!isGecko){
             dou="https://movie.douban.com/tv-web/douban.html";
         }
-        apps.push({id:0,url:dou,name:"豆瓣全网视频",pic:"img/douban.jpg"});
-        apps.push({id:0,url:"mgtv.html",name:"芒果",pic:"img/manguo.jpeg"});
+        apps.push({id:0,url:dou,name:"豆瓣全网影视",pic:"img/douban.jpg"});
+        apps.push({id:0,url:"mgtv.html",name:"芒果TV",pic:"img/manguo.jpeg"});
         apps.push({id:0,url:"youku.html",name:"优酷",pic:"img/youku.jpg"});
         let iqiyi="iqiyi.html";
         if(!isGecko){

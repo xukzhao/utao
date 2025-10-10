@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="提示：再按返回退出应用"
+                android:text="再按返回退出应用\n如有问题关注抖音utaotv"
                 android:textColor="#999999"
                 android:textSize="14sp"
                 android:gravity="center" />

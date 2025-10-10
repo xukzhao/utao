@@ -45,7 +45,7 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:background="#FAF9DE"
+                android:background="@android:color/transparent"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_height="wrap_content">
@@ -53,8 +53,8 @@
                     android:id="@+id/liveName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/fontDefault"
-                    android:textColor="@color/black"
+                    android:textSize="@dimen/fontBig"
+                    android:textColor="@color/white"
                      />
             </LinearLayout>
 
