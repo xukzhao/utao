@@ -54,8 +54,12 @@ public class MyApplication extends Application implements InvocationHandler {
        for (StackTraceElement trace : Thread.currentThread().getStackTrace()) {
            String cls = trace.getClassName();
            if (cls == null) continue;
-           // 兼容新版 Chromium/X5：来自 org.chromium 或 com.tencent.smtt 的调用一律返回伪装包名
-           if (cls.startsWith("org.chromium") || cls.startsWith("com.tencent.smtt")) {
+           // 不对系统 WebView/Chromium 伪装，避免安全异常导致崩溃
+           if (cls.startsWith("org.chromium") || cls.startsWith("com.android.webview")) {
+               return super.getPackageName();
+           }
+           // 如需对 X5 内核调用进行伪装，仅限制在 smtt 调用范围
+           if (cls.startsWith("com.tencent.smtt")) {
                return targetPackageName;
            }
        }
@@ -68,7 +72,7 @@ public class MyApplication extends Application implements InvocationHandler {
         allErrorCatch();
         context = getApplicationContext();
         //initX5();会自动初始化
-        androidId = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+        androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         if(null==androidId){
             LogUtil.i(TAG, "androidId: getUUID");
             androidId=getUUID();

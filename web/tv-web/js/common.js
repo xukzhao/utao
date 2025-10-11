@@ -18,10 +18,20 @@ var _tvFunc={
      console.log(params)
      return params
    },
-     getQueryParams() {
+    getQueryParamsNew() {
     return Object.fromEntries(
         new URLSearchParams(window.location.search)
     );
+   },
+    getQueryParams() {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    // 使用兼容性最好的reduce方法
+    return Array.from(params).reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+    }, {});
    },
     isApp(){
         return _tvIsApp;
