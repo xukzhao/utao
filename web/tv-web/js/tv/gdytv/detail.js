@@ -22,19 +22,9 @@ function setupVideo(video) {
 (function(){
     _tvFunc.waitForVideoElement().then(video => {
         let param=_tvFunc.getQueryParams();
-        let type="0";
-        if(param["utaot"]){
-            type=param["utaot"];
-        }
-        console.log("type::",type);
-        if(type==="0"){
-            setupVideo(video);
-        }
-        if(type==="1"){
-            _tvFunc.fixedW("body");
-            _tvFunc.fullscreen("video");
-            $$("video").css("position","fixed !important");
-        }
+        _tvFunc.fixedW("body");
+        _tvFunc.fullscreen("video");
+        $$("video").css("position","fixed !important");
         video.muted = false;
         video.volume = 1;
         video.playsInline = false;
@@ -45,6 +35,7 @@ function setupVideo(video) {
             video.muted = true;
             video.play();
         }
+        $$(".mobile-num").remove();
         //_data.hzList(video);
         _tvFunc.check(function (){
             let videoPlay=_tvFunc.isVideoPlaying(video);
@@ -56,51 +47,12 @@ function setupVideo(video) {
             return videoPlay},function (){_data.hzList(video);},1000,5);
 
     });
-})();
-$$(function (){
-    let url = window.location.href;
-    if(url.indexOf("u-link=1")>0){
-        _tvFunc.check(function (){
-            let utaoLoc =  sessionStorage.getItem("u-loc");
-            if(utaoLoc){
-                console.log("utaoLoc",utaoLoc,url);
-                if(url==utaoLoc){
-                    window.location.href=extractDomain(utaoLoc)+"/tv-web/live.html?url="+sessionStorage.getItem("u-m3u8");
-                    return true
-                }
-            }
-            return false},function (){},1000,10);
-    }
-  /*  let param=_tvFunc.getQueryParams();
-    if(param["ujs"]){
-        let ujs = param["ujs"];
-        ujs=decodeURIComponent(ujs);
-        console.log("ujs",ujs);
-    }*/
-    let ujs=   _tvFunc.getQueryParams()["ujs"];
-        //url.indexOf("ujs=");
-    if(ujs){
-        let ujsContent=decodeUnicodeBase64(ujs.replace(/ /g, '+'));
-        console.log("ujsContent",ujsContent);
-        eval(ujsContent);
-        //$$(tag).click();
-    }
-    //viewport
-    let viewport = document.getElementById("viewport");
-    console.log("viewport::",viewport);
-    if(viewport){
-        viewport.content = "width=device-width, initial-scale=1";
-    }
     const viewportMeta = document.querySelector('meta[name="viewport"]');
     console.log("viewportMeta::",viewportMeta);
     if (viewportMeta) {
         viewportMeta.setAttribute('content', `width=device-width, initial-scale=1`);
     }
-    //
-
-// _tvFunc.videoReady(function (video)
-
-});
+})();
 
 
 

@@ -1118,9 +1118,9 @@ data:
         url: https://web.guangdianyun.tv/tv/?id=391&uin=1743
 
       - name: 成都新闻综合
-        url: https://www.cditv.cn/show/4845-563.html?u-link=1
+        url: https://www.cditv.cn/show/4845-563.html
       - name: 成都经济资讯
-        url: https://www.cditv.cn/show/4845-562.html?u-link=1
+        url: https://www.cditv.cn/show/4845-562.html
       - name: 成都都市生活
         url: https://www.cditv.cn/show/4845-561.html?u-link=1
       - name: 成都影视文艺
@@ -1340,9 +1340,9 @@ data:
       - name: 北海经济科教
         url: https://res.gxbhxww.cn/html/rft/live.html?channelId=51733cd2fd0548d288c3015ec3d0535b&type=1&siteId=c510269b15014be4aaf5aa6d2b92c629&shareAppId=c510269b15014be4aaf5aa6d2b92c629
       - name: 玉林新闻综合
-        url: https://web.guangdianyun.tv/tv/3289?uin=4042&u-link=1
+        url: https://web.guangdianyun.tv/tv/3289?uin=4042
       - name: 玉林公共
-        url: https://web.guangdianyun.tv/tv/3290?uin=4042&u-link=1
+        url: https://web.guangdianyun.tv/tv/3290?uin=4042
 #      - name: 柳州新闻综合
 #        url: https://live.lzgd.com.cn/tv/1902?uin=3370
 #      - name: 柳州科教
@@ -1467,6 +1467,10 @@ data:
         url: http://m-suizhou.cjyun.org/dsgb?20220318
       - name: 随州农村
         url: http://m-suizhou.cjyun.org/dsgb?20220318&ujs=JCQoJyN2aWRlb193cmFwIGxpJykuZmlsdGVyKGZ1bmN0aW9uKCkge3JldHVybiAkJCh0aGlzKS50ZXh0KCkudHJpbSgpID09PSAn6ZqP5bee5Yac5p2RJzt9KS5jbGljaygpOw==
+#      - name: 恩施综合
+#        url: https://web.guangdianyun.tv/tv/1812?uin=3179
+      - name: 恩施文旅
+        url: https://web.guangdianyun.tv/tv/1811?uin=3179
   #湖南
   - tag: hntv
     name: 湖南
@@ -1510,9 +1514,9 @@ data:
       - name: 邵阳新闻综合
         url: http://www.sytv.net.cn/folder2188/folder2190
       - name: 岳阳新闻综合
-        url: https://web.guangdianyun.tv/tv/1699?uin=2193&u-link=1
+        url: https://web.guangdianyun.tv/tv/1699?uin=2193
       - name: 岳阳文旅都市
-        url: https://web.guangdianyun.tv/tv/1701?uin=2193&u-link=1
+        url: https://web.guangdianyun.tv/tv/1701?uin=2193
       - name: 娄底综合
         url: http://www.ldntv.cn/folder51/folder154/folder171
       - name: 郴州综合
@@ -1755,7 +1759,7 @@ data:
       - name: 海口城乡经济
         url: https://hkbtv.cn/h5/#/pagesVideo/tvDetail?articleType=1&id=6414658595168719922&publishType=2
       - name: 儋州综合
-        url: https://web.guangdianyun.tv/tv/1330?uin=1669&u-link=1
+        url: https://web.guangdianyun.tv/tv/1330?uin=1669
 
   #贵州
   - tag: guizhou

@@ -60,6 +60,9 @@ _data={
         if(url.startsWith("https://www.mgtv.com/live")){
             return "tv/hntv"
         }
+        if(url.startsWith("https://web.guangdianyun.tv")){
+            return "tv/gdytv"
+        }
         return "tv/common"
     }
     let detailPath=loadDetailByUrl(window.location.href);
