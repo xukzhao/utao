@@ -594,7 +594,8 @@ public class LiveActivity extends BaseActivity {
         }
         
         Live currentProvince = provinces.get(currentProvinceIndex);
-        binding.provinceName.setText(currentProvince.getName());
+        int count = currentProvince.getVods() == null ? 0 : currentProvince.getVods().size();
+        binding.provinceName.setText(currentProvince.getName() + "(" + count + ")");
         setupChannelList(currentProvince.getVods());
     }
 
