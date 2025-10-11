@@ -52,15 +52,14 @@ public class MyApplication extends Application implements InvocationHandler {
    @Override
    public String  getPackageName(){
        for (StackTraceElement trace : Thread.currentThread().getStackTrace()) {
-           String cls = trace.getClassName();
-           if (cls == null) continue;
-           // 不对系统 WebView/Chromium 伪装，避免安全异常导致崩溃
-           if (cls.startsWith("org.chromium") || cls.startsWith("com.android.webview")) {
-               return super.getPackageName();
-           }
-           // 如需对 X5 内核调用进行伪装，仅限制在 smtt 调用范围
-           if (cls.startsWith("com.tencent.smtt")) {
-               return targetPackageName;
+           if ("org.chromium.base.BuildInfo" .equalsIgnoreCase( trace.getClassName())) {
+               String m = trace.getMethodName();
+               // 判断当前调用是否来自 Chromium（BuildInfo 类的方法）
+               // 在部分旧版是 getAll 或 getPackageName 在较新版本是 <init>
+               if (m.equalsIgnoreCase("getAll") || m.equalsIgnoreCase("getPackageName") || m.equalsIgnoreCase("<init>")) {
+                   return targetPackageName;
+               }
+              // return "";// 返回空字符串移除包名
            }
        }
        return super.getPackageName();// 其他场景返回真实包名

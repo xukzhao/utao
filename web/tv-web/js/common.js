@@ -704,6 +704,13 @@ var _layer={
 var _tvMsg={
     notVip:" 建议在拼多多/抖音/淘宝等购物软件里搜索购买"
 }
+function extractDomain(url) {
+    const match = url.match(/^(https?:\/\/[^/?#]+)/i);
+    return match ? match[1] : null;
+}
+function decodeUnicodeBase64(base64Str) {
+    return decodeURIComponent(escape(atob(base64Str)));
+}
 _apiX.msg("videoQuality",[]);
 class VideoStallDetector {
     constructor(videoElement, options = {}) {
