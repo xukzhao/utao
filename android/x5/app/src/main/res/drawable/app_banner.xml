@@ -3,15 +3,15 @@
     <!-- Background color or gradient for TV banner (16:9). Replace as needed. -->
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#20232A"/>
+            <solid android:color="#FFFFFFFF"/>
         </shape>
     </item>
 
     <!-- Centered app mark; using existing mipmap foreground as a placeholder. -->
     <item
         android:gravity="center"
-        android:width="96dp"
-        android:height="96dp"
+        android:width="144dp"
+        android:height="144dp"
         android:drawable="@mipmap/ic_launcher_foreground"/>
 </layer-list>
 
