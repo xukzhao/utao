@@ -249,19 +249,19 @@ data:
       - name: 广东纪录片
         url: https://www.gdtv.cn/tvChannelDetail/94
       - name: 广州综合
-        url: https://app.gztv.com/plusshare/#/tvDetail?code=3001
+        url: https://app.gztv.com/plusshare/?a=1#/tvDetail?code=3001
       - name: 广州新闻
-        url: https://app.gztv.com/plusshare/#/tvDetail?code=3002
+        url: https://app.gztv.com/plusshare/?a=2#/tvDetail?code=3002
       - name: 广州南国都市
-        url: https://app.gztv.com/plusshare/#/tvDetail?code=3003
+        url: https://app.gztv.com/plusshare/?a=3#/tvDetail?code=3003
       - name: 广州法制
-        url: https://app.gztv.com/plusshare/#/tvDetail?code=3004
+        url: https://app.gztv.com/plusshare/?a=4#/tvDetail?code=3004
       - name: 广州影视
-        url: https://app.gztv.com/plusshare/#/tvDetail?code=3006
+        url: https://app.gztv.com/plusshare/?a=5#/tvDetail?code=3006
       - name: 东莞新闻综合
-        url: https://dgrtv.sun0769.com/index.php/online2/4
+        url: https://dgrtv.sun0769.com/index.php/online2/4?utaot=1
       - name: 东莞生活资讯
-        url: https://dgrtv.sun0769.com/index.php/online2/5
+        url: https://dgrtv.sun0769.com/index.php/online2/5?utaot=1
       - name: 河源综合
         url: https://tmpstream.hyrtv.cn/xwzh/sd/live.m3u8
       - name: 河源公共
