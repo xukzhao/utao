@@ -256,8 +256,8 @@ data:
         url: https://app.gztv.com/plusshare/?a=3#/tvDetail?code=3003
       - name: 广州法制
         url: https://app.gztv.com/plusshare/?a=4#/tvDetail?code=3004
-      - name: 广州影视
-        url: https://app.gztv.com/plusshare/?a=5#/tvDetail?code=3006
+#      - name: 广州影视
+#        url: https://app.gztv.com/plusshare/?a=5#/tvDetail?code=3006
       - name: 东莞新闻综合
         url: https://dgrtv.sun0769.com/index.php/online2/4?utaot=1
       - name: 东莞生活资讯
@@ -353,12 +353,6 @@ data:
         url: https://v.iqilu.com/live/yspd/
       - name: 山东教育
         url: https://www.sdetv.com.cn/edu/pc/live/index.html
-      - name: 济宁综合
-        url: https://tv.utao.tv/tv-web/live.html?url=https://lives.jnnews.tv/video/s10001-JNTV-1/index.m3u8
-      - name: 济宁生活
-        url: https://tv.utao.tv/tv-web/live.html?url=https://lives.jnnews.tv/video/s10001-JNTV2-2023/index.m3u8
-      - name: 济宁公共
-        url: https://tv.utao.tv/tv-web/live.html?url=https://lives.jnnews.tv/video/s10001-JNTV3/index.m3u8
       - name: 青岛新闻综合
         url: http://www.qtv.com.cn/live/tv/index.shtml
       - name: 青岛经济生活
@@ -1453,11 +1447,11 @@ data:
       - name: 荆门科教文旅
         url: http://cjy.jptnews.cn/p/353049.html
       - name: 襄阳综合
-        url: https://xiangyang.cjyun.org/app/streamradio/142&u-link=1
+        url: https://xiangyang.cjyun.org/app/streamradio/142?u-link=1
       - name: 襄阳经济生活
-        url: https://xiangyang.cjyun.org/app/streamradio/138&u-link=1
+        url: https://xiangyang.cjyun.org/app/streamradio/138?u-link=1
       - name: 襄阳公共
-        url: https://xiangyang.cjyun.org/app/streamradio/130&u-link=1
+        url: https://xiangyang.cjyun.org/app/streamradio/130?u-link=1
       - name: 随州综合
         url: http://m-suizhou.cjyun.org/dsgb?20220318
       - name: 随州农村

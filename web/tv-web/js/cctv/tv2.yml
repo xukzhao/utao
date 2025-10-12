@@ -1317,11 +1317,11 @@ data:
       - name: 荆门科教文旅
         url: http://cjy.jptnews.cn/p/353049.html
       - name: 襄阳综合
-        url: https://xiangyang.cjyun.org/app/streamradio/142&u-link=1
+        url: https://xiangyang.cjyun.org/app/streamradio/142?u-link=1
       - name: 襄阳经济生活
-        url: https://xiangyang.cjyun.org/app/streamradio/138&u-link=1
+        url: https://xiangyang.cjyun.org/app/streamradio/138?u-link=1
       - name: 襄阳公共
-        url: https://xiangyang.cjyun.org/app/streamradio/130&u-link=1
+        url: https://xiangyang.cjyun.org/app/streamradio/130?u-link=1
       - name: 随州综合
         url: http://m-suizhou.cjyun.org/dsgb?20220318
       - name: 随州农村

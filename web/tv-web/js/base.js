@@ -181,6 +181,11 @@ myPort.onMessage.addListener(function (m) {
       _messageCtrl.ctrl(m.data);
       return;
   }
+  if(m.service==="redirect"){
+    console.log(`from background ${m.data}` );
+    window.location.href=m.data.url;
+    return;
+ }
     if(m.service==="loginQr"){
         let loginQr=window.wrappedJSObject._loginQr;
         loginQr(m.data.url,m.data.type);
