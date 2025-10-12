@@ -68,8 +68,6 @@ function setupVideo(video) {
         try {
             video.play();
         } catch (e) {
-            video.muted = true;
-            video.play();
         }
         //_data.hzList(video);
         _tvFunc.check(function (){

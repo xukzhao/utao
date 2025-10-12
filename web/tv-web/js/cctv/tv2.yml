@@ -171,6 +171,10 @@ data:
         url: https://www.nbs.cn/live/?id=110095
       - name: 海南少儿
         url: https://service-app.hnntv.cn/AppEngine/appinfo/STHaiNan/share.html?userId=1&appId=STHaiNan&userId=1&channelId=7
+      - name: 广东少儿
+        url: https://www.gdtv.cn/tvChannelDetail/54
+      - name: 嘉佳卡通
+        url: https://www.gdtv.cn/tvChannelDetail/66
       - name: 哈哈炫动
         url: https://live.kankanews.com/huikan?id=9
       - name: 北京少儿
@@ -209,6 +213,36 @@ data:
   - tag: gdtv
     name: 广东
     vods:
+      - name: 广东卫视
+        url: https://www.gdtv.cn/tvChannelDetail/43?utaot=1
+      - name: 广东4K超高清
+        url: https://www.gdtv.cn/tvChannelDetail/16?utaot=1
+      - name: 广东经典电视剧
+        url: https://www.gdtv.cn/tvChannelDetail/100?utaot=1
+      - name: 广东珠江
+        url: https://www.gdtv.cn/tvChannelDetail/44?utaot=1
+      - name: 广东新闻
+        url: https://www.gdtv.cn/tvChannelDetail/45?utaot=1
+      - name: 广东民生
+        url: https://www.gdtv.cn/tvChannelDetail/48?utaot=1
+      - name: 广东体育
+        url: https://www.gdtv.cn/tvChannelDetail/47?utaot=1
+      - name: 大湾区卫视
+        url: https://www.gdtv.cn/tvChannelDetail/51?utaot=1
+      - name: 大湾区卫视（海外版）
+        url: https://www.gdtv.cn/tvChannelDetail/46?utaot=1
+      - name: 广东影视
+        url: https://www.gdtv.cn/tvChannelDetail/53?utaot=1
+      - name: 广东南方购物
+        url: https://www.gdtv.cn/tvChannelDetail/42?utaot=1
+      - name: 广东现代教育
+        url: https://www.gdtv.cn/tvChannelDetail/111?utaot=1
+      - name: 广东岭南戏曲
+        url: https://www.gdtv.cn/tvChannelDetail/15?utaot=1
+      - name: 广东移动
+        url: https://www.gdtv.cn/tvChannelDetail/74?utaot=1
+      - name: 广东纪录片
+        url: https://www.gdtv.cn/tvChannelDetail/94?utaot=1
       - name: 广州综合
         url: https://app.gztv.com/plusshare/?a=1#/tvDetail?code=3001
       - name: 广州新闻
@@ -217,8 +251,6 @@ data:
         url: https://app.gztv.com/plusshare/?a=3#/tvDetail?code=3003
       - name: 广州法制
         url: https://app.gztv.com/plusshare/?a=4#/tvDetail?code=3004
-      - name: 广州影视
-        url: https://app.gztv.com/plusshare/?a=5#/tvDetail?code=3006
       - name: 东莞新闻综合
         url: https://dgrtv.sun0769.com/index.php/online2/4?utaot=1
       - name: 东莞生活资讯
@@ -234,6 +266,12 @@ data:
   - tag: xianggang
     name: 香港
     vods:
+      - name: 凤凰卫视资讯台
+        url: https://www.fengshows.com/live?tag=0
+      - name: 凤凰卫视中文台
+        url: https://www.fengshows.com/live?tag=1
+      - name: 凤凰卫视香港台
+        url: https://www.fengshows.com/live?tag=2
       - name: 香港卫视
         url: http://www.hkstv.tv/index/live/channel/.html
   - tag: sdtv
@@ -257,12 +295,6 @@ data:
         url: https://v.iqilu.com/live/yspd/
       - name: 山东教育
         url: https://www.sdetv.com.cn/edu/pc/live/index.html
-      - name: 济宁综合
-        url: live.html?url=https://lives.jnnews.tv/video/s10001-JNTV-1/index.m3u8
-      - name: 济宁生活
-        url: live.html?url=https://lives.jnnews.tv/video/s10001-JNTV2-2023/index.m3u8
-      - name: 济宁公共
-        url: live.html?url=https://lives.jnnews.tv/video/s10001-JNTV3/index.m3u8
       - name: 青岛新闻综合
         url: http://www.qtv.com.cn/live/tv/index.shtml
       - name: 青岛经济生活

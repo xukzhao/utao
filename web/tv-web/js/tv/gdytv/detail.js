@@ -32,8 +32,6 @@ function setupVideo(video) {
         try {
             video.play();
         } catch (e) {
-            video.muted = true;
-            video.play();
         }
         $$(".mobile-num").remove();
         //_data.hzList(video);

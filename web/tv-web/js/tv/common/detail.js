@@ -42,10 +42,9 @@ function setupVideo(video) {
         try {
             video.play();
         } catch (e) {
-            video.muted = true;
-            video.play();
         }
-        //_data.hzList(video);
+        $$("body").css("min-width","100%");
+        $$("html").css("min-width","100%");
         _tvFunc.check(function (){
             let videoPlay=_tvFunc.isVideoPlaying(video);
             if(!videoPlay){
@@ -86,11 +85,11 @@ $$(function (){
         //$$(tag).click();
     }
     //viewport
-    let viewport = document.getElementById("viewport");
+ /*   let viewport = document.getElementById("viewport");
     console.log("viewport::",viewport);
     if(viewport){
         viewport.content = "width=device-width, initial-scale=1";
-    }
+    }*/
     const viewportMeta = document.querySelector('meta[name="viewport"]');
     console.log("viewportMeta::",viewportMeta);
     if (viewportMeta) {
