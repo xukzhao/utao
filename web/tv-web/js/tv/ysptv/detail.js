@@ -65,7 +65,7 @@ function setupVideo(video) {
             video.play();
         } catch (e) {
         }
-        //_data.hzList(video);
+        _data.hzList(video);
         _tvFunc.check(function (){
             let videoPlay=_tvFunc.isVideoPlaying(video);
             if(!videoPlay){

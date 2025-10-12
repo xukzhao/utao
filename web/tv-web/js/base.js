@@ -197,6 +197,11 @@ myPort.onMessage.addListener(function (m) {
        // document.getElementById(m.data).click();
         return;
     }
+    if(m.service==="js"){
+        console.log(`from background ${m.data}` );
+        eval(m.data);
+        return;
+    }
     if(m.service==="app"){
         sessionStorage.setItem("_tvRunEnv",m.data);
     }
