@@ -41,6 +41,7 @@ public class MyApplication extends Application implements InvocationHandler {
    @Override
    protected void attachBaseContext(Context base) {
        realPackageName = base.getPackageName();
+       targetPackageName = generateRandomPackageName();
        hookPackageManager(base);
        super.attachBaseContext(base);
        MultiDex.install(base);
@@ -67,11 +68,10 @@ public class MyApplication extends Application implements InvocationHandler {
     public void onCreate() {
         super.onCreate();
         LogUtil.i(TAG, "onViewInitBegin: ");
-        targetPackageName=generateRandomPackageName();
         allErrorCatch();
         context = getApplicationContext();
         //initX5();会自动初始化
-        androidId = Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+        androidId = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         if(null==androidId){
             LogUtil.i(TAG, "androidId: getUUID");
             androidId=getUUID();
@@ -139,6 +139,7 @@ public class MyApplication extends Application implements InvocationHandler {
                 this);
     }
     private void allErrorCatch(){
+        final Thread.UncaughtExceptionHandler systemDefault = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Thread thread, Throwable throwable) {
@@ -150,14 +151,16 @@ public class MyApplication extends Application implements InvocationHandler {
 
                     LogUtil.e("Application", "捕获到 SurfaceTexture 相关异常: " + throwable.getMessage());
 
-                    // 记录异常但不终止应用
+                    // 记录非致命异常但不终止应用
+                    CrashHandler.recordNonFatal(getApplicationContext(), throwable);
                     return;
                 }
 
-                // 其他异常，使用默认处理器
-                Thread.UncaughtExceptionHandler defaultHandler = Thread.getDefaultUncaughtExceptionHandler();
-                if (defaultHandler != null) {
-                    defaultHandler.uncaughtException(thread, throwable);
+                // 其他异常，交给系统默认处理器，避免递归
+                if (systemDefault != null) {
+                    systemDefault.uncaughtException(thread, throwable);
+                } else {
+                    android.os.Process.killProcess(android.os.Process.myPid());
                 }
             }
 

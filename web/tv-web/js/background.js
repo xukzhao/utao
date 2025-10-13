@@ -51,11 +51,35 @@ const _connect={
 
 const  _listener={
     init(){
-        //this.startListener();
-        this.CompletedListener();
+        //this.ssl();
+        //this.CompletedListener();
         this.headerListener();
         this.imageLoadListener();
+        this.m3u8Listener();
+		this.tvWebRedirectListener();
+		this.fengshowsRedirectListener();
 
+    },
+    fengshowsRedirectListener(){
+        function onBefore(details){
+            try{
+                const orgUrl = details.url || "";
+                if(orgUrl.startsWith("https://tlive.fengshows.com/live/") || orgUrl.startsWith("https://hkmolive.fengshows.com/live/")){
+                    const idx = orgUrl.indexOf("/live");
+                    const realUrl = "http://qctv.fengshows.cn" + (idx !== -1 ? orgUrl.substring(idx) : "/live");
+                    console.log("fengshows redirect:", orgUrl, "->", realUrl);
+                    return { redirectUrl: realUrl };
+                }
+            }catch(e){
+                console.log("fengshowsRedirectListener error: "+e.message);
+            }
+        }
+        browser.webRequest.onBeforeRequest.addListener(onBefore, {
+            urls: [
+                "https://tlive.fengshows.com/live/*",
+                "https://hkmolive.fengshows.com/live/*"
+            ]
+        }, ["blocking"]);
     },
     CompletedListener(){
         function logURL(requestDetails) {
@@ -75,25 +99,72 @@ const  _listener={
             urls: ["https://mesh.if.iqiyi.com/tvg/v2/lw/base_info*"]
         });
     },
-    startListener(){
-        function logURL(requestDetails) {
-            console.log("requestDetails" + requestDetails.url);
-            let originalUrl = requestDetails.url;
-            // 示例：将 example.com 替换为 example.org
-            let modifiedUrl = originalUrl.replace("tlive.fengshows.com", "qctv.fengshows.cn");
-            console.log("modifiedUrl"+modifiedUrl);
-            // 2. 修改请求头
-            let newHeaders = new Headers(requestDetails.requestHeaders || {});
-
-            // 添加/修改头
-            newHeaders.set("Origin", "qctv.fengshows.cn");
-            //newHeaders.set("User-Agent", "Mozilla/5.0 (Custom GeckoView)");, requestHeaders: Array.from(newHeaders.entries())
-            return {redirectUrl: modifiedUrl};
+	tvWebRedirectListener(){
+		function onBefore(details){
+			try{
+				const url = details.url || "";
+				const marker = "/tv-web/";
+				const idx = url.indexOf(marker);
+				if(idx === -1){
+					return;
+				}
+				let suffix = url.substring(idx + marker.length); // includes path + query + hash
+				if(suffix.startsWith('/')){
+					suffix = suffix.substring(1);
+				}
+				if(!suffix){
+					suffix = "index.html";
+				}
+				const redirectUrl = browser.runtime.getURL(suffix);
+				console.log("tv-web redirect:", url, "->", redirectUrl);
+                portWeb.postMessage({service:"redirect",data:{url:redirectUrl} });
+                return { redirectUrl: redirectUrl };
+				// Use a data: URL that performs in-page navigation to avoid tab API
+				//const html = "<!doctype html><meta charset=\\\"utf-8\\\"><script>location.replace('" + redirectUrl.replace(/'/g, "\\\\'") + "');<\\/script>";
+				//return { redirectUrl: "data:text/html;charset=utf-8," + encodeURIComponent(html) };
+			}catch(e){
+				console.log("tvWebRedirectListener error: "+e.message);
+			}
+		}
+		browser.webRequest.onBeforeRequest.addListener(onBefore, {
+			urls: ["<all_urls>"],
+			types: ["main_frame"]
+		}, ["blocking"]);
+	},
+    m3u8Listener(){
+        function safePost(msg){
+            if(null!=portWeb){
+                portWeb.postMessage(msg);
+            }else{
+                let index=setInterval(function(){
+                    if(null!=portWeb){
+                        clearInterval(index);
+                        portWeb.postMessage(msg);
+                    }
+                },100);
+            }
         }
-        browser.webRequest.onBeforeRequest.addListener(logURL, {
-            //<all_urls>
-            urls: ["https://tlive.fengshows.com/live/*"]
-        },  ["blocking"] );
+        function onBefore(details){
+            try{
+                const reqUrl = details.url || "";
+                if(!reqUrl || reqUrl.indexOf('.m3u8')===-1){
+                    return;
+                }
+                // 页面地址（发起该请求的文档）
+                const locUrl = details.documentUrl || details.originUrl || "";
+                if(!locUrl || locUrl.indexOf('u-link=1')===-1){
+                    return;
+                }
+                console.log("m3u8 captured:", reqUrl, " loc:", locUrl);
+                safePost({service:"sessionStorage",data:{key:"u-loc",value:locUrl}});
+                safePost({service:"sessionStorage",data:{key:"u-m3u8",value:reqUrl}});
+            }catch(e){
+                console.log("m3u8Listener error: "+e.message);
+            }
+        }
+        browser.webRequest.onBeforeRequest.addListener(onBefore, {
+            urls: ["<all_urls>"]
+        });
     },
     ssl(){
         // 拦截证书错误并允许加载
@@ -107,7 +178,7 @@ const  _listener={
                 };
             },
             { urls: ["https://qctv.fengshows.cn/live/*"] },
-            ["blocking", "responseHeaders", "extraHeaders"]
+            ["blocking", "responseHeaders"]
         );
     },
     headerListener(){
@@ -180,6 +251,8 @@ const  _listener={
 }
 _connect.init();
 _listener.init();
+
+
 
 
 

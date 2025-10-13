@@ -187,7 +187,20 @@ public class StartActivity extends Activity {
         }
     }
     private void to(){
-        Intent intent = new Intent(StartActivity.this, MainActivity.class);
+        // 根据设置跳转到不同页面
+        String startPage = ValueUtil.getString(this, "startPage", "main");
+        Intent intent;
+        
+        if ("live".equals(startPage)) {
+            // 跳转到直播页面
+            intent = new Intent(StartActivity.this, LiveActivity.class);
+            LogUtil.i(TAG, "启动页面：电视直播");
+        } else {
+            // 默认跳转到主页面
+            intent = new Intent(StartActivity.this, MainActivity.class);
+            LogUtil.i(TAG, "启动页面：视频点播");
+        }
+        
         startActivity(intent);
         finish();
     }

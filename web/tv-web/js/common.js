@@ -7,16 +7,31 @@ if(typeof _tvIsGecko === "undefined"){
 }
 var _tvFunc={
     // 获取url请求参数
-    getQueryParams() {
+    getQueryParamsXX() {
       var query = location.search.substring(1)
       var arr = query.split('&')
       var params = {}
       for (var i = 0; i < arr.length; i++) {
           var pair = arr[i].split('=')
-         params[pair[0]] = pair[1]
+         params[pair[0]] = decodeURI(pair[1]);
       }
      console.log(params)
      return params
+   },
+    getQueryParamsNew() {
+    return Object.fromEntries(
+        new URLSearchParams(window.location.search)
+    );
+   },
+    getQueryParams() {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    // 使用兼容性最好的reduce方法
+    return Array.from(params).reduce((acc, [key, value]) => {
+        acc[key] = value;
+        return acc;
+    }, {});
    },
     isApp(){
         return _tvIsApp;
@@ -40,6 +55,22 @@ var _tvFunc={
         }
         return url;
     },
+    getVideoQuality(videoElement) {
+    // 确保视频元数据已加载
+   /* if (videoElement.readyState < 1) {
+        console.warn("Video metadata not loaded. Listen for 'loadedmetadata' event.");
+        return "未知";
+    }*/
+    const width = videoElement.videoWidth;
+    const height = videoElement.videoHeight;
+    const maxDimension = Math.max(width, height);
+    // 主流通用分辨率标准判断 [6,7,8](@ref)
+    if (maxDimension >= 3840) return "4K";       // 4K标准：3840x2160或更高
+    else if (maxDimension >= 1920) return "1080P"; // 全高清：1920x1080
+    else if (maxDimension >= 1280) return "720P";  // 高清：1280x720
+    else if (maxDimension >= 640) return "480P";   // 标清：640x480（部分场景归为360P）
+    else return "360P";                            // 低清：如640x360
+   },
    loadCssCode(code) {
       var style = document.createElement('style')
     // style.type = 'text/css'
@@ -48,7 +79,7 @@ var _tvFunc={
       var head = document.getElementsByTagName('head')[0]
       head.appendChild(style);
     },
-    fullscreen(id){
+    fullscreenQQ(id){
         var css=`
    ${id}{
         position: fixed !important;
@@ -62,6 +93,25 @@ var _tvFunc={
           background-color: rgb(0, 0, 0); 
     }
  `;
+        this.loadCssCode(css);
+    },
+    fullscreen(id) {
+        var css = `${id}{
+            position: fixed !important;
+            z-index: 99990 !important;
+            width: 100% !important;
+            height: 100% !important;
+            top: 0 !important;
+            left: 0 !important;
+            right:0 !important;
+            background-color: rgb(0, 0, 0);
+            bottom: 0 !important;}
+            video::-webkit-media-controls {display: none !important;}
+video::-webkit-media-controls-enclosure {display: none !important;}
+video::-webkit-media-controls-panel {display: none !important;}
+video::-webkit-media-controls-play-button {display: none !important;}
+video::-webkit-media-controls-start-playback-button {display: none !important;}
+video::-moz-media-controls {display: none !important;}`;
         this.loadCssCode(css);
     },
     fixedW(id){
@@ -295,14 +345,19 @@ var _tvFunc={
        maxNum=maxNumOrg;
     }
     let index=setInterval(function(){
-          if(check()){
+        try{
+            if(check()){
+                clearInterval(index);
+                callback(index);
+            }
+            console.log("num {} maxNum {}",num,maxNum)
+            num++;
+            if(num>maxNum){
+                clearInterval(index);
+            }
+        }catch (e){
             clearInterval(index);
-            callback(index);
-          }
-          num++;
-          if(num>maxNum){
-            clearInterval(index);
-          }
+        }
     },time);
     return index;
    },
@@ -315,7 +370,99 @@ var _tvFunc={
          }
      }
      return false;
-   }
+   },
+    //网友改
+    waitForVideoElement() {
+        const timeout = 1000 * 35;  //************************
+        return new Promise((resolve) => {
+                // 优先查找已存在的 video 元素
+                const existing = document.querySelector('video');
+                if (existing) {
+                    //_apiX.videoFind("ok");
+                    resolve(existing);
+                    return;
+                }
+
+                const startTime = Date.now();
+                let intervalId = null;
+
+                // 使用 MutationObserver 监听 DOM 变化
+                const observer = new MutationObserver(() => {
+                        const video = document.querySelector('video');
+                        if (video) {
+                            observer.disconnect();
+                            clearInterval(intervalId);
+                            //_apiX.videoFind("ok");
+                            resolve(video);
+                        }
+                    }
+                );
+
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+
+                // 每隔 200ms 轮询一次作为兜底
+                intervalId = setInterval(() => {
+                    const video = document.querySelector('video');
+                    if (video) {
+                        observer.disconnect();
+                        clearInterval(intervalId);
+                        //_apiX.videoFind("ok");
+                        resolve(video);
+                    } else if (Date.now() - startTime >= timeout) {
+                        observer.disconnect();
+                        clearInterval(intervalId);
+                        //_apiX.toast(timeout / 1000 + "秒，未找到资源。系统重新加载！");
+                        resolve(null);
+                    }
+                }, 200);
+            }
+        );
+    },
+    async waitForVideoPlay(video, timeout) {
+        if (!video)
+            video = await this.waitForVideoElement();
+        if (!video) {
+            return Promise.resolve(false);
+        }
+
+        if (this.isVideoPlaying(video)) {
+            return Promise.resolve(true);
+        }
+
+        return new Promise((resolve) => {
+                const startTime = Date.now();
+                timeout = timeout || 1000 * 35; //************************
+                const check = () => {
+                    if (this.isVideoPlaying(video)) {
+                        resolve(true);
+
+                        // 注册卡顿回调
+                        const stallDetector = new VideoStallDetector(video);
+                        stallDetector.onStall = (reason) => {
+                            if (reason.toLowerCase() != 'buffering' && reason.toLowerCase() != 'readystate') {
+                                _apiX.toast('卡顿原因：' + reason + "。系统重新加载！");
+                                _apiX.msg("tobackup", "{}");
+                            } else {//_apiX.toast('卡顿原因：' + reason);
+                            }
+                        };
+
+                    } else if (Date.now() - startTime >= timeout) {
+                        //_apiX.toast(timeout / 1000 + "秒，视频未播放。系统重新加载！");
+                        resolve(false);
+                    } else {
+                        setTimeout(check, 200); // 每 200ms 检查一次
+                    }
+                };
+                check();
+            }
+        );
+    },
+    isVideoPlaying(video) {
+        return video.readyState > 2 && !video.paused && !video.ended && video.currentTime > 0;
+    }
 };
 var _apiX={
     userAgent(isH5){
@@ -324,6 +471,9 @@ var _apiX={
             userAgent="Mozilla/5.0 (iPhone; CPU iPhone OS 17_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Cronet Mobile/15E148 Safari/604.1";
         }
         return userAgent;
+    },
+    toast(message){
+        _api.toast(message);
     },
     msg(service,data){
         let dataStr=  JSON.stringify(data);
@@ -553,4 +703,80 @@ var _layer={
 }
 var _tvMsg={
     notVip:" 建议在拼多多/抖音/淘宝等购物软件里搜索购买"
+}
+function extractDomain(url) {
+    const match = url.match(/^(https?:\/\/[^/?#]+)/i);
+    return match ? match[1] : null;
+}
+function decodeUnicodeBase64(base64Str) {
+    return decodeURIComponent(escape(atob(base64Str)));
+}
+_apiX.msg("videoQuality",[]);
+class VideoStallDetector {
+    constructor(videoElement, options = {}) {
+        this.video = videoElement;
+        this.checkInterval = options.checkInterval || 1000 * 60;
+        // 默认60秒检查一次
+        this.stallTimeThreshold = options.stallTimeThreshold || 60;
+        // 默认60秒未更新时间视为卡顿
+        this.lastTimeUpdate = 0;
+        this.isStalled = false;
+
+        this.init();
+    }
+
+    init() {
+        this.bindEvents();
+        this.startPeriodicCheck();
+    }
+
+    bindEvents() {
+        this.video.addEventListener('waiting', this.handleWaiting.bind(this));
+        this.video.addEventListener('timeupdate', this.handleTimeUpdate.bind(this));
+    }
+
+    handleWaiting() {
+        //console.log('视频正在缓冲，可能卡住了');
+        //if (this.onStall) this.onStall('网络掉线，正在缓冲');
+        if (this.onStall)
+            this.onStall('Buffering');
+    }
+
+    handleTimeUpdate() {
+        const currentTime = this.video.currentTime;
+        if (currentTime === this.lastTimeUpdate) {
+            // 如果连续两次时间未更新，可能卡住了
+            if (!this.isStalled) {
+                this.isStalled = true;
+                setTimeout(() => {
+                    if (this.video.currentTime === currentTime) {
+                        //console.log(`视频卡住超过 ${this.stallTimeThreshold} 秒`);
+                        //if (this.onStall) this.onStall('timeupdate');
+                        if (this.onStall)
+                            this.onStall(`视频进度更新超 ${this.stallTimeThreshold} 秒`);
+                    }
+                    this.isStalled = false;
+                }, this.stallTimeThreshold * 1000);
+            }
+        } else {
+            this.isStalled = false;
+        }
+        this.lastTimeUpdate = currentTime;
+    }
+
+    startPeriodicCheck() {
+        setInterval(() => {
+            if (!this.video.paused && this.video.readyState < this.video.HAVE_FUTURE_DATA) {
+                //console.log('视频可能卡住了：没有足够的数据可以播放');
+                //if (this.onStall) this.onStall('没有足够的数据可以播放');
+                if (this.onStall)
+                    this.onStall('readyState');
+            }
+        }, this.checkInterval);
+    }
+
+    // 设置回调函数
+    onStall(callback) {
+        this.onStall = callback;
+    }
 }

@@ -11,6 +11,9 @@ public class Vod {
    private Integer tagIndex;
    private Integer detailIndex;
    private String key;
+   
+   // 添加收藏状态字段
+   private boolean isFavorite = false;
 
     public String getName() {
         return name;
@@ -50,5 +53,14 @@ public class Vod {
 
     public void setKey(String key) {
         this.key = key;
+    }
+    
+    // 收藏状态的getter和setter
+    public boolean isFavorite() {
+        return isFavorite;
+    }
+    
+    public void setFavorite(boolean favorite) {
+        isFavorite = favorite;
     }
 }

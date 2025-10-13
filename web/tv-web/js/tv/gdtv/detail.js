@@ -44,13 +44,12 @@ function setupVideo(video) {
         try {
             video.play();
         } catch (e) {
-            video.muted = true;
-            video.play();
         }
 
     });
-    let viewport = document.getElementById("viewport");
-    if(viewport){
-        viewport.content = "width=device-width, initial-scale=1";
+    const viewportMeta = document.querySelector('meta[name="viewport"]');
+    console.log("viewportMeta::",viewportMeta);
+    if (viewportMeta) {
+        viewportMeta.setAttribute('content', `width=device-width, initial-scale=1`);
     }
 })();

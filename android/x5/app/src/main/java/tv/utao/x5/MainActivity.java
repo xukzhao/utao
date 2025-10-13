@@ -1,16 +1,26 @@
 package tv.utao.x5;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
+
+import tv.utao.x5.databinding.DialogExitMainBinding;
 import tv.utao.x5.impl.WebViewClientImpl;
 import tv.utao.x5.util.LogUtil;
+import tv.utao.x5.util.ValueUtil;
 import tv.utao.x5.utils.ToastUtils;
 
 public class MainActivity extends BaseWebViewActivity {
     private long mClickBackTime = 0;
+    private DialogExitMainBinding exitDialogBinding;
+    private boolean isExitDialogShowing = false;
     public boolean dispatchTouchEvent(MotionEvent event) {
         if(event.getAction() == KeyEvent.ACTION_DOWN){
             float x= event.getX();
@@ -49,6 +59,22 @@ public class MainActivity extends BaseWebViewActivity {
         }
         int keyCode = event.getKeyCode();
         LogUtil.i("keyDown keyCode ", keyCode+" event" + event);
+        
+        // 优先处理退出对话框
+        if(isExitDialogShowing){
+            if(keyCode==KeyEvent.KEYCODE_BACK){
+                finish();
+                return true;
+            }
+            // 退出对话框显示时，让系统处理上下键焦点切换和确认键
+            if(keyCode==KeyEvent.KEYCODE_DPAD_UP || keyCode==KeyEvent.KEYCODE_DPAD_DOWN || 
+               keyCode==KeyEvent.KEYCODE_DPAD_CENTER || keyCode==KeyEvent.KEYCODE_ENTER){
+                return super.dispatchKeyEvent(event);
+            }
+            // 其他按键不处理
+            return true;
+        }
+        
         boolean isMenuShow=isMenuShow();
         if(isMenuShow){
             if(keyCode==KeyEvent.KEYCODE_BACK||keyCode==KeyEvent.KEYCODE_MENU||keyCode==KeyEvent.KEYCODE_TAB){
@@ -90,6 +116,12 @@ public class MainActivity extends BaseWebViewActivity {
         return super.dispatchKeyEvent(event);
     }
     private boolean keyBack(){
+        // 如果退出对话框已显示，再次按返回键则退出
+        if (isExitDialogShowing) {
+            finish();
+            return true;
+        }
+        
         String url = WebViewClientImpl.backUrl();
         LogUtil.i("keyBack","keyBack "+url);
         //NextPlusNavigationDelegate.backUrl();
@@ -97,21 +129,80 @@ public class MainActivity extends BaseWebViewActivity {
             mWebView.loadUrl(url);
             return true;
         }
-        long currentTime = System.currentTimeMillis();
-        if (currentTime - mClickBackTime < 3000) {
-            //killAppProcess();
-            finish();
-            //super.onBackPressed();
-            //System.exit(0);
-        } else {
-            ToastUtils.show(this, "再按一次返回键退出", Toast.LENGTH_SHORT);
-            mClickBackTime = currentTime;
-        }
-        //detail-> home-> index
+        
+        // 显示退出对话框
+        showExitDialog();
         return true;
     }
+    
+    private void showExitDialog() {
+        if (exitDialogBinding == null) {
+            initExitDialog();
+        }
+        isExitDialogShowing = true;
+        exitDialogBinding.exitDialogContainer.setVisibility(View.VISIBLE);
+        
+        // 设置对话框中按钮的焦点
+        //exitDialogBinding.btnExit.setFocusable(true);
+        exitDialogBinding.btnCancel.setFocusable(true);
+        exitDialogBinding.btnStartToggle.setFocusable(true);
+        
+        // 设置启动按钮文案（启动XX）
+        String currentStartPage = ValueUtil.getString(this, "startPage", "main");
+        if ("main".equals(currentStartPage)) {
+            exitDialogBinding.btnStartToggle.setText("启动即电视直播");
+        } else {
+            exitDialogBinding.btnStartToggle.setText("启动即视频点播");
+        }
+        
+        // 默认焦点在退出按钮上
+        exitDialogBinding.btnCancel.post(() -> exitDialogBinding.btnCancel.requestFocus());
 
+        // Main 返回菜单不显示收藏与画质
+        // 此布局本身不包含这两个控件，无需隐藏
+        
+    }
+    
+    private void hideExitDialog() {
+        if (exitDialogBinding != null) {
+            isExitDialogShowing = false;
+            exitDialogBinding.exitDialogContainer.setVisibility(View.GONE);
+        }
+    }
+    
+    private void initExitDialog() {
+        View dialogView = findViewById(R.id.exitDialog);
+        exitDialogBinding = DataBindingUtil.bind(dialogView);
+        
+        if (exitDialogBinding == null) {
+            return;
+        }
 
-
-
+        // 取消按钮
+        exitDialogBinding.btnCancel.setOnClickListener(v -> {
+            hideExitDialog();
+        });
+        
+        // 点击背景关闭对话框
+        exitDialogBinding.dialogBackdrop.setOnClickListener(v -> {
+            hideExitDialog();
+        });
+        
+        // 启动首页切换按钮（仅按钮，点击切换并更新文案）
+        exitDialogBinding.btnStartToggle.setOnClickListener(v -> {
+            String currentStartPage = ValueUtil.getString(this, "startPage", "main");
+            if ("main".equals(currentStartPage)) {
+                // 当前是视频点播，切换到电视直播
+                ValueUtil.putString(this, "startPage", "live");
+                ToastUtils.show(this, "已设置启动首页为：电视直播", Toast.LENGTH_SHORT);
+                exitDialogBinding.btnStartToggle.setText("启动即视频点播");
+            } else {
+                // 当前是电视直播，切换到视频点播
+                ValueUtil.putString(this, "startPage", "main");
+                ToastUtils.show(this, "已设置启动首页为：视频点播", Toast.LENGTH_SHORT);
+                exitDialogBinding.btnStartToggle.setText("启动即电视直播");
+            }
+        });
+    }
+    
 }
