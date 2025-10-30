@@ -181,6 +181,11 @@ myPort.onMessage.addListener(function (m) {
       _messageCtrl.ctrl(m.data);
       return;
   }
+  if(m.service==="redirect"){
+    console.log(`from background ${m.data}` );
+    window.location.href=m.data.url;
+    return;
+ }
     if(m.service==="loginQr"){
         let loginQr=window.wrappedJSObject._loginQr;
         loginQr(m.data.url,m.data.type);
@@ -190,6 +195,11 @@ myPort.onMessage.addListener(function (m) {
         console.log(`from background ${m.data}` );
         $("#"+m.data).trigger("click");
        // document.getElementById(m.data).click();
+        return;
+    }
+    if(m.service==="js"){
+        console.log(`from background ${m.data}` );
+        eval(m.data);
         return;
     }
     if(m.service==="app"){

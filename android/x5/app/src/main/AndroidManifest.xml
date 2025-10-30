@@ -31,7 +31,7 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:banner="@mipmap/ic_launcher"
+        android:banner="@drawable/app_banner"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:hardwareAccelerated="true"

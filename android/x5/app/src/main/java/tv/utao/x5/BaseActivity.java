@@ -50,6 +50,16 @@ public abstract class BaseActivity extends Activity {
         getWindow().getDecorView().setImportantForAccessibility(
                 View.IMPORTANT_FOR_ACCESSIBILITY_NO
         );
+        // 禁用内容捕获以规避部分机型系统 WebView 在初始绘制时的崩溃
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            try {
+                getWindow().getDecorView().setImportantForContentCapture(
+                        View.IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS
+                );
+            } catch (NoSuchMethodError | NoClassDefFoundError ignored) {
+                // 某些定制 ROM 在 Q 也可能缺此 API，安全忽略
+            }
+        }
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         initWebViewFallback();
         createInit();
@@ -80,6 +90,16 @@ public abstract class BaseActivity extends Activity {
      */
     protected void initWebView() {
         WebSettings webSetting = mWebView.getSettings();
+        // 针对 Android 10+ 禁用内容捕获，避免系统 ContentCaptureManager 相关崩溃
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            try {
+                mWebView.setImportantForContentCapture(
+                        View.IMPORTANT_FOR_CONTENT_CAPTURE_NO_EXCLUDE_DESCENDANTS
+                );
+            } catch (NoSuchMethodError | NoClassDefFoundError ignored) {
+                // 某些定制 ROM 在 Q 也可能缺此 API，安全忽略
+            }
+        }
         webSetting.setJavaScriptEnabled(true);
         webSetting.setAllowFileAccess(true);
         webSetting.setDatabaseEnabled(true);

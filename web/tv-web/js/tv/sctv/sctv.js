@@ -1,6 +1,6 @@
-let url = window.location.href;
-let index= url.indexOf("tag=");
-let tag = url.substring(index+4,url.length);
+//let url = window.location.href;
+//let index= url.indexOf("tag=");
+let tag =  _tvFunc.getQueryParams()["tag"];
 //api.vonchange.com
 let playUrl=null;
 let initPlayer=function (){

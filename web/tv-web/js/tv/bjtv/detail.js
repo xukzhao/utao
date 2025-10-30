@@ -2,9 +2,9 @@
 (function(){
     _tvFunc.fixedW("body");
     _tvFunc.check(function (){return $$(".right_list li").length>0},function (){
-        let url = window.location.href;
-        let index= url.indexOf("tag=");
-        let tag = url.substring(index+4,url.length);
+        //let url = window.location.href;
+        //let index= url.indexOf("tag=");
+        let tag =  _tvFunc.getQueryParams()["tag"];
         console.log(tag);
         let currentTag=0;
         $$(".right_list li").each(function (i,item){

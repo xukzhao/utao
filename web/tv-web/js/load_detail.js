@@ -65,24 +65,18 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://live.kankanews.com/")){
             return "tv/sh"
         }
-        if(url.startsWith("https://live.fjtv.net/")){
-            return "tv/fjtv"
-        }
         if(url.startsWith("https://www.btime.com")){
             return "tv/bjtv"
         }
-        if(url.startsWith("https://www.jxntv.cn/")){
+ /*       if(url.startsWith("https://www.jxntv.cn/")){
             return "tv/jxntv"
-        }
+        }*/
         if(url.startsWith("https://www.jlntv.cn/")){
             return "tv/jltv"
         }
     /*    if(url.startsWith("https://www.gdtv.cn/tvChannelDetail")){
             return "tv/gdtv"
         }*/
-        if(url.startsWith("https://tv.hoolo.tv")){
-            return "tv/hztv"
-        }
         if(url.startsWith("https://www.lcxw.cn/")){
             _tvLoadRes.js("https://cdn.bootcdn.net/ajax/libs/hls.js/1.5.13/hls.js");
             return "tv/lctv"
@@ -90,9 +84,9 @@ if(typeof _tvload == "undefined"){
         if(url.startsWith("https://www.fengshows.com/")){
             return "tv/fengshows"
         }
-        if(url.startsWith("https://www.rzw.com.cn")){
+     /*   if(url.startsWith("https://www.rzw.com.cn")){
             return "tv/rztv"
-        }
+        }*/
         if(url.startsWith("https://www.nmtv.cn")){
             return "tv/nmtv"
         }
